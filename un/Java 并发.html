@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/echarts.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/echarts.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"scrollpercent":true,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    save_scroll: false,
+    copycode: {"enable":true,"show_result":true,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="Java 并发 1.Java 应用的main函数是一个线程，是被JVM起动的时候调用，线程的名字叫做main 2.实现一个线程，必须创建Thread实例，override run 方法，并且调用start方法 3.在JVM启动以后，实际上是有多个线程，但是至少有一共非守护线程。 4.当调用start方法的时候，此时自少有俩个线程，一个是调用者线程，一个是执行run方法的线程 5.线程的生命周期 n">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FILE">
+<meta property="og:url" content="http://yoursite.com/un/Java 并发.html">
+<meta property="og:site_name" content="FILE">
+<meta property="og:description" content="Java 并发 1.Java 应用的main函数是一个线程，是被JVM起动的时候调用，线程的名字叫做main 2.实现一个线程，必须创建Thread实例，override run 方法，并且调用start方法 3.在JVM启动以后，实际上是有多个线程，但是至少有一共非守护线程。 4.当调用start方法的时候，此时自少有俩个线程，一个是调用者线程，一个是执行run方法的线程 5.线程的生命周期 n">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1571836846603.png">
+<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1571836828837.png">
+<meta property="og:updated_time" content="2019-10-23T13:32:57.968Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FILE">
+<meta name="twitter:description" content="Java 并发 1.Java 应用的main函数是一个线程，是被JVM起动的时候调用，线程的名字叫做main 2.实现一个线程，必须创建Thread实例，override run 方法，并且调用start方法 3.在JVM启动以后，实际上是有多个线程，但是至少有一共非守护线程。 4.当调用start方法的时候，此时自少有俩个线程，一个是调用者线程，一个是执行run方法的线程 5.线程的生命周期 n">
+<meta name="twitter:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1571836846603.png">
+  <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/un/Java 并发">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title> | FILE</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FILE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+          <p>Java 并发</p>
+<p>1.Java 应用的main函数是一个线程，是被JVM起动的时候调用，线程的名字叫做main</p>
+<p>2.实现一个线程，必须创建Thread实例，override run 方法，并且调用start方法</p>
+<p>3.在JVM启动以后，实际上是有多个线程，但是至少有一共非守护线程。</p>
+<p>4.当调用start方法的时候，此时自少有俩个线程，一个是调用者线程，一个是执行run方法的线程</p>
+<p>5.线程的生命周期 new runnable running blocked terminated  </p>
+<p>1.创建线程对象默认线程名Thread </p>
+<p>2.stacksize 表示的是虚拟机栈的大小， 栈越大，可以放入的栈帧越多， 但是栈的数量随之减少</p>
+<p>1.Daemon 线程，辅助使用，父线程死亡，就立即结束。比如开辟线程执行心跳。</p>
+<p>2.Join等子线程执行结束后 父线程才继续执行 ，Join 等到你结束或者 等待你多久。 作用，等到需要的东西都执行结束之后。</p>
+<p>1.synchronized 锁的对象 this object  和 静态就是.class</p>
+<p>2.wait放弃执行权，放弃了锁，notify的对象不确定。可能全部放弃执行权力。直到有人唤醒他，唤醒之后就有可运行状态，然后抢锁，抢到了再执行。</p>
+<p>3.notifyall 唤醒同意给moniter 的所有线程。</p>
+<p>1.sleep 和wait 的区别：</p>
+<p>sleep 是线程的 的方法，wait是 Object方法</p>
+<p>sleep不释放锁，wait释放，add to the Objectmonitor waiting queue</p>
+<p>使用wait 必须依赖与同步，必须抢到锁，才能释放锁</p>
+<p>sleep不用被唤醒，wait 需要</p>
+<p>1.Runtime.getRuntime().addShutdownHook(new Thread)</p>
+<p>31 讲中。java进程中 出问题，使用钩子函数（addShutdownHook）捕获， 捕获到之后，再调用方法处理，释放资源。</p>
+<p>在kill linux kill 进程的时候，尽量避免使用kill -9来强行杀死进程，因为不能被钩爪函数调用。</p>
+<p>线程中出现异常的时候。run 方法不能抛出异常。</p>
+<p>t.setUncaughtExceptionHandler() getStackTrace() </p>
+<p>线程池</p>
+<p>1.任务队列</p>
+<p>2.拒绝策列（抛出异常，丢弃，阻塞， 临时队列）</p>
+<p>3.init(min)</p>
+<p>4.active </p>
+<p>5.max</p>
+<p>min &gt; active &gt; max </p>
+<p>并发编程中的三个比较重要的概念</p>
+<p>1.原子性</p>
+<p>​    - 一个操作或多个操作要么都成功，要么都失败</p>
+<p>2.可见性</p>
+<p>​    - 一个数据改变，其他能看见其改变</p>
+<p>3.有序性</p>
+<p>int i = 0；</p>
+<p>boolean flag = false；</p>
+<p>i = 1；</p>
+<p>flag = true；</p>
+<p>i =1； flag = true</p>
+<p>重排序，只要求 最终一致性。中间过程不要求。除非有依赖关系的。    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//------------Thread 1 ----------- 执行过程中可能发生重排序， 就发生空指针异常。</span></span><br><span class="line">obj = creatObj();           </span><br><span class="line">init = <span class="keyword">true</span>;</span><br><span class="line"><span class="comment">//-------------Thread 2-----------</span></span><br><span class="line"><span class="keyword">while</span>(!init)&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">usingTheObj(obj);</span><br></pre></td></tr></table></figure>
+<p>java 中如何保证</p>
+<p>1.原子</p>
+<p>对基本数据类型的读写 是保证了原子性的。</p>
+<p>在long 或者 double 的时候 可能高位地位分开赋值，可能就没有保证子性</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="number">10</span>;</span><br><span class="line">cache <span class="number">10</span>; memory <span class="number">10</span>;</span><br><span class="line">a = <span class="number">10</span>; <span class="comment">//满足</span></span><br><span class="line">a = b; <span class="comment">//不满足1.read 2.assign b;</span></span><br><span class="line">c++; <span class="comment">//不满足 1.read 2.add 3.assign to c;</span></span><br><span class="line">c = c + <span class="number">1</span><span class="comment">// 不满足1.read 2.add 3.assign to c;</span></span><br></pre></td></tr></table></figure>
+<p>2.可见性</p>
+<p>volatile 保证可见性。</p>
+<p>立即更新到main memory 中去。 其他的去拿数据也是在main memory中去读取数据。</p>
+<p>3.有序性</p>
+<p>happens- before relationship</p>
+<p>3.1 在一个线程内 </p>
+<p>3.2 unlock 必须发生在lock 之后</p>
+<p>3.3 volatile修饰的变量， 对该变量的写操作，先与该变量的读操作</p>
+<p>3.4 传递规则， a &gt; b &gt; c  a&gt; c</p>
+<p>3.5  启动 start 先于 run</p>
+<p>3.6 中断，interrupt 发生在捕获之前</p>
+<p>3.7 对象的销毁，初始化 发生在 finalize 之前</p>
+<p>3.8 线程终结</p>
+<p>volatile 关键字</p>
+<p>两层语义 </p>
+<p>1.保证不同线程间的可见性</p>
+<p>2.禁止对其进行重排序, 保证了有序性 happens-before relationship </p>
+<p>3.并未保证原子性</p>
+<p>sync 或者 lock</p>
+<p>使用场景</p>
+<ol>
+<li><p>状态量标记</p>
+<p>eg volatile Boolean start= true </p>
+<ol>
+<li>屏障前后的顺序前后一致<ol>
+<li>volatile 可以防止重排序</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>不可变对象 一定是线程安全的</p>
+<p>可变对象不一定是线程安全的</p>
+<p>servlet 不是线程安全，请求是实例  存起来，使用</p>
+<p>struts 1.x action 也不是</p>
+<p>struts  2.x action 是线程安全的 </p>
+<p>Integer String 典型的不可变对象 immutable 多线程友好的， 里面的 任何属性和 引用都是不可变的 不能被继承</p>
+<p>比如 List 要解决这问题 ， 返回一个新的 克隆一个  或者 unmodifyable </p>
+<p>StringBuffer 可变的， 大量的加锁 线程安全的</p>
+<p>StringBuilder 可变的 ， 不加锁 不是线程安全的</p>
+<p>future 模式</p>
+<p>先 付钱 后 给你一个票  等完成了 再凭票领取</p>
+<p>A再厨房做饭， </p>
+<p>B快递员， 快递来了， 要求开门</p>
+<p>等下 我待会来拿.</p>
+<p>Request  &gt; Tomcat httpServer &gt; doing</p>
+<p>Request &gt; Tomcat httpServer &gt; Queue</p>
+<p>threadlocal 以前是 通过 map 实现 当前线程作为key值</p>
+<p>使用threadlocal  上下文！！ 安全框架 很多都要使用  </p>
+<p>注意 线程池 需要清理threadlocal   </p>
+<p>invoke 一个方法</p>
+<p>线程中的通信</p>
+<ol>
+<li>Future</li>
+<li>Suspenio</li>
+</ol>
+<p>Balking</p>
+<p>active object</p>
+<p>两个线程 之间 future 只能调用一个方法 </p>
+<p>接受异步消息的主动方法  </p>
+<p>JVM ClassLoader</p>
+<p>编译 JVM — 内存分布 作用不大 ， 内存溢出  内存泄漏</p>
+<p>类加载器是一个抽象的 类—</p>
+<p>1.1 结束 JVM 生命周期的方式</p>
+<p>System.exit</p>
+<p>Normal finish done</p>
+<p>Encounter the error or exception</p>
+<p>Crash</p>
+<p>OS problems and others</p>
+<p>三个阶段</p>
+<p>加载： 查找并加载类的二进制数据 — 如 classpath 中去找</p>
+<p>链接： 确保类的加载正确性 —验证</p>
+<p>​             为静态变量分配内存 —加载 初试话为默认值  没有new 对象就有了 </p>
+<p>​             把类的符号引用 转换我i直接引用。—解析</p>
+<p>初始化：为类的静态变量赋予正确的初始值</p>
+<blockquote>
+<p>魔术因子  00001 代表exe class二进制文件也有魔术因子</p>
+</blockquote>
+<p>对象的使用方式</p>
+<p>主动使用：（类 加载）初始化</p>
+<pre><code>* new
+* 方位某个类的静态变量进行读写， 对接口中静态变量进行读取（结构默认final public）
+* 调用静态方法
+* 反射某个类 
+* 子类 -- 父类初始化（先初始化父类）--通过子类访问父类的静态  子类不出初始化（静态变量实际上是相当于全局的东西）
+* 通过数组访问 不初始化
+* 访问常量类型 不初始化（通过final 修饰 之后 ， 不会 初始化）--即引用常量不会初始化 ，--应为在编译阶段 就放到常量池中去了
+* （在编译阶段能算出来 ，的可以放到常量池中， 在运行期间才能算出来到 ）
+* 启动类 
+</code></pre><blockquote>
+<p>首次主动使用 类加载</p>
+</blockquote>
+<p>类的加载的最终产品是位于区中的class对象</p>
+<p>Method area has per class structures and fields</p>
+<p>Nothing by static fields and structures</p>
+<p>run-time constant pool </p>
+<p>连接</p>
+<p>验证1</p>
+<p>​    魔术因子是否正确（表示是什么文件）</p>
+<p>​    主从版本号是否符合当前虚拟机</p>
+<p>​    常量池中的常量类型是否支持</p>
+<p>验证2 </p>
+<p>​    是否有父类</p>
+<p>​    父类是不是允许继承</p>
+<p>​    是否实现了抽象方法</p>
+<p>​    是否覆盖了父类的final字段</p>
+<p>​    其他的语义检查</p>
+<p> 字节码验证</p>
+<p>​    主要进行数据流和控制流的分析</p>
+<p>​    操作栈 给了 一共int 类型 但是却给了 long 的数据</p>
+<p>符号引用验证</p>
+<p>​    调用 了一个不存在的方法 字段等</p>
+<p>赋值 默认</p>
+<p>3解析</p>
+<p>类或接口的解析</p>
+<p>字段解析</p>
+<p>类方法解析</p>
+<p>接口方法解析</p>
+<p>根加载器</p>
+<p>​    负责  jrt </p>
+<p>扩展</p>
+<p>系统加载器 —- main</p>
+<p>同一个  类加载器的 class 只有一个在堆里</p>
+<p>lock free  </p>
+<p> CAS compare and set<br>利用 CAS 做一个 trylock</p>
+<p>Atomic Long 中间不一样 两段</p>
+<p>====================</p>
+<h3 id="Netty"><a href="#Netty" class="headerlink" title="Netty"></a>Netty</h3><ul>
+<li>回调<ul>
+<li>A的a()方法调用类B的b()方法</li>
+<li>类B的b()方法执行完毕主动调用类A的callback()方法</li>
+</ul>
+</li>
+</ul>
+<p>Blocking  IO</p>
+<p>​    Socket - read/ wirte - Thread</p>
+<p><img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1571836846603.png" alt="1571836846603"></p>
+<p> Non-blocking IO  </p>
+<p><img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1571836828837.png" alt="1571836828837"></p>
+<p>Using  the Nio1.0</p>
+<p>#1 Bind server to port </p>
+<p>#2 Register the channel with the selector to be interested in new Client connections that get accepted </p>
+<p>#3 Block until something is selected </p>
+<p>#4 Get all SelectedKey instances  </p>
+<p>#5 Remove the SelectedKey from the iterator  </p>
+<p>#6 Accept the client connection </p>
+<p>#7 Register connection to selector and set ByteBuffer  </p>
+<p>#8 Check for SelectedKey for read </p>
+<p>#9 Read data to ByteBuffer </p>
+<p>#10 Check for SelectedKey for write </p>
+<p>#11 Write data from ByteBuffer to channel </p>
+<ul>
+<li>In NIO.2 you can just trigger  an  IO  operation  and  register  a  completion  handler  with  it,  this  handler  will  then  get </li>
+</ul>
+<p>notified  once  the  operation  complates.</p>
+<p>#1Bind Server to port </p>
+<p>#2 Start to accept new Client connections. Once one is accepted the CompletionHandler will get called. </p>
+<p>#3 Again accept new Client connections </p>
+<p>#4 Trigger a read operation on the Channel, the given CompletionHandler will be notified once </p>
+<p>something was read </p>
+<p>#5 Close the socket on error </p>
+<p>#6 Trigger a write operation on the Channel, the given CompletionHandler will be notified once </p>
+<p>something was written </p>
+<p>#7 Trigger again a write operation if something is left in the ByteBuffer </p>
+<p>#8 Trigger a read operation on the Channel, the given CompletionHandler will be notified once </p>
+<p>something was read </p>
+<p>一、命令行模式下简化删除<br>\1. 向后删除单个字符：【x】<br>\2. 向前删除单个字符：【X】<br>\3. 删除从光标开始到单词结尾：【dw】<br>删除从光标后的2个单词：【d2w】<br>\4. 删除整个单词：【daw】<br>仅当光标停留在一个单词开头，【dw】才能删除整个单词，否则只能删除一部分；而【daw】不考虑光标的停留位置，只要在该单词上，则会自动删除整个单词<br>\5. 删除光标停留的那整行：【dd】<br>假设想连续删除多行，则用【4dd】连续删除4行<br>\6. 从光标处往前删除单词：【db】<br>和【dw】的作用方向正好相反<br>\7. 删除光标位置到本行开头：【d0】<br>\8. 点命令【.】含义是重复上次修改，上次修改的单位可以是字符，整行，甚至整个文件。<br>因此如果删除整行【dd】，配合【.】也可以起到重复操作的目的。<br>点命令最大的用处在于，每次从输入模式到命令模式切换时，整个阶段vim会记录每一个按键操作，使用点命令可以重新执行所有的这些按键操作，就好像“一键回放”，我们可以把点命令当成一个宏。<br>比如要给结构体语句添上‘;’号<br>按照常规方法做会比较慢，这时候光标先移动到第一条语句上，【A】【；】【ESC】<br>再反复使用【j】【.】即可。</p>
+<p>二、简化行光标移动<br>\1. 光标移动到行尾 【】2.光标移动到行尾并进入输入模式，类似于【】2.光标移动到行尾并进入输入模式，类似于【】【a】： 【A】<br>\3. 光标移动到行尾并回车，再进入输入模式，类似于【$】【enter】【a】： 【o】<br>小o的作用类似于新建一空白行<br>\4. 光标移动到行首【^】<br>\5. 光标移动到整个文件头部【gg】<br>\6. 光标移动到整个文件尾部【G】<br>\7. 跳转到指定的行<br>在编辑模式下，输入ngg，或者nG；在命令模式下输入行号 :n<br>（n为行号）</p>
+<p>三、简化行内光标移动<br>\1. 光标移动到单个字符：【f】，也用于查找。比如要在本行移动光标至字符<em>处，直接【f</em>】即可<br>\2. 无需输入即可移动光标，查找：【<em>】<br>\3. 【w】移动光标到下一个单词开头，【b】移动光标到上一个单词开头，两者均可跨行<br>\4. 配合点命令【.】以及【</em>】星命令，就能实现快速的查找并替换。<br>首先在需要被替换的单词上按【*】，然后【a】修改第一个单词，完成后【ESC】，此时vim已经记住了操作，剩下的就是重复【n】查找下一个，【.】回放操作。</p>
+<p>仔细体会vim对重复操作的简化，追求的是一键移动，一键操作修改。</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/echarts.png"
+      alt="Les">
+  <p class="site-author-name" itemprop="name">Les</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Netty"><span class="nav-number">1.</span> <span class="nav-text">Netty</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Les</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+  
+
+</body>
+</html>

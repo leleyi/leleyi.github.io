@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/echarts.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/echarts.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"scrollpercent":true,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    save_scroll: false,
+    copycode: {"enable":true,"show_result":true,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="TextCnn12345678910import numpy as npimport torchimport torch.nn as nnimport torch.nn.functional as Ffrom sklearn import metricsimport timeimport pickle as pklimport osfrom datetime import timedeltafro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TextCNN">
+<meta property="og:url" content="http://yoursite.com/2019/09/25/TextCNN/index.html">
+<meta property="og:site_name" content="FILE">
+<meta property="og:description" content="TextCnn12345678910import numpy as npimport torchimport torch.nn as nnimport torch.nn.functional as Ffrom sklearn import metricsimport timeimport pickle as pklimport osfrom datetime import timedeltafro">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/09/25/TextCNN/textcnn.png">
+<meta property="og:updated_time" content="2019-10-04T12:30:43.928Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TextCNN">
+<meta name="twitter:description" content="TextCnn12345678910import numpy as npimport torchimport torch.nn as nnimport torch.nn.functional as Ffrom sklearn import metricsimport timeimport pickle as pklimport osfrom datetime import timedeltafro">
+<meta name="twitter:image" content="http://yoursite.com/2019/09/25/TextCNN/textcnn.png">
+  <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/2019/09/25/TextCNN/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>TextCNN | FILE</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FILE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/25/TextCNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Les">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/echarts.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FILE">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">TextCNN
+
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-09-25 16:52:15" itemprop="dateCreated datePublished" datetime="2019-09-25T16:52:15+08:00">2019-09-25</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-04 20:30:43" itemprop="dateModified" datetime="2019-10-04T20:30:43+08:00">2019-10-04</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/nlp/" itemprop="url" rel="index"><span itemprop="name">nlp</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="TextCnn"><a href="#TextCnn" class="headerlink" title="TextCnn"></a>TextCnn</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> metrics</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> pickle <span class="keyword">as</span> pkl</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> tqdm</span><br></pre></td></tr></table></figure>
+<h4 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a>数据加载</h4><p>数据集采用THUCNEWS，和预处理的embedding</p>
+<ol>
+<li>class.text, test.txt, train.txt 2. embedding_SougouNew.npz</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">train_file_path = <span class="string">"THUCNews/data/train.txt"</span></span><br><span class="line">test_file_path = <span class="string">"THUCNews/data/test.txt"</span></span><br><span class="line">dev_file_path = <span class="string">"THUCNews/data/dev.txt"</span></span><br><span class="line">class_file_path = <span class="string">"THUCNews/data/class.txt"</span></span><br><span class="line">embedding_file_path = <span class="string">"THUCNews/data/embedding_SougouNews.npz"</span></span><br><span class="line">vocab_file_path = <span class="string">"THUCNews/data/vocab.pkl"</span></span><br><span class="line">save_file_path = <span class="string">"THUCNews/saved_dict/TextCNN.ckpt"</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>现在开始处理数据，我们采用以字为单位的方式来进行处理<ul>
+<li>以字为单位分割， 并且统计每一个字出现的个数。可以去除出现次数非常少的字（min_freq）,确定vocab的最大长度（max_size）</li>
+<li>生成一个 字 与 id 的map 相互一一映射(tokenizer 切割方式)</li>
+<li>生成与源文本与之对应的 id 数值 </li>
+<li>保证没一段文本的长度固定，字数超过就切断，如果字数不够 则加 PAD</li>
+<li>如果到字表中没有的字 则一律采用一个标志 UNK 来表示<br>（PAD 和 UNK 实际上都是对应着一个向量）</li>
+<li>使用DataLoader在训练的时候进行批次加载</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成一个 字 与 id 的map 相互一一映射(tokenizer 切割方式)</span></span><br><span class="line">UNK, PAD = <span class="string">'&lt;UNK&gt;'</span>, <span class="string">'&lt;PAD&gt;'</span> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_vocab</span><span class="params">(file_path, max_size = <span class="number">10000</span>, min_freq = <span class="number">1</span>)</span>:</span> </span><br><span class="line">    vocab_dic = &#123;&#125;</span><br><span class="line">    tokenizer = <span class="keyword">lambda</span> x:[y <span class="keyword">for</span>  y <span class="keyword">in</span> x] <span class="comment"># 切割</span></span><br><span class="line">    <span class="keyword">with</span> open(file_path, <span class="string">'r'</span>, encoding = <span class="string">'UTF-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> tqdm(f):</span><br><span class="line">            content = line.split(<span class="string">'\t'</span>)[<span class="number">0</span>] <span class="comment"># 将 文本与文本类型标志 分开</span></span><br><span class="line">            <span class="keyword">for</span> word <span class="keyword">in</span> tokenizer(content):</span><br><span class="line">                vocab_dic[word] = vocab_dic.get(word, <span class="number">0</span>) + <span class="number">1</span></span><br><span class="line">        vocab_list = sorted([it <span class="keyword">for</span> it <span class="keyword">in</span> vocab_dic.items() <span class="keyword">if</span> it[<span class="number">1</span>] &gt; min_freq], key = <span class="keyword">lambda</span> x:x[<span class="number">1</span>], reverse = <span class="literal">True</span>)[:max_size] </span><br><span class="line">        vocab_dic = &#123;word_count[<span class="number">0</span>]: idx <span class="keyword">for</span> idx, word_count <span class="keyword">in</span> enumerate(vocab_list)&#125;</span><br><span class="line">        vocab_dic.update(&#123;UNK: len(vocab_dic), PAD: len(vocab_dic) + <span class="number">1</span>&#125;)</span><br><span class="line">    <span class="keyword">return</span> vocab_dic</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># get_vocab(train_file_path, 10000, 1)</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>{“如”：           213}  -&gt;  213    embedding   [1.24, 2.1, 3.5, 2.52,…… 12.3, 0.234]<br>{“<unk>“：4762}   -&gt; 4762   embedding   [3.04, 3.3, 1.5, 0.52,…… 2.13, 0.341] </unk></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成与源文本与之对应的 id 数值</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_dataset</span><span class="params">(file_path, pad_size=<span class="number">32</span>)</span>:</span></span><br><span class="line">    contents = []</span><br><span class="line">    tokenizer = <span class="keyword">lambda</span> x:[y <span class="keyword">for</span>  y <span class="keyword">in</span> x] <span class="comment"># 切割</span></span><br><span class="line">    <span class="keyword">if</span> os.path.exists(vocab_file_path):</span><br><span class="line">        vocab = pkl.load(open(vocab_file_path, <span class="string">'rb'</span>))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        vocab = get_vocab(train_file_path, <span class="number">10000</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">with</span> open(file_path, <span class="string">'r'</span>, encoding = <span class="string">'UTF-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> tqdm(f):</span><br><span class="line">            content, label = line.split(<span class="string">'\t'</span>)</span><br><span class="line">            words_line = []</span><br><span class="line">            token = tokenizer(content)</span><br><span class="line">            seq_len = len(token)</span><br><span class="line">            <span class="keyword">if</span> pad_size:</span><br><span class="line">                <span class="keyword">if</span> len(token) &lt; pad_size:</span><br><span class="line">                    token.extend([vocab.get(PAD)] * (pad_size - len(token)))</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    token = token[:pad_size]</span><br><span class="line">                    seq_len = pad_size</span><br><span class="line">            <span class="keyword">for</span> word <span class="keyword">in</span> token:</span><br><span class="line">                words_line.append(vocab.get(word, vocab.get(UNK)))</span><br><span class="line">            contents.append((words_line, int(label), seq_len))</span><br><span class="line">    <span class="keyword">return</span> contents</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#load_dataset(train_file_path)</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>（[“我”, “爱”, “中”,  “国”，”,”…….. “美”， “好”，“<pad>”，“<pad>”]，  类型，总的长度）<br>（[132,   3,      32,    44,    24,……, 32,      213,      4403,          4403 ] ，       3，   30）</pad></pad></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 产生train dev 和 test 数据集合（由id组成，并与文字一一对应）</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_dataset</span><span class="params">()</span>:</span></span><br><span class="line">    train = load_dataset(train_file_path, <span class="number">32</span>)</span><br><span class="line">    dev = load_dataset(dev_file_path, <span class="number">32</span>)</span><br><span class="line">    test = load_dataset(test_file_path, <span class="number">32</span>)</span><br><span class="line">    <span class="keyword">return</span> train, dev, test</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># build_dataset()</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 产生batch_data即就是将所有数据封装成对象， 再训练的时候一个批次一个批次的取</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DatasetIterater</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, batches, batch_size, device)</span>:</span></span><br><span class="line">        self.batch_size = batch_size</span><br><span class="line">        self.batches = batches</span><br><span class="line">        self.n_batches = len(batches) // batch_size</span><br><span class="line">        self.residue = <span class="literal">False</span>  <span class="comment"># 记录batch数量是否为整数</span></span><br><span class="line">        <span class="keyword">if</span> len(batches) % self.n_batches != <span class="number">0</span>:</span><br><span class="line">            self.residue = <span class="literal">True</span></span><br><span class="line">        self.index = <span class="number">0</span></span><br><span class="line">        self.device = device</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_to_tensor</span><span class="params">(self, datas)</span>:</span></span><br><span class="line">        x = torch.LongTensor([_[<span class="number">0</span>] <span class="keyword">for</span> _ <span class="keyword">in</span> datas]).to(self.device)</span><br><span class="line">        y = torch.LongTensor([_[<span class="number">1</span>] <span class="keyword">for</span> _ <span class="keyword">in</span> datas]).to(self.device)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># pad前的长度(超过pad_size的设为pad_size)</span></span><br><span class="line">        seq_len = torch.LongTensor([_[<span class="number">2</span>] <span class="keyword">for</span> _ <span class="keyword">in</span> datas]).to(self.device)</span><br><span class="line">        <span class="keyword">return</span> (x, seq_len), y</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.residue <span class="keyword">and</span> self.index == self.n_batches:</span><br><span class="line">            batches = self.batches[self.index * self.batch_size: len(self.batches)]</span><br><span class="line">            self.index += <span class="number">1</span></span><br><span class="line">            batches = self._to_tensor(batches)</span><br><span class="line">            <span class="keyword">return</span> batches</span><br><span class="line"></span><br><span class="line">        <span class="keyword">elif</span> self.index &gt; self.n_batches:</span><br><span class="line">            self.index = <span class="number">0</span></span><br><span class="line">            <span class="keyword">raise</span> StopIteration</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            batches = self.batches[self.index * self.batch_size: (self.index + <span class="number">1</span>) * self.batch_size]</span><br><span class="line">            self.index += <span class="number">1</span></span><br><span class="line">            batches = self._to_tensor(batches)</span><br><span class="line">            <span class="keyword">return</span> batches</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.residue:</span><br><span class="line">            <span class="keyword">return</span> self.n_batches + <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> self.n_batches</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_iterator</span><span class="params">(dataset, batch_size)</span>:</span></span><br><span class="line">    iter = DatasetIterater(dataset, batch_size, <span class="string">'cpu'</span>)</span><br><span class="line">    <span class="keyword">return</span> iter</span><br></pre></td></tr></table></figure>
+<h4 id="构建模型"><a href="#构建模型" class="headerlink" title="构建模型"></a>构建模型</h4><p><img src="textcnn.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">batch_size = <span class="number">128</span> <span class="comment"># 批次大小</span></span><br><span class="line">num_epochs = <span class="number">20</span> <span class="comment"># 迭代次数</span></span><br><span class="line">drop_out = <span class="number">0.5</span> <span class="comment"># </span></span><br><span class="line">embedding = <span class="number">300</span> <span class="comment"># embedding 维度</span></span><br><span class="line">pad_size = <span class="number">32</span> <span class="comment"># 文本处理后统一的 长度</span></span><br><span class="line">filter_sizes = (<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>) <span class="comment"># </span></span><br><span class="line">num_filters = <span class="number">128</span> <span class="comment">#filter数量</span></span><br><span class="line">num_class = <span class="number">10</span> <span class="comment"># 文本类型数</span></span><br><span class="line">n_vocab = <span class="number">0</span> <span class="comment"># 词表的大小</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加载与训练好的embedding 数组</span></span><br><span class="line">embedding_pretrained = torch.tensor(</span><br><span class="line">            np.load(embedding_file_path)[<span class="string">"embeddings"</span>].astype(<span class="string">'float32'</span>))</span><br></pre></td></tr></table></figure>
+<p>为了方便查看网络结构所以我把所有参数定义在上面， 然后再网络结构中 直接写相关的数（不用变量，方便读者查看）</p>
+<ul>
+<li>首先是embedding的向量 对图中每一行</li>
+<li>convs是3种不同尺寸的filter（每一种的个数可以是多个一般是2的指数）</li>
+<li>将通过卷积运算的数据通过激活函数relu</li>
+<li>max_pool1d的工作是取得当前的卷积运中的最大值，然后将相同尺寸的max_pool结果拼接起来。 然后再由将不同尺寸max_pool后的结果拼接起来</li>
+<li>将拼接好的结果通过dropout 防止过拟合</li>
+<li>通过fc网络得每一种分类的得分</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Model</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(Model, self).__init__()</span><br><span class="line">        self.embedding = nn.Embedding.from_pretrained(embedding_pretrained, freeze=<span class="literal">False</span>)</span><br><span class="line">        self.convs = nn.ModuleList([nn.Conv2d(<span class="number">1</span>, <span class="number">2</span>, (k, <span class="number">300</span>)) <span class="keyword">for</span> k <span class="keyword">in</span> (<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)]) <span class="comment"># num_filters 2   kernel 2, 3, 4,  * 300</span></span><br><span class="line">        self.dropout = nn.Dropout(<span class="number">0.5</span>)</span><br><span class="line">        self.fc = nn.Linear(<span class="number">2</span> * <span class="number">3</span>, <span class="number">10</span>) <span class="comment">#  num_filters *  len(filter_sizes) num_class</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">conv_and_pool</span><span class="params">(self, x, conv)</span>:</span></span><br><span class="line">        <span class="comment"># 由forward的传过来 x 128 1 32 300</span></span><br><span class="line">        x = F.relu(conv(x)).squeeze(<span class="number">3</span>)</span><br><span class="line">        <span class="comment">#  x 128 256 31</span></span><br><span class="line">        x = F.max_pool1d(x, x.size(<span class="number">2</span>)).squeeze(<span class="number">2</span>)</span><br><span class="line">        <span class="comment"># max_pool 取 31 个中的最大 ，得到128 256 1 然后 squeeze 得到 128 256</span></span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="comment"># x[0] shape 128 * 32</span></span><br><span class="line">        out = self.embedding(x[<span class="number">0</span>])</span><br><span class="line">        <span class="comment"># embedding 之后 32个 每一个都转换为 300 维度的向量</span></span><br><span class="line">        <span class="comment"># out shape 128 32 300</span></span><br><span class="line">        out = out.unsqueeze(<span class="number">1</span>) <span class="comment"># 在 1 上增加一个维度 ？  why</span></span><br><span class="line">        <span class="comment"># 在 1 处增加一个维度 out shape 128 1 32 300</span></span><br><span class="line">        out = torch.cat([self.conv_and_pool(out, conv) <span class="keyword">for</span> conv <span class="keyword">in</span> self.convs], <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># 横着拼在一起 128 768</span></span><br><span class="line">        out = self.dropout(out)</span><br><span class="line">        out = self.fc(out)</span><br><span class="line">        <span class="keyword">return</span> out</span><br></pre></td></tr></table></figure>
+<h4 id="网络的训练"><a href="#网络的训练" class="headerlink" title="网络的训练"></a>网络的训练</h4><ul>
+<li>权重的初始化</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 权重初始化， 使用xavier</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_network</span><span class="params">(model)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> name, w <span class="keyword">in</span> model.named_parameters():</span><br><span class="line">         <span class="keyword">if</span> <span class="string">'embedding'</span> <span class="keyword">not</span> <span class="keyword">in</span> name: </span><br><span class="line">            <span class="keyword">if</span> <span class="string">'weight'</span> <span class="keyword">in</span> name:</span><br><span class="line">                    nn.init.xavier_normal_(w)</span><br><span class="line">            <span class="keyword">elif</span> <span class="string">'bias'</span> <span class="keyword">in</span> name:</span><br><span class="line">                nn.init.constant_(w, <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>训练<ul>
+<li>训练的模型 在上文已经定义</li>
+<li>训练的数据集 通过DatasetIterater批量加载数据</li>
+<li>优化的方法 使用Adam</li>
+<li>使用交叉熵损失函数</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(model, train_iter, dev_iter, test_iter)</span>:</span></span><br><span class="line">    start_time = time.time()</span><br><span class="line">    model.train() <span class="comment"># 训练模式</span></span><br><span class="line">    optimizer = torch.optim.Adam(model.parameters(), lr =  <span class="number">1e-3</span>)</span><br><span class="line">    batch_no = <span class="number">0</span> <span class="comment"># 记录到多少batch了</span></span><br><span class="line">    dev_best_loss = float(<span class="string">'inf'</span>)</span><br><span class="line">    last_improve = <span class="number">0</span> <span class="comment"># 上次验证集loss下降的batch数</span></span><br><span class="line">    flag = <span class="literal">False</span> <span class="comment"># 是否很久没有效果提升</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">20</span>):</span><br><span class="line">        print(<span class="string">'Epoch [&#123;&#125;/&#123;&#125;]'</span>.format(epoch + <span class="number">1</span>, <span class="number">20</span>))</span><br><span class="line">        <span class="keyword">for</span> i, (trains, labels) <span class="keyword">in</span> enumerate(train_iter):</span><br><span class="line">            outputs = model(trains)</span><br><span class="line">            model.zero_grad()</span><br><span class="line">            loss = F.cross_entropy(outputs, labels) <span class="comment"># 交叉熵损失函数</span></span><br><span class="line">            loss.backward()</span><br><span class="line">            optimizer.step()</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> batch_no % <span class="number">100</span> == <span class="number">0</span>: <span class="comment"># 100输出 训练集，和验证集的效果</span></span><br><span class="line">                true = labels.data.cpu()</span><br><span class="line">                predic = torch.max(outputs.data, <span class="number">1</span>)[<span class="number">1</span>].cpu() <span class="comment"># 获取输出结果中最大的作为预测类别</span></span><br><span class="line">                train_acc = metrics.accuracy_score(true, predic) <span class="comment"># 获取训练集的准确度</span></span><br><span class="line">                dev_acc, dev_loss = evaluate(model, dev_iter) <span class="comment"># 评估验证集中的效果</span></span><br><span class="line">                <span class="keyword">if</span> dev_loss &lt; dev_best_loss:</span><br><span class="line">                    dev_best_loss = dev_loss</span><br><span class="line">                    torch.save(model.state_dict(), save_file_path) <span class="comment"># 将有提升的模型参数存下来</span></span><br><span class="line">                    improve = <span class="string">'*'</span></span><br><span class="line">                    last_improve = batch_no <span class="comment"># 最后提升的批次号</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    improve = <span class="string">''</span></span><br><span class="line">                time_dif = time.time() - start_time <span class="comment"># 记录花费的时间</span></span><br><span class="line">                msg = <span class="string">'Iter: &#123;0:&gt;6&#125;,  Train Loss: &#123;1:&gt;5.2&#125;,  Train Acc: &#123;2:&gt;6.2%&#125;,  '</span> \</span><br><span class="line">                      <span class="string">'Val Loss: &#123;3:&gt;5.2&#125;,  Val Acc: &#123;4:&gt;6.2%&#125;,  Time: &#123;5&#125; &#123;6&#125;'</span></span><br><span class="line">                print(msg.format(batch_no, loss.item(), train_acc, dev_loss, dev_acc, time_dif, improve)) <span class="comment"># </span></span><br><span class="line">                model.train()</span><br><span class="line">            batch_no += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> batch_no - last_improve &gt; <span class="number">1000</span>: <span class="comment"># 如果已经超过1000次没有提升了 就主动停止训练</span></span><br><span class="line">                print(<span class="string">"No improve, auto-stoppping"</span>)</span><br><span class="line">                flag = <span class="literal">True</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> flag:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    test(model, test_iter)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(model, test_iter)</span>:</span></span><br><span class="line">    model.load_state_dict(torch.load(save_file_path)) <span class="comment"># 加载以及存储的dev 效果最好的相应模型</span></span><br><span class="line">    model.eval()</span><br><span class="line">    start_time = time.time()</span><br><span class="line">    test_acc, test_loss, test_report, test_confusion = evaluate(model, test_iter, test=<span class="literal">True</span>)</span><br><span class="line">    msg = <span class="string">'Test Loss: &#123;0:&gt;5.2&#125;,  Test Acc: &#123;1:&gt;6.2%&#125;'</span></span><br><span class="line">    print(msg.format(test_loss, test_acc))</span><br><span class="line">    print(<span class="string">"Precision, Recall and F1-Score..."</span>)</span><br><span class="line">    print(test_report)</span><br><span class="line">    print(<span class="string">"Confusion Matrix..."</span>)</span><br><span class="line">    print(test_confusion)</span><br><span class="line">    time_dif = time.time() - start_time</span><br><span class="line">    print(<span class="string">"Time usage:"</span>, time_dif)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">evaluate</span><span class="params">(model, data_iter, test = False)</span>:</span></span><br><span class="line">    model.eval() <span class="comment"># eval 模式</span></span><br><span class="line">    loss_total = <span class="number">0</span></span><br><span class="line">    predict_all = np.array([], dtype = int)</span><br><span class="line">    labels_all = np.array([], dtype = int)</span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        <span class="keyword">for</span> texts, labels <span class="keyword">in</span> data_iter:</span><br><span class="line">            outputs = model(texts)</span><br><span class="line">            loss = F.cross_entropy(outputs, labels)</span><br><span class="line">            loss_total += loss</span><br><span class="line">            labels = labels.data.cpu().numpy()</span><br><span class="line">            predic = torch.max(outputs.data, <span class="number">1</span>)[<span class="number">1</span>].cpu().numpy()</span><br><span class="line">            labels_all = np.append(labels_all, labels) <span class="comment"># 验证集上一个批次真实分类</span></span><br><span class="line">            predict_all = np.append(predict_all, predic) <span class="comment"># 验证集上一个批次的预测结果</span></span><br><span class="line">    acc = metrics.accuracy_score(labels_all, predict_all) <span class="comment"># 在整个验证集上的acc</span></span><br><span class="line">    <span class="keyword">if</span> test:</span><br><span class="line">        class_list = [x.strip() <span class="keyword">for</span> x <span class="keyword">in</span> open(</span><br><span class="line">             <span class="string">'THUCNews/data/class.txt'</span>).readlines()] </span><br><span class="line">        report = metrics.classification_report(labels_all, predict_all, target_names = class_list, digits=<span class="number">4</span>)</span><br><span class="line">        confusion = metrics.confusion_matrix(labels_all, predict_all)</span><br><span class="line">        <span class="keyword">return</span> acc, loss_total / len(data_iter), report, confusion</span><br><span class="line">    <span class="keyword">return</span> acc, loss_total / len(data_iter)</span><br></pre></td></tr></table></figure>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">()</span>:</span></span><br><span class="line">    torch.manual_seed(<span class="number">1</span>)</span><br><span class="line">    torch.cuda.manual_seed_all(<span class="number">1</span>)</span><br><span class="line">    torch.backends.cudnn.deterministic = <span class="literal">True</span>  <span class="comment"># 保证每次结果一样</span></span><br><span class="line">    start_time = time.time()</span><br><span class="line">    print(<span class="string">"Loading data..."</span>) <span class="comment">#vocab, </span></span><br><span class="line">    train_data, dev_data, test_data = build_dataset()</span><br><span class="line">    print(<span class="string">"+++++++++++++++++++++++++++++++++"</span>)</span><br><span class="line">    train_iter = build_iterator(train_data, <span class="number">128</span>) <span class="comment">#batch_size</span></span><br><span class="line">    print(train_iter)</span><br><span class="line">    dev_iter = build_iterator(dev_data, <span class="number">128</span>)</span><br><span class="line">    print(train_iter)</span><br><span class="line">    test_iter = build_iterator(test_data, <span class="number">128</span>)</span><br><span class="line">    print(train_iter)</span><br><span class="line">    </span><br><span class="line">    print(<span class="string">"Loading data Complete, Using time"</span>, time.time() - start_time)</span><br><span class="line">    </span><br><span class="line">    model = Model()</span><br><span class="line">    init_network(model)</span><br><span class="line">    print(model.parameters)</span><br><span class="line">    </span><br><span class="line">    train(model, train_iter, dev_iter, test_iter)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run()</span><br></pre></td></tr></table></figure>
+<pre><code>Loading data...
+
+
+180000it [00:02, 70878.90it/s]
+10000it [00:00, 69477.66it/s]
+10000it [00:00, 72506.85it/s]
+
+
++++++++++++++++++++++++++++++++++
+&lt;__main__.DatasetIterater object at 0x000001E8F73248D0&gt;
+&lt;__main__.DatasetIterater object at 0x000001E8F73248D0&gt;
+&lt;__main__.DatasetIterater object at 0x000001E8F73248D0&gt;
+Loading data Complete, Using time 2.84836745262146
+&lt;bound method Module.parameters of Model(
+  (embedding): Embedding(4762, 300)
+  (convs): ModuleList(
+    (0): Conv2d(1, 2, kernel_size=(2, 300), stride=(1, 1))
+    (1): Conv2d(1, 2, kernel_size=(3, 300), stride=(1, 1))
+    (2): Conv2d(1, 2, kernel_size=(4, 300), stride=(1, 1))
+  )
+  (dropout): Dropout(p=0.5)
+  (fc): Linear(in_features=6, out_features=10, bias=True)
+)&gt;
+Epoch [1/20]
+Iter:      0,  Train Loss:   2.4,  Train Acc: 10.94%,  Val Loss:   2.3,  Val Acc: 11.67%,  Time: 4.347041845321655 *
+Iter:    100,  Train Loss:   2.0,  Train Acc: 21.88%,  Val Loss:   2.0,  Val Acc: 38.10%,  Time: 31.06502628326416 *
+Iter:    200,  Train Loss:   1.9,  Train Acc: 28.12%,  Val Loss:   1.8,  Val Acc: 48.73%,  Time: 56.15272235870361 *
+Iter:    300,  Train Loss:   1.7,  Train Acc: 35.16%,  Val Loss:   1.6,  Val Acc: 56.35%,  Time: 81.23346781730652 *
+Iter:    400,  Train Loss:   1.8,  Train Acc: 35.94%,  Val Loss:   1.6,  Val Acc: 60.44%,  Time: 106.87457942962646 *
+Iter:    500,  Train Loss:   1.7,  Train Acc: 35.16%,  Val Loss:   1.5,  Val 
+...........
+Epoch [6/20]
+Iter:   7100,  Train Loss:   1.6,  Train Acc: 46.09%,  Val Loss:   1.1,  Val Acc: 72.51%,  Time: 1965.9722084999084 
+Iter:   7200,  Train Loss:   1.5,  Train Acc: 46.09%,  Val Loss:   1.1,  Val Acc: 72.92%,  Time: 1993.864845275879 
+Iter:   7300,  Train Loss:   1.6,  Train Acc: 41.41%,  Val Loss:   1.1,  Val Acc: 72.55%,  Time: 2020.9455888271332 
+Iter:   7400,  Train Loss:   1.4,  Train Acc: 47.66%,  Val Loss:   1.1,  Val Acc: 72.65%,  Time: 2047.5681087970734 
+Iter:   7500,  Train Loss:   1.8,  Train Acc: 36.72%,  Val Loss:   1.1,  Val Acc: 72.65%,  Time: 2077.9685645103455 
+No improve, auto-stoppping
+Test Loss:   1.1,  Test Acc: 74.40%
+Precision, Recall and F1-Score...
+               precision    recall  f1-score   support
+
+      finance     0.8488    0.7750    0.8102      1000
+       realty     0.8516    0.7690    0.8082      1000
+       stocks     0.7146    0.6610    0.6868      1000
+    education     0.9013    0.8580    0.8791      1000
+      science     0.6545    0.6290    0.6415      1000
+      society     0.7890    0.6620    0.7200      1000
+     politics     0.4792    0.7620    0.5884      1000
+       sports     0.8064    0.8330    0.8195      1000
+         game     0.8377    0.7590    0.7964      1000
+entertainment     0.7485    0.7320    0.7401      1000
+
+    micro avg     0.7440    0.7440    0.7440     10000
+    macro avg     0.7632    0.7440    0.7490     10000
+ weighted avg     0.7632    0.7440    0.7490     10000
+
+Confusion Matrix...
+[[775   9  92  10  16   3  54  35   2   4]
+ [ 11 769  15  12  48   5  86   7   1  46]
+ [ 85  14 661   1  64   2 150  17   6   0]
+ [  5  20   4 858   2  29  65   0   2  15]
+ [ 14  22 106   7 629  12 112  17  54  27]
+ [  4  16   5  39  11 662 211  15  10  27]
+ [ 10  20  22  18  31  85 762  29   3  20]
+ [  7   1   7   2  15  12  55 833   2  66]
+ [  1   4  12   3 123   3  32  22 759  41]
+ [  1  28   1   2  22  26  63  58  67 732]
+</code></pre><p>参考资料：<br><a href="https://aclweb.org/anthology/D14-1181/" target="_blank" rel="noopener">Convolutional Neural Networks for Sentence Classification</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/06/Neural Networks and Neural Language Models/" rel="next" title="Neural Networks and Neural Language Models">
+                  <i class="fa fa-chevron-left"></i> Neural Networks and Neural Language Models
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/10/01/TextRNN/" rel="prev" title="TextRNN">
+                  TextRNN <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/echarts.png"
+      alt="Les">
+  <p class="site-author-name" itemprop="name">Les</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#TextCnn"><span class="nav-number">1.</span> <span class="nav-text">TextCnn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据加载"><span class="nav-number">1.1.</span> <span class="nav-text">数据加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构建模型"><span class="nav-number">1.2.</span> <span class="nav-text">构建模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络的训练"><span class="nav-number">1.3.</span> <span class="nav-text">网络的训练</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行"><span class="nav-number">1.4.</span> <span class="nav-text">运行</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Les</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', function() {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>

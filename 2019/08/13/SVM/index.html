@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/echarts.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/echarts.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"scrollpercent":true,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    save_scroll: false,
+    copycode: {"enable":true,"show_result":true,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="hands-on svm课后作业train a LinearSVC on a linearly separable dataset. Then train an SVC and a SGDClassifier on the same dataset. See if you can get them to produce roughly the same mode12from sklearn imp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hands-on svm课后作业">
+<meta property="og:url" content="http://yoursite.com/2019/08/13/SVM/index.html">
+<meta property="og:site_name" content="FILE">
+<meta property="og:description" content="hands-on svm课后作业train a LinearSVC on a linearly separable dataset. Then train an SVC and a SGDClassifier on the same dataset. See if you can get them to produce roughly the same mode12from sklearn imp">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/08/13/SVM/output_7_0.png">
+<meta property="og:updated_time" content="2019-08-18T07:47:59.705Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hands-on svm课后作业">
+<meta name="twitter:description" content="hands-on svm课后作业train a LinearSVC on a linearly separable dataset. Then train an SVC and a SGDClassifier on the same dataset. See if you can get them to produce roughly the same mode12from sklearn imp">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/13/SVM/output_7_0.png">
+  <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/2019/08/13/SVM/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>hands-on svm课后作业 | FILE</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FILE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/13/SVM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Les">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/echarts.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FILE">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">hands-on svm课后作业
+
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-08-13 09:57:15" itemprop="dateCreated datePublished" datetime="2019-08-13T09:57:15+08:00">2019-08-13</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-18 15:47:59" itemprop="dateModified" datetime="2019-08-18T15:47:59+08:00">2019-08-18</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ml/" itemprop="url" rel="index"><span itemprop="name">ml</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="hands-on-svm课后作业"><a href="#hands-on-svm课后作业" class="headerlink" title="hands-on svm课后作业"></a>hands-on svm课后作业</h3><h4 id="train-a-LinearSVC-on-a-linearly-separable-dataset-Then-train-an-SVC-and-a-SGDClassifier-on-the-same-dataset-See-if-you-can-get-them-to-produce-roughly-the-same-mode"><a href="#train-a-LinearSVC-on-a-linearly-separable-dataset-Then-train-an-SVC-and-a-SGDClassifier-on-the-same-dataset-See-if-you-can-get-them-to-produce-roughly-the-same-mode" class="headerlink" title="train a LinearSVC on a linearly separable dataset. Then train an SVC and a SGDClassifier on the same dataset. See if you can get them to produce roughly the same mode"></a>train a LinearSVC on a linearly separable dataset. Then train an SVC and a SGDClassifier on the same dataset. See if you can get them to produce roughly the same mode</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line">iris = datasets.load_iris()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">X = iris[<span class="string">"data"</span>][:, (<span class="number">2</span>, <span class="number">3</span>)] <span class="comment">#X.shape (150, 2)</span></span><br><span class="line">y = iris[<span class="string">"target"</span>] <span class="comment">#y.shape (150,)</span></span><br><span class="line">setosa_or_versicolor = (y == <span class="number">0</span>) | (y == <span class="number">1</span>)</span><br><span class="line">X = X[setosa_or_versicolor] <span class="comment">#100, 2)</span></span><br><span class="line">y = y[setosa_or_versicolor]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>using SVC（kernel = “linear”) is much slower than LinearSVC</li>
+<li>SGDClassifier(loss = “hinge”) this aplies regular SGD to train alinear SVM classifier<br>_tip: The Linear SVC class regularizes the bias term, so you should center the trainset fiest by subtracting its mean. In sklearn，This is automatic if you scale the data using the StandarScaler</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC, LinearSVC</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> SGDClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"></span><br><span class="line">C = <span class="number">5</span></span><br><span class="line">alpha = <span class="number">1</span> / (C * len(X))</span><br><span class="line"></span><br><span class="line">lin_clf = LinearSVC(loss=<span class="string">"hinge"</span>, C=C, random_state=<span class="number">42</span>)</span><br><span class="line">svm_clf = SVC(kernel=<span class="string">"linear"</span>, C=C)</span><br><span class="line">sgd_clf = SGDClassifier(loss=<span class="string">"hinge"</span>, learning_rate=<span class="string">"constant"</span>, eta0=<span class="number">0.001</span>, alpha=alpha,</span><br><span class="line">                        max_iter=<span class="number">100000</span>, tol=-np.infty, random_state=<span class="number">42</span>)</span><br><span class="line"></span><br><span class="line">scaler = StandardScaler()</span><br><span class="line">X_scaled = scaler.fit_transform(X)</span><br><span class="line"></span><br><span class="line">lin_clf.fit(X_scaled,y)</span><br><span class="line">svm_clf.fit(X_scaled,y)</span><br><span class="line">sgd_clf.fit(X_scaled,y)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"LinearSVC:                   "</span>, lin_clf.intercept_, lin_clf.coef_)</span><br><span class="line">print(<span class="string">"SVC:                         "</span>, svm_clf.intercept_, svm_clf.coef_)</span><br><span class="line">print(<span class="string">"SGDClassifier(alpha=&#123;:.5f&#125;):"</span>.format(sgd_clf.alpha), sgd_clf.intercept_, sgd_clf.coef_)</span><br></pre></td></tr></table></figure>
+<pre><code>LinearSVC:                    [0.28474027] [[1.0536456  1.09903032]]
+SVC:                          [0.31896852] [[1.1203284  1.02625193]]
+SGDClassifier(alpha=0.00200): [0.319] [[1.12072936 1.02666842]]
+</code></pre><ul>
+<li>得到参数了 画出图来看看（线性模型中 intercept θ0 coef  θ1，  θ2）<br>又两个参数 ， 同时除以 θ2 得到一个一维 ： y = wx + b 的形式</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="comment"># Compute the slope and bias of each decision boundary</span></span><br><span class="line">w1 = -lin_clf.coef_[<span class="number">0</span>, <span class="number">0</span>]/lin_clf.coef_[<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">b1 = -lin_clf.intercept_[<span class="number">0</span>]/lin_clf.coef_[<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">w2 = -svm_clf.coef_[<span class="number">0</span>, <span class="number">0</span>]/svm_clf.coef_[<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">b2 = -svm_clf.intercept_[<span class="number">0</span>]/svm_clf.coef_[<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">w3 = -sgd_clf.coef_[<span class="number">0</span>, <span class="number">0</span>]/sgd_clf.coef_[<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">b3 = -sgd_clf.intercept_[<span class="number">0</span>]/sgd_clf.coef_[<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Transform the decision boundary lines back to the original scale</span></span><br><span class="line">line1 = scaler.inverse_transform([[<span class="number">-10</span>, <span class="number">-10</span> * w1 + b1], [<span class="number">10</span>, <span class="number">10</span> * w1 + b1]])</span><br><span class="line">line2 = scaler.inverse_transform([[<span class="number">-10</span>, <span class="number">-10</span> * w2 + b2], [<span class="number">10</span>, <span class="number">10</span> * w2 + b2]])</span><br><span class="line">line3 = scaler.inverse_transform([[<span class="number">-10</span>, <span class="number">-10</span> * w3 + b3], [<span class="number">10</span>, <span class="number">10</span> * w3 + b3]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot all three decision boundaries</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">4</span>))</span><br><span class="line">plt.plot(line1[:, <span class="number">0</span>], line1[:, <span class="number">1</span>], <span class="string">"g:"</span>, label=<span class="string">"LinearSVC"</span>)</span><br><span class="line">plt.plot(line2[:, <span class="number">0</span>], line2[:, <span class="number">1</span>], <span class="string">"b--"</span>, linewidth=<span class="number">2</span>, label=<span class="string">"SVC"</span>)</span><br><span class="line">plt.plot(line3[:, <span class="number">0</span>], line3[:, <span class="number">1</span>], <span class="string">"r-"</span>, label=<span class="string">"SGDClassifier"</span>)</span><br><span class="line">plt.plot(X[:, <span class="number">0</span>][y==<span class="number">1</span>], X[:, <span class="number">1</span>][y==<span class="number">1</span>], <span class="string">"bs"</span>) <span class="comment"># label="Iris-Versicolor"</span></span><br><span class="line">plt.plot(X[:, <span class="number">0</span>][y==<span class="number">0</span>], X[:, <span class="number">1</span>][y==<span class="number">0</span>], <span class="string">"yo"</span>) <span class="comment"># label="Iris-Setosa"</span></span><br><span class="line">plt.xlabel(<span class="string">"Petal length"</span>, fontsize=<span class="number">14</span>)</span><br><span class="line">plt.ylabel(<span class="string">"Petal width"</span>, fontsize=<span class="number">14</span>)</span><br><span class="line">plt.legend(loc=<span class="string">"upper center"</span>, fontsize=<span class="number">14</span>)</span><br><span class="line">plt.axis([<span class="number">0</span>, <span class="number">5.5</span>, <span class="number">0</span>, <span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_7_0.png" alt="png"></p>
+<h4 id="Train-an-SVM-classifier-on-the-MNIST-dataset-Since-SVM-classifiers-are-binaryclassifiers-you-will-need-to-use-one-versus-all-to-classify-all-10-digits-You-may-want-to-tune-the-hyperparameters-using-small-validation-sets-to-speed-up-the-pro‐cess-What-accuracy-can-you-reach"><a href="#Train-an-SVM-classifier-on-the-MNIST-dataset-Since-SVM-classifiers-are-binaryclassifiers-you-will-need-to-use-one-versus-all-to-classify-all-10-digits-You-may-want-to-tune-the-hyperparameters-using-small-validation-sets-to-speed-up-the-pro‐cess-What-accuracy-can-you-reach" class="headerlink" title="Train  an  SVM  classifier  on  the  MNIST  dataset.  Since  SVM  classifiers  are  binaryclassifiers,  you  will  need  to  use  one-versus-all  to  classify  all  10  digits.  You  may  want to tune the hyperparameters using small validation sets to speed up the pro‐cess. What accuracy can you reach"></a>Train  an  SVM  classifier  on  the  MNIST  dataset.  Since  SVM  classifiers  are  binaryclassifiers,  you  will  need  to  use  one-versus-all  to  classify  all  10  digits.  You  may  want to tune the hyperparameters using small validation sets to speed up the pro‐cess. What accuracy can you reach</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">"ignore"</span>) <span class="comment">## warning</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_mldata</span><br><span class="line">mnist = fetch_mldata(<span class="string">'MNIST original'</span>,data_home=<span class="string">'./datasets/'</span>)</span><br><span class="line">mnist</span><br></pre></td></tr></table></figure>
+<pre><code>{&#39;DESCR&#39;: &#39;mldata.org dataset: mnist-original&#39;,
+ &#39;COL_NAMES&#39;: [&#39;label&#39;, &#39;data&#39;],
+ &#39;target&#39;: array([0., 0., 0., ..., 9., 9., 9.]),
+ &#39;data&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        ...,
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0]], dtype=uint8)}
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">X, y = mnist[<span class="string">"data"</span>], mnist[<span class="string">"target"</span>]</span><br><span class="line">X_train, X_test, y_train, y_test = X[:<span class="number">60000</span>], X[<span class="number">60000</span>:], y[:<span class="number">60000</span>], y[<span class="number">60000</span>:] <span class="comment">#最简单的方式</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">shuffle_index = np.random.permutation(<span class="number">60000</span>) <span class="comment">#随机取序列， 也就是洗牌</span></span><br><span class="line">X_train, y_train = X_train[shuffle_index], y_train[shuffle_index]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lin_clf = LinearSVC(random_state=<span class="number">42</span>)</span><br><span class="line">lin_clf.fit(X_train, y_train)</span><br></pre></td></tr></table></figure>
+<pre><code>LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss=&#39;squared_hinge&#39;, max_iter=1000,
+     multi_class=&#39;ovr&#39;, penalty=&#39;l2&#39;, random_state=42, tol=0.0001,
+     verbose=0)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</span><br><span class="line">y_pred = lin_clf.predict(X_train)</span><br><span class="line">accuracy_score(y_train, y_pred)</span><br></pre></td></tr></table></figure>
+<pre><code>0.8747
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scaler = StandardScaler()</span><br><span class="line">X_train_scaled = scaler.fit_transform(X_train.astype(np.float32))</span><br><span class="line">X_test_scaled = scaler.transform(X_test.astype(np.float32))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lin_clf = LinearSVC(random_state=<span class="number">42</span>)</span><br><span class="line">lin_clf.fit(X_train_scaled, y_train)</span><br></pre></td></tr></table></figure>
+<pre><code>LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss=&#39;squared_hinge&#39;, max_iter=1000,
+     multi_class=&#39;ovr&#39;, penalty=&#39;l2&#39;, random_state=42, tol=0.0001,
+     verbose=0)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y_pred = lin_clf.predict(X_train_scaled)</span><br><span class="line">accuracy_score(y_train, y_pred)</span><br></pre></td></tr></table></figure>
+<pre><code>0.9199
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">svm_clf = SVC(decision_function_shape=<span class="string">"ovr"</span>, gamma=<span class="string">"auto"</span>)</span><br><span class="line">svm_clf.fit(X_train_scaled[:<span class="number">6000</span>], y_train[:<span class="number">6000</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=&#39;ovr&#39;, degree=3, gamma=&#39;auto&#39;, kernel=&#39;rbf&#39;,
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y_pred = svm_clf.predict(X_train_scaled[:<span class="number">6000</span>])</span><br><span class="line">accuracy_score( y_train[:<span class="number">6000</span>], y_pred)</span><br></pre></td></tr></table></figure>
+<pre><code>0.9775
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> RandomizedSearchCV</span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> reciprocal, uniform</span><br><span class="line">param_distributions = &#123;<span class="string">"gamma"</span>: reciprocal(<span class="number">0.001</span>, <span class="number">0.1</span>), <span class="string">"C"</span>: uniform(<span class="number">1</span>,<span class="number">10</span>)&#125;</span><br><span class="line">rnd_search_cv = RandomizedSearchCV(svm_clf, param_distributions, n_iter=<span class="number">5</span>, verbose=<span class="number">2</span>, cv=<span class="number">3</span>)</span><br><span class="line">rnd_search_cv.fit(X_train_scaled[:<span class="number">500</span>], y_train[:<span class="number">500</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>Fitting 3 folds for each of 5 candidates, totalling 15 fits
+[CV] C=6.249402615871811, gamma=0.07077378550552337 ..................
+
+
+[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
+
+
+[CV] ... C=6.249402615871811, gamma=0.07077378550552337, total=   0.1s
+[CV] C=6.249402615871811, gamma=0.07077378550552337 ..................
+
+
+[Parallel(n_jobs=1)]: Done   1 out of   1 | elapsed:    0.2s remaining:    0.0s
+
+
+[CV] ... C=6.249402615871811, gamma=0.07077378550552337, total=   0.1s
+[CV] C=6.249402615871811, gamma=0.07077378550552337 ..................
+[CV] ... C=6.249402615871811, gamma=0.07077378550552337, total=   0.1s
+[CV] C=1.8908728532899979, gamma=0.05548178308647815 .................
+[CV] .. C=1.8908728532899979, gamma=0.05548178308647815, total=   0.1s
+[CV] C=1.8908728532899979, gamma=0.05548178308647815 .................
+[CV] .. C=1.8908728532899979, gamma=0.05548178308647815, total=   0.1s
+[CV] C=1.8908728532899979, gamma=0.05548178308647815 .................
+[CV] .. C=1.8908728532899979, gamma=0.05548178308647815, total=   0.1s
+[CV] C=6.575575197236928, gamma=0.010917851017824925 .................
+[CV] .. C=6.575575197236928, gamma=0.010917851017824925, total=   0.1s
+[CV] C=6.575575197236928, gamma=0.010917851017824925 .................
+[CV] .. C=6.575575197236928, gamma=0.010917851017824925, total=   0.1s
+[CV] C=6.575575197236928, gamma=0.010917851017824925 .................
+[CV] .. C=6.575575197236928, gamma=0.010917851017824925, total=   0.1s
+[CV] C=8.103984118328173, gamma=0.0010976969181254448 ................
+[CV] . C=8.103984118328173, gamma=0.0010976969181254448, total=   0.1s
+[CV] C=8.103984118328173, gamma=0.0010976969181254448 ................
+[CV] . C=8.103984118328173, gamma=0.0010976969181254448, total=   0.1s
+[CV] C=8.103984118328173, gamma=0.0010976969181254448 ................
+[CV] . C=8.103984118328173, gamma=0.0010976969181254448, total=   0.1s
+[CV] C=3.8772829451317716, gamma=0.002522772748672047 ................
+[CV] . C=3.8772829451317716, gamma=0.002522772748672047, total=   0.1s
+[CV] C=3.8772829451317716, gamma=0.002522772748672047 ................
+[CV] . C=3.8772829451317716, gamma=0.002522772748672047, total=   0.1s
+[CV] C=3.8772829451317716, gamma=0.002522772748672047 ................
+[CV] . C=3.8772829451317716, gamma=0.002522772748672047, total=   0.1s
+
+
+[Parallel(n_jobs=1)]: Done  15 out of  15 | elapsed:    4.2s finished
+
+
+
+
+
+RandomizedSearchCV(cv=3, error_score=&#39;raise-deprecating&#39;,
+          estimator=SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=&#39;ovr&#39;, degree=3, gamma=&#39;auto&#39;, kernel=&#39;rbf&#39;,
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False),
+          fit_params=None, iid=&#39;warn&#39;, n_iter=5, n_jobs=None,
+          param_distributions={&#39;gamma&#39;: &lt;scipy.stats._distn_infrastructure.rv_frozen object at 0x000002A3E9698CC0&gt;, &#39;C&#39;: &lt;scipy.stats._distn_infrastructure.rv_frozen object at 0x000002A3EAA16390&gt;},
+          pre_dispatch=&#39;2*n_jobs&#39;, random_state=None, refit=True,
+          return_train_score=&#39;warn&#39;, scoring=None, verbose=2)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rnd_search_cv.best_params_</span><br></pre></td></tr></table></figure>
+<pre><code>{&#39;C&#39;: 8.103984118328173, &#39;gamma&#39;: 0.0010976969181254448}
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rnd_search_cv.best_score_</span><br></pre></td></tr></table></figure>
+<pre><code>0.802
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rnd_search_cv.best_estimator_.fit(X_train_scaled[:<span class="number">6000</span>], y_train[:<span class="number">6000</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>SVC(C=8.103984118328173, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=&#39;ovr&#39;, degree=3, gamma=0.0010976969181254448,
+  kernel=&#39;rbf&#39;, max_iter=-1, probability=False, random_state=None,
+  shrinking=True, tol=0.001, verbose=False)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y_pred = rnd_search_cv.best_estimator_.predict(X_train_scaled[:<span class="number">6000</span>])</span><br><span class="line">accuracy_score(y_train[:<span class="number">6000</span>], y_pred)</span><br></pre></td></tr></table></figure>
+<pre><code>0.9991666666666666
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y_pred = rnd_search_cv.best_estimator_.predict(X_test_scaled)</span><br><span class="line">accuracy_score(y_test, y_pred)</span><br></pre></td></tr></table></figure>
+<pre><code>0.9404
+</code></pre><h4 id="Train-an-SVM-regressor-on-the-California-housing-dataset"><a href="#Train-an-SVM-regressor-on-the-California-housing-dataset" class="headerlink" title="Train an SVM regressor on the California housing dataset"></a>Train an SVM regressor on the California housing dataset</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_california_housing</span><br><span class="line">housing = fetch_california_housing()</span><br><span class="line">X = housing[<span class="string">"data"</span>]</span><br><span class="line">y = housing[<span class="string">"target"</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">X_train, X_test,y_train, y_test = train_test_split(X, y, test_size = <span class="number">0.2</span>, random_state = <span class="number">42</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing  <span class="keyword">import</span> StandardScaler</span><br><span class="line">scaler = StandardScaler()</span><br><span class="line">X_train_scaled = scaler.fit_transform(X_train)</span><br><span class="line">X_test_scaled = scaler.transform(X_test)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> LinearSVR</span><br><span class="line">lin_svr = LinearSVR()</span><br><span class="line">lin_svr.fit(X_train_scaled, y_train)</span><br></pre></td></tr></table></figure>
+<pre><code>LinearSVR(C=1.0, dual=True, epsilon=0.0, fit_intercept=True,
+     intercept_scaling=1.0, loss=&#39;epsilon_insensitive&#39;, max_iter=1000,
+     random_state=None, tol=0.0001, verbose=0)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># from sklearn.metrics import accuracy_score </span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line"></span><br><span class="line">y_pred = lin_svr.predict(X_train_scaled)</span><br><span class="line">mse = mean_squared_error(y_train, y_pred)</span><br><span class="line">mse</span><br></pre></td></tr></table></figure>
+<pre><code>0.9541764911842403
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVR</span><br><span class="line">param_distributions = &#123;<span class="string">"gamma"</span>: reciprocal(<span class="number">0.001</span>, <span class="number">0.1</span>), <span class="string">"C"</span>: uniform(<span class="number">1</span>, <span class="number">10</span>)&#125;</span><br><span class="line">rnd_search_cv = RandomizedSearchCV(SVR(), param_distributions, n_iter=<span class="number">10</span>, verbose=<span class="number">2</span>, cv=<span class="number">3</span>, random_state=<span class="number">42</span>)</span><br><span class="line">rnd_search_cv.fit(X_train_scaled, y_train)</span><br></pre></td></tr></table></figure>
+<pre><code>Fitting 3 folds for each of 10 candidates, totalling 30 fits
+[CV] C=4.745401188473625, gamma=0.07969454818643928 ..................
+
+
+[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
+
+
+[CV] ... C=4.745401188473625, gamma=0.07969454818643928, total=   5.9s
+[CV] C=4.745401188473625, gamma=0.07969454818643928 ..................
+
+
+[Parallel(n_jobs=1)]: Done   1 out of   1 | elapsed:    7.7s remaining:    0.0s
+
+
+[CV] ... C=4.745401188473625, gamma=0.07969454818643928, total=   5.6s
+[CV] C=4.745401188473625, gamma=0.07969454818643928 ..................
+[CV] ... C=4.745401188473625, gamma=0.07969454818643928, total=   5.8s
+[CV] C=8.31993941811405, gamma=0.015751320499779724 ..................
+[CV] ... C=8.31993941811405, gamma=0.015751320499779724, total=   5.5s
+[CV] C=8.31993941811405, gamma=0.015751320499779724 ..................
+[CV] ... C=8.31993941811405, gamma=0.015751320499779724, total=   5.4s
+[CV] C=8.31993941811405, gamma=0.015751320499779724 ..................
+[CV] ... C=8.31993941811405, gamma=0.015751320499779724, total=   6.1s
+[CV] C=2.560186404424365, gamma=0.002051110418843397 .................
+[CV] .. C=2.560186404424365, gamma=0.002051110418843397, total=   5.4s
+[CV] C=2.560186404424365, gamma=0.002051110418843397 .................
+[CV] .. C=2.560186404424365, gamma=0.002051110418843397, total=   5.1s
+[CV] C=2.560186404424365, gamma=0.002051110418843397 .................
+[CV] .. C=2.560186404424365, gamma=0.002051110418843397, total=   4.7s
+[CV] C=1.5808361216819946, gamma=0.05399484409787431 .................
+[CV] .. C=1.5808361216819946, gamma=0.05399484409787431, total=   4.7s
+[CV] C=1.5808361216819946, gamma=0.05399484409787431 .................
+[CV] .. C=1.5808361216819946, gamma=0.05399484409787431, total=   4.8s
+[CV] C=1.5808361216819946, gamma=0.05399484409787431 .................
+[CV] .. C=1.5808361216819946, gamma=0.05399484409787431, total=   4.7s
+[CV] C=7.011150117432088, gamma=0.026070247583707663 .................
+[CV] .. C=7.011150117432088, gamma=0.026070247583707663, total=   5.8s
+[CV] C=7.011150117432088, gamma=0.026070247583707663 .................
+[CV] .. C=7.011150117432088, gamma=0.026070247583707663, total=   5.6s
+[CV] C=7.011150117432088, gamma=0.026070247583707663 .................
+[CV] .. C=7.011150117432088, gamma=0.026070247583707663, total=   5.8s
+[CV] C=1.2058449429580245, gamma=0.0870602087830485 ..................
+[CV] ... C=1.2058449429580245, gamma=0.0870602087830485, total=   5.0s
+[CV] C=1.2058449429580245, gamma=0.0870602087830485 ..................
+[CV] ... C=1.2058449429580245, gamma=0.0870602087830485, total=   5.3s
+[CV] C=1.2058449429580245, gamma=0.0870602087830485 ..................
+[CV] ... C=1.2058449429580245, gamma=0.0870602087830485, total=   4.9s
+[CV] C=9.324426408004218, gamma=0.0026587543983272693 ................
+[CV] . C=9.324426408004218, gamma=0.0026587543983272693, total=   5.2s
+[CV] C=9.324426408004218, gamma=0.0026587543983272693 ................
+[CV] . C=9.324426408004218, gamma=0.0026587543983272693, total=   4.9s
+[CV] C=9.324426408004218, gamma=0.0026587543983272693 ................
+[CV] . C=9.324426408004218, gamma=0.0026587543983272693, total=   4.7s
+[CV] C=2.818249672071006, gamma=0.0023270677083837795 ................
+[CV] . C=2.818249672071006, gamma=0.0023270677083837795, total=   4.8s
+[CV] C=2.818249672071006, gamma=0.0023270677083837795 ................
+[CV] . C=2.818249672071006, gamma=0.0023270677083837795, total=   4.7s
+[CV] C=2.818249672071006, gamma=0.0023270677083837795 ................
+[CV] . C=2.818249672071006, gamma=0.0023270677083837795, total=   5.0s
+[CV] C=4.042422429595377, gamma=0.011207606211860567 .................
+[CV] .. C=4.042422429595377, gamma=0.011207606211860567, total=   5.1s
+[CV] C=4.042422429595377, gamma=0.011207606211860567 .................
+[CV] .. C=4.042422429595377, gamma=0.011207606211860567, total=   5.2s
+[CV] C=4.042422429595377, gamma=0.011207606211860567 .................
+[CV] .. C=4.042422429595377, gamma=0.011207606211860567, total=   5.5s
+[CV] C=5.319450186421157, gamma=0.003823475224675185 .................
+[CV] .. C=5.319450186421157, gamma=0.003823475224675185, total=   5.0s
+[CV] C=5.319450186421157, gamma=0.003823475224675185 .................
+[CV] .. C=5.319450186421157, gamma=0.003823475224675185, total=   4.7s
+[CV] C=5.319450186421157, gamma=0.003823475224675185 .................
+[CV] .. C=5.319450186421157, gamma=0.003823475224675185, total=   4.8s
+
+
+[Parallel(n_jobs=1)]: Done  30 out of  30 | elapsed:  3.7min finished
+
+
+
+
+
+RandomizedSearchCV(cv=3, error_score=&#39;raise-deprecating&#39;,
+          estimator=SVR(C=1.0, cache_size=200, coef0=0.0, degree=3, epsilon=0.1,
+  gamma=&#39;auto_deprecated&#39;, kernel=&#39;rbf&#39;, max_iter=-1, shrinking=True,
+  tol=0.001, verbose=False),
+          fit_params=None, iid=&#39;warn&#39;, n_iter=10, n_jobs=None,
+          param_distributions={&#39;gamma&#39;: &lt;scipy.stats._distn_infrastructure.rv_frozen object at 0x000002A3EAB4C630&gt;, &#39;C&#39;: &lt;scipy.stats._distn_infrastructure.rv_frozen object at 0x000002A3EAB26E80&gt;},
+          pre_dispatch=&#39;2*n_jobs&#39;, random_state=42, refit=True,
+          return_train_score=&#39;warn&#39;, scoring=None, verbose=2)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rnd_search_cv.best_estimator_</span><br></pre></td></tr></table></figure>
+<pre><code>SVR(C=4.745401188473625, cache_size=200, coef0=0.0, degree=3, epsilon=0.1,
+  gamma=0.07969454818643928, kernel=&#39;rbf&#39;, max_iter=-1, shrinking=True,
+  tol=0.001, verbose=False)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">y_pred = rnd_search_cv.best_estimator_.predict(X_train_scaled)</span><br><span class="line">mse = mean_squared_error(y_train, y_pred)</span><br><span class="line">mse</span><br></pre></td></tr></table></figure>
+<pre><code>0.3280453999995986
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/08/09/MNIST/" rel="next" title="MNIST 手写识别任务">
+                  <i class="fa fa-chevron-left"></i> MNIST 手写识别任务
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/08/25/Skip-Thought Vectors/" rel="prev" title="Skip-Thought Vectors">
+                  Skip-Thought Vectors <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/echarts.png"
+      alt="Les">
+  <p class="site-author-name" itemprop="name">Les</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#hands-on-svm课后作业"><span class="nav-number">1.</span> <span class="nav-text">hands-on svm课后作业</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#train-a-LinearSVC-on-a-linearly-separable-dataset-Then-train-an-SVC-and-a-SGDClassifier-on-the-same-dataset-See-if-you-can-get-them-to-produce-roughly-the-same-mode"><span class="nav-number">1.1.</span> <span class="nav-text">train a LinearSVC on a linearly separable dataset. Then train an SVC and a SGDClassifier on the same dataset. See if you can get them to produce roughly the same mode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Train-an-SVM-classifier-on-the-MNIST-dataset-Since-SVM-classifiers-are-binaryclassifiers-you-will-need-to-use-one-versus-all-to-classify-all-10-digits-You-may-want-to-tune-the-hyperparameters-using-small-validation-sets-to-speed-up-the-pro‐cess-What-accuracy-can-you-reach"><span class="nav-number">1.2.</span> <span class="nav-text">Train  an  SVM  classifier  on  the  MNIST  dataset.  Since  SVM  classifiers  are  binaryclassifiers,  you  will  need  to  use  one-versus-all  to  classify  all  10  digits.  You  may  want to tune the hyperparameters using small validation sets to speed up the pro‐cess. What accuracy can you reach</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Train-an-SVM-regressor-on-the-California-housing-dataset"><span class="nav-number">1.3.</span> <span class="nav-text">Train an SVM regressor on the California housing dataset</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Les</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', function() {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>

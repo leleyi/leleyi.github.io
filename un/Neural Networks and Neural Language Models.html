@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/echarts.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/echarts.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"scrollpercent":true,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    save_scroll: false,
+    copycode: {"enable":true,"show_result":true,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="Neural Networks and Neural Language ModelsUnits即一个节点，输入 - &amp;gt; 处理  -&amp;gt;输出  bias   z = b(这个就是bias) + \sum_iw_ix_i vector 将上面的 sum 看作向量的dot product  z = w\cdot x + b activation 把unit中的输出传入activation，事实">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FILE">
+<meta property="og:url" content="http://yoursite.com/un/Neural Networks and Neural Language Models.html">
+<meta property="og:site_name" content="FILE">
+<meta property="og:description" content="Neural Networks and Neural Language ModelsUnits即一个节点，输入 - &amp;gt; 处理  -&amp;gt;输出  bias   z = b(这个就是bias) + \sum_iw_ix_i vector 将上面的 sum 看作向量的dot product  z = w\cdot x + b activation 把unit中的输出传入activation，事实">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1567650842242.png">
+<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1567652039407.png">
+<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1567652578668.png">
+<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1567664540440.png">
+<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1567665692350.png">
+<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1567666754018.png">
+<meta property="og:image" content="file:///C:/Users/65357/AppData/Roaming/Tencent/Users/653574281/TIM/WinTemp/RichOle/_%%7DPP[SL[AY5HZIV1XSFFI9.png">
+<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1567733388447.png">
+<meta property="og:updated_time" content="2019-09-09T14:04:11.390Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FILE">
+<meta name="twitter:description" content="Neural Networks and Neural Language ModelsUnits即一个节点，输入 - &amp;gt; 处理  -&amp;gt;输出  bias   z = b(这个就是bias) + \sum_iw_ix_i vector 将上面的 sum 看作向量的dot product  z = w\cdot x + b activation 把unit中的输出传入activation，事实">
+<meta name="twitter:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1567650842242.png">
+  <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/un/Neural Networks and Neural Language Models">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title> | FILE</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FILE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+          <h3 id="Neural-Networks-and-Neural-Language-Models"><a href="#Neural-Networks-and-Neural-Language-Models" class="headerlink" title="Neural Networks and Neural Language Models"></a>Neural Networks and Neural Language Models</h3><h4 id="Units"><a href="#Units" class="headerlink" title="Units"></a>Units</h4><p>即一个节点，输入 - &gt; 处理  -&gt;输出</p>
+<ul>
+<li><p><strong>bias</strong> </p>
+<script type="math/tex; mode=display">
+z = b(这个就是bias) + \sum_iw_ix_i</script></li>
+<li><p><strong>vector</strong> 将上面的 sum 看作向量的<strong>dot product</strong></p>
+<script type="math/tex; mode=display">
+z = w\cdot x + b</script></li>
+<li><p><strong>activation</strong> 把unit中的输出传入activation，事实上是当前网络的实际输出：</p>
+<script type="math/tex; mode=display">
+y = a = {f(z)}</script></li>
+</ul>
+<ul>
+<li><p>sigmoid:</p>
+<script type="math/tex; mode=display">
+y  = \sigma(z) = \frac{1}{1 + e^{-z}}</script></li>
+<li><p>tanh:</p>
+<script type="math/tex; mode=display">
+y = \frac{e^z - e^{-z}}{e^z + e{-z}}</script></li>
+<li><p>ReLU</p>
+<script type="math/tex; mode=display">
+y = max(x, 0)</script></li>
+</ul>
+<h4 id="The-XOR-problem"><a href="#The-XOR-problem" class="headerlink" title="The XOR problem"></a>The XOR problem</h4><script type="math/tex; mode=display">
+y=\left\{\begin{array}{ll}{0,} & {\text { if } w \cdot x+b \leq 0} \\ {1,} & {\text { if } w \cdot x+b>0}\end{array}\right.</script><p>建立一个 <strong>与</strong> <strong>(a)</strong>， <strong>或</strong> <strong>(b)</strong> 网络非常简单, 但是不能建立一个网络 XOR </p>
+<p><img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1567650842242.png" alt="1567650842242"></p>
+<ul>
+<li><p><strong>decision boundary</strong>  $w1x1+w2x2+b = 0$</p>
+<p>如果由决策边界 或者 决策面，说明是线性可分的，所以可以由单层网络直接模拟</p>
+</li>
+</ul>
+<p><img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1567652039407.png" alt="1567652039407"></p>
+<p>由图可以明显看出 XOR 线性不可分。 所以 XOR不能被单层的感知机计算。可以叠加网络来解决这个问题。</p>
+<p><img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1567652578668.png" alt="1567652578668"></p>
+<p>中间加了hidden layer 形成新的input 。新形成的input 使得其线性可分。</p>
+<h4 id="Feed-Forward-Neural-Networks"><a href="#Feed-Forward-Neural-Networks" class="headerlink" title="Feed-Forward Neural Networks"></a>Feed-Forward Neural Networks</h4><script type="math/tex; mode=display">
+h = \sigma(Wx + b)\\
+z = Uh\\
+y = softmax(z)</script><p>e.g</p>
+<script type="math/tex; mode=display">
+\begin{aligned} z^{[1]} &=W^{[1]} a^{[0]}+b^{[1]} \\ a^{[1]} &=g^{[1]}\left(z^{[1]}\right) \\ z^{[2]} &=W^{[2]} a^{[1]}+b^{[2]} \\ a^{[2]} &=g^{[2]}\left(z^{[2]}\right) \\ \hat{y} &=a^{[2]} \end{aligned}</script><h5 id="Training-Neural-Nets"><a href="#Training-Neural-Nets" class="headerlink" title="Training Neural Nets"></a>Training Neural Nets</h5><ul>
+<li><p><strong>Loss funciton</strong></p>
+<ul>
+<li>cross-entropy loss:<script type="math/tex; mode=display">
+\text 二分类：： L_{CE}(\hat y, y)= -log\ p(p|x) = -[ylog\ \hat y + (1 - y)log(1-\hat y)]\\
+\text 多分类：：L_{CE}(\hat y,y) = - \sum_{i = 1}^{C}y_ilog\ \hat y_i</script></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>由于上述等式处理 当前为真的其他的都将是零，所以可以简化为negative log likelihood loss:<script type="math/tex; mode=display">
+  L_{CE}(\hat y, y) = -log\ \hat y_i\\
+  \text 把softmax函数加上\  L_{CE}(\hat y,y) = -log\frac{e^{z_i}}{\sum_{i = j}^Ke^{z_j}}</script></li>
+</ul>
+<ul>
+<li><p><strong>Computing thre Gradient</strong></p>
+<ul>
+<li>error back-propagation</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>Computation Graphs</strong> </p>
+<p>如果我们计算$L(a,b,c) = c(a + 2b)$。我们可以把计算步骤分解如下：</p>
+<script type="math/tex; mode=display">
+d = 2 * b\\
+e = a +d\\
+L = c * e</script><p>使用计算图来表示如下：</p>
+<p><img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1567664540440.png" alt="1567664540440"></p>
+</li>
+<li><p><strong>Backward differentiation on computation graphs</strong> </p>
+<ul>
+<li><p>chain rule $f(x) = u(v(x))$ 其中$f$对 $x$的导数如下：</p>
+<script type="math/tex; mode=display">
+\frac{df}{dx} = \frac{du}{dv}\cdot \frac{dv}{dx}</script></li>
+<li><p>我们继续计算上图我们需要的3个导数：</p>
+<script type="math/tex; mode=display">
+\frac{\partial L}{\partial c} = e\\
+\frac{\partial L}{\partial a} = \frac{\partial L}{\partial e}\frac{\partial e}{\partial a}\\
+\frac{\partial L}{\partial b} =  \frac{\partial L}{\partial e} \frac{\partial e}{\partial d} \frac{\partial d}{\partial b}</script></li>
+<li><p>在反向传播中我们从右边到左边计算，直到我们所需要的导数</p>
+<p><img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1567665692350.png" alt="1567665692350"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>Backward differentiation for a neural network</strong></p>
+<script type="math/tex; mode=display">
+\begin{aligned} z^{[1]} &=W^{[1]} \mathbf{x}+b^{[1]} \\ a^{[1]} &=\operatorname{RELu}\left(z^{[1]}\right) \\ z^{[2]} &=W^{[2]} a^{[1]}+b^{[2]} \\ a^{[2]} &=\sigma\left(z^{[2]}\right) \\ \hat{y} &=a^{[2]} \end{aligned}</script><p><img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1567666754018.png" alt="1567666754018"></p>
+<ul>
+<li>the derivative of the sigmoid $\sigma$:<script type="math/tex; mode=display">
+\frac {d\sigma(z)}{dz} = \sigma(z)(1 - \sigma(z))</script></li>
+<li><p>the derivative of tanh:</p>
+<script type="math/tex; mode=display">
+\frac{dtanh(z)}{dz} = 1 - tanh^2(z)</script></li>
+<li><p>the derivative of the ReLU</p>
+<script type="math/tex; mode=display">
+\frac{d \operatorname{ReLU}(z)}{d z}=\left\{\begin{array}{ll}{0} & {\text { for } x<0} \\ {1} & {\text { for } x \geq 0}\end{array}\right.</script></li>
+</ul>
+</li>
+</ul>
+<h5 id="More-details-on-learning"><a href="#More-details-on-learning" class="headerlink" title="More details on learning"></a>More details on learning</h5><ul>
+<li><p><strong>dropout</strong> : 防止过拟合</p>
+</li>
+<li><p><strong>hyperparameter</strong>：神经网络的参数是$权重\  W 和 bias\  b$ 通过梯度下降学习而来，而hyperparameters 是通过算法设计者自己选择。其包括 learning rate $\eta$,   mini-batch size， the model architecture ，如何 正则化，采用哪种梯度下降算法等等。</p>
+</li>
+</ul>
+<h4 id="Neural-Language-Models"><a href="#Neural-Language-Models" class="headerlink" title="Neural Language Models"></a>Neural Language Models</h4><p>Neural Models</p>
+<ul>
+<li><p><strong>advance</strong>： 获取更长的的信息。概括上下文。更好的预测准确率。 是其他模型的的基础。</p>
+</li>
+<li><p><strong>disadvance</strong>： 训练速度慢</p>
+</li>
+</ul>
+<p>n-gram 模型</p>
+<script type="math/tex; mode=display">
+P(w_t| w_1^{t - 1})\approx P(w_t| w_{t - N + 1}^{t - 1})</script><h5 id="Embeddings"><a href="#Embeddings" class="headerlink" title="Embeddings"></a>Embeddings</h5><blockquote>
+<p>e.g:I have to make sure when I get home to feed the cat. </p>
+</blockquote>
+<ul>
+<li><p><strong>pretraining</strong>: 通过其他算法，如word2vec训练出embeding representations</p>
+</li>
+<li><p>当然也通常是在训练具体的任务中同时学习embedding </p>
+</li>
+</ul>
+<p><img src="file:///C:\Users\65357\AppData\Roaming\Tencent\Users\653574281\TIM\WinTemp\RichOle\_%}PP[SL[AY5HZIV1XSFFI9.png" alt="img"></p>
+<script type="math/tex; mode=display">
+1 * d -> 1 * 3d\\
+W^T.shape = 3d * d_h \\
+(1 * 3d) * (3d * d_h) = 1 * d_h \\
+U^T = d_h * |V| \\
+(1 * d_h) * U^T = 1 * |V|\\
+\text {softmax:  the probobilty of V_42 is the largest}</script><ul>
+<li><strong>one-hot vector</strong> :</li>
+</ul>
+<script type="math/tex; mode=display">
+[\  0\ 0\  0\  0\  1\  0\  0\  ...\  0\  0\  0\  0\  ] \\
+  1\ 2\ 3\  4 \ 5 \ 6 \ 7 ... ...  \ |V|</script><p><img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1567733388447.png" alt="1567733388447"></p>
+<pre><code>  首先初始换一个 E 矩阵, 该矩阵 乘以 one-hot 之后 ,实际上就是 one-hot 所代表的那个单词的embedding.
+</code></pre><p>​    然后后面操作就和之前是一样的.</p>
+<script type="math/tex; mode=display">
+\begin{aligned} e &=\left(E x_{1}, E x_{2}, \ldots, E x\right) \\ h &=\sigma(W e+b) \\ z &=U h \\ y &=\operatorname{softmax}(z) \end{aligned}</script><h5 id="Training-the-neural-language-model"><a href="#Training-the-neural-language-model" class="headerlink" title="Training the neural language model"></a>Training the neural language model</h5><ul>
+<li><p>训练的参数 $ \theta = E,\ W,\ U,\ b$</p>
+</li>
+<li><p>使用梯度下降,反向传播.</p>
+</li>
+<li>由于在训练中不仅仅是训练参数,并且要预测下一个单词,所以训练出来的E 在预测下一个单词上更优秀.</li>
+</ul>
+<p>通常情况下,输入是一个长文本,包括所有的句子, 随机权重,然后迭代. cross-entropy(negative log likelihood) loss :</p>
+<script type="math/tex; mode=display">
+L = - log\ p(w_t|w_{t-1},...,w_{t-n+1})</script><p>梯度:</p>
+<script type="math/tex; mode=display">
+\theta_{t+1} = \theta_t - \eta \frac{\partial{- log\ p(w_t|w_{t-1},...,w_{t-n+1})}}{\partial \theta}</script><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>1.<a href="https://web.stanford.edu/~jurafsky/slp3/" target="_blank" rel="noopener">Neural Networks and Neural Language Models </a></p>
+<p>2.[<a href="https://web.stanford.edu/~jurafsky/slp3/" target="_blank" rel="noopener">Vector Semantics and Embeddings</a>; </p>
+<p>3.<a href>Word2vec Parameter Learning Explained</a>; Xin Rong ronxin@umich.edu.</p>
+<p>4.<a href>Distributed Representations of Sentences and Documents.pdf</a>Quoc Le Tomas Mikolov Google Inc, 1600 Amphitheatre Parkway, Mountain View, CA 94043</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/echarts.png"
+      alt="Les">
+  <p class="site-author-name" itemprop="name">Les</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Neural-Networks-and-Neural-Language-Models"><span class="nav-number">1.</span> <span class="nav-text">Neural Networks and Neural Language Models</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Units"><span class="nav-number">1.1.</span> <span class="nav-text">Units</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#The-XOR-problem"><span class="nav-number">1.2.</span> <span class="nav-text">The XOR problem</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Feed-Forward-Neural-Networks"><span class="nav-number">1.3.</span> <span class="nav-text">Feed-Forward Neural Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Training-Neural-Nets"><span class="nav-number">1.3.1.</span> <span class="nav-text">Training Neural Nets</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#More-details-on-learning"><span class="nav-number">1.3.2.</span> <span class="nav-text">More details on learning</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Neural-Language-Models"><span class="nav-number">1.4.</span> <span class="nav-text">Neural Language Models</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Embeddings"><span class="nav-number">1.4.1.</span> <span class="nav-text">Embeddings</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Training-the-neural-language-model"><span class="nav-number">1.4.2.</span> <span class="nav-text">Training the neural language model</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Les</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+  
+
+</body>
+</html>

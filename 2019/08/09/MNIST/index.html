@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/echarts.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/echarts.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"scrollpercent":true,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    save_scroll: false,
+    copycode: {"enable":true,"show_result":true,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="Hand - on 3分类任务预处理数据获取数据集使用 sklearn提供的MNIST数据集，进行分类练习。 12import warningswarnings.filterwarnings(&quot;ignore&quot;) ## 个人不想看到warning 123from sklearn.datasets import fetch_mldatamnist = fetch_mldata(&apos;MNIST origi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MNIST 手写识别任务">
+<meta property="og:url" content="http://yoursite.com/2019/08/09/MNIST/index.html">
+<meta property="og:site_name" content="FILE">
+<meta property="og:description" content="Hand - on 3分类任务预处理数据获取数据集使用 sklearn提供的MNIST数据集，进行分类练习。 12import warningswarnings.filterwarnings(&quot;ignore&quot;) ## 个人不想看到warning 123from sklearn.datasets import fetch_mldatamnist = fetch_mldata(&apos;MNIST origi">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/08/09/MNIST/output_8_0.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/09/MNIST/output_34_0.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/09/MNIST/output_35_0.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/09/MNIST/output_39_0.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/09/MNIST/output_42_0.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/09/MNIST/output_56_0.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/09/MNIST/output_59_0.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/09/MNIST/output_77_0.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/09/MNIST/output_93_0.png">
+<meta property="og:updated_time" content="2019-08-18T07:48:20.131Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MNIST 手写识别任务">
+<meta name="twitter:description" content="Hand - on 3分类任务预处理数据获取数据集使用 sklearn提供的MNIST数据集，进行分类练习。 12import warningswarnings.filterwarnings(&quot;ignore&quot;) ## 个人不想看到warning 123from sklearn.datasets import fetch_mldatamnist = fetch_mldata(&apos;MNIST origi">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/09/MNIST/output_8_0.png">
+  <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/2019/08/09/MNIST/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>MNIST 手写识别任务 | FILE</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FILE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/09/MNIST/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Les">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/echarts.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FILE">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">MNIST 手写识别任务
+
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-08-09 14:57:15" itemprop="dateCreated datePublished" datetime="2019-08-09T14:57:15+08:00">2019-08-09</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-18 15:48:20" itemprop="dateModified" datetime="2019-08-18T15:48:20+08:00">2019-08-18</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ml/" itemprop="url" rel="index"><span itemprop="name">ml</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Hand-on-3"><a href="#Hand-on-3" class="headerlink" title="Hand - on 3"></a>Hand - on 3</h1><h2 id="分类任务"><a href="#分类任务" class="headerlink" title="分类任务"></a>分类任务</h2><h3 id="预处理数据"><a href="#预处理数据" class="headerlink" title="预处理数据"></a>预处理数据</h3><h4 id="获取数据集"><a href="#获取数据集" class="headerlink" title="获取数据集"></a>获取数据集</h4><p>使用 sklearn提供的MNIST数据集，进行分类练习。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">"ignore"</span>) <span class="comment">## 个人不想看到warning</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_mldata</span><br><span class="line">mnist = fetch_mldata(<span class="string">'MNIST original'</span>,data_home=<span class="string">'./datasets/'</span>)</span><br><span class="line">mnist</span><br></pre></td></tr></table></figure>
+<pre><code>{&#39;DESCR&#39;: &#39;mldata.org dataset: mnist-original&#39;,
+ &#39;COL_NAMES&#39;: [&#39;label&#39;, &#39;data&#39;],
+ &#39;target&#39;: array([0., 0., 0., ..., 9., 9., 9.]),
+ &#39;data&#39;: array([[0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        ...,
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0],
+        [0, 0, 0, ..., 0, 0, 0]], dtype=uint8)}
+</code></pre><p>可以清晰的看到数据的结构，我们看看数据的详细情况</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">X, y = mnist[<span class="string">"data"</span>], mnist[<span class="string">"target"</span>]</span><br><span class="line">X.shape <span class="comment">#(70000, 784)</span></span><br><span class="line">y.shape <span class="comment">#(70000,)</span></span><br></pre></td></tr></table></figure>
+<pre><code>(70000,)
+</code></pre><p>将数据画出来画图代码如下（各个参数在代码中有解释详细可以见api）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> matplotlib </span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">some_digit = X[<span class="number">36000</span>] <span class="comment">#随便查看一个数据</span></span><br><span class="line">some_digit_image = some_digit.reshape(<span class="number">28</span>,<span class="number">28</span>) <span class="comment"># </span></span><br><span class="line">plt.imshow(some_digit_image, cmap = matplotlib.cm.binary, interpolation = <span class="string">'nearest'</span>) </span><br><span class="line"><span class="comment"># X : array-like or PIL image</span></span><br><span class="line"><span class="comment"># interpolation 构成图的效果不同 默认也是nearest</span></span><br><span class="line">plt.axis(<span class="string">"off"</span>) <span class="comment"># 画图不要坐标轴</span></span><br><span class="line">plt.show() </span><br><span class="line">y[<span class="number">36000</span>] <span class="comment"># 5.0</span></span><br></pre></td></tr></table></figure>
+<p><img src="output_8_0.png" alt="png"></p>
+<pre><code>5.0
+</code></pre><h4 id="处理数据集，-将其分成测试集与训练集"><a href="#处理数据集，-将其分成测试集与训练集" class="headerlink" title="处理数据集， 将其分成测试集与训练集"></a>处理数据集， 将其分成测试集与训练集</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">X_train, X_test, y_train, y_test = X[:<span class="number">60000</span>], X[<span class="number">60000</span>:], y[:<span class="number">60000</span>], y[<span class="number">60000</span>:] <span class="comment">#最简单的方式</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">shuffle_index = np.random.permutation(<span class="number">60000</span>) <span class="comment">#随机取序列， 也就是洗牌</span></span><br><span class="line">X_train, y_train = X_train[shuffle_index], y_train[shuffle_index]</span><br></pre></td></tr></table></figure>
+<p>多分类算法可以建立在二分类算法之上，后文可以看到。首先我们试试二分类算法以 5作为例子，所有数中就是（ == 5 或者 != 5 两种情况。所以我们把训练集测试集的标签修改为 0， 1两种情况</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">y_train_5 = (y_train == <span class="number">5</span>)  <span class="comment"># True for all 5s, False for all other digits.</span></span><br><span class="line">y_test_5 = (y_test == <span class="number">5</span>)</span><br><span class="line">y_train_5 <span class="comment">#array([False, False, False, ..., False, False, False])</span></span><br></pre></td></tr></table></figure>
+<pre><code>array([False, False, False, ..., False, False, False])
+</code></pre><h4 id="先简化训练一个二分类，使用SGDClassifier分类器"><a href="#先简化训练一个二分类，使用SGDClassifier分类器" class="headerlink" title="先简化训练一个二分类，使用SGDClassifier分类器"></a>先简化训练一个二分类，使用SGDClassifier分类器</h4><p>某个名人说过，管他三七二十一 线性模型直接先拿出来看看。sklearn中已经帮我们实现好了各种模型，现在我们不要关系模型的底层如何工作。先把他用起来。熟悉流程，具体的分类分类器可以见sklearn的api（）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> SGDClassifier </span><br><span class="line">sgd_clf = SGDClassifier(random_state = <span class="number">42</span>) <span class="comment">#这里保证每次的数据都是统一的</span></span><br><span class="line">sgd_clf.fit(X_train, y_train_5)</span><br><span class="line">sgd_clf.predict([some_digit])</span><br></pre></td></tr></table></figure>
+<pre><code>array([ True])
+</code></pre><h3 id="评估一个分类器的好坏"><a href="#评估一个分类器的好坏" class="headerlink" title="评估一个分类器的好坏"></a>评估一个分类器的好坏</h3><p>我们先用传统的交叉验证，可以看到精确度已经很不错了。但是着这往往是不够的。在这个二分类问题上，否的占了绝大多数那么精确的自然就很高。<br>所以我们需要其他的的评估方式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score</span><br><span class="line">cross_val_score(sgd_clf, X_train, y_train_5, cv = <span class="number">3</span>, scoring = <span class="string">'accuracy'</span>)</span><br><span class="line"><span class="comment">#cv 多少折</span></span><br><span class="line"><span class="comment"># 采用精确度的衡量 array([0.9587 , 0.95975, 0.95095])</span></span><br></pre></td></tr></table></figure>
+<pre><code>array([0.965  , 0.95905, 0.9616 ])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.base <span class="keyword">import</span> BaseEstimator</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Never5Classifier</span><span class="params">(BaseEstimator)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self, X, y = None)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, X)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> np.zeros((len(X), <span class="number">1</span>), dtype = bool)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> StratifiedKFold</span><br><span class="line"><span class="keyword">from</span> sklearn.base <span class="keyword">import</span> clone</span><br><span class="line">skfolds = StratifiedKFold(n_splits = <span class="number">3</span>, random_state = <span class="number">42</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> train_index, test_index <span class="keyword">in</span> skfolds.split(X_train, y_train_5):</span><br><span class="line">    clone_clf = clone(sgd_clf)</span><br><span class="line">    X_train_folds = X_train[train_index]</span><br><span class="line">    y_train_folds = y_train_5[train_index]</span><br><span class="line">    X_test_fold = X_train[test_index]</span><br><span class="line">    y_test_fold = y_train_5[test_index]</span><br><span class="line">    </span><br><span class="line">    clone_clf.fit(X_train_folds,y_train_folds)</span><br><span class="line">    y_pred = clone_clf.predict(X_test_fold)</span><br><span class="line">    n_correct = sum(y_pred == y_test_fold)</span><br><span class="line">    </span><br><span class="line">    print(n_correct / len(y_pred))</span><br></pre></td></tr></table></figure>
+<pre><code>0.965
+0.95905
+0.9616
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">never_5_clf = Never5Classifier()</span><br><span class="line">cross_val_score(never_5_clf, X_train, y_train_5, cv = <span class="number">3</span>, scoring = <span class="string">'accuracy'</span>)</span><br><span class="line"><span class="comment">#array([0.91155, 0.9091 , 0.9083 ])</span></span><br></pre></td></tr></table></figure>
+<pre><code>array([0.909  , 0.90955, 0.9104 ])
+</code></pre><h4 id="使用其他评判方法-—-采用混淆矩阵来查看具体的预测情况"><a href="#使用其他评判方法-—-采用混淆矩阵来查看具体的预测情况" class="headerlink" title="使用其他评判方法 — 采用混淆矩阵来查看具体的预测情况"></a>使用其他评判方法 — 采用混淆矩阵来查看具体的预测情况</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_predict  <span class="comment"># not corss_val_scores</span></span><br><span class="line">y_train_pred = cross_val_predict(sgd_clf, X_train, y_train_5, cv = <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> confusion_matrix </span><br><span class="line">confusion_matrix(y_train_5, y_train_pred)</span><br></pre></td></tr></table></figure>
+<pre><code>array([[53735,   844],
+       [ 1372,  4049]], dtype=int64)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">confusion_matrix(y_train_5, y_train_5)</span><br></pre></td></tr></table></figure>
+<pre><code>array([[54579,     0],
+       [    0,  5421]], dtype=int64)
+</code></pre><p>我们给出其他的评估方式</p>
+<script type="math/tex; mode=display">
+正项预测正确的比上所有正确的：：\text { precision }=\frac{T P}{T P+F P}</script><script type="math/tex; mode=display">
+正项预测正确的的比上预测正确的：：\text { recall }=\frac{T P}{T P+F N}</script><p>sklearn同样帮我们实现了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> precision_score, recall_score</span><br><span class="line"></span><br><span class="line">precision_score(y_train_5, y_train_pred) <span class="comment">#0.7913295996681187</span></span><br><span class="line"></span><br><span class="line">recall_score(y_train_5, y_train_pred)<span class="comment">#0.7037446965504519</span></span><br></pre></td></tr></table></figure>
+<pre><code>0.6935989669802619
+</code></pre><p>新的问题又出现了 precision 和 recall 之间有如何权衡呢我们可以用f1值</p>
+<script type="math/tex; mode=display">
+F_{1}=\frac{2}{\frac{1}{\text { precision }}+\frac{1}{\text { recall }}}=2 \times \frac{\text { precision } \times \text { recall }}{\text { precision }+\text { recall }}=\frac{T P}{T P+\frac{F N+F P}{2}}</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> f1_score</span><br><span class="line">f1_score(y_train_5, y_train_pred) <span class="comment">#0.7449716852177309</span></span><br></pre></td></tr></table></figure>
+<pre><code>0.7606716568885292
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y_scores = sgd_clf.decision_function([some_digit])</span><br><span class="line">y_scores <span class="comment">#array([45727.05659041])</span></span><br></pre></td></tr></table></figure>
+<pre><code>array([181985.89677917])
+</code></pre><p>在不同的情况下我们需求的precision 和 recall 大小不一，我们可以修改阈值来获取更准确的判断</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">threshold = <span class="number">20000</span> <span class="comment">#300000</span></span><br><span class="line">y_some_digit_pred = (y_scores &gt; threshold)</span><br><span class="line">y_some_digit_pred <span class="comment">#array([ True]) array([False])</span></span><br></pre></td></tr></table></figure>
+<pre><code>array([ True])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y_scores = cross_val_predict(sgd_clf, X_train, y_train_5, cv = <span class="number">3</span>, method = <span class="string">"decision_function"</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="画出-precision-与-recall-的曲线来进行决策"><a href="#画出-precision-与-recall-的曲线来进行决策" class="headerlink" title="画出 precision 与 recall 的曲线来进行决策"></a>画出 precision 与 recall 的曲线来进行决策</h4><p>由图中我们可以看到 precision 和 recall 是成负相关的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> precision_recall_curve</span><br><span class="line"></span><br><span class="line">precisions, recalls, thresholds = precision_recall_curve(y_train_5, y_scores)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_precision_recall_vs_threshold</span><span class="params">(precisions, recalls, thresholds)</span>:</span></span><br><span class="line">    plt.plot(thresholds, precisions[: <span class="number">-1</span>], <span class="string">"b--"</span>, label = <span class="string">"Precision"</span>, linewidth=<span class="number">2</span>) <span class="comment"># x, y,  "blue- -"</span></span><br><span class="line">    plt.plot(thresholds, recalls[: <span class="number">-1</span>], <span class="string">'g-'</span>, label = <span class="string">"Recall"</span>, linewidth=<span class="number">2</span>) </span><br><span class="line">    plt.xlabel(<span class="string">"Threshold"</span>)</span><br><span class="line">    plt.legend(loc = <span class="string">"upper left"</span>)</span><br><span class="line">    plt.ylim([<span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line">    plt.xlim([<span class="number">-700000</span>, <span class="number">700000</span>])</span><br><span class="line">plot_precision_recall_vs_threshold(precisions, recalls, thresholds)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_34_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(recalls, precisions)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_35_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y_train_pred_90 = (y_scores &gt; <span class="number">70000</span>)</span><br><span class="line">precision_score(y_train_5, y_train_pred_90)<span class="comment">#0.9194610778443114</span></span><br></pre></td></tr></table></figure>
+<pre><code>0.9118254202300207
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">recall_score(y_train_5, y_train_pred_90) <span class="comment">#0.5665006456373363</span></span><br></pre></td></tr></table></figure>
+<pre><code>0.5703744696550452
+</code></pre><h4 id="ROC-receiver-operating-characteristic-曲线图"><a href="#ROC-receiver-operating-characteristic-曲线图" class="headerlink" title="ROC  receiver  operating  characteristic  曲线图"></a>ROC  receiver  operating  characteristic  曲线图</h4><p>PR曲线会面临一个问题，当需要获得更高recall时，model需要输出更多的样本，precision可能会伴随出现下降/不变/升高，得到的曲线会出现浮动差异（出现锯齿），无法像ROC一样保证单调性。所以，对于正负样本分布大致均匀的问题，ROC曲线作为性能指标更好。<br> PR图和ROC图使用， 如果poitivecalss 少 或者 相较false negatives 更在意 false positives的时候 使用RP 反之就可以使用ROC图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> roc_curve</span><br><span class="line">fpr, tpr, thresholds = roc_curve(y_train_5, y_scores)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_roc_curve</span><span class="params">(fpr, tpr, label = None)</span>:</span></span><br><span class="line">    plt.plot(fpr, tpr, linewidth = <span class="number">2</span>, label = label)</span><br><span class="line">    plt.plot([<span class="number">0</span>,<span class="number">1</span>], [<span class="number">0</span>, <span class="number">1</span>], <span class="string">'k--'</span>)</span><br><span class="line">    plt.axis([<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line">    plt.xlabel(<span class="string">'False Positive Rate'</span>)</span><br><span class="line">    plt.ylabel(<span class="string">'True Positive Rate'</span>)</span><br><span class="line">plot_roc_curve(fpr, tpr)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_39_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> roc_auc_score</span><br><span class="line">roc_auc_score(y_train_5, y_scores) <span class="comment">#0.9633748472261346 计算出面积</span></span><br></pre></td></tr></table></figure>
+<pre><code>0.9594366171439257
+</code></pre><p>换个分类算法看看ROC的面积</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier</span><br><span class="line">forest_clf = RandomForestClassifier(random_state = <span class="number">42</span>)</span><br><span class="line"></span><br><span class="line">y_probas_forest = cross_val_predict(forest_clf, X_train, y_train_5, cv = <span class="number">3</span>,method = <span class="string">"predict_proba"</span>)</span><br><span class="line">y_scores_forest = y_probas_forest[:, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">fpr_forest, tpr_forest, thresholds_forest = roc_curve(y_train_5,y_scores_forest)</span><br><span class="line"></span><br><span class="line">plt.plot(fpr, tpr, <span class="string">"b:"</span>, label = <span class="string">"SGD"</span>)</span><br><span class="line">plot_roc_curve(fpr_forest, tpr_forest, <span class="string">"Random Forest"</span>)</span><br><span class="line">plt.legend(loc = <span class="string">"bottom right"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_42_0.png" alt="png"></p>
+<h3 id="多分类"><a href="#多分类" class="headerlink" title="多分类"></a>多分类</h3><p>如果是用二分类器 分类多分类问题 sklearn 自动转成 OvA </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sgd_clf.fit(X_train, y_train)</span><br><span class="line">sgd_clf.predict([some_digit]) <span class="comment">#array([5.]) some_digit = X[36000]</span></span><br></pre></td></tr></table></figure>
+<pre><code>array([5.])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">some_digit_scores = sgd_clf.decision_function([some_digit])</span><br><span class="line">some_digit_scores</span><br></pre></td></tr></table></figure>
+<pre><code>array([[-155608.02760533, -555690.96286451, -356978.92322184,
+        -175413.31640276, -447476.21501408,  181985.89677917,
+        -635600.35487992, -405225.45597096, -721820.14291054,
+        -747332.14490551]])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">np.argmax(some_digit_scores) <span class="comment"># 5</span></span><br><span class="line">sgd_clf.classes_ <span class="comment">#array([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])</span></span><br></pre></td></tr></table></figure>
+<pre><code>array([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+</code></pre><p>如果使用OVO形式</p>
+<script type="math/tex; mode=display">
+classifiers的数量
+N \times(N-1) / 2</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.multiclass <span class="keyword">import</span> OneVsOneClassifier</span><br><span class="line">ovo_clf = OneVsOneClassifier(SGDClassifier(random_state = <span class="number">42</span>))</span><br><span class="line">ovo_clf.fit(X_train, y_train)</span><br><span class="line">ovo_clf.predict([some_digit])<span class="comment">#array([5.])</span></span><br><span class="line">len(ovo_clf.estimators_) <span class="comment"># 45</span></span><br></pre></td></tr></table></figure>
+<pre><code>45
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">forest_clf.fit(X_train, y_train)</span><br><span class="line">forest_clf.predict([some_digit]) </span><br><span class="line">forest_clf.predict_proba([some_digit]) <span class="comment">#array([[0. , 0. , 0.1, 0.2, 0. , 0.6, 0. , 0.1, 0. , 0. ]])</span></span><br></pre></td></tr></table></figure>
+<pre><code>array([[0.1, 0. , 0.1, 0. , 0. , 0.8, 0. , 0. , 0. , 0. ]])
+</code></pre><h4 id="交叉验证，-标准化"><a href="#交叉验证，-标准化" class="headerlink" title="交叉验证， 标准化"></a>交叉验证， 标准化</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cross_val_score(sgd_clf, X_train, y_train, cv=<span class="number">3</span>, scoring=<span class="string">"accuracy"</span>) <span class="comment">#array([0.86842631, 0.87664383, 0.86888033])</span></span><br></pre></td></tr></table></figure>
+<pre><code>array([0.86612677, 0.87064353, 0.85777867])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line">scaler = StandardScaler()</span><br><span class="line">X_train_scaled = scaler.fit_transform(X_train.astype(np.float64))</span><br><span class="line">cross_val_score(sgd_clf, X_train_scaled, y_train, cv = <span class="number">3</span>, scoring = <span class="string">"accuracy"</span>) <span class="comment"># array([0.91226755, 0.90839542, 0.90818623])</span></span><br><span class="line"><span class="comment"># 有所提升</span></span><br></pre></td></tr></table></figure>
+<pre><code>array([0.90831834, 0.91114556, 0.9086863 ])
+</code></pre><h4 id="误差分析-进一步提高模型质量"><a href="#误差分析-进一步提高模型质量" class="headerlink" title="误差分析 进一步提高模型质量"></a>误差分析 进一步提高模型质量</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">y_train_pred = cross_val_predict(sgd_clf, X_train_scaled, y_train, cv = <span class="number">3</span>)</span><br><span class="line">conf_mx = confusion_matrix(y_train, y_train_pred)</span><br><span class="line">conf_mx</span><br></pre></td></tr></table></figure>
+<pre><code>array([[5720,    3,   24,    8,   12,   56,   46,    8,   41,    5],
+       [   2, 6473,   48,   29,    6,   42,    8,   12,  112,   10],
+       [  54,   38, 5331,   97,   88,   25,  102,   52,  158,   13],
+       [  48,   38,  135, 5370,    3,  217,   39,   58,  131,   92],
+       [  26,   28,   36,    7, 5340,    8,   52,   29,   86,  230],
+       [  72,   38,   36,  196,   76, 4596,  105,   29,  176,   97],
+       [  38,   26,   39,    1,   40,   96, 5625,    6,   46,    1],
+       [  20,   27,   68,   30,   54,   10,    7, 5811,   17,  221],
+       [  49,  158,   80,  161,   15,  162,   57,   24, 5002,  143],
+       [  44,   36,   25,   96,  137,   29,    3,  207,   77, 5295]],
+      dtype=int64)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.matshow(conf_mx, cmap=plt.cm.gray)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_56_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">row_sums = conf_mx.sum(axis=<span class="number">1</span>, keepdims=<span class="literal">True</span>)</span><br><span class="line">norm_conf_mx = conf_mx / row_sums</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># print(row_sums)</span></span><br><span class="line"><span class="comment"># print(norm_conf_mx)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">np.fill_diagonal(norm_conf_mx, <span class="number">0</span>)</span><br><span class="line">plt.matshow(norm_conf_mx, cmap=plt.cm.gray)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_59_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line">y_train_large = (y_train &gt;= <span class="number">7</span>)</span><br><span class="line">y_train_odd = (y_train % <span class="number">2</span> == <span class="number">1</span>)</span><br><span class="line">y_multilabel = np.c_[y_train_large, y_train_odd]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">knn_clf = KNeighborsClassifier()</span><br><span class="line">knn_clf.fit(X_train, y_multilabel)</span><br></pre></td></tr></table></figure>
+<pre><code>KNeighborsClassifier(algorithm=&#39;auto&#39;, leaf_size=30, metric=&#39;minkowski&#39;,
+           metric_params=None, n_jobs=None, n_neighbors=5, p=2,
+           weights=&#39;uniform&#39;)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">knn_clf.predict([some_digit])</span><br></pre></td></tr></table></figure>
+<pre><code>array([[False,  True]])
+</code></pre><p>宏平均和微平均的对比</p>
+<p>如果每个class的样本数量差不多,那么宏平均和微平均没有太大差异 <br><br>如果每个class的样本数量差异很大,而且你想:<br><br>更注重样本量多的class:使用微平均<br><br>更注重样本量少的class:使用宏平均<br><br>如果微平均大大低于宏平均,检查样本量多的class</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y_train_knn_pred = cross_val_predict(knn_clf, X_train, y_train, cv = <span class="number">3</span>)</span><br><span class="line">f1_score(y_train, y_train_knn_pred, average=<span class="string">"macro"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">noise = np.random.randint(<span class="number">0</span>, <span class="number">100</span>, (len(X_train), <span class="number">784</span>))</span><br><span class="line">X_train_mod = X_train + noise</span><br><span class="line">noise = np.random.randint(<span class="number">0</span>, <span class="number">100</span>, (len(X_test), <span class="number">784</span>))</span><br><span class="line">X_test_mod = X_test + noise</span><br><span class="line">y_train_mod = X_train</span><br><span class="line">y_test_mod = X_test</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">some_index = <span class="number">5500</span></span><br><span class="line">plt.subplot(<span class="number">121</span>); plot_digit(X_test_mod[some_index])</span><br><span class="line">plt.subplot(<span class="number">122</span>); plot_digit(y_test_mod[some_index])</span><br><span class="line">save_fig(<span class="string">"noisy_digit_example_plot"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">knn_clf.fit(X_train_mod, y_train_mod)</span><br><span class="line">clean_digit = knn_clf.predict([X_test_mode[some_index]])</span><br><span class="line">plot_digit(clean_digit)</span><br><span class="line">save_fig(<span class="string">"cleaned_digit_example_plot"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="课后练习"><a href="#课后练习" class="headerlink" title="课后练习"></a>课后练习</h2><h3 id="将KNeighborsClassifer-的-accuracy-提高的到-97-上"><a href="#将KNeighborsClassifer-的-accuracy-提高的到-97-上" class="headerlink" title="将KNeighborsClassifer 的  accuracy 提高的到  97%  上"></a>将KNeighborsClassifer 的  accuracy 提高的到  97%  上</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line">param_grid = [&#123;<span class="string">'weights'</span>: [<span class="string">"distance"</span>], <span class="string">'n_neighbors'</span>: [<span class="number">4</span>]&#125;]</span><br><span class="line"></span><br><span class="line">knn_clf = KNeighborsClassifier()</span><br><span class="line">grid_search = GridSearchCV(knn_clf, param_grid, cv = <span class="number">2</span>, verbose = <span class="number">3</span>, n_jobs = <span class="number">1</span>) <span class="comment">#verbose 提示信息 # n_jobs:用来设定CPU运行情况</span></span><br><span class="line"></span><br><span class="line">grid_search.fit(X_train, y_train)</span><br></pre></td></tr></table></figure>
+<pre><code>Fitting 2 folds for each of 1 candidates, totalling 2 fits
+[CV] n_neighbors=4, weights=distance .................................
+
+
+[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grid_search.best_params_</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</span><br><span class="line">y_pred = grid_search.predict(X_test)</span><br><span class="line">accuracy_score(y_test, y_pred)</span><br></pre></td></tr></table></figure>
+<h3 id="训练集中加入图片上下左右移动后的图片，再看效果如何"><a href="#训练集中加入图片上下左右移动后的图片，再看效果如何" class="headerlink" title="训练集中加入图片上下左右移动后的图片，再看效果如何"></a>训练集中加入图片上下左右移动后的图片，再看效果如何</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.ndimage.interpolation <span class="keyword">import</span> shift</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shift_image</span><span class="params">(image, dx, dy)</span>:</span></span><br><span class="line">    image = image.reshape((<span class="number">28</span>, <span class="number">28</span>))</span><br><span class="line">    shifted_image = shift(image,[dy, dx], cval = <span class="number">0</span>, mode = <span class="string">"constant"</span>)</span><br><span class="line">    <span class="keyword">return</span> shifted_image.reshape([<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">image = X_train[<span class="number">1000</span>]</span><br><span class="line">shifted_image_down =shift_image(image, <span class="number">0</span> , <span class="number">5</span>)</span><br><span class="line">plt.figure(figsize = (<span class="number">12</span>, <span class="number">3</span>))</span><br><span class="line">plt.subplot(<span class="number">131</span>)</span><br><span class="line">plt.title(<span class="string">"Original"</span>, fontsize = <span class="number">14</span>)</span><br><span class="line">plt.imshow(image.reshape(<span class="number">28</span>, <span class="number">28</span>), interpolation = <span class="string">"nearest"</span>, cmap = <span class="string">"Greys"</span>)</span><br><span class="line">plt.subplot(<span class="number">132</span>)</span><br><span class="line">plt.title(<span class="string">"Shifted down"</span>, fontsize = <span class="number">14</span>)</span><br><span class="line">plt.imshow(shifted_image_down.reshape(<span class="number">28</span>, <span class="number">28</span>), cmap = <span class="string">"Greys"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_77_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">X_train_augmented = [image <span class="keyword">for</span> image <span class="keyword">in</span> X_train]</span><br><span class="line">y_train_augmented = [label <span class="keyword">for</span> label <span class="keyword">in</span> y_train]</span><br><span class="line"><span class="comment">#上下左右移动一个点</span></span><br><span class="line"><span class="keyword">for</span> dx, dy <span class="keyword">in</span> ((<span class="number">1</span>, <span class="number">0</span>), (<span class="number">-1</span>, <span class="number">0</span>), (<span class="number">0</span>, <span class="number">1</span>), (<span class="number">0</span>, <span class="number">-1</span>)):</span><br><span class="line">    <span class="keyword">for</span> image, label <span class="keyword">in</span> zip(X_train, y_train):</span><br><span class="line">        X_train_augmented.append(shift_image(image, dx, dy))</span><br><span class="line">        y_train_augmented.append(label)</span><br><span class="line"></span><br><span class="line">X_train_augmented = np.array(X_train_augmented)</span><br><span class="line">y_train_augmented = np.array(y_train_augmented)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shuffle_idx = np.random.permutation(len(X_train_augmented))</span><br><span class="line">X_train_augmented = X_train_augmented[shuffle_idx]</span><br><span class="line">y_train_augmented = y_train_augmented[shuffle_idx]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line">knn_clf = KNeighborsClassifier(n_neighbors = <span class="number">4</span>,weights = <span class="string">'distance'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">knn_clf.fit(X_train_augmented, y_train_augmented)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y_pred = knn_clf.predict(X_test)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</span><br><span class="line">accuracy_score(y_test, y_pred)</span><br></pre></td></tr></table></figure>
+<h3 id="kaggle-泰坦尼克"><a href="#kaggle-泰坦尼克" class="headerlink" title="kaggle 泰坦尼克"></a>kaggle 泰坦尼克</h3><h4 id="数据的读取，整理"><a href="#数据的读取，整理" class="headerlink" title="数据的读取，整理"></a>数据的读取，整理</h4><ul>
+<li>同样首先需要获取数据源（），然后查看数据的分布情况</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">TITANIC_PATH = os.path.join(<span class="string">"datasets"</span>,<span class="string">"titanic"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_titanic_data</span><span class="params">(filename, titanic_path = TITANIC_PATH)</span>:</span></span><br><span class="line">    csv_path = os.path.join(titanic_path, filename)</span><br><span class="line">    <span class="keyword">return</span> pd.read_csv(csv_path)</span><br><span class="line"></span><br><span class="line">train_data = load_titanic_data(<span class="string">"train.csv"</span>)</span><br><span class="line">test_data = load_titanic_data(<span class="string">"test.csv"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">train_data = load_titanic_data(<span class="string">"train.csv"</span>)</span><br><span class="line">test_data = load_titanic_data(<span class="string">"test.csv"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_data.head()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Braund, Mr. Owen Harris</td>
+      <td>male</td>
+      <td>22.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>A/5 21171</td>
+      <td>7.2500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
+      <td>female</td>
+      <td>38.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>PC 17599</td>
+      <td>71.2833</td>
+      <td>C85</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+      <td>3</td>
+      <td>Heikkinen, Miss. Laina</td>
+      <td>female</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>STON/O2. 3101282</td>
+      <td>7.9250</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
+      <td>female</td>
+      <td>35.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>113803</td>
+      <td>53.1000</td>
+      <td>C123</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Allen, Mr. William Henry</td>
+      <td>male</td>
+      <td>35.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>373450</td>
+      <td>8.0500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_data.info()</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 891 entries, 0 to 890
+Data columns (total 12 columns):
+PassengerId    891 non-null int64
+Survived       891 non-null int64
+Pclass         891 non-null int64
+Name           891 non-null object
+Sex            891 non-null object
+Age            714 non-null float64
+SibSp          891 non-null int64
+Parch          891 non-null int64
+Ticket         891 non-null object
+Fare           891 non-null float64
+Cabin          204 non-null object
+Embarked       889 non-null object
+dtypes: float64(2), int64(5), object(5)
+memory usage: 83.6+ KB
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_data.describe()</span><br></pre></td></tr></table></figure>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Fare</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>891.000000</td>
+      <td>891.000000</td>
+      <td>891.000000</td>
+      <td>714.000000</td>
+      <td>891.000000</td>
+      <td>891.000000</td>
+      <td>891.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>446.000000</td>
+      <td>0.383838</td>
+      <td>2.308642</td>
+      <td>29.699118</td>
+      <td>0.523008</td>
+      <td>0.381594</td>
+      <td>32.204208</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>257.353842</td>
+      <td>0.486592</td>
+      <td>0.836071</td>
+      <td>14.526497</td>
+      <td>1.102743</td>
+      <td>0.806057</td>
+      <td>49.693429</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.420000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>223.500000</td>
+      <td>0.000000</td>
+      <td>2.000000</td>
+      <td>20.125000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>7.910400</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>446.000000</td>
+      <td>0.000000</td>
+      <td>3.000000</td>
+      <td>28.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>14.454200</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>668.500000</td>
+      <td>1.000000</td>
+      <td>3.000000</td>
+      <td>38.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>31.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>891.000000</td>
+      <td>1.000000</td>
+      <td>3.000000</td>
+      <td>80.000000</td>
+      <td>8.000000</td>
+      <td>6.000000</td>
+      <td>512.329200</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> matplotlib </span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">train_data.hist(bins = <span class="number">100</span>, figsize = (<span class="number">20</span>, <span class="number">15</span>))</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="output_93_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">corr_matrix = train_data.corr()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">corr_matrix[<span class="string">"Survived"</span>].sort_values(ascending=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>Survived       1.000000
+Fare           0.257307
+Parch          0.081629
+PassengerId   -0.005007
+SibSp         -0.035322
+Age           -0.077221
+Pclass        -0.338481
+Name: Survived, dtype: float64
+</code></pre><p> 我们看到数据中有非数字等等，所以我们分开处理。使用pipeline 一次性完成数据的处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.base <span class="keyword">import</span> BaseEstimator, TransformerMixin</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DataFrameSelector</span><span class="params">(BaseEstimator, TransformerMixin)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, attribute_names)</span>:</span></span><br><span class="line">        self.attribute_names = attribute_names</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self, X, y = None)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">transform</span><span class="params">(self, X, y = None)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> X[self.attribute_names]</span><br><span class="line">    </span><br><span class="line"><span class="comment"># Inspired from stackoverflow.com/questions/25239958</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MostFrequentImputer</span><span class="params">(BaseEstimator, TransformerMixin)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self, X, y=None)</span>:</span></span><br><span class="line">        self.most_frequent_ = pd.Series([X[c].value_counts().index[<span class="number">0</span>] <span class="keyword">for</span> c <span class="keyword">in</span> X],</span><br><span class="line">                                        index=X.columns)</span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">transform</span><span class="params">(self, X, y=None)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> X.fillna(self.most_frequent_)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.impute <span class="keyword">import</span> SimpleImputer</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler </span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder, OneHotEncoder</span><br><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</span><br><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> FeatureUnion</span><br><span class="line"></span><br><span class="line"><span class="comment"># train_num = train_data.drop(["PassengerId","Name","Sex","Ticket","Cabin", "Embarked"],  axis = 1)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handle</span><span class="params">(num_atttribs, cat_tribs)</span>:</span></span><br><span class="line">    num_pipeline = Pipeline([</span><br><span class="line">         (<span class="string">'selector'</span>, DataFrameSelector(num_attribs)),</span><br><span class="line">         (<span class="string">'imputer'</span>, MostFrequentImputer()),</span><br><span class="line"><span class="comment">#     ('std_scaler', StandardScaler()),</span></span><br><span class="line">    ])</span><br><span class="line">    cat_pipeline = Pipeline([</span><br><span class="line">         (<span class="string">'seletor'</span>, DataFrameSelector(cat_tribs)),</span><br><span class="line">         (<span class="string">"imputer"</span>, MostFrequentImputer()),</span><br><span class="line">         (<span class="string">"cat_encoder"</span>, OneHotEncoder(sparse=<span class="literal">False</span>)),</span><br><span class="line">    ])</span><br><span class="line">    full_pipeline = FeatureUnion(transformer_list = [</span><br><span class="line">         (<span class="string">"num_pipeline"</span>, num_pipeline),</span><br><span class="line">         (<span class="string">"cat_pipeline"</span>, cat_pipeline),</span><br><span class="line">    ])</span><br><span class="line">    <span class="keyword">return</span> full_pipeline</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num_attribs = [<span class="string">"Age"</span>, <span class="string">"SibSp"</span>, <span class="string">"Parch"</span>, <span class="string">"Fare"</span>]</span><br><span class="line">cat_attribs = [<span class="string">"Pclass"</span>,<span class="string">"Sex"</span>,<span class="string">"Embarked"</span>]</span><br><span class="line">full_pipeline = handle(num_attribs, cat_attribs)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">train_prepared = full_pipeline.fit_transform(train_data)</span><br><span class="line"></span><br><span class="line">X_test = full_pipeline.fit_transform(test_data) <span class="comment"># 测试集 也是需要处理的</span></span><br><span class="line">train_prepared</span><br></pre></td></tr></table></figure>
+<pre><code>array([[22.,  1.,  0., ...,  0.,  0.,  1.],
+       [38.,  1.,  0., ...,  1.,  0.,  0.],
+       [26.,  0.,  0., ...,  0.,  0.,  1.],
+       ...,
+       [24.,  1.,  2., ...,  0.,  0.,  1.],
+       [26.,  0.,  0., ...,  1.,  0.,  0.],
+       [32.,  0.,  0., ...,  0.,  1.,  0.]])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y_train = train_data[<span class="string">"Survived"</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="小鹿乱撞"><a href="#小鹿乱撞" class="headerlink" title="小鹿乱撞"></a>小鹿乱撞</h4><h5 id="线性模型"><a href="#线性模型" class="headerlink" title="线性模型"></a>线性模型</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> SGDClassifier</span><br><span class="line">lin_clf = SGDClassifier()</span><br><span class="line">lin_clf.fit(train_prepared, y_train)</span><br><span class="line">linear_scores = cross_val_score(lin_clf, train_prepared, y_train, cv=<span class="number">10</span>)</span><br><span class="line">print(<span class="string">"linear_model:"</span>, linear_scores.mean()) <span class="comment">#linear_model: 0.6868817387356714</span></span><br></pre></td></tr></table></figure>
+<pre><code>linear_model: 0.6962870275791625
+</code></pre><h5 id="svm"><a href="#svm" class="headerlink" title="svm"></a>svm</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</span><br><span class="line">svm_clf = SVC(gamma = <span class="string">"auto"</span>)</span><br><span class="line">svm_clf.fit(train_prepared, y_train)</span><br><span class="line">svm_scores = cross_val_score(svm_clf, train_prepared, y_train, cv=<span class="number">10</span>)</span><br><span class="line">print(<span class="string">"svm:"</span>, svm_scores.mean()) <span class="comment">#svm: 0.7365250822835092</span></span><br></pre></td></tr></table></figure>
+<pre><code>svm: 0.7386715469299737
+</code></pre><h5 id="随机森林"><a href="#随机森林" class="headerlink" title="随机森林"></a><font color="red">随机森林</font></h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier</span><br><span class="line"></span><br><span class="line">forest_clf = RandomForestClassifier(n_estimators = <span class="number">100</span>, random_state=<span class="number">42</span>)</span><br><span class="line">forest_scores = cross_val_score(forest_clf, train_prepared, y_train, cv=<span class="number">10</span>)</span><br><span class="line">forest_scores.mean()</span><br><span class="line">print(<span class="string">"ensemble:"</span>, forest_scores.mean()) <span class="comment">#ensemble: 0.8149526160481217</span></span><br></pre></td></tr></table></figure>
+<pre><code>ensemble: 0.809334354783793
+</code></pre><h5 id="最近邻试试"><a href="#最近邻试试" class="headerlink" title="最近邻试试"></a>最近邻试试</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line"></span><br><span class="line">knn_clf = KNeighborsClassifier(n_neighbors = <span class="number">4</span>,weights = <span class="string">'distance'</span>)</span><br><span class="line">knn_scores = cross_val_score(knn_clf, train_prepared, y_train, cv=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"neighbors:"</span>, knn_scores.mean()) <span class="comment">#neighbors: 0.7240517534899558</span></span><br></pre></td></tr></table></figure>
+<pre><code>neighbors: 0.7229029054590852
+</code></pre><h4 id="继续优化-1-调参-2-年龄分层-3…"><a href="#继续优化-1-调参-2-年龄分层-3…" class="headerlink" title="继续优化 1.调参 2.年龄分层 3…."></a>继续优化 1.调参 2.年龄分层 3….</h4><h5 id="调参"><a href="#调参" class="headerlink" title="调参"></a>调参</h5><p>（0.8149526160481217 —— 0.8317563273181252)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line"><span class="comment">#参数调好了我就只留下了 最优的参数</span></span><br><span class="line">param_grid = &#123; </span><br><span class="line">    <span class="string">'n_estimators'</span>: [<span class="number">100</span>],</span><br><span class="line">    <span class="string">'max_features'</span>: [<span class="string">'auto'</span>],</span><br><span class="line">    <span class="string">'min_samples_leaf'</span> :[<span class="number">2</span>],</span><br><span class="line">    <span class="string">'min_samples_split'</span>:[<span class="number">2</span>],</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">grid_search = GridSearchCV(forest_clf, param_grid, cv = <span class="number">5</span>, scoring = <span class="string">'neg_mean_squared_error'</span>)</span><br><span class="line">grid_search.fit(train_prepared, y_train)</span><br><span class="line">grid_search.best_params_ <span class="comment">#&#123;'max_features': 'auto', 'n_estimators': 50&#125;</span></span><br></pre></td></tr></table></figure>
+<pre><code>{&#39;max_features&#39;: &#39;auto&#39;,
+ &#39;min_samples_leaf&#39;: 2,
+ &#39;min_samples_split&#39;: 2,
+ &#39;n_estimators&#39;: 100}
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">forest_clf = RandomForestClassifier(n_estimators = <span class="number">100</span>,max_features = <span class="string">'auto'</span>, min_samples_leaf = <span class="number">2</span>, max_depth = <span class="number">20</span>,random_state=<span class="number">42</span>)</span><br><span class="line">forest_scores = cross_val_score(forest_clf, train_prepared, y_train, cv=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"ensemble:"</span>, forest_scores.mean()) <span class="comment">#ensemble: 0.8317563273181252</span></span><br><span class="line"></span><br><span class="line">forest_clf.fit(train_prepared, y_train)</span><br><span class="line">predictions = forest_clf.predict(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># test = pd.DataFrame(X_test)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># my_submission = pd.DataFrame(&#123;'PassengerId': test_data['PassengerId'],'Survived': predictions&#125;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># my_submission.to_csv('./submission.csv', index=False)</span></span><br></pre></td></tr></table></figure>
+<pre><code>ensemble: 0.8294716831233686
+</code></pre><h5 id="年龄分层"><a href="#年龄分层" class="headerlink" title="年龄分层"></a>年龄分层</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">train_data[<span class="string">"AgeBucket"</span>] = train_data[<span class="string">"Age"</span>] // <span class="number">15</span> * <span class="number">15</span></span><br><span class="line">train_data[[<span class="string">"AgeBucket"</span>, <span class="string">"Survived"</span>]].groupby([<span class="string">'AgeBucket'</span>]).mean()</span><br><span class="line">train = train_data.drop(<span class="string">'Age'</span>, axis = <span class="number">1</span>)</span><br><span class="line">train.info()</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 891 entries, 0 to 890
+Data columns (total 12 columns):
+PassengerId    891 non-null int64
+Survived       891 non-null int64
+Pclass         891 non-null int64
+Name           891 non-null object
+Sex            891 non-null object
+SibSp          891 non-null int64
+Parch          891 non-null int64
+Ticket         891 non-null object
+Fare           891 non-null float64
+Cabin          204 non-null object
+Embarked       889 non-null object
+AgeBucket      714 non-null float64
+dtypes: float64(2), int64(5), object(5)
+memory usage: 83.6+ KB
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num_attribs = [<span class="string">"AgeBucket"</span>, <span class="string">"SibSp"</span>, <span class="string">"Parch"</span>, <span class="string">"Fare"</span>]</span><br><span class="line">cat_attribs = [<span class="string">"Pclass"</span>,<span class="string">"Sex"</span>,<span class="string">"Embarked"</span>]</span><br><span class="line">full_pipeline = handle(num_attribs, cat_attribs)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">train_prepared = full_pipeline.fit_transform(train)</span><br><span class="line">train_prepared</span><br></pre></td></tr></table></figure>
+<pre><code>array([[15.,  1.,  0., ...,  0.,  0.,  1.],
+       [30.,  1.,  0., ...,  1.,  0.,  0.],
+       [15.,  0.,  0., ...,  0.,  0.,  1.],
+       ...,
+       [15.,  1.,  2., ...,  0.,  0.,  1.],
+       [15.,  0.,  0., ...,  1.,  0.,  0.],
+       [30.,  0.,  0., ...,  0.,  1.,  0.]])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">forest_clf = RandomForestClassifier(n_estimators = <span class="number">100</span>,max_features = <span class="string">'auto'</span>, min_samples_leaf = <span class="number">2</span>, max_depth = <span class="number">20</span>,random_state=<span class="number">42</span>)</span><br><span class="line">forest_scores = cross_val_score(forest_clf, train_prepared, y_train, cv=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"ensemble:"</span>, forest_scores.mean()) <span class="comment">#  ensemble: 0.8294211780728634 反而还降低了</span></span><br></pre></td></tr></table></figure>
+<pre><code>ensemble: 0.8272242083758938
+</code></pre><h5 id="属性融合"><a href="#属性融合" class="headerlink" title="属性融合"></a>属性融合</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">train[<span class="string">"RelativesOnboard"</span>] = train[<span class="string">"SibSp"</span>] + train[<span class="string">"Parch"</span>]</span><br><span class="line">train[[<span class="string">"RelativesOnboard"</span>, <span class="string">"Survived"</span>]].groupby([<span class="string">'RelativesOnboard'</span>]).mean()</span><br><span class="line"></span><br><span class="line">train_cb = train.drop([<span class="string">"SibSp"</span>,<span class="string">"Parch"</span>], axis = <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">num_attribs = [<span class="string">"AgeBucket"</span>, <span class="string">"Fare"</span>] <span class="comment">#, "SibSp", "Parch",</span></span><br><span class="line">cat_attribs = [<span class="string">"Pclass"</span>,<span class="string">"Sex"</span>,<span class="string">"Embarked"</span>]</span><br><span class="line">full_pipeline = handle(num_attribs, cat_attribs)</span><br><span class="line"></span><br><span class="line">train_prepared = full_pipeline.fit_transform(train_cb)</span><br><span class="line">train_prepared</span><br></pre></td></tr></table></figure>
+<pre><code>array([[15.    ,  7.25  ,  0.    , ...,  0.    ,  0.    ,  1.    ],
+       [30.    , 71.2833,  1.    , ...,  1.    ,  0.    ,  0.    ],
+       [15.    ,  7.925 ,  0.    , ...,  0.    ,  0.    ,  1.    ],
+       ...,
+       [15.    , 23.45  ,  0.    , ...,  0.    ,  0.    ,  1.    ],
+       [15.    , 30.    ,  1.    , ...,  1.    ,  0.    ,  0.    ],
+       [30.    ,  7.75  ,  0.    , ...,  0.    ,  1.    ,  0.    ]])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">forest_clf = RandomForestClassifier(n_estimators = <span class="number">100</span>,max_features = <span class="string">'auto'</span>, min_samples_leaf = <span class="number">2</span>, max_depth = <span class="number">20</span>,random_state=<span class="number">42</span>)</span><br><span class="line">forest_scores = cross_val_score(forest_clf, train_prepared, y_train, cv=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"ensemble:"</span>, forest_scores.mean()) <span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<pre><code>ensemble: 0.8294211780728634
+</code></pre><ul>
+<li>这机个方式不仅没有提升，反而还下降了。目前最高的得分就是以最优参数的随机森林分类算法</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/08/09/动态规划（难度easey）/" rel="next" title="DP相关算法题">
+                  <i class="fa fa-chevron-left"></i> DP相关算法题
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/08/13/SVM/" rel="prev" title="hands-on svm课后作业">
+                  hands-on svm课后作业 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/echarts.png"
+      alt="Les">
+  <p class="site-author-name" itemprop="name">Les</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hand-on-3"><span class="nav-number">1.</span> <span class="nav-text">Hand - on 3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分类任务"><span class="nav-number">1.1.</span> <span class="nav-text">分类任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#预处理数据"><span class="nav-number">1.1.1.</span> <span class="nav-text">预处理数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取数据集"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">获取数据集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#处理数据集，-将其分成测试集与训练集"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">处理数据集， 将其分成测试集与训练集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#先简化训练一个二分类，使用SGDClassifier分类器"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">先简化训练一个二分类，使用SGDClassifier分类器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#评估一个分类器的好坏"><span class="nav-number">1.1.2.</span> <span class="nav-text">评估一个分类器的好坏</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用其他评判方法-—-采用混淆矩阵来查看具体的预测情况"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">使用其他评判方法 — 采用混淆矩阵来查看具体的预测情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#画出-precision-与-recall-的曲线来进行决策"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">画出 precision 与 recall 的曲线来进行决策</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ROC-receiver-operating-characteristic-曲线图"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">ROC  receiver  operating  characteristic  曲线图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多分类"><span class="nav-number">1.1.3.</span> <span class="nav-text">多分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#交叉验证，-标准化"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">交叉验证， 标准化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#误差分析-进一步提高模型质量"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">误差分析 进一步提高模型质量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#课后练习"><span class="nav-number">1.2.</span> <span class="nav-text">课后练习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将KNeighborsClassifer-的-accuracy-提高的到-97-上"><span class="nav-number">1.2.1.</span> <span class="nav-text">将KNeighborsClassifer 的  accuracy 提高的到  97%  上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练集中加入图片上下左右移动后的图片，再看效果如何"><span class="nav-number">1.2.2.</span> <span class="nav-text">训练集中加入图片上下左右移动后的图片，再看效果如何</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kaggle-泰坦尼克"><span class="nav-number">1.2.3.</span> <span class="nav-text">kaggle 泰坦尼克</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据的读取，整理"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">数据的读取，整理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小鹿乱撞"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">小鹿乱撞</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#线性模型"><span class="nav-number">1.2.3.2.1.</span> <span class="nav-text">线性模型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#svm"><span class="nav-number">1.2.3.2.2.</span> <span class="nav-text">svm</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#随机森林"><span class="nav-number">1.2.3.2.3.</span> <span class="nav-text">随机森林</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#最近邻试试"><span class="nav-number">1.2.3.2.4.</span> <span class="nav-text">最近邻试试</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#继续优化-1-调参-2-年龄分层-3…"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">继续优化 1.调参 2.年龄分层 3….</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#调参"><span class="nav-number">1.2.3.3.1.</span> <span class="nav-text">调参</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#年龄分层"><span class="nav-number">1.2.3.3.2.</span> <span class="nav-text">年龄分层</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#属性融合"><span class="nav-number">1.2.3.3.3.</span> <span class="nav-text">属性融合</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Les</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', function() {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>
