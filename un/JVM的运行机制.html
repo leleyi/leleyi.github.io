@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/echarts.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/echarts.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"scrollpercent":true,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    save_scroll: false,
+    copycode: {"enable":true,"show_result":true,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="内存区域 PC寄存器（线程私有）  每个线程拥有一个PC寄存器 在线程创建时 创建 指向下一条指令的地址 执行Java方法的时候指向虚拟机字节码地址，本地方法时，PC的值为undefined   Java栈（线程私有）生命周期与线程相同  线程私有 栈由一系列帧组成（因此Java栈也叫做帧栈） 帧保存一个方法的局部变量、操作数栈、常量池指针 局部变量中存放编译期可知的基本类型（boolean…,">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FILE">
+<meta property="og:url" content="http://yoursite.com/un/JVM的运行机制.html">
+<meta property="og:site_name" content="FILE">
+<meta property="og:description" content="内存区域 PC寄存器（线程私有）  每个线程拥有一个PC寄存器 在线程创建时 创建 指向下一条指令的地址 执行Java方法的时候指向虚拟机字节码地址，本地方法时，PC的值为undefined   Java栈（线程私有）生命周期与线程相同  线程私有 栈由一系列帧组成（因此Java栈也叫做帧栈） 帧保存一个方法的局部变量、操作数栈、常量池指针 局部变量中存放编译期可知的基本类型（boolean…,">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1572183763460.png">
+<meta property="og:image" content="http://www.blogjava.net/images/blogjava_net/fancydeepin/JVM/%E5%A0%86%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B2.png">
+<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1572269150237.png">
+<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1572269375148.png">
+<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1572269789303.png">
+<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1572352591909.png">
+<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1572356646923.png">
+<meta property="og:updated_time" content="2019-10-30T13:30:35.403Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FILE">
+<meta name="twitter:description" content="内存区域 PC寄存器（线程私有）  每个线程拥有一个PC寄存器 在线程创建时 创建 指向下一条指令的地址 执行Java方法的时候指向虚拟机字节码地址，本地方法时，PC的值为undefined   Java栈（线程私有）生命周期与线程相同  线程私有 栈由一系列帧组成（因此Java栈也叫做帧栈） 帧保存一个方法的局部变量、操作数栈、常量池指针 局部变量中存放编译期可知的基本类型（boolean…,">
+<meta name="twitter:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1572183763460.png">
+  <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/un/JVM的运行机制">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title> | FILE</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FILE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+          <h4 id="内存区域"><a href="#内存区域" class="headerlink" title="内存区域"></a>内存区域</h4><ul>
+<li><p><strong>PC寄存器</strong>（线程私有）</p>
+<ul>
+<li>每个线程拥有一个PC寄存器</li>
+<li>在线程创建时 创建</li>
+<li>指向下一条指令的地址</li>
+<li>执行Java方法的时候指向虚拟机字节码地址，本地方法时，PC的值为undefined</li>
+</ul>
+</li>
+<li><p><strong>Java栈</strong>（线程私有）生命周期与线程相同</p>
+<ul>
+<li>线程私有</li>
+<li>栈由一系列帧组成（因此Java栈也叫做帧栈）</li>
+<li>帧保存一个方法的局部变量、操作数栈、常量池指针<ul>
+<li>局部变量中存放编译期可知的基本类型（boolean…, reference）</li>
+<li>double 和 float 占两个slot</li>
+</ul>
+</li>
+<li>每一次方法调用创建一个帧，并压栈</li>
+</ul>
+</li>
+<li><p><strong>方法区</strong> （线程共享）</p>
+<ul>
+<li>保存装载的类信息</li>
+<li>类型的常量池      </li>
+<li>字段，方法信息</li>
+<li>方法字节码通常和永久区(Perm)关联在一起  主要又虚拟机来维护</li>
+</ul>
+</li>
+<li><p><strong>运行时常量池</strong>-方法区的一部分</p>
+<ul>
+<li>Class文件中 有一项常量池 —用于存放<strong>编译期</strong>生成的各种字面量和符号引用，将在<strong>类加载</strong>后进去方法去的运行时常量池中存放</li>
+<li>特性，动态性，不是只有<strong>编译期</strong>才能产生</li>
+</ul>
+</li>
+<li><p><strong>Java堆</strong>（线程共享）</p>
+<ul>
+<li>和程序开发密切相关</li>
+<li>应用系统对象都保存在Java堆中</li>
+<li>所有线程共享Java堆</li>
+<li>对分代GC来说，堆也是分代的</li>
+<li>GC的主要工作区间</li>
+</ul>
+</li>
+</ul>
+<h4 id="JVM-参数"><a href="#JVM-参数" class="headerlink" title="JVM 参数"></a>JVM 参数</h4><ul>
+<li><p>Trace跟踪参数</p>
+<ul>
+<li>verbose:gc</li>
+<li>XX:printGC </li>
+<li><p>XX:PrintGCDetails</p>
+<ul>
+<li>XX:PrintGCTimeStamps</li>
+<li>Xloggc:log/gc.log </li>
+<li>XX:JPrintHeapAtGC // print head information before gc and after gc</li>
+<li>XX:TraceClassLoading //monitor the class load</li>
+<li>XX:PrintClassHistogram</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Heap</p>
+<ul>
+<li><p>-Xms -Xms // the max and the min</p>
+</li>
+<li><p>-Xmn // new </p>
+</li>
+<li><p>-XX:NewRatio</p>
+</li>
+<li><p>XX:SuvirorRatio</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Stack</p>
+<ul>
+<li>Xss</li>
+</ul>
+</li>
+</ul>
+<p>experiment</p>
+<blockquote>
+<p>args: -XX:+PrintGCDetails -Xms20m -Xmx20m -Xmn10m </p>
+</blockquote>
+<p><img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1572183763460.png" alt="1572183763460"></p>
+<p><strong>PSYoungGen</strong>：新生代情况<br><strong>PSOldGen</strong>：老年代情况，占用空间10240K，10M，这个是老年代的活跃数据情况<br><strong>PSPermGen</strong>：永久带情况，占用空间21504K，21M，它是永久带的活跃数据大小<br><strong>Eden Space (heap)</strong>： 内存最初从这个线程池分配给大部分对象。<br><strong>Survivor Space (heap)</strong>：用于保存在eden space内存池中经过垃圾回收后没有被回收的对象。<br><strong>Tenured Generation (heap)</strong>：用于保持已经在 survivor space内存池中存在了一段时间的对象。<br><strong>Permanent Generation (non-heap)</strong>: 保存虚拟机自己的静态(refective)数据，例如类（class）和方法（method）对象。Java虚拟机共享这些类数据。这个区域被分割为只读的和只写的，<br><strong>Code Cache (non-heap)</strong>:HotSpot Java虚拟机包括一个用于编译和保存本地代码（native code）的内存，叫做“代码缓存区”（code cache）</p>
+<p>详细信息区域给出一些当前线程的信息： Used ：已使用：当前的内存使用量。使用的内存包括所有对象（能被获取和不能被获取的）所占用的内存。</p>
+<p>Committed ：分配量：Java虚拟机保证能够获取到的内存量。分配内存（committedmemory）的量可能随时间改变。Java虚拟机可能释放部分这里的内存给系统，相应的分配的内存这时可能少于初始化时分配的给它的量。分配量总数大于或等于已使用的内存量。</p>
+<p>Max :内存管理系统可以使用的最大内存量。这个值可以被改变或者不做设定。如果JVM试图增加使用的内存到大于分配量（committedmemory）的情况，内存分配可能失败，即便想使用的内存量小于或者等于最大值（如：系统虚拟内存比较低时）</p>
+<p>Usage Threshold The usage threshold of a memory pool. This field will only beshown if the memory pool supports usage threshold. GC time :垃圾回收使用的总时间和调用垃圾回收的次数。它可能有好几行，每行代表JVM使用的垃圾回收算法</p>
+<p>-XX:+TraceClassLoading  跟踪类的加载</p>
+<p>[Opened C:\Program Files\Java\jdk1.8.0_91\jre\lib\rt.jar]<br>[Loaded java.lang.Object from C:\Program Files\Java\jdk1.8.0_91\jre\lib\rt.jar]<br>[Loaded java.io.Serializable from C:\Program Files\Java\jdk1.8.0_91\jre\lib\rt.jar]<br>[Loaded java.lang.Comparable from C:\Program Files\Java\jdk1.8.0_91\jre\lib\rt.jar]<br>[Loaded java.lang.CharSequence from C:\Program Files\Java\jdk1.8.0_91\jre\lib\rt.jar]</p>
+<p>-Xmx20m -Xms5m</p>
+<p>bytes_size is 1M<br>Xmx = 18.0 M<br>free memory = 4.1466827392578125 M<br>total memory = 5.5 </p>
+<p>=============================</p>
+<p>byte[] bytes = new byte[1 <em> 1024 </em> 1024];</p>
+<p>bytes_size is 1M<br>Xmx = 18.0 M<br>free memory = 3.1513824462890625 M # free 内存下降<br>total memory = 5.5 M</p>
+<p>======================</p>
+<p>byte[] bytes = new byte[4 <em> 1024 </em> 1024];</p>
+<p>bytes_size is 4M<br>Xmx = 18.0 M<br>free memory = 4.6210479736328125 M<br>total memory = 10.0 M  # 总内存增多</p>
+<p>=========================</p>
+<p>System.gc();</p>
+<p>byte[] bytes = new byte[4 <em> 1024 </em> 1024];</p>
+<p>bytes_size is 4M<br>Xmx = 18.0 M<br>free memory = 5.288612365722656 M  #空闲内存增多<br>total memory = 10.0 M</p>
+<h4 id="堆的分配"><a href="#堆的分配" class="headerlink" title="堆的分配"></a>堆的分配</h4><p> <img src="http://www.blogjava.net/images/blogjava_net/fancydeepin/JVM/%E5%A0%86%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B2.png" alt="img"> </p>
+<p>-Xmn</p>
+<p>–设置新生代大小</p>
+<p>-XX:NewRatio</p>
+<p>–新生代（eden+2*s）和老年代（不包含永久区）的比值</p>
+<p>–4 表示 新生代:老年代=1:4，即年轻代占堆的1/5</p>
+<p>-XX:SurvivorRatio</p>
+<p>–设置两个Survivor区和eden的比</p>
+<p>–8表示 两个Survivor :eden=2:8，即一个Survivor占年轻代的1/10</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">byte</span>[] b=<span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt; <span class="number">10</span>;i++)&#123;</span><br><span class="line">    b=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1</span> * <span class="number">1024</span> *<span class="number">1024</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>-Xmx20m -Xms20m -Xmn1m  -XX:+PrintGCDetails  # 新生代 放不下</p>
+<p><img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1572269150237.png" alt="1572269150237"></p>
+<p>-Xmx20m -Xms20m -Xmn15m  -XX:+PrintGCDetails   # 新生可以容纳</p>
+<p><img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1572269375148.png" alt="1572269375148"></p>
+<p>-Xmx20m -Xms20m -Xmn7m  -XX:+PrintGCDetails </p>
+<p><img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1572269789303.png" alt="1572269789303"></p>
+<p><strong>1.Eden区</strong></p>
+<p>  Eden区位于Java堆的年轻代，是<strong>新对象</strong>分配内存的地方，由于堆是所有线程共享的，因此在堆上分配内存需要加锁。而Sun JDK为提升效率，会为每个新建的线程在Eden上分配一块独立的空间由该线程独享，这块空间称为TLAB（Thread Local Allocation Buffer）。在TLAB上分配内存不需要加锁，因此JVM在给线程中的对象分配内存时会尽量在TLAB上分配。如果对象过大或TLAB用完，则仍然在堆上进行分配。如果Eden区内存也用完了，则会进行一次Minor GC（young GC）。</p>
+<p><strong>2.Survival from to</strong></p>
+<p>  Survival区与Eden区相同都在Java堆的年轻代。Survival区有两块，一块称为from区，另一块为to区，这两个区是相对的，在发生一次Minor GC后，from区就会和to区互换。在发生Minor GC时，Eden区和Survivalfrom区会把一些仍然存活的对象复制进Survival to区，并清除内存。Survival to区会把一些存活得足够旧的对象移至年老代。</p>
+<p><strong>3.年老代</strong></p>
+<p>  年老代里存放的都是存活时间较久的，大小较大的对象，因此年老代使用标记整理算法。当年老代容量满的时候，会触发一次Major GC（full GC），回收年老代和年轻代中不再被使用的对象资源。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* -Xmx20m -Xms20m -Xmn20m  -XX:+HeapDumpOnOutOfMemoryError</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line">List&lt;OOMObject&gt; list = <span class="keyword">new</span> ArrayList&lt;OOMObject&gt;();</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            list.add(<span class="keyword">new</span> OOMObject());</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1572352591909.png" alt="1572352591909"></p>
+<h4 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h4><p>运行时常量池溢出</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 保持引用 以免gc</span></span><br><span class="line">        List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">            list.add(String.valueOf(i++).intern());</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1572356646923.png" alt="1572356646923"></p>
+<p>方法区溢出</p>
+<ul>
+<li>String 相等问题</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">String str1 = <span class="keyword">new</span> String(<span class="string">"lele"</span>);</span><br><span class="line">        String str2 = <span class="keyword">new</span> String(<span class="string">"lele"</span>);</span><br><span class="line">        <span class="keyword">if</span> (str1 == str2) &#123;</span><br><span class="line">            System.out.println(<span class="string">"相同引用"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"引用不同"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (str1.equals(str2))&#123;</span><br><span class="line">            System.out.println(<span class="string">"内容相同"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        String str3 = <span class="string">"elel"</span>;</span><br><span class="line">        String str4 = <span class="string">"elel"</span>;</span><br><span class="line">        <span class="keyword">if</span> (str3 == str4)&#123;</span><br><span class="line">            System.out.println(<span class="string">"引用相同"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (str4.equals(str3))&#123;</span><br><span class="line">            System.out.println(<span class="string">"内容相同"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">=====================结果如下==================</span><br><span class="line"><span class="string">"C:\Program Files\Java\jdk1.8.0_91\bin\java.exe"</span> -Xmx20m -Xms20m -Xmn20m -XX:+HeapDumpOnOutOfMemoryError <span class="string">"</span></span><br><span class="line"><span class="string">引用不同</span></span><br><span class="line"><span class="string">内容相同</span></span><br><span class="line"><span class="string">引用相同</span></span><br><span class="line"><span class="string">内容相同</span></span><br></pre></td></tr></table></figure>
+<h3 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h3><h4 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h4><p>java 虚拟机没有使用引用计数法， 不能解决循环引用问题。</p>
+<h4 id="可达性分析"><a href="#可达性分析" class="headerlink" title="可达性分析"></a>可达性分析</h4><p>通过GC Roots  作为起点，向下搜索。</p>
+<ul>
+<li>GC Root 对象包括<ul>
+<li>虚拟机栈（本地变量表）中引用的对象。</li>
+<li>方法区中类静态属性引用的对象。 static</li>
+<li>方法区中常量的引用对象。 final static</li>
+<li>JNI Native方法 引用的对象。</li>
+</ul>
+</li>
+</ul>
+<p>只以用来来判断垃圾的回收。粒度太粗，不够节约资源，所以可以java对引用进行了扩展。</p>
+<ul>
+<li><p>Strong Reference</p>
+<p>new 出来的这 类。 只要引用在，怎永远不会被回收。</p>
+</li>
+<li><p>Soft Reference</p>
+<p>使用SoftResference类来实现软引用， 在内存溢出之前，把这些对象列进回收范围，进行第二次回收。</p>
+</li>
+<li><p>Weak Reference</p>
+<p>被弱引用关联的对象只能生存到下一次垃圾回收发生之前 。 无论内存是否充足， 下一次都将被回收。即展缓一次回收。</p>
+</li>
+<li><p>Phantom Reference</p>
+<p>唯一目的是收到一个系统通知。</p>
+</li>
+</ul>
+<p>可达性分析之后， 没有引用链，将会被标记一次。在判断是否覆盖finalize（），或者是否执行finalize（） 是的话，则没有必要执行。</p>
+<p>如果有必要执行finalize（）方法吗，将其放入 F_Queue中。并在一个由虚拟机，低优先级的Finializer去执行。 即触动队列中的finalize（) 方法——并不等待其执行结束。</p>
+<p>稍后GC将会对F-Queue中的对象进行第二次的小规模标记， 也是对象最后一次不死的机会， 重新引用上。不然就会被回收。任何对象finalize（)只会执行一次。</p>
+<p>方法区的回收</p>
+<p>常量，没有对常量的引用，就可以回收了。</p>
+<p>装载类的信息，无用的类， 类的所有实列都被回收， 加载类的ClassLoader 也被回收了，该类对应的 java.lang.Class 没有在任何地方引用。就可以回收了</p>
+<h4 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h4><ul>
+<li><p>标记清除</p>
+</li>
+<li><p>复制算法</p>
+<p>多数都是以这种收集算法来回收新生代。使用 eden from to， from to 交替。如果Survivor空间不够的时候， 使用老年代的来担保。<br>所有的新生代首先会在Eden区进行内存分配，当Eden区满时会进行一次Minor GC操作，将Eden区进行回收，此时判断存活的对象会被复制进入Survivor from区（年龄加1），对于大对象直接进入老年代，实际上是为了保证Eden区具有充足的空间可用的一种策略，采用-XX:PretenureSizeThreshold参数可以设置多大的对象可以直接进入老年代内存区域。对于长期存活的对象直接进入老年代，实际上时对Eden区到Survivor区过度的一种策略，是为了保证Eden区到Survivor区不会频繁的进行复制一直存活的对象且对Survivor区也能保证不会具有太多的一直占据的内存，采用-XX:MaxTenuringThreshold=数字 参数可以设置对象在经过多少次GC后会被放入老年代（年龄达到设置值，默认为15）。对于动态对象年龄判断，实际上是对Survivor区的一种策略，是为了保证Survivor区具有充足的空间用于分配，动态对象年龄只判断Survivor区是否存在相等对象年龄的对象是否超过Survivor from/to的一半时，直接将超过的对象放入老年代。对于空间分配担保实际上是针对老年代，为了保证老年代的内存区域具有充足的空间，不至于内存溢出的情况出现，在发生MinorGC之前，JVM会判断之前每次晋升到老年代的平均大小是否大于老年代剩余空间的大小，若大于则进行full GC（即回收所有区域），若小于，则还需要查看一个参数HandlePromotionFailure，即是否允许担保失败，因为实际上进入老年代的对象大小在GC前是未知的，这也是为什么采用之前晋升的平均值来进行判断担保，也就是说只是一种预测，并不能代表真实就是有这么多对象晋升，所以若不允许担保失败，即保守的人为一定会有超过剩余老年代区域的对象存入，则还是进行Full GC,否则，进行Minor GC。</p>
+</li>
+<li><p>标记-整理</p>
+<p>老年代的特点。让存活的对象，都向一段移动。然后直接清除掉边界以外的内存。</p>
+</li>
+</ul>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/echarts.png"
+      alt="Les">
+  <p class="site-author-name" itemprop="name">Les</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#内存区域"><span class="nav-number">1.</span> <span class="nav-text">内存区域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JVM-参数"><span class="nav-number">2.</span> <span class="nav-text">JVM 参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#堆的分配"><span class="nav-number">3.</span> <span class="nav-text">堆的分配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法区"><span class="nav-number">4.</span> <span class="nav-text">方法区</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾收集器"><span class="nav-number"></span> <span class="nav-text">垃圾收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#引用计数"><span class="nav-number">1.</span> <span class="nav-text">引用计数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可达性分析"><span class="nav-number">2.</span> <span class="nav-text">可达性分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#垃圾回收算法"><span class="nav-number">3.</span> <span class="nav-text">垃圾回收算法</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Les</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+  
+
+</body>
+</html>
