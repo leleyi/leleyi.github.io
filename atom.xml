@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-11-13T00:51:22.738Z</updated>
+  <updated>2020-02-26T06:55:21.607Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2020/02/26/Vmware%20Poxy/"/>
+    <id>http://yoursite.com/2020/02/26/Vmware Poxy/</id>
+    <published>2020-02-26T03:58:31.413Z</published>
+    <updated>2020-02-26T06:55:21.607Z</updated>
+    
+    <content type="html"><![CDATA[<p>title: CentOs Poxy<br>tags:<br>mathjax: true<br>categories: tool</p><h1 id="Vmware-CentOs-Poxy"><a href="#Vmware-CentOs-Poxy" class="headerlink" title="Vmware CentOs Poxy"></a>Vmware CentOs Poxy</h1><p>使用vmware 装了个centos. 但是需要Google. 本机已经使用ssr.可以访问.</p><ol><li>首先将vm网络设置为桥接</li></ol><p>虚拟机- 设置<br><img src="20200226113957464_28044.png =400x" alt></p><p>2.将本机ssr设置为<br>帮助 - 选项设置<br><img src="20200226114136407_25977.png =400x" alt></p><p>3.打开虚拟机器设置网络代理<br>System - Preference - Network Proxy<br>此处设置的ip地址为宿主机的ip<br><img src="20200226114649104_4762.png =400x" alt></p><p>4.ok测试<br><img src="20200226114819288_15728.png =400x" alt></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;title: CentOs Poxy&lt;br&gt;tags:&lt;br&gt;mathjax: true&lt;br&gt;categories: tool&lt;/p&gt;
+&lt;h1 id=&quot;Vmware-CentOs-Poxy&quot;&gt;&lt;a href=&quot;#Vmware-CentOs-Poxy&quot; class=&quot;hea
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>STDP手写数字识别</title>

@@ -55,22 +55,24 @@
   };
 </script>
 
-  <meta name="description" content="Sequence to Sequenceseq2seq 故名思意就是一串输入输出也是一串 其中包括两组RNNs 一组负责encoder 另一组负责 decoder。如图一所示：经过encoder后得到一个context 然后将其作为输入到decoder。 decoder是根据之前的来预测下一个单词是什么，而且是在输入x的条件下，所以有一下式子：  P(y | x)=P\left(y_{1} | x">
-<meta property="og:type" content="website">
+  <meta name="description" content="title: CentOs Poxytags:mathjax: truecategories: tool Vmware CentOs Poxy使用vmware 装了个centos. 但是需要Google. 本机已经使用ssr.可以访问.  首先将vm网络设置为桥接  虚拟机- 设置 2.将本机ssr设置为帮助 - 选项设置 3.打开虚拟机器设置网络代理System - Preference - N">
+<meta property="og:type" content="article">
 <meta property="og:title" content="FILE">
-<meta property="og:url" content="http://yoursite.com/un/Sequence to Sequence and Attention.html">
+<meta property="og:url" content="http://yoursite.com/2020/02/26/Vmware Poxy/index.html">
 <meta property="og:site_name" content="FILE">
-<meta property="og:description" content="Sequence to Sequenceseq2seq 故名思意就是一串输入输出也是一串 其中包括两组RNNs 一组负责encoder 另一组负责 decoder。如图一所示：经过encoder后得到一个context 然后将其作为输入到decoder。 decoder是根据之前的来预测下一个单词是什么，而且是在输入x的条件下，所以有一下式子：  P(y | x)=P\left(y_{1} | x">
+<meta property="og:description" content="title: CentOs Poxytags:mathjax: truecategories: tool Vmware CentOs Poxy使用vmware 装了个centos. 但是需要Google. 本机已经使用ssr.可以访问.  首先将vm网络设置为桥接  虚拟机- 设置 2.将本机ssr设置为帮助 - 选项设置 3.打开虚拟机器设置网络代理System - Preference - N">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1565831917502.png">
-<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1565832071695.png">
-<meta property="og:updated_time" content="2019-08-16T03:00:17.154Z">
+<meta property="og:image" content="http://yoursite.com/2020/02/26/Vmware%20Poxy/20200226113957464_28044.png%20=400x">
+<meta property="og:image" content="http://yoursite.com/2020/02/26/Vmware%20Poxy/20200226114136407_25977.png%20=400x">
+<meta property="og:image" content="http://yoursite.com/2020/02/26/Vmware%20Poxy/20200226114649104_4762.png%20=400x">
+<meta property="og:image" content="http://yoursite.com/2020/02/26/Vmware%20Poxy/20200226114819288_15728.png%20=400x">
+<meta property="og:updated_time" content="2020-02-26T06:55:21.607Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FILE">
-<meta name="twitter:description" content="Sequence to Sequenceseq2seq 故名思意就是一串输入输出也是一串 其中包括两组RNNs 一组负责encoder 另一组负责 decoder。如图一所示：经过encoder后得到一个context 然后将其作为输入到decoder。 decoder是根据之前的来预测下一个单词是什么，而且是在输入x的条件下，所以有一下式子：  P(y | x)=P\left(y_{1} | x">
-<meta name="twitter:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1565831917502.png">
+<meta name="twitter:description" content="title: CentOs Poxytags:mathjax: truecategories: tool Vmware CentOs Poxy使用vmware 装了个centos. 但是需要Google. 本机已经使用ssr.可以访问.  首先将vm网络设置为桥接  虚拟机- 设置 2.将本机ssr设置为帮助 - 选项设置 3.打开虚拟机器设置网络代理System - Preference - N">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/26/Vmware%20Poxy/20200226113957464_28044.png%20=400x">
   <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
-  <link rel="canonical" href="http://yoursite.com/un/Sequence to Sequence and Attention">
+  <link rel="canonical" href="http://yoursite.com/2020/02/26/Vmware Poxy/">
 
 
 <script id="page-configurations">
@@ -78,8 +80,8 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
-    isPage: true,
+    isPost: true,
+    isPage: false,
     isArchive: false
   };
 </script>
@@ -210,84 +212,113 @@
         <div class="content-wrap">
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
           <div id="content" class="content page-post-detail">
             
 
   <div id="posts" class="posts-expand">
     
-    
-    
-    <div class="post-block page">
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/26/Vmware Poxy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Les">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/echarts.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FILE">
+    </span>
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">
-
-</h1>
-
-<div class="post-meta">
-  
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
-          <h3 id="Sequence-to-Sequence"><a href="#Sequence-to-Sequence" class="headerlink" title="Sequence to Sequence"></a>Sequence to Sequence</h3><p>seq2seq 故名思意就是一串输入输出也是一串</p>
-<p>其中包括两组RNNs 一组负责encoder 另一组负责 decoder。如图一所示：经过encoder后得到一个context 然后将其作为输入到decoder。</p>
-<p>decoder是根据之前的来预测下一个单词是什么，而且是在输入x的条件下，所以有一下式子：</p>
-<script type="math/tex; mode=display">
-P(y | x)=P\left(y_{1} | x\right) P\left(y_{2} | y_{1}, x\right) P\left(y_{3} | y_{1}, y_{2}, x\right) \ldots P\left(y_{T} | y_{1}, \ldots, y_{T-1}, x\right)</script><p>如何训练？</p>
-<script type="math/tex; mode=display">
-J=\frac{1}{T} \sum_{t=1}^{T} J_{t}</script><p>其中 </p>
-<script type="math/tex; mode=display">
-J_{t}</script><p> 是 第 t 个输出的概率</p>
-<p>  <img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1565831917502.png" alt="1565831917502"></p>
-<p>  <img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1565832071695.png" alt="1565832071695"></p>
-<p>timestep t 上图中 scores 就是t时刻对对应的分数 ：</p>
-<script type="math/tex; mode=display">
-Scores：e^{t}=\left[s_{t}^{T} \boldsymbol{h}_{1}, \ldots, \boldsymbol{s}_{t}^{T} \boldsymbol{h}_{N}\right] \in \mathbb{R}^{N}</script><p>采用softmax函数来计算其概率分布</p>
-<script type="math/tex; mode=display">
-\alpha^{t}=\operatorname{softmax}\left(e^{t}\right) \in \mathbb{R}^{N}</script><script type="math/tex; mode=display">
-\boldsymbol{a}_{t}=\sum_{i=1}^{N} \alpha_{i}^{t} \boldsymbol{h}_{i} \in \mathbb{R}^{h}</script><script type="math/tex; mode=display">
-\left[\boldsymbol{a}_{t} ; \boldsymbol{s}_{t}\right] \in \mathbb{R}^{2 h}</script><p>Transformer</p>
-<p>text<sup><a href="#fn_1" id="reffn_1">1</a></sup></p>
-<blockquote id="fn_1">
-<sup>1</sup>. Computer Aided Translation[EB/OL]. <a href="https://www.microsoft.com/en-us/research/video/computer-aided-translation/" target="_blank" rel="noopener">https://www.microsoft.com/en-us/research/video/computer-aided-translation/</a>, 2016/2018-8.19.<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
-</blockquote>
+          <h1 class="post-title" itemprop="name headline">
 
+            
+          </h1>
         
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-02-26 11:58:31 / Modified: 14:55:21" itemprop="dateCreated datePublished" datetime="2020-02-26T11:58:31+08:00">2020-02-26</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-      
-      
+        <p>title: CentOs Poxy<br>tags:<br>mathjax: true<br>categories: tool</p>
+<h1 id="Vmware-CentOs-Poxy"><a href="#Vmware-CentOs-Poxy" class="headerlink" title="Vmware CentOs Poxy"></a>Vmware CentOs Poxy</h1><p>使用vmware 装了个centos. 但是需要Google. 本机已经使用ssr.可以访问.</p>
+<ol>
+<li>首先将vm网络设置为桥接</li>
+</ol>
+<p>虚拟机- 设置<br><img src="20200226113957464_28044.png =400x" alt></p>
+<p>2.将本机ssr设置为<br>帮助 - 选项设置<br><img src="20200226114136407_25977.png =400x" alt></p>
+<p>3.打开虚拟机器设置网络代理<br>System - Preference - Network Proxy<br>此处设置的ip地址为宿主机的ip<br><img src="20200226114649104_4762.png =400x" alt></p>
+<p>4.ok测试<br><img src="20200226114819288_15728.png =400x" alt></p>
+
     </div>
-    
 
     
     
     
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/11/09/eth_mnist/" rel="next" title="STDP手写数字识别">
+                  <i class="fa fa-chevron-left"></i> STDP手写数字识别
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
   </div>
 
 
@@ -379,7 +410,7 @@ Scores：e^{t}=\left[s_{t}^{T} \boldsymbol{h}_{1}, \ldots, \boldsymbol{s}_{t}^{T
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sequence-to-Sequence"><span class="nav-number">1.</span> <span class="nav-text">Sequence to Sequence</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vmware-CentOs-Poxy"><span class="nav-number">1.</span> <span class="nav-text">Vmware CentOs Poxy</span></a></li></ol></div>
             
 
           </div>
@@ -485,10 +516,9 @@ Scores：e^{t}=\left[s_{t}^{T} \boldsymbol{h}_{1}, \ldots, \boldsymbol{s}_{t}^{T
 
 
   
-    <script src="/js/scrollspy.js?v=7.3.0"></script>
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
 <script src="/js/post-details.js?v=7.3.0"></script>
 
-  
 
 </body>
 </html>

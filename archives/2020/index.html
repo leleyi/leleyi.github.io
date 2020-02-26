@@ -55,22 +55,15 @@
   };
 </script>
 
-  <meta name="description" content="Sequence to Sequenceseq2seq 故名思意就是一串输入输出也是一串 其中包括两组RNNs 一组负责encoder 另一组负责 decoder。如图一所示：经过encoder后得到一个context 然后将其作为输入到decoder。 decoder是根据之前的来预测下一个单词是什么，而且是在输入x的条件下，所以有一下式子：  P(y | x)=P\left(y_{1} | x">
-<meta property="og:type" content="website">
+  <meta property="og:type" content="website">
 <meta property="og:title" content="FILE">
-<meta property="og:url" content="http://yoursite.com/un/Sequence to Sequence and Attention.html">
+<meta property="og:url" content="http://yoursite.com/archives/2020/index.html">
 <meta property="og:site_name" content="FILE">
-<meta property="og:description" content="Sequence to Sequenceseq2seq 故名思意就是一串输入输出也是一串 其中包括两组RNNs 一组负责encoder 另一组负责 decoder。如图一所示：经过encoder后得到一个context 然后将其作为输入到decoder。 decoder是根据之前的来预测下一个单词是什么，而且是在输入x的条件下，所以有一下式子：  P(y | x)=P\left(y_{1} | x">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1565831917502.png">
-<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1565832071695.png">
-<meta property="og:updated_time" content="2019-08-16T03:00:17.154Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FILE">
-<meta name="twitter:description" content="Sequence to Sequenceseq2seq 故名思意就是一串输入输出也是一串 其中包括两组RNNs 一组负责encoder 另一组负责 decoder。如图一所示：经过encoder后得到一个context 然后将其作为输入到decoder。 decoder是根据之前的来预测下一个单词是什么，而且是在输入x的条件下，所以有一下式子：  P(y | x)=P\left(y_{1} | x">
-<meta name="twitter:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1565831917502.png">
   <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
-  <link rel="canonical" href="http://yoursite.com/un/Sequence to Sequence and Attention">
+  <link rel="canonical" href="http://yoursite.com/archives/2020/">
 
 
 <script id="page-configurations">
@@ -79,12 +72,12 @@
     sidebar: "",
     isHome: false,
     isPost: false,
-    isPage: true,
-    isArchive: false
+    isPage: false,
+    isArchive: true
   };
 </script>
 
-  <title> | FILE</title>
+  <title>Archive | FILE</title>
   
 
 
@@ -228,67 +221,74 @@
 
   
 
-          <div id="content" class="content page-post-detail">
+          <div id="content" class="content page-archive">
             
 
-  <div id="posts" class="posts-expand">
-    
-    
-    
-    <div class="post-block page">
-      <header class="post-header">
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
+      <span class="archive-page-counter">
+        
+        
+        
+          
+        
+        Um..! 13 posts in total. Keep on posting.
+      </span>
+      
 
-<h1 class="post-title" itemprop="name headline">
+      
 
-</h1>
-
-<div class="post-meta">
+  
+  
   
 
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-        
-          <h3 id="Sequence-to-Sequence"><a href="#Sequence-to-Sequence" class="headerlink" title="Sequence to Sequence"></a>Sequence to Sequence</h3><p>seq2seq 故名思意就是一串输入输出也是一串</p>
-<p>其中包括两组RNNs 一组负责encoder 另一组负责 decoder。如图一所示：经过encoder后得到一个context 然后将其作为输入到decoder。</p>
-<p>decoder是根据之前的来预测下一个单词是什么，而且是在输入x的条件下，所以有一下式子：</p>
-<script type="math/tex; mode=display">
-P(y | x)=P\left(y_{1} | x\right) P\left(y_{2} | y_{1}, x\right) P\left(y_{3} | y_{1}, y_{2}, x\right) \ldots P\left(y_{T} | y_{1}, \ldots, y_{T-1}, x\right)</script><p>如何训练？</p>
-<script type="math/tex; mode=display">
-J=\frac{1}{T} \sum_{t=1}^{T} J_{t}</script><p>其中 </p>
-<script type="math/tex; mode=display">
-J_{t}</script><p> 是 第 t 个输出的概率</p>
-<p>  <img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1565831917502.png" alt="1565831917502"></p>
-<p>  <img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1565832071695.png" alt="1565832071695"></p>
-<p>timestep t 上图中 scores 就是t时刻对对应的分数 ：</p>
-<script type="math/tex; mode=display">
-Scores：e^{t}=\left[s_{t}^{T} \boldsymbol{h}_{1}, \ldots, \boldsymbol{s}_{t}^{T} \boldsymbol{h}_{N}\right] \in \mathbb{R}^{N}</script><p>采用softmax函数来计算其概率分布</p>
-<script type="math/tex; mode=display">
-\alpha^{t}=\operatorname{softmax}\left(e^{t}\right) \in \mathbb{R}^{N}</script><script type="math/tex; mode=display">
-\boldsymbol{a}_{t}=\sum_{i=1}^{N} \alpha_{i}^{t} \boldsymbol{h}_{i} \in \mathbb{R}^{h}</script><script type="math/tex; mode=display">
-\left[\boldsymbol{a}_{t} ; \boldsymbol{s}_{t}\right] \in \mathbb{R}^{2 h}</script><p>Transformer</p>
-<p>text<sup><a href="#fn_1" id="reffn_1">1</a></sup></p>
-<blockquote id="fn_1">
-<sup>1</sup>. Computer Aided Translation[EB/OL]. <a href="https://www.microsoft.com/en-us/research/video/computer-aided-translation/" target="_blank" rel="noopener">https://www.microsoft.com/en-us/research/video/computer-aided-translation/</a>, 2016/2018-8.19.<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
-</blockquote>
-
-        
-      </div>
-      
-      
-      
+  
+    
+    <div class="collection-title">
+      <h1 class="archive-year" id="archive-year-2020">2020</h1>
     </div>
-    
+  
+  
 
-    
-    
-    
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+          <a class="post-title-link" href="/2020/02/26/Vmware Poxy/" itemprop="url">
+            
+              <span itemprop="name">Untitled</span>
+            
+          </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2020-02-26T11:58:31+08:00"
+              content="2020-02-26">
+          02-26
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+
+    </div>
   </div>
+  
+  
+  
+
+  
+
 
 
           </div>
@@ -307,17 +307,8 @@ Scores：e^{t}=\left[s_{t}^{T} \boldsymbol{h}_{1}, \ldots, \boldsymbol{s}_{t}^{T
 
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -369,23 +360,6 @@ Scores：e^{t}=\left[s_{t}^{T} \boldsymbol{h}_{1}, \ldots, \boldsymbol{s}_{t}^{T
 
         </div>
       </div>
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sequence-to-Sequence"><span class="nav-number">1.</span> <span class="nav-text">Sequence to Sequence</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
 
     </div>
   </aside>
@@ -485,10 +459,5 @@ Scores：e^{t}=\left[s_{t}^{T} \boldsymbol{h}_{1}, \ldots, \boldsymbol{s}_{t}^{T
 
 
   
-    <script src="/js/scrollspy.js?v=7.3.0"></script>
-<script src="/js/post-details.js?v=7.3.0"></script>
-
-  
-
 </body>
 </html>
