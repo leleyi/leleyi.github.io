@@ -55,15 +55,19 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
+  <meta name="description" content="1.服务器必须使用Goroutines和通道同时管理和与其客户端交互。 多个客户端应能够同时连接/断开服务器 2。 当客户端要将值放入服务器时，它将发送以下request string：Put：key：value。 当客户端希望从服务器获取值时，它将发送以下请求字符串：Get：key。 当客户端要从服务器删除密钥时，它将发送以下请求字符串：Delete：key。 这些是来自客户端的唯一可能的消息。">
+<meta property="og:type" content="website">
 <meta property="og:title" content="FILE">
-<meta property="og:url" content="http://yoursite.com/categories/ml/index.html">
+<meta property="og:url" content="http://yoursite.com/un/kvStore.html">
 <meta property="og:site_name" content="FILE">
+<meta property="og:description" content="1.服务器必须使用Goroutines和通道同时管理和与其客户端交互。 多个客户端应能够同时连接/断开服务器 2。 当客户端要将值放入服务器时，它将发送以下request string：Put：key：value。 当客户端希望从服务器获取值时，它将发送以下请求字符串：Get：key。 当客户端要从服务器删除密钥时，它将发送以下请求字符串：Delete：key。 这些是来自客户端的唯一可能的消息。">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-03-17T13:49:29.284Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FILE">
+<meta name="twitter:description" content="1.服务器必须使用Goroutines和通道同时管理和与其客户端交互。 多个客户端应能够同时连接/断开服务器 2。 当客户端要将值放入服务器时，它将发送以下request string：Put：key：value。 当客户端希望从服务器获取值时，它将发送以下请求字符串：Get：key。 当客户端要从服务器删除密钥时，它将发送以下请求字符串：Delete：key。 这些是来自客户端的唯一可能的消息。">
   <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
-  <link rel="canonical" href="http://yoursite.com/categories/ml/">
+  <link rel="canonical" href="http://yoursite.com/un/kvStore">
 
 
 <script id="page-configurations">
@@ -72,12 +76,12 @@
     sidebar: "",
     isHome: false,
     isPost: false,
-    isPage: false,
+    isPage: true,
     isArchive: false
   };
 </script>
 
-  <title>Category: ml | FILE</title>
+  <title> | FILE</title>
   
 
 
@@ -221,135 +225,53 @@
 
   
 
-          <div id="content" class="content ">
+          <div id="content" class="content page-post-detail">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>ml<small>Category</small>
-        </h1>
-      </div>
+<h1 class="post-title" itemprop="name headline">
+
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
 
       
+      
+      
+      <div class="post-body">
+        
+          <p>1.服务器必须使用Goroutines和通道同时管理和与其客户端交互。 多个客户端应能够同时连接/断开服务器</p>
+<p>2。 当客户端要将值放入服务器时，它将发送以下request string：Put：key：value。 当客户端希望从服务器获取值时，它将发送以下请求字符串：Get：key。 当客户端要从服务器删除密钥时，它将发送以下请求字符串：Delete：key。 这些是来自客户端的唯一可能的消息。 您将负责解析请求字符串并选择适当的操作</p>
+<p>3。 服务器从客户端读取Get（）请求消息时，应使用以下字符串：key：value [newline]到发送消息的客户端。对于与给定密钥关联的每个值，该字符串应该发送一次。 应该发送给Put（）request.</p>
+<p>4。 发送或接收的每条消息都应以换行符（\ n）终止。</p>
+<p>5。 服务器不应假定上面列出的键值API函数是线程安全的。您将负责确保访问数据库时不存在争用条件。</p>
+<p>6。 服务器必须实现CountActive（）函数，该函数返回当前连接到它的客户端的数量。</p>
+<p>7。 服务器必须实现CountDropped（）函数，该函数返回已与服务器断开连接并因此从服务器上断开连接的客户端的数量</p>
+<p>8。 服务器必须对慢速读取的客户端做出响应。 为了更好地理解这意味着什么，请考虑这样一种情况：客户端在较长时间内不调用Read。 如果在此期间服务器继续向客户端的TCP连接写入消息，则最终TCP连接输出缓冲区将达到最大容量，并且服务器随后对Write的调用将被阻止。 为了处理这些情况，您的服务器应保留最多500条待发消息的队列，以便以后再写给客户端。 发送到慢速读取客户端的消息（其传出消息缓冲区已达到500的最大容量），应该只删除该消息。 如果读取速度较慢的客户端将来会再次开始读取，则服务器应确保将其队列中所有缓冲的消息写回到客户端（提示：使用缓冲通道正确实现此目的）</p>
 
-  
-  
-  
-
-  
+        
+      </div>
+      
+      
+      
+    </div>
     
-    <div class="collection-title">
-      <h1 class="archive-year" id="archive-year-2019">2019</h1>
-    </div>
-  
-  
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/08/28/Transformer/" itemprop="url">
-            
-              <span itemprop="name">Transformer</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-08-28T17:57:15+08:00"
-              content="2019-08-28">
-          08-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-  
-  
-  
-
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/08/13/SVM/" itemprop="url">
-            
-              <span itemprop="name">hands-on svm课后作业</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-08-13T09:57:15+08:00"
-              content="2019-08-13">
-          08-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-  
-  
-  
-
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/08/09/MNIST/" itemprop="url">
-            
-              <span itemprop="name">MNIST 手写识别任务</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-08-09T14:57:15+08:00"
-              content="2019-08-09">
-          08-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    </div>
-
+    
+    
+    
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -522,5 +444,10 @@
 
 
   
+    <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+  
+
 </body>
 </html>
