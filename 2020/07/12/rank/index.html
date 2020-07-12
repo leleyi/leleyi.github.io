@@ -55,17 +55,17 @@
   };
 </script>
 
-  <meta name="description" content="Rank P@notic Model  以作者为中心, 将作者所有的文本汇集(mate-document),并且向量化(vec-mate), 通过query与vec-mate的相似度来排序.进而获取专家排序.  - 简单但是准确度低. Voting Model  以文档为中心, 首先计算出query与document的相似度.并排序. $\text {RRFscore}(d)=\sum{i} \f">
+  <meta name="description" content="Rank P@notic Model  以作者为中心, 将作者所有的文本汇集(mate-document),并且向量化(vec-mate), 通过query与vec-mate的相似度来排序.进而获取专家排序.  - 简单但是准确度低. Voting Model  以文档为中心, 首先计算出query与document的相似度.并排序. \text {RRFscore}(d)=\sum_{i} \f">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FILE">
+<meta property="og:title" content="Rank For Expert Retrieval">
 <meta property="og:url" content="http://yoursite.com/2020/07/12/rank/index.html">
 <meta property="og:site_name" content="FILE">
-<meta property="og:description" content="Rank P@notic Model  以作者为中心, 将作者所有的文本汇集(mate-document),并且向量化(vec-mate), 通过query与vec-mate的相似度来排序.进而获取专家排序.  - 简单但是准确度低. Voting Model  以文档为中心, 首先计算出query与document的相似度.并排序. $\text {RRFscore}(d)=\sum{i} \f">
+<meta property="og:description" content="Rank P@notic Model  以作者为中心, 将作者所有的文本汇集(mate-document),并且向量化(vec-mate), 通过query与vec-mate的相似度来排序.进而获取专家排序.  - 简单但是准确度低. Voting Model  以文档为中心, 首先计算出query与document的相似度.并排序. \text {RRFscore}(d)=\sum_{i} \f">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-11T13:50:29.783Z">
+<meta property="og:updated_time" content="2020-07-12T13:44:08.908Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FILE">
-<meta name="twitter:description" content="Rank P@notic Model  以作者为中心, 将作者所有的文本汇集(mate-document),并且向量化(vec-mate), 通过query与vec-mate的相似度来排序.进而获取专家排序.  - 简单但是准确度低. Voting Model  以文档为中心, 首先计算出query与document的相似度.并排序. $\text {RRFscore}(d)=\sum{i} \f">
+<meta name="twitter:title" content="Rank For Expert Retrieval">
+<meta name="twitter:description" content="Rank P@notic Model  以作者为中心, 将作者所有的文本汇集(mate-document),并且向量化(vec-mate), 通过query与vec-mate的相似度来排序.进而获取专家排序.  - 简单但是准确度低. Voting Model  以文档为中心, 首先计算出query与document的相似度.并排序. \text {RRFscore}(d)=\sum_{i} \f">
   <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
   <link rel="canonical" href="http://yoursite.com/2020/07/12/rank/">
 
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title> | FILE</title>
+  <title>Rank For Expert Retrieval | FILE</title>
   
 
 
@@ -232,7 +232,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">Rank For Expert Retrieval
 
             
           </h1>
@@ -249,20 +249,25 @@
                 
               
 
-              <time title="Created: 2020-07-12 14:39:48" itemprop="dateCreated datePublished" datetime="2020-07-12T14:39:48+08:00">2020-07-12</time>
+              <time title="Created: 2020-07-12 21:44:15 / Modified: 21:44:08" itemprop="dateCreated datePublished" datetime="2020-07-12T21:44:15+08:00">2020-07-12</time>
             </span>
           
             
 
             
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-11 21:50:29" itemprop="dateModified" datetime="2020-07-11T21:50:29+08:00">2020-07-11</time>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
               </span>
-            
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/information-retrieval/" itemprop="url" rel="index"><span itemprop="name">information retrieval</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -278,7 +283,8 @@
       
         <h3 id="Rank"><a href="#Rank" class="headerlink" title="Rank"></a>Rank</h3><ul>
 <li><strong>P@notic Model</strong><br>  以作者为中心, 将作者所有的文本汇集(mate-document),并且向量化(vec-mate), 通过query与vec-mate的相似度来排序.进而获取专家排序.  - 简单但是准确度低.</li>
-<li><p><strong>Voting Model</strong><br>  以文档为中心, 首先计算出query与document的相似度.并排序.<br> $\text {RRFscore}(d)=\sum<em>{i} \frac{1}{k+r</em>{i}(d)}, \quad k=0 \text { (for this example)}$<br>  $r_i$ the rank of i,比如 候选作者是排名第2,3,7的文档的作者, 则他的得分为<br>  $\frac{1}{2} + \frac{1}{3} +\frac{1}{7} = 0.976$.将相关作者得分排序的到结果.<br>  将最相关的文档的作者,和作者的文章数量都考虑到了.<br>  其他技术:</p>
+<li><p><strong>Voting Model</strong><br>  以文档为中心, 首先计算出query与document的相似度.并排序.</p>
+<script type="math/tex; mode=display">\text {RRFscore}(d)=\sum_{i} \frac{1}{k+r_{i}(d)}, \quad k=0 \text { (for this example)}</script><p>  $r_i$ the rank of i,比如 候选作者是排名第2,3,7的文档的作者, 则他的得分为<br>  <script type="math/tex">\frac{1}{2} + \frac{1}{3} +\frac{1}{7} = 0.976</script>.将相关作者得分排序的到结果.<br>  将最相关的文档的作者,和作者的文章数量都考虑到了.<br>  其他技术:</p>
 <pre><code>  Comb*:综合各个方式结果.
 </code></pre></li>
 <li><p><strong>Propagation Model</strong><br>  传播模型是基于图的方式.因为文档与作者之间天然就是一个二分图. :<br>  采用随机游走的方式,让图收敛.<br>目前来看的话, 投票模型的效果是最好的. </p>
@@ -304,8 +310,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2020/02/26/CentOsPoxy/" rel="next" title="CentOs Poxy">
-                  <i class="fa fa-chevron-left"></i> CentOs Poxy
+                <a href="/2020/07/12/Evaluation/" rel="next" title="检索系统的评价">
+                  <i class="fa fa-chevron-left"></i> 检索系统的评价
                 </a>
               
             </div>
@@ -313,10 +319,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2020/07/12/Learn2Rank/" rel="prev" title="Learn to rank">
-                  Learn to rank <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -373,7 +375,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -524,6 +526,55 @@
 
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', function() {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
   
 
   
