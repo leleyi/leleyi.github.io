@@ -55,17 +55,17 @@
   };
 </script>
 
-  <meta name="description" content="一、Docker 介绍1. 安装需要的包12#想安装Docker，需要先将依赖的环境全部下载下来sudo apt install apt-transport-https ca-certificates software-properties-common curl 2. 指定 Docker 镜像源1234#.更换国内软件源，推荐中国科技大学的源，稳定速度快（可选）sudo cp /etc/apt/">
+  <meta name="description" content="参考b站教程 一、Docker 介绍1. 安装需要的包12#想安装Docker，需要先将依赖的环境全部下载下来sudo apt install apt-transport-https ca-certificates software-properties-common curl 2. 指定 Docker 镜像源1234#.更换国内软件源，推荐中国科技大学的源，稳定速度快（可选）sudo cp /e">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker">
 <meta property="og:url" content="http://yoursite.com/2020/08/01/docker/index.html">
 <meta property="og:site_name" content="FILE">
-<meta property="og:description" content="一、Docker 介绍1. 安装需要的包12#想安装Docker，需要先将依赖的环境全部下载下来sudo apt install apt-transport-https ca-certificates software-properties-common curl 2. 指定 Docker 镜像源1234#.更换国内软件源，推荐中国科技大学的源，稳定速度快（可选）sudo cp /etc/apt/">
+<meta property="og:description" content="参考b站教程 一、Docker 介绍1. 安装需要的包12#想安装Docker，需要先将依赖的环境全部下载下来sudo apt install apt-transport-https ca-certificates software-properties-common curl 2. 指定 Docker 镜像源1234#.更换国内软件源，推荐中国科技大学的源，稳定速度快（可选）sudo cp /e">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-08-06T06:42:17.943Z">
+<meta property="og:updated_time" content="2020-08-07T08:56:23.030Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker">
-<meta name="twitter:description" content="一、Docker 介绍1. 安装需要的包12#想安装Docker，需要先将依赖的环境全部下载下来sudo apt install apt-transport-https ca-certificates software-properties-common curl 2. 指定 Docker 镜像源1234#.更换国内软件源，推荐中国科技大学的源，稳定速度快（可选）sudo cp /etc/apt/">
+<meta name="twitter:description" content="参考b站教程 一、Docker 介绍1. 安装需要的包12#想安装Docker，需要先将依赖的环境全部下载下来sudo apt install apt-transport-https ca-certificates software-properties-common curl 2. 指定 Docker 镜像源1234#.更换国内软件源，推荐中国科技大学的源，稳定速度快（可选）sudo cp /e">
   <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
   <link rel="canonical" href="http://yoursite.com/2020/08/01/docker/">
 
@@ -260,7 +260,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-06 14:42:17" itemprop="dateModified" datetime="2020-08-06T14:42:17+08:00">2020-08-06</time>
+                <time title="Modified: 2020-08-07 16:56:23" itemprop="dateModified" datetime="2020-08-07T16:56:23+08:00">2020-08-07</time>
               </span>
             
           
@@ -276,7 +276,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="一、Docker-介绍"><a href="#一、Docker-介绍" class="headerlink" title="一、Docker 介绍"></a>一、Docker 介绍</h2><h3 id="1-安装需要的包"><a href="#1-安装需要的包" class="headerlink" title="1. 安装需要的包"></a>1. 安装需要的包</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>想安装Docker，需要先将依赖的环境全部下载下来</span><br><span class="line">sudo apt install apt-transport-https ca-certificates software-properties-common curl</span><br></pre></td></tr></table></figure>
+        <p><a href="https://search.bilibili.com/video?keyword=elastic" target="_blank" rel="noopener">参考b站教程</a></p>
+<h2 id="一、Docker-介绍"><a href="#一、Docker-介绍" class="headerlink" title="一、Docker 介绍"></a>一、Docker 介绍</h2><h3 id="1-安装需要的包"><a href="#1-安装需要的包" class="headerlink" title="1. 安装需要的包"></a>1. 安装需要的包</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>想安装Docker，需要先将依赖的环境全部下载下来</span><br><span class="line">sudo apt install apt-transport-https ca-certificates software-properties-common curl</span><br></pre></td></tr></table></figure>
 <h3 id="2-指定-Docker-镜像源"><a href="#2-指定-Docker-镜像源" class="headerlink" title="2. 指定 Docker 镜像源"></a>2. 指定 Docker 镜像源</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>.更换国内软件源，推荐中国科技大学的源，稳定速度快（可选）</span><br><span class="line">sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak</span><br><span class="line">sudo sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list</span><br><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
 <h3 id="3-添加-GPG-密钥"><a href="#3-添加-GPG-密钥" class="headerlink" title="3.添加 GPG 密钥"></a>3.添加 GPG 密钥</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>添加 Docker-ce 软件源，这里还是以中国科技大学的 Docker-ce 源为例</span><br><span class="line">curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -</span><br><span class="line">sudo add-apt-repository "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu \</span><br><span class="line"><span class="meta">$</span>(lsb_release -cs) stable"</span><br></pre></td></tr></table></figure>
 <h3 id="3-安装-Docker"><a href="#3-安装-Docker" class="headerlink" title="3. 安装 Docker"></a>3. 安装 Docker</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install docker-ce</span><br></pre></td></tr></table></figure>
