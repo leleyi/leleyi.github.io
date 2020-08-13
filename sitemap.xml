@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2020/08/13/nslookup/</loc>
+    
+    <lastmod>2020-08-13T13:04:01.455Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/07/12/ES/</loc>
     
-    <lastmod>2020-08-07T09:01:20.189Z</lastmod>
+    <lastmod>2020-08-08T06:47:43.110Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/07/12/Evaluation/</loc>
+    
+    <lastmod>2020-08-07T12:29:50.215Z</lastmod>
     
   </url>
   
@@ -26,13 +40,6 @@
     <loc>http://yoursite.com/2020/07/12/rank/</loc>
     
     <lastmod>2020-07-13T05:15:51.255Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2020/07/12/Evaluation/</loc>
-    
-    <lastmod>2020-07-12T14:57:15.177Z</lastmod>
     
   </url>
   
