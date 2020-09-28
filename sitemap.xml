@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2020/09/12/linux%E6%9D%83%E9%99%90/</loc>
+    
+    <lastmod>2020-09-26T07:10:42.535Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/09/10/%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%E6%AE%B5/</loc>
+    
+    <lastmod>2020-09-10T13:26:15.468Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/08/20/Authorisation/</loc>
+    
+    <lastmod>2020-08-20T00:41:33.508Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/08/13/nslookup/</loc>
     
-    <lastmod>2020-08-13T13:04:01.455Z</lastmod>
+    <lastmod>2020-08-14T00:41:11.462Z</lastmod>
     
   </url>
   
