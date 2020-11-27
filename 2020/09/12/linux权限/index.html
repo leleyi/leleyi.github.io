@@ -55,17 +55,17 @@
   };
 </script>
 
-  <meta name="description" content="更改文件权限 （chmod 命令）一般使用格式 chmod [可选项]    123456789101112131415161718192021可选项：  -c, --changes          like verbose but report only when a change is made (若该档案权限确实已经更改，才显示其更改动作)  -f, --silent, --quiet">
+  <meta name="description" content="在 Linux 中，增加用户或改变用户的组属性可以使用 useradd 或者 usermod 命令。useradd 增加一个新用户或者更新默认新用户信息。usermod 则是更改用户帐户属性，例如将其添加到一个已有的组中。 在 Linux 用户系统中存在两类组。第一类是主要用户组，第二类是附加用户组。所有的用户帐户及相关信息都存储在 /etc/passwd 文件中，/etc/shadow 和 /e">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux 权限.">
 <meta property="og:url" content="http://yoursite.com/2020/09/12/linux权限/index.html">
 <meta property="og:site_name" content="FILE">
-<meta property="og:description" content="更改文件权限 （chmod 命令）一般使用格式 chmod [可选项]    123456789101112131415161718192021可选项：  -c, --changes          like verbose but report only when a change is made (若该档案权限确实已经更改，才显示其更改动作)  -f, --silent, --quiet">
+<meta property="og:description" content="在 Linux 中，增加用户或改变用户的组属性可以使用 useradd 或者 usermod 命令。useradd 增加一个新用户或者更新默认新用户信息。usermod 则是更改用户帐户属性，例如将其添加到一个已有的组中。 在 Linux 用户系统中存在两类组。第一类是主要用户组，第二类是附加用户组。所有的用户帐户及相关信息都存储在 /etc/passwd 文件中，/etc/shadow 和 /e">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-26T07:10:42.535Z">
+<meta property="og:updated_time" content="2020-10-28T09:02:50.640Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 权限.">
-<meta name="twitter:description" content="更改文件权限 （chmod 命令）一般使用格式 chmod [可选项]    123456789101112131415161718192021可选项：  -c, --changes          like verbose but report only when a change is made (若该档案权限确实已经更改，才显示其更改动作)  -f, --silent, --quiet">
+<meta name="twitter:description" content="在 Linux 中，增加用户或改变用户的组属性可以使用 useradd 或者 usermod 命令。useradd 增加一个新用户或者更新默认新用户信息。usermod 则是更改用户帐户属性，例如将其添加到一个已有的组中。 在 Linux 用户系统中存在两类组。第一类是主要用户组，第二类是附加用户组。所有的用户帐户及相关信息都存储在 /etc/passwd 文件中，/etc/shadow 和 /e">
   <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
   <link rel="canonical" href="http://yoursite.com/2020/09/12/linux权限/">
 
@@ -260,7 +260,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-26 15:10:42" itemprop="dateModified" datetime="2020-09-26T15:10:42+08:00">2020-09-26</time>
+                <time title="Modified: 2020-10-28 17:02:50" itemprop="dateModified" datetime="2020-10-28T17:02:50+08:00">2020-10-28</time>
               </span>
             
           
@@ -276,7 +276,62 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="更改文件权限-（chmod-命令）"><a href="#更改文件权限-（chmod-命令）" class="headerlink" title="更改文件权限 （chmod 命令）"></a>更改文件权限 （chmod 命令）</h2><h3 id="一般使用格式"><a href="#一般使用格式" class="headerlink" title="一般使用格式"></a>一般使用格式</h3><blockquote>
+        <p>在 Linux 中，增加用户或改变用户的组属性可以使用 <code>useradd</code> 或者 <code>usermod</code> 命令。<code>useradd</code> 增加一个新用户或者更新默认新用户信息。<code>usermod</code> 则是更改用户帐户属性，例如将其添加到一个已有的组中。</p>
+<p>在 Linux 用户系统中存在两类组。第一类是主要用户组，第二类是附加用户组。所有的用户帐户及相关信息都存储在 <code>/etc/passwd</code> 文件中，<code>/etc/shadow</code> 和 <code>/etc/group</code> 文件存储了用户信息。</p>
+<h2 id="useradd-示例-–-增加一个新用户到附加用户组-¶"><a href="#useradd-示例-–-增加一个新用户到附加用户组-¶" class="headerlink" title="useradd 示例 – 增加一个新用户到附加用户组 ¶"></a>useradd 示例 – 增加一个新用户到附加用户组 <a href="#useradd_1">¶</a></h2><p>新增加一个用户并将其列入一个已有的用户组中需要用到 <code>useradd</code> 命令。如果还没有这个用户组，可以先创建该用户组。</p>
+<p>命令参数如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd -G &#123;group-name&#125; username</span><br></pre></td></tr></table></figure>
+<p>例如，我们要创建一个新用户 xjj并将其添加到用户组 developers 中。首先需要以 root 用户身份登录到系统中。先确认一下是否存在 developers 这个用户组，在命令行输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\# grep developers /etc/group</span><br></pre></td></tr></table></figure>
+<p>输出类似于：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">developers:x:1124:</span><br></pre></td></tr></table></figure>
+<p>如果看不到任何输出，那么就需要先创建这个用户组了，使用 <code>groupadd</code> 命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\# groupadd xjj</span><br></pre></td></tr></table></figure>
+<p>然后创建用户 xjj并将其加入到 developers 用户组：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\# useradd -G xjj dl</span><br></pre></td></tr></table></figure>
+<p>为用户 xjj设置密码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\# passwd xjj</span><br></pre></td></tr></table></figure>
+<p>为确保已经将该用户正确的添加到 developers 用户组中，可以查看该用户的属性，使用 <code>id</code> 命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\# id xjj</span><br></pre></td></tr></table></figure>
+<p>前面命令中用到的大写的 G （-G） 参数就是为了将用户添加到一个附加用户组中，而同时还会为此用户创建一个属于他自己的新组 如果要将该用户同时增加到多个附加用户组中，可以使用英文半角的逗号来分隔多个附加组名（不要加空格）。例如，同时将 xjj 增加到 admins, ftp, www, 和 developers 用户组中，可以输入以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\# useradd -G admins,ftp,www,developers cnzhx</span><br></pre></td></tr></table></figure>
+<h2 id="useradd-示例-–-增加一个新用户到主要用户组-¶"><a href="#useradd-示例-–-增加一个新用户到主要用户组-¶" class="headerlink" title="useradd 示例 – 增加一个新用户到主要用户组 ¶"></a>useradd 示例 – 增加一个新用户到主要用户组 <a href="#useradd_2">¶</a></h2><p>要增加用户 xjj到组 developers，可以使用下面的指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\# useradd -g developers xjj </span><br><span class="line"># id xjj</span><br></pre></td></tr></table></figure>
+<p>输出类似于：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uid=1123(cnzhx) gid=1124(developers) groups=1124(developers)</span><br></pre></td></tr></table></figure>
+<p>请注意如前面的示例的区别，这里使用了小写字母 g （-g）作为参数，此时用户的主要用户组不再是 xjj而直接就是 developers。</p>
+<p>小写字母 g （-g）将新增加的用户初始化为指定为登录组（主要用户组）。此组名必须已经存在。组号（gid）即是此已有组的组号。</p>
+<h2 id="usermod-示例-–-将一个已有用户增加到一个已有用户组中-¶"><a href="#usermod-示例-–-将一个已有用户增加到一个已有用户组中-¶" class="headerlink" title="usermod 示例 – 将一个已有用户增加到一个已有用户组中 ¶"></a>usermod 示例 – 将一个已有用户增加到一个已有用户组中 <a href="#usermod">¶</a></h2><p>将一个已有用户 xjj增加到一个已有用户组 apache 中，使此用户组成为该用户的附加用户组，可以使用带 -a 参数的 <code>usermod</code>  指令。-a 代表 append， 也就是将用户添加到新用户组中而不必离开原有的其他用户组。不过需要与 -G 选项配合使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\# usermod -a -G apache xjj</span><br></pre></td></tr></table></figure>
+<p>如果要同时将 xjj 的主要用户组改为 apache，则直接使用 -g 选项：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\# usermod -g apache xjj</span><br></pre></td></tr></table></figure>
+<p>如果要将一个用户从某个组中删除，则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpasswd -d user group</span><br></pre></td></tr></table></figure>
+<p>但是这个时候需要保证 group 不是 user 的主组。</p>
+<h2 id="附：管理用户（user）和用户组（group）的相关工具或命令-¶"><a href="#附：管理用户（user）和用户组（group）的相关工具或命令-¶" class="headerlink" title="附：管理用户（user）和用户组（group）的相关工具或命令 ¶"></a>附：管理用户（user）和用户组（group）的相关工具或命令 <a href="#commands">¶</a></h2><p><strong>1）管理用户（user）的工具或命令</strong></p>
+<p><code>useradd    注：添加用户  
+adduser    注：添加用户  
+passwd     注：为用户设置密码  
+usermod    注：修改用户命令，可以通过usermod 来修改登录名、用户的家目录等等；  
+pwcov      注：同步用户从/etc/passwd 到/etc/shadow  
+pwck       注：pwck是校验用户配置文件/etc/passwd 和/etc/shadow 文件内容是否合法或完整；  
+pwunconv   注：是pwcov 的立逆向操作，是从/etc/shadow和 /etc/passwd 创建/etc/passwd ，然后会删除 /etc/shadow 文件；  
+finger     注：查看用户信息工具  
+id         注：查看用户的UID、GID及所归属的用户组  
+chfn       注：更改用户信息工具  
+su         注：用户切换工具  
+sudo       注：sudo 是通过另一个用户来执行命令（execute a command as another user），su 是用来切换用户，然后通过切换到的用户来完成相应的任务，但sudo 能后面直接执行命令，比如sudo 不需要root 密码就可以执行root 赋与的执行只有root才能执行相应的命令；但得通过visudo 来编辑/etc/sudoers来实现；  
+visudo     注：visodo 是编辑 /etc/sudoers 的命令；也可以不用这个命令，直接用vi 来编辑 /etc/sudoers 的效果是一样的；  
+sudoedit   注：和sudo 功能差不多；</code></p>
+<p><strong>2）管理用户组（group）的工具或命令</strong><br><code>groupadd    注：添加用户组；  
+groupdel    注：删除用户组；  
+groupmod    注：修改用户组信息  
+groups      注：显示用户所属的用户组  
+grpck  
+grpconv     注：通过/etc/group和/etc/gshadow 的文件内容来同步或创建/etc/gshadow ，如果/etc/gshadow 不存在则创建；  
+grpunconv   注：通过/etc/group 和/etc/gshadow 文件内容来同步或创建/etc/group ，然后删除gshadow文件；</code></p>
+<p>将一个用户添加到某个组，即可让此用户拥有该组的权限。比如在<a href="https://cnzhx.net/blog/vps-centos-6-lamp-phpmyadmin/" title="Linode VPS 上 CentOS 6 安装 LAMP + phpMyAdmin 记录" target="_blank" rel="noopener">配置 VPS 上的 LAMP 服务器</a>的时候，运行网站的 apache 用户修改的文件，如果服务器管理用户 cnzhx（可以通过 ssh 登录到服务器）需要修改此文件的话，就可以将 xjj加入到 apache 组中达到目的</p>
+<h2 id="更改文件权限-（chmod-命令）"><a href="#更改文件权限-（chmod-命令）" class="headerlink" title="更改文件权限 （chmod 命令）"></a>更改文件权限 （chmod 命令）</h2><h3 id="一般使用格式"><a href="#一般使用格式" class="headerlink" title="一般使用格式"></a>一般使用格式</h3><blockquote>
 <p>chmod [可选项] <mode> <file...></file...></mode></p>
 </blockquote>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">可选项：</span><br><span class="line">  -c, --changes          like verbose but report only when a change is made (若该档案权限确实已经更改，才显示其更改动作)</span><br><span class="line">  -f, --silent, --quiet  suppress most error messages  （若该档案权限无法被更改也不要显示错误讯息）</span><br><span class="line">  -v, --verbose          output a diagnostic <span class="keyword">for</span> every file processed（显示权限变更的详细资料）</span><br><span class="line">       --no-preserve-root  <span class="keyword">do</span> not treat <span class="string">'/'</span> specially (the default)</span><br><span class="line">       --preserve-root    fail to operate recursively on <span class="string">'/'</span></span><br><span class="line">       --reference=RFILE  use RFILE<span class="string">'s mode instead of MODE values</span></span><br><span class="line"><span class="string">  -R, --recursive        change files and directories recursively （以递归的方式对目前目录下的所有档案与子目录进行相同的权限变更)</span></span><br><span class="line"><span class="string">       --help		显示此帮助信息</span></span><br><span class="line"><span class="string">       --version		显示版本信息</span></span><br><span class="line"><span class="string">mode ：权限设定字串，详细格式如下：</span></span><br><span class="line"><span class="string">[ugoa...][[+-=][rwxX]...][,...]，其中</span></span><br><span class="line"><span class="string">[ugoa...]</span></span><br><span class="line"><span class="string">u 表示该档案的拥有者，g 表示与该档案的拥有者属于同一个群体(group)者，o 表示其他以外的人，a 表示所有（包含上面三者）。</span></span><br><span class="line"><span class="string">[+-=]</span></span><br><span class="line"><span class="string">+ 表示增加权限，- 表示取消权限，= 表示唯一设定权限。</span></span><br><span class="line"><span class="string">[rwxX]</span></span><br><span class="line"><span class="string">r 表示可读取，w 表示可写入，x 表示可执行，X 表示只有当该档案是个子目录或者该档案已经被设定过为可执行。</span></span><br><span class="line"><span class="string"> 	</span></span><br><span class="line"><span class="string">file...</span></span><br><span class="line"><span class="string">文件列表（单个或者多个文件、文件夹）</span></span><br></pre></td></tr></table></figure>
@@ -471,7 +526,7 @@
 </ul>
 <ul>
 <li><p>将用户加入到su组. </p>
-<p>  su 到root 用户.<br>  leleyi(用户名)     ALL=(ALL)       ALL.<br>  包保存即可.</p>
+<p>  su 到root 用户.<br>  vim /etc/sudoers<br>  leleyi(用户名)     ALL=(ALL)       ALL.<br>  包保存即可.</p>
 </li>
 </ul>
 
@@ -499,6 +554,10 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/09/29/源码阅读之 ArrayBlockingQueue/" rel="prev" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -555,7 +614,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -610,7 +669,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#更改文件权限-（chmod-命令）"><span class="nav-number">1.</span> <span class="nav-text">更改文件权限 （chmod 命令）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一般使用格式"><span class="nav-number">1.1.</span> <span class="nav-text">一般使用格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字权限使用格式"><span class="nav-number">1.2.</span> <span class="nav-text">数字权限使用格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更改文件拥有者（chown-命令）"><span class="nav-number">2.</span> <span class="nav-text">更改文件拥有者（chown 命令）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Linux-权限详解"><span class="nav-number">3.</span> <span class="nav-text">二、Linux 权限详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十位权限表示"><span class="nav-number">4.</span> <span class="nav-text">十位权限表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十二位权限（Linux-附加权限）"><span class="nav-number">5.</span> <span class="nav-text">十二位权限（Linux 附加权限）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#附加权限相关概念"><span class="nav-number">5.1.</span> <span class="nav-text">附加权限相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#粘滞位权限："><span class="nav-number">5.1.1.</span> <span class="nav-text">粘滞位权限：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十二位的权限表示方法"><span class="nav-number">5.2.</span> <span class="nav-text">十二位的权限表示方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附加权限的八进制形式"><span class="nav-number">5.3.</span> <span class="nav-text">附加权限的八进制形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#权限范围及代号"><span class="nav-number">5.4.</span> <span class="nav-text">权限范围及代号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法及选项说明"><span class="nav-number">5.5.</span> <span class="nav-text">语法及选项说明</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#useradd-示例-–-增加一个新用户到附加用户组-¶"><span class="nav-number">1.</span> <span class="nav-text">useradd 示例 – 增加一个新用户到附加用户组 ¶</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#useradd-示例-–-增加一个新用户到主要用户组-¶"><span class="nav-number">2.</span> <span class="nav-text">useradd 示例 – 增加一个新用户到主要用户组 ¶</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#usermod-示例-–-将一个已有用户增加到一个已有用户组中-¶"><span class="nav-number">3.</span> <span class="nav-text">usermod 示例 – 将一个已有用户增加到一个已有用户组中 ¶</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附：管理用户（user）和用户组（group）的相关工具或命令-¶"><span class="nav-number">4.</span> <span class="nav-text">附：管理用户（user）和用户组（group）的相关工具或命令 ¶</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更改文件权限-（chmod-命令）"><span class="nav-number">5.</span> <span class="nav-text">更改文件权限 （chmod 命令）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一般使用格式"><span class="nav-number">5.1.</span> <span class="nav-text">一般使用格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字权限使用格式"><span class="nav-number">5.2.</span> <span class="nav-text">数字权限使用格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更改文件拥有者（chown-命令）"><span class="nav-number">6.</span> <span class="nav-text">更改文件拥有者（chown 命令）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Linux-权限详解"><span class="nav-number">7.</span> <span class="nav-text">二、Linux 权限详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十位权限表示"><span class="nav-number">8.</span> <span class="nav-text">十位权限表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十二位权限（Linux-附加权限）"><span class="nav-number">9.</span> <span class="nav-text">十二位权限（Linux 附加权限）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#附加权限相关概念"><span class="nav-number">9.1.</span> <span class="nav-text">附加权限相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#粘滞位权限："><span class="nav-number">9.1.1.</span> <span class="nav-text">粘滞位权限：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十二位的权限表示方法"><span class="nav-number">9.2.</span> <span class="nav-text">十二位的权限表示方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附加权限的八进制形式"><span class="nav-number">9.3.</span> <span class="nav-text">附加权限的八进制形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#权限范围及代号"><span class="nav-number">9.4.</span> <span class="nav-text">权限范围及代号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法及选项说明"><span class="nav-number">9.5.</span> <span class="nav-text">语法及选项说明</span></a></li></ol></li></ol></div>
             
 
           </div>
