@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/echarts.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/echarts.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"scrollpercent":true,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    save_scroll: false,
+    copycode: {"enable":true,"show_result":true,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="# 字节 作者：*? 链接：https://www.nowcoder.com/discuss/485900?source_id=profile_create&amp;amp;channel=1009 来源：牛客网 技术 后端 【字节跳动】字节跳动后端面经 已拿意向书 https://www.nowcoder.com/discuss/302265 【字节跳动】字节后端三面 凉凉夜色为我思念成河 https:">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FILE">
+<meta property="og:url" content="http://yoursite.com/新建文件夹/# 字节.html">
+<meta property="og:site_name" content="FILE">
+<meta property="og:description" content="# 字节 作者：*? 链接：https://www.nowcoder.com/discuss/485900?source_id=profile_create&amp;amp;channel=1009 来源：牛客网 技术 后端 【字节跳动】字节跳动后端面经 已拿意向书 https://www.nowcoder.com/discuss/302265 【字节跳动】字节后端三面 凉凉夜色为我思念成河 https:">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-09-29T14:01:34.569Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FILE">
+<meta name="twitter:description" content="# 字节 作者：*? 链接：https://www.nowcoder.com/discuss/485900?source_id=profile_create&amp;amp;channel=1009 来源：牛客网 技术 后端 【字节跳动】字节跳动后端面经 已拿意向书 https://www.nowcoder.com/discuss/302265 【字节跳动】字节后端三面 凉凉夜色为我思念成河 https:">
+  <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/新建文件夹/# 字节">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title> | FILE</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FILE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+          <p># 字节</p>
+<p>作者：*?</p>
+<p>链接：<a href="https://www.nowcoder.com/discuss/485900?source_id=profile_create&amp;channel=1009" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/485900?source_id=profile_create&amp;channel=1009</a></p>
+<p>来源：牛客网</p>
+<p>技术</p>
+<p>后端</p>
+<p>【字节跳动】字节跳动后端面经 已拿意向书 <a href="https://www.nowcoder.com/discuss/302265" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/302265</a></p>
+<p>【字节跳动】字节后端三面 凉凉夜色为我思念成河 <a href="https://www.nowcoder.com/discuss/227726" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/227726</a></p>
+<p>【字节跳动】字节跳动 C++深圳后端 四面面经 意向书已get <a href="https://www.nowcoder.com/discuss/21736" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/21736</a></p>
+<p>【字节跳动】头条后端开发提前批技术面小结（已拿意向性offer） <a href="https://www.nowcoder.com/discuss/216828" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/216828</a></p>
+<p>【字节跳动】字节跳动提前批后端第三面凉经 <a href="https://www.nowcoder.com/discuss/214125" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/214125</a></p>
+<p>【字节跳动】字节二面（凉面）C++ 后端 <a href="https://www.nowcoder.com/discuss/209688" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/209688</a></p>
+<p>【字节跳动】字节跳动提前批后端开发（视频架构）一二三面 <a href="https://www.nowcoder.com/discuss/209548" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/209548</a></p>
+<p>【字节跳动】字节跳动 后端提前批一面凉经 <a href="https://www.nowcoder.com/discuss/207096" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207096</a></p>
+<p>【字节跳动】字节 后端 一面凉经 <a href="https://www.nowcoder.com/discuss/207326" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207326</a></p>
+<p>【字节跳动】字节跳动 C++后端 一面 面经 <a href="https://www.nowcoder.com/discuss/207260" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207260</a></p>
+<p>【字节跳动】字节提前批后端开发-视频架构方向面经 <a href="https://www.nowcoder.com/discuss/207891" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207891</a></p>
+<p>【字节跳动】头条互娱 后端 一面二面 <a href="https://www.nowcoder.com/discuss/208374" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/208374</a></p>
+<p>【字节跳动】字节跳动 互娱后端一面 <a href="https://www.nowcoder.com/discuss/208161" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/208161</a></p>
+<p>【字节跳动】字节跳动-视频架构-后端开发（视频一面） <a href="https://www.nowcoder.com/discuss/208773" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/208773</a></p>
+<p>【字节跳动】字节跳动 成都效率工程后端C++提前批三面凉面 <a href="https://www.nowcoder.com/discuss/205353" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/205353</a></p>
+<p>【字节跳动】字节跳动后端提前批 <a href="https://www.nowcoder.com/discuss/204112" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/204112</a></p>
+<p>【字节跳动】字节跳动 成都效率工程后端C++提前批三面凉面 <a href="https://www.nowcoder.com/discuss/205353" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/205353</a></p>
+<p>【有赞、字节跳动、网易、华为、美团、滴滴】6家Java后端社招面经 <a href="https://www.nowcoder.com/discuss/349126" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/349126</a></p>
+<p>【字节跳动】字节跳动Java后端视频面一面凉经 <a href="https://www.nowcoder.com/discuss/302831" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/302831</a></p>
+<p>【字节跳动】字节后端开发面经 <a href="https://www.nowcoder.com/discuss/301301" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/301301</a></p>
+<p>【字节跳动】字节跳动-后端开发-面经 <a href="https://www.nowcoder.com/discuss/262576" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/262576</a></p>
+<p>【字节跳动】【字节跳动】后端开发三轮面经 <a href="https://www.nowcoder.com/discuss/241356" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/241356</a></p>
+<p>【字节跳动】字节跳动后端三轮面经 <a href="https://www.nowcoder.com/discuss/226626" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/226626</a></p>
+<p>【字节跳动】字节跳动提前批后端开发 <a href="https://www.nowcoder.com/discuss/220896" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/220896</a></p>
+<p>【字节跳动】头条后端开发面经（已拿意向书） <a href="https://www.nowcoder.com/discuss/217672" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/217672</a></p>
+<p>【字节跳动】头条提前批后端,刚拿到意向书，分享面经还愿 <a href="https://www.nowcoder.com/discuss/213834" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/213834</a></p>
+<p>【字节跳动】字节跳动后端提前批二面凉 <a href="https://www.nowcoder.com/discuss/207144" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207144</a></p>
+<p>【字节跳动】字节 后端 一面凉经 <a href="https://www.nowcoder.com/discuss/207065" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207065</a></p>
+<p>【字节跳动】头条深圳后端提前批一面凉经 <a href="https://www.nowcoder.com/discuss/207046" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207046</a></p>
+<p>【字节跳动】字节跳动提前批后端两面面经 <a href="https://www.nowcoder.com/discuss/207290" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207290</a></p>
+<p>【字节跳动】头条java后端提前批一面凉经 <a href="https://www.nowcoder.com/discuss/207272" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207272</a></p>
+<p>【字节跳动】头条后端一轮游面经 <a href="https://www.nowcoder.com/discuss/207815" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207815</a></p>
+<p>【字节跳动】头条提前批Java后端工程师面经 <a href="https://www.nowcoder.com/discuss/206411" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/206411</a></p>
+<p>【字节跳动】字节跳动data后端一面面经 <a href="https://www.nowcoder.com/discuss/204325" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/204325</a></p>
+<p>【字节跳动】头条后端一面凉经 <a href="https://www.nowcoder.com/discuss/205034" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/205034</a></p>
+<p>【字节跳动】字节跳动 后端开发 二面凉经 <a href="https://www.nowcoder.com/discuss/343393" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/343393</a></p>
+<p>【字节跳动】字节跳动后端实习面试（全程超越附体） <a href="https://www.nowcoder.com/discuss/338849" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/338849</a></p>
+<p>【字节跳动】今日头条 后端 社招 <a href="https://www.nowcoder.com/discuss/325907" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/325907</a></p>
+<p>【蚂蚁金服、PingCAP、字节跳动】后端两年社招面经 <a href="https://www.nowcoder.com/discuss/322042" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/322042</a></p>
+<p>【字节跳动、腾讯】头条后端校招面经一二三面 腾讯后端实习一二面 面经 <a href="https://www.nowcoder.com/discuss/314995" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/314995</a></p>
+<p>【字节跳动】字节跳动后端开发面试 <a href="https://www.nowcoder.com/discuss/293766" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/293766</a></p>
+<p>【PingCAP、蚂蚁、字节跳动】后端社招面试经历(两年经验) <a href="https://www.nowcoder.com/discuss/284494" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/284494</a></p>
+<p>【字节跳动】【字节】后端一面 <a href="https://www.nowcoder.com/discuss/280129" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/280129</a></p>
+<p>【字节跳动】字节跳动效率工程后端三面凉经 <a href="https://www.nowcoder.com/discuss/277817" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/277817</a></p>
+<p>【字节跳动】字节跳动一二面面经【后端】 <a href="https://www.nowcoder.com/discuss/250449" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/250449</a></p>
+<p>【字节跳动】字节后端一面凉经 <a href="https://www.nowcoder.com/discuss/241250" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/241250</a></p>
+<p>【字节跳动】字节跳动 后端开发 一、二、三面 面经 <a href="https://www.nowcoder.com/discuss/236551" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/236551</a></p>
+<p>【字节跳动】字节跳动后端开发实习生凉经 <a href="https://www.nowcoder.com/discuss/213918" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/213918</a></p>
+<p>【字节跳动】字节跳动后端一面凉经 <a href="https://www.nowcoder.com/discuss/209668" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/209668</a></p>
+<p>【字节跳动】字节跳动后端二面凉经 <a href="https://www.nowcoder.com/discuss/209793" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/209793</a></p>
+<p>【字节跳动】字节跳不动后端面经 <a href="https://www.nowcoder.com/discuss/208742" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/208742</a></p>
+<p>【字节跳动】字节跳动后端开发一面凉 <a href="https://www.nowcoder.com/discuss/208946" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/208946</a></p>
+<p>【字节跳动】头条后端实习二面面经 7/14 <a href="https://www.nowcoder.com/discuss/206633" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/206633</a></p>
+<p>【字节跳动】后端开发二面凉经QAQ <a href="https://www.nowcoder.com/discuss/203652" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/203652</a></p>
+<p>【字节跳动】190705字节跳动效率工程EE后端一面面经 <a href="https://www.nowcoder.com/discuss/203488" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/203488</a></p>
+<p>【字节跳动】头条一面二面Data后端（一首凉凉送给自己） <a href="https://www.nowcoder.com/discuss/205742" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/205742</a></p>
+<p>【字节跳动】头条南京后端上岸 <a href="https://www.nowcoder.com/discuss/218650" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/218650</a></p>
+<p>【字节跳动】字节跳动提前批后端，刚拿意向书，分享一下面经 <a href="https://www.nowcoder.com/discuss/210872" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/210872</a></p>
+<p>Java</p>
+<p>【陌陌，云从科技，字节跳动】日常实习java面经-陌陌，云从科技，字节跳动 <a href="https://www.nowcoder.com/discuss/350072" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/350072</a></p>
+<p>【有赞、字节跳动、网易、华为、美团、滴滴】6家Java后端社招面经 <a href="https://www.nowcoder.com/discuss/349126" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/349126</a></p>
+<p>【阿里、腾讯、字节跳动】总结秋招 回馈牛客（阿里+腾讯+头条 Java面经） <a href="https://www.nowcoder.com/discuss/342084" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/342084</a></p>
+<p>【知乎、快看漫画、快手、字节跳动】社招-一年经验-Java开发-知乎/快看漫画/快手/头条面经 <a href="https://www.nowcoder.com/discuss/331681" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/331681</a></p>
+<p>【蚂蚁金服、字节跳动】蚂蚁金服和字节跳动Java社招面经 <a href="https://www.nowcoder.com/discuss/315199" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/315199</a></p>
+<p>【字节跳动】北京字节跳动游戏JAVA游戏服务器回馈一下攒人品 <a href="https://www.nowcoder.com/discuss/308109" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/308109</a></p>
+<p>【字节跳动】字节跳动Java后端视频面一面凉经 <a href="https://www.nowcoder.com/discuss/302831" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/302831</a></p>
+<p>【字节跳动】字节跳动java后台已上岸，发个面经回馈牛油 <a href="https://www.nowcoder.com/discuss/215891" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/215891</a></p>
+<p>【字节跳动】头条java后端提前批一面凉经 <a href="https://www.nowcoder.com/discuss/207272" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207272</a></p>
+<p>【字节跳动】字节跳动Java后台一面面经 <a href="https://www.nowcoder.com/discuss/207262" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207262</a></p>
+<p>【字节跳动】头条提前批Java后端工程师面经 <a href="https://www.nowcoder.com/discuss/206411" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/206411</a></p>
+<p>【字节跳动】【java】头条提前批一面（2019-07-07） <a href="https://www.nowcoder.com/discuss/203984" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/203984</a></p>
+<p>【字节跳动】字节跳动-提前批-Java后台 - 一面面经（QAQ） <a href="https://www.nowcoder.com/discuss/204596" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/204596</a></p>
+<p>【字节跳动】字节跳动-提前批-Java后台 - 一面面经（QAQ） <a href="https://www.nowcoder.com/discuss/204596" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/204596</a></p>
+<p>C++</p>
+<p>【字节跳动】字节跳动-抖音C++开发实习一二面凉经 <a href="https://www.nowcoder.com/discuss/342523" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/342523</a></p>
+<p>【小米、海格、旷视、快看、美团、百度、快手、字节跳动】算法转C++开发，我的秋招面经(&gt;o&lt;) <a href="https://www.nowcoder.com/discuss/302094" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/302094</a></p>
+<p>【字节跳动】字节c++一面 <a href="https://www.nowcoder.com/discuss/298886" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/298886</a></p>
+<p>【百度、京东方、美团、 小米、字节跳动】秋招总结(C++，附部分面经) <a href="https://www.nowcoder.com/discuss/291376" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/291376</a></p>
+<p>【字节跳动】字节跳动 基础架构C++服务端开发面经 <a href="https://www.nowcoder.com/discuss/241129" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/241129</a></p>
+<p>【阿里、滴滴、腾讯、贝壳、字节跳动、网易、】发一波C++面经攒人品，希望8月能收获offer <a href="https://www.nowcoder.com/discuss/228118" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/228118</a></p>
+<p>【字节跳动】字节跳动 C++深圳后端 四面面经 意向书已get <a href="https://www.nowcoder.com/discuss/21736" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/21736</a></p>
+<p>【字节跳动】字节跳动C++一面凉经 <a href="https://www.nowcoder.com/discuss/210321" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/210321</a></p>
+<p>【字节跳动】字节二面（凉面）C++ 后端 <a href="https://www.nowcoder.com/discuss/209688" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/209688</a></p>
+<p>【字节跳动】头条C++开发二面凉经 <a href="https://www.nowcoder.com/discuss/209636" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/209636</a></p>
+<p>【字节跳动】头条C++ 一二面凉经 <a href="https://www.nowcoder.com/discuss/207322" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207322</a></p>
+<p>【字节跳动】字节跳动 C++后端 一面 面经 <a href="https://www.nowcoder.com/discuss/207260" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207260</a></p>
+<p>【字节跳动】字节跳动C++研发工程师（三面全通过） <a href="https://www.nowcoder.com/discuss/208173" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/208173</a></p>
+<p>【字节跳动】字节跳动 互娱 C++ 一面 <a href="https://www.nowcoder.com/discuss/208969" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/208969</a></p>
+<p>【字节跳动】字节跳动C++提前批一面面经 <a href="https://www.nowcoder.com/discuss/206156" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/206156</a></p>
+<p>【字节跳动】字节跳动 C++开发工程师 面经 <a href="https://www.nowcoder.com/discuss/206522" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/206522</a></p>
+<p>【字节跳动】字节跳动，刚刚出炉的C++一面凉经 <a href="https://www.nowcoder.com/discuss/206425" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/206425</a></p>
+<p>【字节跳动】字节跳动 成都效率工程后端C++提前批三面凉面 <a href="https://www.nowcoder.com/discuss/205353" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/205353</a></p>
+<p>【字节跳动】字节跳动 成都效率工程后端C++提前批三面凉面 <a href="https://www.nowcoder.com/discuss/205353" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/205353</a></p>
+<p>【字节跳动】头条ios开发 一面C++ <a href="https://www.nowcoder.com/discuss/306888" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/306888</a></p>
+<p>前端</p>
+<p>【字节跳动、浦发】非科班查硕的秋招前端面经整理 <a href="https://www.nowcoder.com/discuss/349699" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/349699</a></p>
+<p>【字节跳动】字节跳动-效率工程 一二三面面筋 + 前端笔记分享 <a href="https://www.nowcoder.com/discuss/337035" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/337035</a></p>
+<p>【字节跳动 】回馈牛客 字节跳动前端面经 <a href="https://www.nowcoder.com/discuss/***898" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/***898</a></p>
+<p>【酷狗、字节跳动、CVTE、猿辅导】前端两年社招面经总结 <a href="https://www.nowcoder.com/discuss/316450" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/316450</a></p>
+<p>【字节跳动】字节跳动前端面经 <a href="https://www.nowcoder.com/discuss/308745" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/308745</a></p>
+<p>【字节跳动】字节跳动-头条研发 前端一二面凉 <a href="https://www.nowcoder.com/discuss/294450" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/294450</a></p>
+<p>【字节跳动】头条抖音散招前端凉经 <a href="https://www.nowcoder.com/discuss/286453" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/286453</a></p>
+<p>【字节跳动】字节跳动前端一面凉经 <a href="https://www.nowcoder.com/discuss/279144" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/279144</a></p>
+<p>【字节跳动】「前端」19年第一次面试 面筋 攒人品 许愿顺利 <a href="https://www.nowcoder.com/discuss/276007" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/276007</a></p>
+<p>【阿里、字节跳动、携程、美团】我的秋招总结（前端） <a href="https://www.nowcoder.com/discuss/273606" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/273606</a></p>
+<p>【字节跳动】字节前端一面 <a href="https://www.nowcoder.com/discuss/274438" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/274438</a></p>
+<p>【字节跳动】字节跳动 前端面经 <a href="https://www.nowcoder.com/discuss/268116" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/268116</a></p>
+<p>【字节跳动】字节跳动前端一面凉经 <a href="https://www.nowcoder.com/discuss/226798" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/226798</a></p>
+<p>【字节跳动】字节前端一面凉经 <a href="https://www.nowcoder.com/discuss/226691" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/226691</a></p>
+<p>【字节跳动、猿辅导】字节提前批+猿辅导一面 前端 面经 <a href="https://www.nowcoder.com/discuss/220884" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/220884</a></p>
+<p>【字节跳动】字节跳动前端面经, 已拿意向书 <a href="https://www.nowcoder.com/discuss/213424" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/213424</a></p>
+<p>【字节跳动】字节跳动 深圳抖音 提前批前端 三面+HR面 已拿意向书 <a href="https://www.nowcoder.com/discuss/213863" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/213863</a></p>
+<p>【字节跳动、瓜子、360、猿辅导、中信银行、老虎】头条猿辅导瓜子老虎证券等前端面经 <a href="https://www.nowcoder.com/discuss/213693" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/213693</a></p>
+<p>【字节跳动】抖音前端凉经 <a href="https://www.nowcoder.com/discuss/212448" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/212448</a></p>
+<p>【字节跳动】字节跳动提前批前端，已拿意向书 <a href="https://www.nowcoder.com/discuss/210817" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/210817</a></p>
+<p>【字节跳动】字节跳动提前批前端一面凉经 <a href="https://www.nowcoder.com/discuss/210083" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/210083</a></p>
+<p>【字节跳动】字节跳动 互娱 前端一面凉经 <a href="https://www.nowcoder.com/discuss/207553" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207553</a></p>
+<p>【字节跳动】字节跳动ToB业务前端提前批一面凉面 <a href="https://www.nowcoder.com/discuss/207409" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207409</a></p>
+<p>【字节跳动】字节跳动提前批前端三面面经 <a href="https://www.nowcoder.com/discuss/208384" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/208384</a></p>
+<p>【字节跳动】字节跳动提前批前端3面+HR面 面经 <a href="https://www.nowcoder.com/discuss/208931" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/208931</a></p>
+<p>【字节跳动】字节前端一面凉经 <a href="https://www.nowcoder.com/discuss/206457" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/206457</a></p>
+<p>【字节跳动】字节跳动游戏平台 前端三面凉经 <a href="https://www.nowcoder.com/discuss/205511" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/205511</a></p>
+<p>【字节跳动】字节跳动提前批前端岗一面面经 <a href="https://www.nowcoder.com/discuss/205969" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/205969</a></p>
+<p>【字节跳动】字节跳动提前批前端岗一面面经 <a href="https://www.nowcoder.com/discuss/205969" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/205969</a></p>
+<p>【字节跳动】字节跳动to B提前批前端一面（攒个人品） <a href="https://www.nowcoder.com/discuss/203874" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/203874</a></p>
+<p>【字节跳动】记一次字节跳动前端面试，四轮技术面通过，已拿offer <a href="https://www.nowcoder.com/discuss/204314" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/204314</a></p>
+<p>【字节跳动】字节跳动一面总结（前端技术岗） <a href="https://www.nowcoder.com/discuss/204829" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/204829</a></p>
+<p>移动端</p>
+<p>ios</p>
+<p>【字节跳动】头条ios开发 一面C++ <a href="https://www.nowcoder.com/discuss/306888" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/306888</a></p>
+<p>【字节跳动】双非本科非科班 抖音Android面筋（被调剂到iOS了） <a href="https://www.nowcoder.com/discuss/300246" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/300246</a></p>
+<p>【字节跳动】回馈牛客！【深圳字节跳动】ios移动端已拿意向书 <a href="https://www.nowcoder.com/discuss/212124" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/212124</a></p>
+<p>安卓</p>
+<p>【字节跳动】字节安卓社招面经来啦 <a href="https://www.nowcoder.com/discuss/302228" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/302228</a></p>
+<p>【字节跳动】字节安卓开发一二三hr面面经，赠送春招实习面经 <a href="https://www.nowcoder.com/discuss/276777" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/276777</a></p>
+<p>【字节跳动、滴滴、哔哩哔哩、腾讯】安卓方向秋招面经记录 <a href="https://www.nowcoder.com/discuss/229649" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/229649</a></p>
+<p>【字节跳动、OPPO】字节跳动、oppo安卓开发面筋 <a href="https://www.nowcoder.com/discuss/223431" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/223431</a></p>
+<p>【字节跳动】补发：字节跳动安卓开发实习三轮面经 <a href="https://www.nowcoder.com/discuss/203703" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/203703</a></p>
+<p>【字节跳动】头条提前批安卓岗面经 <a href="https://www.nowcoder.com/discuss/204672" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/204672</a></p>
+<p>测试/测开</p>
+<p>【字节跳动】字节跳动测试开发—二面面经 <a href="https://www.nowcoder.com/discuss/351722" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/351722</a></p>
+<p>【字节跳动】字节跳动头条研发—-测试开发一面面经 <a href="https://www.nowcoder.com/discuss/351378" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/351378</a></p>
+<p>【字节跳动】字节跳动测试开发一面面经 <a href="https://www.nowcoder.com/discuss/348347" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/348347</a></p>
+<p>【字节跳动】字节跳动，测试工程师面经 <a href="https://www.nowcoder.com/discuss/344652" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/344652</a></p>
+<p>【字节跳动】字节跳动-互娱研发-测试工程师 <a href="https://www.nowcoder.com/discuss/326346" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/326346</a></p>
+<p>【字节跳动】还愿字节+测试面经 <a href="https://www.nowcoder.com/discuss/311344" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/311344</a></p>
+<p>【字节跳动】字节跳动测试开发内推(实习生/秋招) <a href="https://www.nowcoder.com/discuss/302486" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/302486</a></p>
+<p>【字节跳动】字节跳动测试开发工程师三次面试凉经 <a href="https://www.nowcoder.com/discuss/298626" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/298626</a></p>
+<p>【字节跳动】字节跳动测试工程师-头条研发面经 <a href="https://www.nowcoder.com/discuss/299077" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/299077</a></p>
+<p>【字节跳动】字节跳动测试开发（测开）一、二、三技术面经 <a href="https://www.nowcoder.com/discuss/289856" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/289856</a></p>
+<p>【字节跳动】字节跳动，客户端测试开发岗一面 <a href="https://www.nowcoder.com/discuss/275572" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/275572</a></p>
+<p>【字节跳动】2019.07字节跳动 测试开发技术面 <a href="https://www.nowcoder.com/discuss/213808" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/213808</a></p>
+<p>【字节跳动】字节提前批测试开发三面 <a href="https://www.nowcoder.com/discuss/210***" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/210***</a></p>
+<p>【字节跳动】回馈一下牛客网（字节跳动测试开发一二面凉经） <a href="https://www.nowcoder.com/discuss/209199" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/209199</a></p>
+<p>【字节跳动】回馈一下牛客网（字节跳动测试开发一二面凉经） <a href="https://www.nowcoder.com/discuss/209199" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/209199</a></p>
+<p>【字节跳动】2019字节跳动秋招提前批测试开发岗一面 <a href="https://www.nowcoder.com/discuss/203384" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/203384</a></p>
+<p>【字节跳动】面经：字节跳动测试开发提前批面经 <a href="https://www.nowcoder.com/discuss/203453" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/203453</a></p>
+<p>【字节跳动】字节跳动游戏测试开发二面凉经 <a href="https://www.nowcoder.com/discuss/204107" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/204107</a></p>
+<p>【字节跳动】字节跳动 测试开发提前批一二面 <a href="https://www.nowcoder.com/discuss/205153" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/205153</a></p>
+<p>【字节跳动】字节跳动测试提前批一面 <a href="https://www.nowcoder.com/discuss/203485" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/203485</a></p>
+<p>【字节跳动】字节跳动 测试一面凉经 <a href="https://www.nowcoder.com/discuss/205286" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/205286</a></p>
+<p>【字节跳动】头条测试工程师一面 <a href="https://www.nowcoder.com/discuss/205092" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/205092</a></p>
+<p>【字节跳动】字节测开实习一面(视频面) <a href="https://www.nowcoder.com/discuss/341318" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/341318</a></p>
+<p>【字节跳动】字节 测开 三面 凉经 <a href="https://www.nowcoder.com/discuss/317807" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/317807</a></p>
+<p>【字节跳动】字节测开1-4面面经（收到意向书） <a href="https://www.nowcoder.com/discuss/304858" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/304858</a></p>
+<p>【字节跳动】字节跳动测试开发（测开）一、二、三技术面经 <a href="https://www.nowcoder.com/discuss/289856" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/289856</a></p>
+<p>【字节跳动】测开面经 <a href="https://www.nowcoder.com/discuss/214526" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/214526</a></p>
+<p>【字节跳动】【还愿】头条提前批测开面经 <a href="https://www.nowcoder.com/discuss/213349" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/213349</a></p>
+<p>【字节跳动】字节跳动提前批测开劝退一面面经 <a href="https://www.nowcoder.com/discuss/207520" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207520</a></p>
+<p>【字节跳动】抖音火山测开凉经 <a href="https://www.nowcoder.com/discuss/208097" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/208097</a></p>
+<p>【字节跳动】字节跳动 游戏测开一二三面面经 <a href="https://www.nowcoder.com/discuss/204117" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/204117</a></p>
+<p>【字节跳动】字节跳动游戏提前批-杭州-测开三面 <a href="https://www.nowcoder.com/discuss/204318" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/204318</a></p>
+<p>数据分析</p>
+<p>【字节跳动】字节 数据分析面经 <a href="https://www.nowcoder.com/discuss/344423" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/344423</a></p>
+<p>【字节跳动/网易 】字节跳动/网易 数据分析 社招面经 <a href="https://www.nowcoder.com/discuss/330721" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/330721</a></p>
+<p>【字节跳动】字节跳动数据分析一面、二面面经（已凉） <a href="https://www.nowcoder.com/discuss/322985" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/322985</a></p>
+<p>【字节跳动】字节跳动 数据分析 10月的offer 部分面经 <a href="https://www.nowcoder.com/discuss/322770" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/322770</a></p>
+<p>【字节跳动】攒人品贴 - 字节/头条数据分析面试一面二面 <a href="https://www.nowcoder.com/discuss/314832" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/314832</a></p>
+<p>【字节跳动】字节跳动 数据分析二面 面试已完成？（附简单面经） <a href="https://www.nowcoder.com/discuss/301369" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/301369</a></p>
+<p>【字节跳动】字节跳动数据分析一面 <a href="https://www.nowcoder.com/discuss/267795" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/267795</a></p>
+<p>【字节跳动】字节跳动_数据分析： 一面：0828凉凉 <a href="https://www.nowcoder.com/discuss/236629" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/236629</a></p>
+<p>【字节跳动】字节跳动 数据分析 一面 <a href="https://www.nowcoder.com/discuss/230722" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/230722</a></p>
+<p>【字节跳动】字节跳动数据分析一面凉经… <a href="https://www.nowcoder.com/discuss/219080" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/219080</a></p>
+<p>【字节跳动】字节跳动秋招 数据分析 一面 <a href="https://www.nowcoder.com/discuss/219004" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/219004</a></p>
+<p>【字节跳动】字节跳动 数据分析 产品方向 日常实习 面经 <a href="https://www.nowcoder.com/discuss/207493" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207493</a></p>
+<p>【爱奇艺、字节跳动、映客直播】我的面试经历-数据分析实习生 <a href="https://www.nowcoder.com/discuss/204273" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/204273</a></p>
+<p>算法</p>
+<p>【小米、海格、旷视、快看、美团、百度、快手、字节跳动】算法转C++开发，我的秋招面经(&gt;o&lt;) <a href="https://www.nowcoder.com/discuss/302094" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/302094</a></p>
+<p>【字节跳动】技术面试前半段基础知识答得不好，为什么还要接着问算法题 <a href="https://www.nowcoder.com/discuss/207765" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207765</a></p>
+<p>【百度、字节跳动】算法面经：百度，字节跳动 <a href="https://www.nowcoder.com/discuss/350817" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/350817</a></p>
+<p>【字节跳动】回报牛客：发一下字节算法工程师面经，时间久了只能发个大概。 <a href="https://www.nowcoder.com/discuss/330565" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/330565</a></p>
+<p>【VIVO、TP_LINK、字节跳动、百度、华为】秋招总结：非机器学习科班学生漫长的算法工程师上岸之旅 <a href="https://www.nowcoder.com/discuss/326300" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/326300</a></p>
+<p>【字节跳动】字节跳动——机器人算法工程师（视频面试） <a href="https://www.nowcoder.com/discuss/323272" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/323272</a></p>
+<p>【TP_LINK、拼多多、欢聚时代、旷视、美团、字节跳动】回馈牛客，发一波2019算法秋招面经 <a href="https://www.nowcoder.com/discuss/313708" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/313708</a></p>
+<p>【360、微博、百度、字节跳动】广告算法秋招总面经 <a href="https://www.nowcoder.com/discuss/312020" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/312020</a></p>
+<p>【字节跳动】字节跳动效率工程团队 算法实习生 一面凉经 <a href="https://www.nowcoder.com/discuss/311673" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/311673</a></p>
+<p>【字节跳动、百度、依图、拼多多、海康、美团】算法上岸，特别回馈一下牛客上，发一波面经，祝各位前途似锦 <a href="https://www.nowcoder.com/discuss/302700" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/302700</a></p>
+<p>【字节跳动、华为】【面经】字节跳动/华为 算法实习面试 <a href="https://www.nowcoder.com/discuss/275818" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/275818</a></p>
+<p>【依图、海康、商汤、大疆、字节跳动】秋招小结：感受+面经（CV算法岗） - 09.07 <a href="https://www.nowcoder.com/discuss/248664" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/248664</a></p>
+<p>【字节跳动】字节跳动 头条 算法 面经 已拿offer意向书 <a href="https://www.nowcoder.com/discuss/235500" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/235500</a></p>
+<p>【字节跳动】字节跳动-ailab-视觉算法面经 <a href="https://www.nowcoder.com/discuss/229358" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/229358</a></p>
+<p>【字节跳动】字节跳动算法岗一二面面经 <a href="https://www.nowcoder.com/discuss/227743" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/227743</a></p>
+<p>【字节跳动】字节跳动算法工程师岗一二三面经 <a href="https://www.nowcoder.com/discuss/226960" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/226960</a></p>
+<p>【字节跳动】字节跳动算法二面凉经 <a href="https://www.nowcoder.com/discuss/226706" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/226706</a></p>
+<p>【字节跳动】字节跳动算法岗一面凉经 <a href="https://www.nowcoder.com/discuss/226619" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/226619</a></p>
+<p>【字节跳动】头条提前批算法面经（2技术面+1leader面） <a href="https://www.nowcoder.com/discuss/220966" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/220966</a></p>
+<p>【字节跳动】字节跳动 算法 已拿意向书 <a href="https://www.nowcoder.com/discuss/216672" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/216672</a></p>
+<p>【字节跳动】字节跳动算法岗提前批面经 <a href="https://www.nowcoder.com/discuss/215883" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/215883</a></p>
+<p>【字节跳动】头条算法提前批三面面经 <a href="https://www.nowcoder.com/discuss/213671" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/213671</a></p>
+<p>【字节跳动】还愿，收到字节跳动提前批算法岗offer了 <a href="https://www.nowcoder.com/discuss/212439" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/212439</a></p>
+<p>【字节跳动】回馈牛客，字节算法三面许愿求offer <a href="https://www.nowcoder.com/discuss/211763" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/211763</a></p>
+<p>【字节跳动】深圳抖音图像图形算法三面面经(已获意向书) <a href="https://www.nowcoder.com/discuss/211382" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/211382</a></p>
+<p>【字节跳动】字节跳动计算机视觉算法面经 <a href="https://www.nowcoder.com/discuss/210829" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/210829</a></p>
+<p>【字节跳动】[字节跳动/头条] 算法提前批三轮面经，前来回馈广大牛油们 <a href="https://www.nowcoder.com/discuss/210036" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/210036</a></p>
+<p>【字节跳动】字节跳动算法岗三面面经 <a href="https://www.nowcoder.com/discuss/207105" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207105</a></p>
+<p>【字节跳动】字节跳动提前批算法工程师面经 <a href="https://www.nowcoder.com/discuss/207092" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207092</a></p>
+<p>【字节跳动】OPPO视频面（NLP算法），凉经 <a href="https://www.nowcoder.com/discuss/206740" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/206740</a></p>
+<p>【字节跳动】字节跳动头条研发算法一面 <a href="https://www.nowcoder.com/discuss/207317" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207317</a></p>
+<p>【字节跳动】算法岗提前批凉经【字节跳动+京东】 <a href="https://www.nowcoder.com/discuss/207287" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207287</a></p>
+<p>【字节跳动】头条 机器学习算法一面 <a href="https://www.nowcoder.com/discuss/207712" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/207712</a></p>
+<p>【字节跳动】字节跳动算法工程师面经+个人疑问 <a href="https://www.nowcoder.com/discuss/209478" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/209478</a></p>
+<p>【字节跳动】字节跳动 AILab提前批算法工程师面经(已收到offer) <a href="https://www.nowcoder.com/discuss/206226" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/206226</a></p>
+<p>【字节跳动】字节跳动CV算法一面凉经 <a href="https://www.nowcoder.com/discuss/206593" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/206593</a></p>
+<p>【字节跳动】【字节跳动算法岗提前批1+2视频面】趁热分享 <a href="https://www.nowcoder.com/discuss/205964" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/205964</a></p>
+<p>【字节跳动】字节跳动ai lab cv算法面经（我来反馈攒人品了） <a href="https://www.nowcoder.com/discuss/205843" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/205843</a></p>
+<p>【字节跳动】字节跳动 Data 算法工程师 广告/AML 提前批3面面经 <a href="https://www.nowcoder.com/discuss/205736" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/205736</a></p>
+<p>【字节跳动】头条算法最新凉经 <a href="https://www.nowcoder.com/discuss/206065" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/206065</a></p>
+<p>【字节跳动】【字节跳动算法岗提前批1+2视频面】趁热分享 <a href="https://www.nowcoder.com/discuss/205964" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/205964</a></p>
+<p>【字节跳动】头条机器学习算法岗面试记录 <a href="https://www.nowcoder.com/discuss/205260" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/205260</a></p>
+<p>非技术</p>
+<p>运营</p>
+<p>【字节跳动】字节跳动商业产品运营经理三面面经 <a href="https://www.nowcoder.com/discuss/232127" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/232127</a></p>
+<p>【字节跳动】字节跳动产品运营面经（已完成一二三面 许愿意向书） <a href="https://www.nowcoder.com/discuss/226872" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/226872</a></p>
+<p>【字节跳动】字节跳动商业化运营管培生面经 <a href="https://www.nowcoder.com/discuss/324886" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/324886</a></p>
+<p>【字节跳动】字节跳动商业化运营管培 base成都 三面过经 <a href="https://www.nowcoder.com/discuss/291433" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/291433</a></p>
+<p>【字节跳动】字节跳动游戏提前批游戏运营管理面经（3面+HR） <a href="https://www.nowcoder.com/discuss/210136" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/210136</a></p>
+<p>商业化</p>
+<p>【字节跳动】字节商业化产品实习面经，在线许愿 <a href="https://www.nowcoder.com/discuss/347555" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/347555</a></p>
+<p>【字节跳动】字节跳动商业化运营管培生面经 <a href="https://www.nowcoder.com/discuss/324886" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/324886</a></p>
+<p>【字节跳动】字节跳动商业化运营管培 base成都 三面过经 <a href="https://www.nowcoder.com/discuss/291433" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/291433</a></p>
+<p>【字节跳动】字节跳动商业化营销策划一面面经-base厦门la分公司 <a href="https://www.nowcoder.com/discuss/299516" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/299516</a></p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/echarts.png"
+      alt="Les">
+  <p class="site-author-name" itemprop="name">Les</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Les</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+  
+
+</body>
+</html>
