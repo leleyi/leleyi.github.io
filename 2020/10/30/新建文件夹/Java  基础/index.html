@@ -55,19 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="公式  p(c a \mid q)=\frac{p(q \mid c a) p(c a)}{p(q)} \operatorname{Score}_{R R}(a, q)=\sum_{d: a \in d, d \in R(q)} \frac{1}{\operatorname{rank}(d, q)} s\left(c a_{i}\right)^{n+1}=s\left(c a_{i}\right)">
+  <meta name="description" content="Java  基础  hashmap是怎么实现的 ES内部原理 ES地理位置排序底层数据结构 了解哪些设计模式 优先级队列原理 一致性哈希了解吗 java 字节流 字符流 java 线程创建方式 ACID java 中数组和链表的区别，各自优势  如何设计拥有高效的随机读取能力的的链表（跳表）  设计跳表，跳表插入开销，跳表随机读取过程  java 泛型理解 concurrentHashMap pu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FILE">
-<meta property="og:url" content="http://yoursite.com/2020/11/02/公式/index.html">
+<meta property="og:url" content="http://yoursite.com/2020/10/30/新建文件夹/Java  基础/index.html">
 <meta property="og:site_name" content="FILE">
-<meta property="og:description" content="公式  p(c a \mid q)=\frac{p(q \mid c a) p(c a)}{p(q)} \operatorname{Score}_{R R}(a, q)=\sum_{d: a \in d, d \in R(q)} \frac{1}{\operatorname{rank}(d, q)} s\left(c a_{i}\right)^{n+1}=s\left(c a_{i}\right)">
+<meta property="og:description" content="Java  基础  hashmap是怎么实现的 ES内部原理 ES地理位置排序底层数据结构 了解哪些设计模式 优先级队列原理 一致性哈希了解吗 java 字节流 字符流 java 线程创建方式 ACID java 中数组和链表的区别，各自优势  如何设计拥有高效的随机读取能力的的链表（跳表）  设计跳表，跳表插入开销，跳表随机读取过程  java 泛型理解 concurrentHashMap pu">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-11-08T12:11:29.555Z">
+<meta property="og:updated_time" content="2020-10-31T00:35:19.266Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FILE">
-<meta name="twitter:description" content="公式  p(c a \mid q)=\frac{p(q \mid c a) p(c a)}{p(q)} \operatorname{Score}_{R R}(a, q)=\sum_{d: a \in d, d \in R(q)} \frac{1}{\operatorname{rank}(d, q)} s\left(c a_{i}\right)^{n+1}=s\left(c a_{i}\right)">
+<meta name="twitter:description" content="Java  基础  hashmap是怎么实现的 ES内部原理 ES地理位置排序底层数据结构 了解哪些设计模式 优先级队列原理 一致性哈希了解吗 java 字节流 字符流 java 线程创建方式 ACID java 中数组和链表的区别，各自优势  如何设计拥有高效的随机读取能力的的链表（跳表）  设计跳表，跳表插入开销，跳表随机读取过程  java 泛型理解 concurrentHashMap pu">
   <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
-  <link rel="canonical" href="http://yoursite.com/2020/11/02/公式/">
+  <link rel="canonical" href="http://yoursite.com/2020/10/30/新建文件夹/Java  基础/">
 
 
 <script id="page-configurations">
@@ -218,7 +218,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/02/公式/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/30/新建文件夹/Java  基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Les">
@@ -249,7 +249,7 @@
                 
               
 
-              <time title="Created: 2020-11-02 14:37:04" itemprop="dateCreated datePublished" datetime="2020-11-02T14:37:04+08:00">2020-11-02</time>
+              <time title="Created: 2020-10-30 22:33:51" itemprop="dateCreated datePublished" datetime="2020-10-30T22:33:51+08:00">2020-10-30</time>
             </span>
           
             
@@ -260,7 +260,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-11-08 20:11:29" itemprop="dateModified" datetime="2020-11-08T20:11:29+08:00">2020-11-08</time>
+                <time title="Modified: 2020-10-31 08:35:19" itemprop="dateModified" datetime="2020-10-31T08:35:19+08:00">2020-10-31</time>
               </span>
             
           
@@ -276,17 +276,99 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>公式</p>
-<script type="math/tex; mode=display">
-p(c a \mid q)=\frac{p(q \mid c a) p(c a)}{p(q)}</script><script type="math/tex; mode=display">
-\operatorname{Score}_{R R}(a, q)=\sum_{d: a \in d, d \in R(q)} \frac{1}{\operatorname{rank}(d, q)}</script><script type="math/tex; mode=display">
-s\left(c a_{i}\right)^{n+1}=s\left(c a_{i}\right)^{n}+\sum_{c a_{j} \in U} \sum_{e \in R_{j i}} w\left(\left(v_{j}, v_{i}\right), e\right) s\left(c a_{j}\right)^{n}</script><script type="math/tex; mode=display">v = Transformer(d)</script><p>$W(e) = rank(indexOfAuthor)$</p>
-<script type="math/tex; mode=display">Dis(d_A, d_B) =   \prod w(e) \ e \in E</script><script type="math/tex; mode=display">Socre = \theta ^{Dis(d_A, d_B) - 1}</script><p>在图中有 $\forall d\in D$ 我们有d的邻居 $adj(d)$, 再有$ \forall a \in adj(d) \subset A$ 可以得到 $d^+ \in  adj(a) \subset D$. </p>
-<script type="math/tex; mode=display">
-\mathcal{L}(A, B)=y^{*}\|f(A)-f(B)\|^{2}+\left(1-y^{*}\right) \max \left(0, m^{2}-\|f(A)-f(B)\|^{2}\right)</script><script type="math/tex; mode=display">
-\mathcal{L}(Q, P, N)=\max \left(0,\|f(Q)-f(P)\|^{2}-\|f(Q)-f(N)\|^{2}+m\right)</script><p>$ G(D,A,E) $</p>
-<script type="math/tex; mode=display">
-m\left(q, d^{+}, d^{-}\right)=c-\lambda \cdot\left(\mathrm{BM} 25\left(q, d^{+}\right)-\mathrm{BM} 25\left(q, d^{-}\right)\right)</script>
+        <p>Java  基础</p>
+<ol>
+<li>hashmap是怎么实现的</li>
+<li>ES内部原理 ES地理位置<a href="https://www.nowcoder.com/jump/super-jump/word?word=排序" target="_blank" rel="noopener">排序</a>底层数据结构</li>
+<li>了解哪些设计模式</li>
+<li>优先级队列原理</li>
+<li>一致性哈希了解吗</li>
+<li>java 字节流 字符流</li>
+<li>java 线程创建方式</li>
+<li>ACID</li>
+<li>java 中数组和<a href>链表</a>的区别，各自优势 </li>
+<li>如何设计拥有高效的随机读取能力的的<a href>链表</a>（跳表） </li>
+<li>设计跳表，跳表插入开销，跳表随机读取过程 </li>
+<li>java 泛型理解 concurrentHashMap put流程</li>
+<li>hashmap ，concurrentHashMap（put过程，怎么解决冲突的，sizeCtl 等关键成员变量的作用） </li>
+<li>volatile </li>
+<li>spring IOC 过程 </li>
+<li>如何自己设计IOC框架</li>
+<li>设计一个高并发系统</li>
+<li>Java 泛型的理解，hashmap</li>
+<li>lambda都用来干什么了</li>
+<li>对java中锁的理解</li>
+<li>悲观锁 乐观锁</li>
+<li>对CAS的理解，java中的CAS，如何不用unsafe实现CAS</li>
+<li>spring ioc过程，循环依赖怎么解决的</li>
+<li>spring aop, jdk 动态<em>*</em>和 cglib稍微说说了下</li>
+<li>对volatile的理解</li>
+<li>详细的说一下concurrentHashMap</li>
+<li>知道LSM吗</li>
+<li>LSM 在cassandra 存储模型中的体现</li>
+<li>jvm内存模型jvm 内存模型</li>
+<li>volatile，</li>
+<li>java的arraylist linklist有什么区别，什么数据结构，hashmap是啥结构，线程安全不？如果要线程安全怎么办？答con-hashmap，怎么实现的，还有没有优化！</li>
+<li>java的io，nio，bio等啥区别</li>
+<li>还有一个cas了解吗</li>
+<li>问java和c++区别</li>
+<li>java的垃圾回收</li>
+<li>面向对象的特性</li>
+<li>java的线程池说一下</li>
+<li>java的GC，说一下，</li>
+<li>标记清除和标记整理的区别。</li>
+<li>说一下，JVM那些东西</li>
+<li>linux用过吧，常用命令，解压缩那些参数代表啥</li>
+<li>java的hashmap,数据结构，怎么扩容</li>
+<li>arraylist和linkedlist区别</li>
+<li>11.java有内存泄漏吗？<br>12.说一下内存泄漏的原因并举一个例子吧</li>
+<li>什么时候不用分代收集的方式 </li>
+<li>软引用、弱引用、强引用</li>
+<li>软引用和弱引用具体区别 </li>
+<li>类加载机制是什么 </li>
+<li>结合tomcat说一下双亲委派 </li>
+<li>并发里面的atomic底层 </li>
+<li>cas会遇到什么问题（aba），除了aba问题呢？ </li>
+<li>了解rpc吗？（学过，只知道本地存根、远程存根什么的） </li>
+<li><a href>项目</a>里用到了rpc吧（用到了，具体我不负责，并不了解） </li>
+<li>进程和线程区别 </li>
+<li>进程和进程，线程和线程怎么通信 </li>
+<li>用过juc包吧（提到了线程池和sychronized），线程池常用哪些参数 </li>
+<li>core满了以后会怎么样 </li>
+<li>如果没有设置core这些，不断的有请求，会发生什么 </li>
+<li>说一下stackoverflow和oom的区别（提到了栈帧） </li>
+<li>怎么快速出现一个stackoverflow错误 </li>
+<li>写个java代码，最后到执行的过程是啥（提到了编译） </li>
+<li>4.java有没有内存溢出 5.写一个程序实现内存溢出</li>
+<li>20.Jvm内存区域划分<br> 21.一个对象从进入堆区到死亡的全流程</li>
+<li>29.同步和异步的区别<br>30.非阻塞io和阻塞式io的区别<br>31.http如何保持连接<br>32.如果不用http，如何保持连接<br>33.Volatile 关键字的作用<br>34.Volatile 关键字的实现<br>35.用户态和内核态的区别<br>36.lru了解吗？<br>37.怎么实现lru？<br>38.布隆过滤器了解吗？</li>
+<li>object类clone和hash关系</li>
+<li>用过什么容器<br>  hashmap1.7 和1.8区别</li>
+<li><p>了解过jdk什么<br>  用过什么容器</p>
+<pre><code>hashmap[源码]()
+</code></pre><p>  为啥用<a href>红黑树</a>不用其它树<br>hashcode怎么对应数组的序号<br>  流和nio区别 优缺点<br>jvm内存结构 新老代什么的 为啥不用计数法用可达性分析啥的</p>
+<p>4.如何把exception提取出来</p>
+<p>3.git操作，指令<br>4.jvm相关</p>
+<p>3.error和ecxeption说一下<br>4.如何把exception提取出来</p>
+</li>
+</ol>
+<p>8.arraylist linkedlist区别<br>  9.arraylist如何扩容<br>10.hashmap怎么解决冲突<br>  11.integer a=1和new integer和integer.valueof是否==<br>12.值改为200还一样吗 （不一样）<br>  13.jvm内存结构<br>    14.静态变量在哪个部分存<br>  15.mysql索引结构<br>    16.聚集索引和二级索引怎么存 区别是什么<br>  17.二级索引里存的key是什么</p>
+<p>\11. java单例模式一套</p>
+<p>\12. java多线程原子锁，cas机制，aba问题</p>
+<p>\13. 缓存置换lru实现</p>
+<ol>
+<li>对线程安全的理解</li>
+<li>乐观锁和悲观锁的区别？</li>
+<li>这两种锁在Java和MySQL分别是怎么实现的？</li>
+<li>事务有哪些特性？</li>
+<li>怎么理解原子性？</li>
+<li>HashMap为什么不是线程安全的？</li>
+<li>怎么让HashMap变得线程安全？</li>
+<li>jdk1.8对ConcurrentHashMap做了哪些优化？</li>
+<li>线程池了解吗？讲讲那个函数有几个形参，分别是什么，最重要的是什么，corepoolSize和maxpoolsize区别，如果来了一个线程，过程是什么。</li>
+</ol>
+<p>java线程池了解吗，看过<a href="https://www.nowcoder.com/jump/super-jump/word?word=源码" target="_blank" rel="noopener">源码</a>吗？说一说</p>
+
     </div>
 
     
@@ -302,7 +384,7 @@ m\left(q, d^{+}, d^{-}\right)=c-\lambda \cdot\left(\mathrm{BM} 25\left(q, d^{+}\
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2020/10/30/新建文件夹/Java  基础/" rel="next" title="">
+                <a href="/2020/10/30/新建文件夹/操作系统/" rel="next" title="">
                   <i class="fa fa-chevron-left"></i> 
                 </a>
               
@@ -312,7 +394,7 @@ m\left(q, d^{+}, d^{-}\right)=c-\lambda \cdot\left(\mathrm{BM} 25\left(q, d^{+}\
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2020/11/09/新建文件夹/ExF/" rel="prev" title="">
+                <a href="/2020/11/02/公式/" rel="prev" title="">
                    <i class="fa fa-chevron-right"></i>
                 </a>
               

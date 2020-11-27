@@ -55,15 +55,19 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
+  <meta name="description" content="JVM内存模型GCGc全流程JVM中的GC机制大体介绍一下，介绍新生代的回收机制，新生代回收的复制和标记清除的优劣；minor gc和full gc怎么判断对象可被回收GC是怎么判断年代的强制young gc会有什么问题？回收过程是怎么样的？有过GC调优的经历么？知道G1么？CMS GC有什么问题？java的内存模型，gc的分代 gc算法，怎么判断对象可被回收 说一下新生代、老年代用到的算法  了">
+<meta property="og:type" content="article">
 <meta property="og:title" content="FILE">
-<meta property="og:url" content="http://yoursite.com/archives/2020/10/index.html">
+<meta property="og:url" content="http://yoursite.com/2020/10/18/新建文件夹/GC算法/index.html">
 <meta property="og:site_name" content="FILE">
+<meta property="og:description" content="JVM内存模型GCGc全流程JVM中的GC机制大体介绍一下，介绍新生代的回收机制，新生代回收的复制和标记清除的优劣；minor gc和full gc怎么判断对象可被回收GC是怎么判断年代的强制young gc会有什么问题？回收过程是怎么样的？有过GC调优的经历么？知道G1么？CMS GC有什么问题？java的内存模型，gc的分代 gc算法，怎么判断对象可被回收 说一下新生代、老年代用到的算法  了">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-10-31T00:35:57.167Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FILE">
+<meta name="twitter:description" content="JVM内存模型GCGc全流程JVM中的GC机制大体介绍一下，介绍新生代的回收机制，新生代回收的复制和标记清除的优劣；minor gc和full gc怎么判断对象可被回收GC是怎么判断年代的强制young gc会有什么问题？回收过程是怎么样的？有过GC调优的经历么？知道G1么？CMS GC有什么问题？java的内存模型，gc的分代 gc算法，怎么判断对象可被回收 说一下新生代、老年代用到的算法  了">
   <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
-  <link rel="canonical" href="http://yoursite.com/archives/2020/10/">
+  <link rel="canonical" href="http://yoursite.com/2020/10/18/新建文件夹/GC算法/">
 
 
 <script id="page-configurations">
@@ -71,13 +75,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
-    isArchive: true
+    isArchive: false
   };
 </script>
 
-  <title>Archive | FILE</title>
+  <title> | FILE</title>
   
 
 
@@ -203,289 +207,135 @@
         <div class="content-wrap">
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-          <div id="content" class="content page-archive">
+          <div id="content" class="content page-post-detail">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 40 posts in total. Keep on posting.
-      </span>
-      
-
-      
-
-  
-  
-  
-
-  
+  <div id="posts" class="posts-expand">
     
-    <div class="collection-title">
-      <h1 class="archive-year" id="archive-year-2020">2020</h1>
-    </div>
-  
-  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/18/新建文件夹/GC算法/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Les">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/echarts.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FILE">
+    </span>
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2020/10/30/新建文件夹/Java  基础/" itemprop="url">
+          <h1 class="post-title" itemprop="name headline">
+
             
-              <span itemprop="name">Untitled</span>
-            
-          </a>
+          </h1>
         
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-10-30T22:33:51+08:00"
-              content="2020-10-30">
-          10-30
-        </time>
-      </div>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
 
-    </header>
-  </article>
+              
+                
+              
 
-
-
-  
-  
-  
-
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2020/10/30/新建文件夹/操作系统/" itemprop="url">
+              <time title="Created: 2020-10-18 11:09:25" itemprop="dateCreated datePublished" datetime="2020-10-18T11:09:25+08:00">2020-10-18</time>
+            </span>
+          
             
-              <span itemprop="name">Untitled</span>
+
             
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-10-30T22:33:13+08:00"
-              content="2020-10-30">
-          10-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-  
-  
-  
-
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2020/10/30/新建文件夹/数据库/" itemprop="url">
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-10-31 08:35:57" itemprop="dateModified" datetime="2020-10-31T08:35:57+08:00">2020-10-31</time>
+              </span>
             
-              <span itemprop="name">Untitled</span>
-            
-          </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-10-30T22:26:24+08:00"
-              content="2020-10-30">
-          10-30
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+        </div>
+      </header>
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
-
-  
-  
-  
-
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2020/10/30/新建文件夹/网络/" itemprop="url">
-            
-              <span itemprop="name">Untitled</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-10-30T22:25:08+08:00"
-              content="2020-10-30">
-          10-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-  
-  
-  
-
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2020/10/28/新建文件夹/PDD_algorithms/" itemprop="url">
-            
-              <span itemprop="name">Untitled</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-10-28T19:49:17+08:00"
-              content="2020-10-28">
-          10-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-  
-  
-  
-
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2020/10/28/windows protobuf/" itemprop="url">
-            
-              <span itemprop="name">简单的windows protobuf  .proto文件编译</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-10-28T17:57:15+08:00"
-              content="2020-10-28">
-          10-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-  
-  
-  
-
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2020/10/18/新建文件夹/GC算法/" itemprop="url">
-            
-              <span itemprop="name">Untitled</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-10-18T11:09:25+08:00"
-              content="2020-10-18">
-          10-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
+      
+        <h3 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h3><h4 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h4><h4 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h4><p>Gc全流程<br>JVM中的GC机制大体介绍一下，介绍新生代的回收机制，新生代回收的复制和标记清除的优劣；<br>minor gc和full gc<br>怎么判断对象可被回收<br>GC是怎么判断年代的<br>强制young gc会有什么问题？<br>回收过程是怎么样的？<br>有过GC调优的经历么？<br>知道G1么？<br>CMS GC有什么问题？<br>java的内存模型，gc的分代</p>
+<p>gc<a href="https://www.nowcoder.com/jump/super-jump/word?word=算法" target="_blank" rel="noopener">算法</a>，怎么判断对象可被回收</p>
+<p>说一下新生代、老年代用到的<a href>算法</a> </p>
+<p>了解java虚拟机吗？说说垃圾回收，都有哪些<a href="https://www.nowcoder.com/jump/super-jump/word?word=算法" target="_blank" rel="noopener">算法</a>？（如何识别垃圾2种，如何清理垃圾4种），讲讲分代回收的过程双亲委派</p>
+<ol>
+<li><p>Java为什么要设计双亲委派模型？ </p>
+</li>
+<li><p>什么时候需要自定义类加载器？ </p>
+</li>
+<li><p>\10. 操作系统与jvm的不同</p>
+<p>\11. 类加载过程</p>
+<p>\12. 线程怎么去访问jvm里的类信息</p>
+<ol>
+<li>了解java虚拟机吗？说说垃圾回收，都有哪些<a href="https://www.nowcoder.com/jump/super-jump/word?word=算法" target="_blank" rel="noopener">算法</a>？（如何识别垃圾2种，如何清理垃圾4种），讲讲分代回收的过程。</li>
+<li></li>
+</ol>
+</li>
+</ol>
 
     </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/09/30/新建文件夹/PDD_redis_QA/" rel="next" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/10/28/windows protobuf/" rel="prev" title="简单的windows protobuf  .proto文件编译">
+                  简单的windows protobuf  .proto文件编译 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
   </div>
   
   
   
+  </article>
 
-  
-
+  </div>
 
 
           </div>
@@ -504,8 +354,17 @@
 
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -565,6 +424,23 @@
 
         </div>
       </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM"><span class="nav-number">1.</span> <span class="nav-text">JVM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内存模型"><span class="nav-number">1.1.</span> <span class="nav-text">内存模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GC"><span class="nav-number">1.2.</span> <span class="nav-text">GC</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
     </div>
   </aside>
@@ -664,5 +540,9 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
 </body>
 </html>
