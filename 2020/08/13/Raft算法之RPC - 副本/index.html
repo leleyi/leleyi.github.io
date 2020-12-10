@@ -55,22 +55,16 @@
   };
 </script>
 
-  <meta name="description" content="Sequence to Sequenceseq2seq 故名思意就是一串输入输出也是一串 其中包括两组RNNs 一组负责encoder 另一组负责 decoder。如图一所示：经过encoder后得到一个context 然后将其作为输入到decoder。 decoder是根据之前的来预测下一个单词是什么，而且是在输入x的条件下，所以有一下式子：  P(y | x)=P\left(y_{1} | x">
-<meta property="og:type" content="website">
-<meta property="og:title" content="FILE">
-<meta property="og:url" content="http://yoursite.com/un/Sequence to Sequence and Attention.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Domain name system">
+<meta property="og:url" content="http://yoursite.com/2020/08/13/Raft算法之RPC - 副本/index.html">
 <meta property="og:site_name" content="FILE">
-<meta property="og:description" content="Sequence to Sequenceseq2seq 故名思意就是一串输入输出也是一串 其中包括两组RNNs 一组负责encoder 另一组负责 decoder。如图一所示：经过encoder后得到一个context 然后将其作为输入到decoder。 decoder是根据之前的来预测下一个单词是什么，而且是在输入x的条件下，所以有一下式子：  P(y | x)=P\left(y_{1} | x">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1565831917502.png">
-<meta property="og:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1565832071695.png">
-<meta property="og:updated_time" content="2019-08-16T03:00:17.154Z">
+<meta property="og:updated_time" content="2020-12-10T11:21:09.283Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FILE">
-<meta name="twitter:description" content="Sequence to Sequenceseq2seq 故名思意就是一串输入输出也是一串 其中包括两组RNNs 一组负责encoder 另一组负责 decoder。如图一所示：经过encoder后得到一个context 然后将其作为输入到decoder。 decoder是根据之前的来预测下一个单词是什么，而且是在输入x的条件下，所以有一下式子：  P(y | x)=P\left(y_{1} | x">
-<meta name="twitter:image" content="c:/Users/65357/AppData/Roaming/Typora/typora-user-images/1565831917502.png">
+<meta name="twitter:title" content="Domain name system">
   <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
-  <link rel="canonical" href="http://yoursite.com/un/Sequence to Sequence and Attention">
+  <link rel="canonical" href="http://yoursite.com/2020/08/13/Raft算法之RPC - 副本/">
 
 
 <script id="page-configurations">
@@ -78,13 +72,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
-    isPage: true,
+    isPost: true,
+    isPage: false,
     isArchive: false
   };
 </script>
 
-  <title> | FILE</title>
+  <title>Domain name system | FILE</title>
   
 
 
@@ -210,84 +204,129 @@
         <div class="content-wrap">
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
           <div id="content" class="content page-post-detail">
             
 
   <div id="posts" class="posts-expand">
     
-    
-    
-    <div class="post-block page">
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/13/Raft算法之RPC - 副本/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Les">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/echarts.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FILE">
+    </span>
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">
-
-</h1>
-
-<div class="post-meta">
-  
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
-          <h3 id="Sequence-to-Sequence"><a href="#Sequence-to-Sequence" class="headerlink" title="Sequence to Sequence"></a>Sequence to Sequence</h3><p>seq2seq 故名思意就是一串输入输出也是一串</p>
-<p>其中包括两组RNNs 一组负责encoder 另一组负责 decoder。如图一所示：经过encoder后得到一个context 然后将其作为输入到decoder。</p>
-<p>decoder是根据之前的来预测下一个单词是什么，而且是在输入x的条件下，所以有一下式子：</p>
-<script type="math/tex; mode=display">
-P(y | x)=P\left(y_{1} | x\right) P\left(y_{2} | y_{1}, x\right) P\left(y_{3} | y_{1}, y_{2}, x\right) \ldots P\left(y_{T} | y_{1}, \ldots, y_{T-1}, x\right)</script><p>如何训练？</p>
-<script type="math/tex; mode=display">
-J=\frac{1}{T} \sum_{t=1}^{T} J_{t}</script><p>其中 </p>
-<script type="math/tex; mode=display">
-J_{t}</script><p> 是 第 t 个输出的概率</p>
-<p>  <img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1565831917502.png" alt="1565831917502"></p>
-<p>  <img src="C:\Users\65357\AppData\Roaming\Typora\typora-user-images\1565832071695.png" alt="1565832071695"></p>
-<p>timestep t 上图中 scores 就是t时刻对对应的分数 ：</p>
-<script type="math/tex; mode=display">
-Scores：e^{t}=\left[s_{t}^{T} \boldsymbol{h}_{1}, \ldots, \boldsymbol{s}_{t}^{T} \boldsymbol{h}_{N}\right] \in \mathbb{R}^{N}</script><p>采用softmax函数来计算其概率分布</p>
-<script type="math/tex; mode=display">
-\alpha^{t}=\operatorname{softmax}\left(e^{t}\right) \in \mathbb{R}^{N}</script><script type="math/tex; mode=display">
-\boldsymbol{a}_{t}=\sum_{i=1}^{N} \alpha_{i}^{t} \boldsymbol{h}_{i} \in \mathbb{R}^{h}</script><script type="math/tex; mode=display">
-\left[\boldsymbol{a}_{t} ; \boldsymbol{s}_{t}\right] \in \mathbb{R}^{2 h}</script><p>Transformer</p>
-<p>text<sup><a href="#fn_1" id="reffn_1">1</a></sup></p>
-<blockquote id="fn_1">
-<sup>1</sup>. Computer Aided Translation[EB/OL]. <a href="https://www.microsoft.com/en-us/research/video/computer-aided-translation/" target="_blank" rel="noopener">https://www.microsoft.com/en-us/research/video/computer-aided-translation/</a>, 2016/2018-8.19.<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
-</blockquote>
+          <h1 class="post-title" itemprop="name headline">Domain name system
 
+            
+          </h1>
         
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-08-13 21:42:15" itemprop="dateCreated datePublished" datetime="2020-08-13T21:42:15+08:00">2020-08-13</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-10 19:21:09" itemprop="dateModified" datetime="2020-12-10T19:21:09+08:00">2020-12-10</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/other/" itemprop="url" rel="index"><span itemprop="name">other</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-      
-      
+        
     </div>
-    
 
     
     
     
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/08/13/nslookup/" rel="next" title="Domain name system">
+                  <i class="fa fa-chevron-left"></i> Domain name system
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/08/20/Authorisation/" rel="prev" title="Authorisation not recognised">
+                  Authorisation not recognised <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
   </div>
 
 
@@ -307,17 +346,8 @@ Scores：e^{t}=\left[s_{t}^{T} \boldsymbol{h}_{1}, \ldots, \boldsymbol{s}_{t}^{T
 
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -379,23 +409,6 @@ Scores：e^{t}=\left[s_{t}^{T} \boldsymbol{h}_{1}, \ldots, \boldsymbol{s}_{t}^{T
 
         </div>
       </div>
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sequence-to-Sequence"><span class="nav-number">1.</span> <span class="nav-text">Sequence to Sequence</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
 
     </div>
   </aside>
@@ -488,17 +501,65 @@ Scores：e^{t}=\left[s_{t}^{T} \boldsymbol{h}_{1}, \ldots, \boldsymbol{s}_{t}^{T
   
 
   
+    
+      <script type="text/x-mathjax-config">
 
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', function() {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
   
 
   
 
+  
+
 
   
-    <script src="/js/scrollspy.js?v=7.3.0"></script>
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
 <script src="/js/post-details.js?v=7.3.0"></script>
 
-  
 
 </body>
 </html>
