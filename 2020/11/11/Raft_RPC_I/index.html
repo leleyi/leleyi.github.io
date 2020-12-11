@@ -57,7 +57,7 @@
 
   <meta name="description" content="Connector connector 是Raft中基础的一部分.每个节点需要和其他节点相互连接.所有的RPC都是通过最终都是要经过Connector中通过节点之间的TCP连接.负责将数据传输 因为每个节点既可以作为Server . 也可以作为Client. 所以我们需要由 InboundChannelGroup 和 OutboundChannelGroup 分别记录与每个节点的网络连接。  I">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java实现Raft算法_Raft算法之RPC">
+<meta property="og:title" content="Java实现Raft算法_Raft算法之Connector">
 <meta property="og:url" content="http://yoursite.com/2020/11/11/Raft_RPC_I/index.html">
 <meta property="og:site_name" content="FILE">
 <meta property="og:description" content="Connector connector 是Raft中基础的一部分.每个节点需要和其他节点相互连接.所有的RPC都是通过最终都是要经过Connector中通过节点之间的TCP连接.负责将数据传输 因为每个节点既可以作为Server . 也可以作为Client. 所以我们需要由 InboundChannelGroup 和 OutboundChannelGroup 分别记录与每个节点的网络连接。  I">
@@ -66,9 +66,9 @@
 <meta property="og:image" content="http://yoursite.com/2020/11/11/Raft_RPC_I/2.png">
 <meta property="og:image" content="http://yoursite.com/2020/11/11/Raft_RPC_I/3.png">
 <meta property="og:image" content="http://yoursite.com/2020/11/11/Raft_RPC_I/4.png">
-<meta property="og:updated_time" content="2020-12-11T14:47:47.375Z">
+<meta property="og:updated_time" content="2020-12-11T14:49:40.439Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java实现Raft算法_Raft算法之RPC">
+<meta name="twitter:title" content="Java实现Raft算法_Raft算法之Connector">
 <meta name="twitter:description" content="Connector connector 是Raft中基础的一部分.每个节点需要和其他节点相互连接.所有的RPC都是通过最终都是要经过Connector中通过节点之间的TCP连接.负责将数据传输 因为每个节点既可以作为Server . 也可以作为Client. 所以我们需要由 InboundChannelGroup 和 OutboundChannelGroup 分别记录与每个节点的网络连接。  I">
 <meta name="twitter:image" content="http://yoursite.com/2020/11/11/Raft_RPC_I/1.png">
   <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
@@ -86,7 +86,7 @@
   };
 </script>
 
-  <title>Java实现Raft算法_Raft算法之RPC | FILE</title>
+  <title>Java实现Raft算法_Raft算法之Connector | FILE</title>
   
 
 
@@ -237,7 +237,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">Java实现Raft算法_Raft算法之RPC
+          <h1 class="post-title" itemprop="name headline">Java实现Raft算法_Raft算法之Connector
 
             
           </h1>
@@ -265,7 +265,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-11 22:47:47" itemprop="dateModified" datetime="2020-12-11T22:47:47+08:00">2020-12-11</time>
+                <time title="Modified: 2020-12-11 22:49:40" itemprop="dateModified" datetime="2020-12-11T22:49:40+08:00">2020-12-11</time>
               </span>
             
           
