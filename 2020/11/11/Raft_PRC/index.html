@@ -62,10 +62,12 @@
 <meta property="og:site_name" content="FILE">
 <meta property="og:description" content="RPC(Remote Procedure Call)：远程过程调用，它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的思想.RPC 最核心要解决的问题就是在分布式系统间，如何执行另外一个地址空间上的函数、方法，就仿佛在本地调用一样RPC 主要需要处理几个核心的问题.1：代理  2.通讯  3：序列化 4：服务实例化 在我Raft中只有三种RPC请求. 所以我们不通过代理的方式进">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-10T11:31:31.938Z">
+<meta property="og:image" content="c:/Users/leleyi/AppData/Roaming/Typora/typora-user-images/image-20201217221119106.png">
+<meta property="og:updated_time" content="2020-12-17T14:11:19.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java实现Raft算法_Raft算法之RPC">
 <meta name="twitter:description" content="RPC(Remote Procedure Call)：远程过程调用，它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的思想.RPC 最核心要解决的问题就是在分布式系统间，如何执行另外一个地址空间上的函数、方法，就仿佛在本地调用一样RPC 主要需要处理几个核心的问题.1：代理  2.通讯  3：序列化 4：服务实例化 在我Raft中只有三种RPC请求. 所以我们不通过代理的方式进">
+<meta name="twitter:image" content="c:/Users/leleyi/AppData/Roaming/Typora/typora-user-images/image-20201217221119106.png">
   <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
   <link rel="canonical" href="http://yoursite.com/2020/11/11/Raft_PRC/">
 
@@ -260,7 +262,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-10 19:31:31" itemprop="dateModified" datetime="2020-12-10T19:31:31+08:00">2020-12-10</time>
+                <time title="Modified: 2020-12-17 22:11:19" itemprop="dateModified" datetime="2020-12-17T22:11:19+08:00">2020-12-17</time>
               </span>
             
           
@@ -394,6 +396,7 @@
 </li>
 </ol>
 <p>例如: RequestVotePRC  调用之后. 通过 Ecoder 编码 - 网络传输 - Dcoder 解码  -&gt; 根据请求类型 进行事件的POST. 而订阅者的订阅方法 触发执行逻辑.</p>
+<p><img src="C:\Users\leleyi\AppData\Roaming\Typora\typora-user-images\image-20201217221119106.png" alt="image-20201217221119106"></p>
 <p>参考:</p>
 <p><a href="https://www.cnblogs.com/luozhiyun/p/11324181.html" target="_blank" rel="noopener">https://www.cnblogs.com/luozhiyun/p/11324181.html</a></p>
 <p><a href="https://developers.google.com/protocol-buffers/docs/overview" target="_blank" rel="noopener">https://developers.google.com/protocol-buffers/docs/overview</a></p>
@@ -483,7 +486,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

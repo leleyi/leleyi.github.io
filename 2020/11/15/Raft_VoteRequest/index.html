@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/echarts.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/echarts.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"scrollpercent":true,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    save_scroll: false,
+    copycode: {"enable":true,"show_result":true,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="LeaderElection在之前我们在connector的阶段以及简单使用VoteRequestRPC作为例子来说明底层的网络通信.一节我将详细记录LeaderElection阶段的实现.  Raft要求系统在任意时刻最多只有一个Leader，正常工作期间只有Leader和Followers。Raft算法将时间分为一个个的任期（term），每一个term的开始都是Leader选举。在成功选举Le">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java实现Raft算法_Raft算法之VoteRequest">
+<meta property="og:url" content="http://yoursite.com/2020/11/15/Raft_VoteRequest/index.html">
+<meta property="og:site_name" content="FILE">
+<meta property="og:description" content="LeaderElection在之前我们在connector的阶段以及简单使用VoteRequestRPC作为例子来说明底层的网络通信.一节我将详细记录LeaderElection阶段的实现.  Raft要求系统在任意时刻最多只有一个Leader，正常工作期间只有Leader和Followers。Raft算法将时间分为一个个的任期（term），每一个term的开始都是Leader选举。在成功选举Le">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2020/11/15/Raft_VoteRequest/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/15/Raft_VoteRequest/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/15/Raft_VoteRequest/3.png">
+<meta property="og:updated_time" content="2020-12-18T12:36:44.929Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java实现Raft算法_Raft算法之VoteRequest">
+<meta name="twitter:description" content="LeaderElection在之前我们在connector的阶段以及简单使用VoteRequestRPC作为例子来说明底层的网络通信.一节我将详细记录LeaderElection阶段的实现.  Raft要求系统在任意时刻最多只有一个Leader，正常工作期间只有Leader和Followers。Raft算法将时间分为一个个的任期（term），每一个term的开始都是Leader选举。在成功选举Le">
+<meta name="twitter:image" content="http://yoursite.com/2020/11/15/Raft_VoteRequest/1.png">
+  <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/2020/11/15/Raft_VoteRequest/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Java实现Raft算法_Raft算法之VoteRequest | FILE</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FILE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/15/Raft_VoteRequest/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Les">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/echarts.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FILE">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">Java实现Raft算法_Raft算法之VoteRequest
+
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-11-15 13:40:15" itemprop="dateCreated datePublished" datetime="2020-11-15T13:40:15+08:00">2020-11-15</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-18 20:36:44" itemprop="dateModified" datetime="2020-12-18T20:36:44+08:00">2020-12-18</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="LeaderElection"><a href="#LeaderElection" class="headerlink" title="LeaderElection"></a>LeaderElection</h3><p>在之前我们在connector的阶段以及简单使用VoteRequestRPC作为例子来说明底层的网络通信.一节我将详细记录LeaderElection阶段的实现.</p>
+<p><img src="1.png" alt="png"></p>
+<p>Raft要求系统在任意时刻最多只有一个Leader，正常工作期间只有Leader和Followers。Raft算法将时间分为一个个的<strong>任期（term）</strong>，每一个term的开始都是Leader选举。在成功选举Leader之后，Leader会在整个term内管理整个集群。如果Leader选举失败，该term就会因为没有Leader而结束。</p>
+<h4 id="Role"><a href="#Role" class="headerlink" title="Role"></a>Role</h4><p>在之前的概述中我们大概介绍了Raft算法中节点存在有3个角色。即Leader， Candidate， Follower。并且角色中保存着任期（Term）</p>
+<p><img src="2.png" alt="png"></p>
+<p><strong>Candidate</strong>：其中Candidate是最为简单的，因为它只在节点选举阶段短暂存在， 节点的觉大多数时间都是Leader或者Follower。</p>
+<p><strong>Leader</strong>：接受客户端请求，并向Follower同步请求日志（包括心跳， configChange和普通请求数据），当日志同步到大多数节点上后告诉Follower提交日志。</p>
+<p><strong>Follower</strong>：接受并持久化Leader同步的日志，在Leader告之日志可以提交之后，提交日志。</p>
+<p><img src="3.png" alt="png"></p>
+<h4 id="ElectionTimeout"><a href="#ElectionTimeout" class="headerlink" title="ElectionTimeout"></a>ElectionTimeout</h4><p>从上述UML图中我们可以看到，这里在Follower和Candidate中都已一个electionTimeout字段。ElectionTimeout类中封装了倒计时的Future.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ElectionTimeout <span class="title">scheduleElectionTimeout</span><span class="params">(@Nonnull Runnable task)</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * task : context.taskExecutor().submit(this::doProcessElectionTimeout, LOGGING_FUTURE_CALLBACK);</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">int</span> timeout = electionTimeoutRandom.nextInt(maxElectionTimeout - minElectionTimeout) + minElectionTimeout;</span><br><span class="line">    ScheduledFuture&lt;?&gt; scheduledFuture = scheduledExecutorService.schedule(task, timeout, TimeUnit.MILLISECONDS);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ElectionTimeout(scheduledFuture);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当Follower在运行的时候就会有一个electionTimeout倒计时钟，防止节点长时间没有收到消息。</p>
+<ul>
+<li>所以当Follower 和Candidate收到来自其他节点的消息的时候都会重置electionTimeout。</li>
+<li>当超时还没有收到消息节点将会转换为Candidate并发起投票请求。</li>
+</ul>
+<h4 id="投票请求（candidate）"><a href="#投票请求（candidate）" class="headerlink" title="投票请求（candidate）"></a>投票请求（candidate）</h4><p>问题来了，节点同时启动到底是谁成为Candidate呢。其实electionTimout的倒计时时间每个节点都在在一个范围内取得随机值。谁先触发超时，谁就先成为Candidate并发起投票请求。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">changeToRole(<span class="keyword">new</span> CandidateNodeRole(oldTerm + <span class="number">1</span>, scheduleElectionTimeout()));</span><br><span class="line">            EntryMeta lastEntryMeta = context.log().getLastEntryMeta();</span><br><span class="line">            RequestVoteRpc rpc = <span class="keyword">new</span> RequestVoteRpc();</span><br><span class="line">            rpc.setTerm(newTerm);</span><br><span class="line">            rpc.setCandidateId(context.selfId());</span><br><span class="line">            rpc.setLastLogIndex(lastEntryMeta.getIndex());</span><br><span class="line">            rpc.setLastLogTerm(lastEntryMeta.getTerm());</span><br><span class="line">context.connector().sendRequestVote(rpc, context.group().listEndpointOfMajorExceptSelf());</span><br></pre></td></tr></table></figure>
+<h4 id="收到投票请求（members）"><a href="#收到投票请求（members）" class="headerlink" title="收到投票请求（members）"></a>收到投票请求（members）</h4><p>当其他节点收到这个投票请求。根据请求的Term和角色进行相应的回复。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// skip non-major node, it maybe removed node</span></span><br><span class="line"><span class="keyword">if</span> (!context.group().isMemberOfMajor(rpcMessage.getSourceNodeId())) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> RequestVoteResult(role.getTerm(), <span class="keyword">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// reply current term if result's term is smaller than current one</span></span><br><span class="line">RequestVoteRpc rpc = rpcMessage.get();</span><br><span class="line"><span class="keyword">if</span> (rpc.getTerm() &lt; role.getTerm()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> RequestVoteResult(role.getTerm(), <span class="keyword">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// step down if result's term is larger than current term</span></span><br><span class="line"><span class="keyword">if</span> (rpc.getTerm() &gt; role.getTerm()) &#123;</span><br><span class="line">    <span class="keyword">boolean</span> voteForCandidate = !context.log().isNewerThan(rpc.getLastLogIndex(), rpc.getLastLogTerm());</span><br><span class="line">    becomeFollower(rpc.getTerm(), (voteForCandidate ? rpc.getCandidateId() : <span class="keyword">null</span>), <span class="keyword">null</span>, <span class="keyword">true</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> RequestVoteResult(rpc.getTerm(), voteForCandidate);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">switch</span> (role.getName()) &#123;</span><br><span class="line">    <span class="keyword">case</span> FOLLOWER:</span><br><span class="line">        FollowerNodeRole follower = (FollowerNodeRole) role;</span><br><span class="line">        NodeId votedFor = follower.getVotedFor();</span><br><span class="line">        <span class="comment">// reply vote granted for</span></span><br><span class="line">        <span class="comment">// 1. not voted and candidate's log is newer than self</span></span><br><span class="line">        <span class="comment">// 2. voted for candidate</span></span><br><span class="line">        <span class="keyword">if</span> ((votedFor == <span class="keyword">null</span> &amp;&amp; !context.log().isNewerThan(rpc.getLastLogIndex(), rpc.getLastLogTerm())) ||</span><br><span class="line">                Objects.equals(votedFor, rpc.getCandidateId())) &#123;</span><br><span class="line">            becomeFollower(role.getTerm(), rpc.getCandidateId(), <span class="keyword">null</span>, <span class="keyword">true</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> RequestVoteResult(rpc.getTerm(), <span class="keyword">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RequestVoteResult(role.getTerm(), <span class="keyword">false</span>);</span><br><span class="line">    <span class="keyword">case</span> CANDIDATE: <span class="comment">// voted for self</span></span><br><span class="line">    <span class="keyword">case</span> LEADER:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RequestVoteResult(role.getTerm(), <span class="keyword">false</span>);</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"unexpected node role ["</span> + role.getName() + <span class="string">"]"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>首先检测是不是我配置文件配置的一家人啊。正所谓不是一家人不进一家门。 不是 不投票（避免新配置的节点干坏事）</p>
+</li>
+<li><p>再来看看你的任期有没有我的任期大。哟你的任期还没有我的任期高呢 你有什么资格 。 不投票</p>
+<p>rpc.getTerm() &lt; role.getTerm()</p>
+</li>
+<li><p>你的任期比我的高，你是爸爸。 再看看Logindex 呢。 如果logIndex比我的小。 不投票 否则立马成为你的马仔Follower并投票。</p>
+</li>
+<li><p>当任期相等，需要看看当前我的自己的角色是什么啊。是follower更具index判断投票与否，是candidate 已经给自己投票了。leader肯定久更不会投票了 。</p>
+</li>
+</ul>
+<p>总结一下 ： 节点收到消息之后，给Candidate投票的情况其实就很明确的两种情况</p>
+<ul>
+<li><ol>
+<li>节点的任期（Term）小于请求的任期。</li>
+</ol>
+</li>
+<li><ol>
+<li>任期相等的时候，还需要判断下当前节点的角色，本身是Follower，根据logindex来判断是否投票，切换领导。</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpcMessage.getChannel().writeRequestVoteResult(result);</span><br></pre></td></tr></table></figure>
+<p>节点收到消息并且处理完之后肯等就是返回处理结果了。</p>
+<h4 id="收到投票结果（candidate）"><a href="#收到投票结果（candidate）" class="headerlink" title="收到投票结果（candidate）"></a>收到投票结果（candidate）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (result.getTerm() &gt; role.getTerm()) &#123;</span><br><span class="line">    <span class="comment">// remote node have large term， I will never become a Leader -&gt; change to follower</span></span><br><span class="line">    becomeFollower(result.getTerm(), <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">true</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// check role  </span></span><br><span class="line"><span class="keyword">if</span> (role.getName() != RoleName.CANDIDATE) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// do nothing if not vote granted</span></span><br><span class="line"><span class="keyword">if</span> (!result.isVoteGranted()) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> currentVotesCount = ((CandidateNodeRole) role).getVotesCount() + <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> countOfMajor = context.group().getCountOfMajor();</span><br><span class="line">role.cancelTimeoutOrTask();</span><br><span class="line"><span class="keyword">if</span> (currentVotesCount &gt; countOfMajor / <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="comment">// become leader</span></span><br><span class="line">    resetReplicatingStates();</span><br><span class="line">    changeToRole(<span class="keyword">new</span> LeaderNodeRole(role.getTerm(), scheduleLogReplicationTask()));</span><br><span class="line">    context.log().appendEntry(role.getTerm()); <span class="comment">// no-op log</span></span><br><span class="line">    context.connector().resetChannels(); <span class="comment">// close all inbound channels</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// update votes count</span></span><br><span class="line">    changeToRole(<span class="keyword">new</span> CandidateNodeRole(role.getTerm(), currentVotesCount, scheduleElectionTimeout()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当candidate收到投票结果之后</p>
+<ul>
+<li>如果收到的结果中任期（Term） 比自己的高。说明member的任期高，并且没有给我投票的。而且自己遇到了高任期就该立马认怂。成为Follower</li>
+<li>如果我当前已经不是Candidate了那投票也就没有意义了。</li>
+<li>查看投票结果<ul>
+<li>如果投票True说明我获取到了当前票。计算我的总票数<ul>
+<li>如果总票数 大于一半 - 成为Leader ——&gt;去做leader该做的事情</li>
+<li>否则更新自己的票数，继续等待投票</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/11/14/Raft_RPC_2/" rel="next" title="Java实现Raft算法_Raft算法之Executor , Scheduler">
+                  <i class="fa fa-chevron-left"></i> Java实现Raft算法_Raft算法之Executor , Scheduler
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/echarts.png"
+      alt="Les">
+  <p class="site-author-name" itemprop="name">Les</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#LeaderElection"><span class="nav-number">1.</span> <span class="nav-text">LeaderElection</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Role"><span class="nav-number">1.1.</span> <span class="nav-text">Role</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ElectionTimeout"><span class="nav-number">1.2.</span> <span class="nav-text">ElectionTimeout</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#投票请求（candidate）"><span class="nav-number">1.3.</span> <span class="nav-text">投票请求（candidate）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#收到投票请求（members）"><span class="nav-number">1.4.</span> <span class="nav-text">收到投票请求（members）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#收到投票结果（candidate）"><span class="nav-number">1.5.</span> <span class="nav-text">收到投票结果（candidate）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Les</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', function() {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>

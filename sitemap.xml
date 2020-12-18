@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2020/11/13/Raft_RPC_I/</loc>
+    <loc>http://yoursite.com/2020/11/15/Raft_VoteRequest/</loc>
     
-    <lastmod>2020-12-12T01:23:42.482Z</lastmod>
+    <lastmod>2020-12-18T12:36:44.929Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2020/11/11/Raft_PRC/</loc>
     
-    <lastmod>2020-12-10T11:31:31.938Z</lastmod>
+    <lastmod>2020-12-17T14:11:19.790Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/11/14/Raft_RPC_2/</loc>
+    
+    <lastmod>2020-12-17T13:43:29.388Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/11/13/Raft_RPC_I/</loc>
+    
+    <lastmod>2020-12-12T07:28:35.651Z</lastmod>
     
   </url>
   
@@ -457,14 +471,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/un/Efficient%20Vector%20Representation%20for%20documents%20through%20coppuption.html</loc>
+    <loc>http://yoursite.com/un/Convolutional%20Neural%20Networks%20for%20Sentence%20Classification.html</loc>
     
     <lastmod>2019-08-26T08:02:54.558Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/un/Convolutional%20Neural%20Networks%20for%20Sentence%20Classification.html</loc>
+    <loc>http://yoursite.com/un/Efficient%20Vector%20Representation%20for%20documents%20through%20coppuption.html</loc>
     
     <lastmod>2019-08-26T08:02:54.558Z</lastmod>
     

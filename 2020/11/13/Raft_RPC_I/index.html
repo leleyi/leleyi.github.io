@@ -66,7 +66,8 @@
 <meta property="og:image" content="http://yoursite.com/2020/11/13/Raft_RPC_I/2.png">
 <meta property="og:image" content="http://yoursite.com/2020/11/13/Raft_RPC_I/3.png">
 <meta property="og:image" content="http://yoursite.com/2020/11/13/Raft_RPC_I/4.png">
-<meta property="og:updated_time" content="2020-12-12T01:23:42.482Z">
+<meta property="og:image" content="http://yoursite.com/2020/11/13/Raft_RPC_I/rpc_uml.png">
+<meta property="og:updated_time" content="2020-12-12T07:28:35.651Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java实现Raft算法_Raft算法之Connector">
 <meta name="twitter:description" content="Connector 基本概念connector 是Raft中基础的一部分.每个节点需要和其他节点相互连接.所有的RPC都是通过最终都是要经过Connector中通过节点之间的TCP连接.负责将数据传输 因为每个节点既可以作为Server . 也可以作为Client. 所以我们需要由 InboundChannelGroup 和 OutboundChannelGroup 分别记录与每个节点的网络连接">
@@ -265,7 +266,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-12 09:23:42" itemprop="dateModified" datetime="2020-12-12T09:23:42+08:00">2020-12-12</time>
+                <time title="Modified: 2020-12-12 15:28:35" itemprop="dateModified" datetime="2020-12-12T15:28:35+08:00">2020-12-12</time>
               </span>
             
           
@@ -332,6 +333,7 @@
 <li>Candidate 判定是RequestVoteRPCResult，  event.post 通知订阅方法。onReceiveRequestVoteResult</li>
 <li>订阅方法触发-&gt;处理逻辑</li>
 </ol>
+<h3 id="RPC类图"><a href="#RPC类图" class="headerlink" title="RPC类图."></a>RPC类图.</h3><p><img src="rpc_uml.png" alt="png"></p>
 
     </div>
 
@@ -357,6 +359,10 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/11/14/Raft_RPC_2/" rel="prev" title="Java实现Raft算法_Raft算法之Executor , Scheduler">
+                  Java实现Raft算法_Raft算法之Executor , Scheduler <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -413,7 +419,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -470,7 +476,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Connector"><span class="nav-number">1.</span> <span class="nav-text">Connector</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立连接"><span class="nav-number">1.2.</span> <span class="nav-text">建立连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传输数据"><span class="nav-number">1.3.</span> <span class="nav-text">传输数据</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Connector"><span class="nav-number">1.</span> <span class="nav-text">Connector</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立连接"><span class="nav-number">1.2.</span> <span class="nav-text">建立连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传输数据"><span class="nav-number">1.3.</span> <span class="nav-text">传输数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPC类图"><span class="nav-number">1.4.</span> <span class="nav-text">RPC类图.</span></a></li></ol></li></ol></div>
             
 
           </div>
