@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2020/11/14/Raft_RPC_Executor/</loc>
+    
+    <lastmod>2020-12-18T12:44:43.736Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/11/11/Raft_PRC_Message/</loc>
+    
+    <lastmod>2020-12-18T12:40:31.624Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/11/15/Raft_VoteRequest/</loc>
     
     <lastmod>2020-12-18T12:36:44.929Z</lastmod>
@@ -9,21 +23,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2020/11/11/Raft_PRC/</loc>
-    
-    <lastmod>2020-12-17T14:11:19.790Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2020/11/14/Raft_RPC_2/</loc>
-    
-    <lastmod>2020-12-17T13:43:29.388Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2020/11/13/Raft_RPC_I/</loc>
+    <loc>http://yoursite.com/2020/11/13/Raft_RPC_Connector/</loc>
     
     <lastmod>2020-12-12T07:28:35.651Z</lastmod>
     

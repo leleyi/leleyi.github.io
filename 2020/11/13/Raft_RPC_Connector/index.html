@@ -58,22 +58,22 @@
   <meta name="description" content="Connector 基本概念connector 是Raft中基础的一部分.每个节点需要和其他节点相互连接.所有的RPC都是通过最终都是要经过Connector中通过节点之间的TCP连接.负责将数据传输 因为每个节点既可以作为Server . 也可以作为Client. 所以我们需要由 InboundChannelGroup 和 OutboundChannelGroup 分别记录与每个节点的网络连接">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java实现Raft算法_Raft算法之Connector">
-<meta property="og:url" content="http://yoursite.com/2020/11/13/Raft_RPC_I/index.html">
+<meta property="og:url" content="http://yoursite.com/2020/11/13/Raft_RPC_Connector/index.html">
 <meta property="og:site_name" content="FILE">
 <meta property="og:description" content="Connector 基本概念connector 是Raft中基础的一部分.每个节点需要和其他节点相互连接.所有的RPC都是通过最终都是要经过Connector中通过节点之间的TCP连接.负责将数据传输 因为每个节点既可以作为Server . 也可以作为Client. 所以我们需要由 InboundChannelGroup 和 OutboundChannelGroup 分别记录与每个节点的网络连接">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2020/11/13/Raft_RPC_I/1.png">
-<meta property="og:image" content="http://yoursite.com/2020/11/13/Raft_RPC_I/2.png">
-<meta property="og:image" content="http://yoursite.com/2020/11/13/Raft_RPC_I/3.png">
-<meta property="og:image" content="http://yoursite.com/2020/11/13/Raft_RPC_I/4.png">
-<meta property="og:image" content="http://yoursite.com/2020/11/13/Raft_RPC_I/rpc_uml.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/13/Raft_RPC_Connector/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/13/Raft_RPC_Connector/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/13/Raft_RPC_Connector/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/13/Raft_RPC_Connector/4.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/13/Raft_RPC_Connector/rpc_uml.png">
 <meta property="og:updated_time" content="2020-12-12T07:28:35.651Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java实现Raft算法_Raft算法之Connector">
 <meta name="twitter:description" content="Connector 基本概念connector 是Raft中基础的一部分.每个节点需要和其他节点相互连接.所有的RPC都是通过最终都是要经过Connector中通过节点之间的TCP连接.负责将数据传输 因为每个节点既可以作为Server . 也可以作为Client. 所以我们需要由 InboundChannelGroup 和 OutboundChannelGroup 分别记录与每个节点的网络连接">
-<meta name="twitter:image" content="http://yoursite.com/2020/11/13/Raft_RPC_I/1.png">
+<meta name="twitter:image" content="http://yoursite.com/2020/11/13/Raft_RPC_Connector/1.png">
   <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
-  <link rel="canonical" href="http://yoursite.com/2020/11/13/Raft_RPC_I/">
+  <link rel="canonical" href="http://yoursite.com/2020/11/13/Raft_RPC_Connector/">
 
 
 <script id="page-configurations">
@@ -224,7 +224,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/13/Raft_RPC_I/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/13/Raft_RPC_Connector/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Les">
@@ -350,7 +350,7 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2020/11/11/Raft_PRC/" rel="next" title="Java实现Raft算法_Raft算法之RPC">
+                <a href="/2020/11/11/Raft_PRC_Message/" rel="next" title="Java实现Raft算法_Raft算法之RPC">
                   <i class="fa fa-chevron-left"></i> Java实现Raft算法_Raft算法之RPC
                 </a>
               
@@ -360,7 +360,7 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2020/11/14/Raft_RPC_2/" rel="prev" title="Java实现Raft算法_Raft算法之Executor , Scheduler">
+                <a href="/2020/11/14/Raft_RPC_Executor/" rel="prev" title="Java实现Raft算法_Raft算法之Executor , Scheduler">
                   Java实现Raft算法_Raft算法之Executor , Scheduler <i class="fa fa-chevron-right"></i>
                 </a>
               
