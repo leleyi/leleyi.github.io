@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2020/11/22/Raft_AppendEntries/</loc>
+    
+    <lastmod>2020-12-22T14:18:15.312Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/12/19/Google_EvenBus/</loc>
+    
+    <lastmod>2020-12-19T12:12:13.753Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/11/14/Raft_RPC_Executor/</loc>
     
-    <lastmod>2020-12-18T12:44:43.736Z</lastmod>
+    <lastmod>2020-12-19T02:52:52.646Z</lastmod>
     
   </url>
   

@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/echarts.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/echarts.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"scrollpercent":true,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    save_scroll: false,
+    copycode: {"enable":true,"show_result":true,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="ReplicateLog ReplicateLog是整个Raft中的关键地方.所有的信息都是通过AppendEntries的方式通知到所有节点. 123456789101112private void doReplicateLog() &amp;#123;    if (context.group().isStandalone()) &amp;#123;        context.log().advanceC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java实现Raft算法_Raft算法之ReplicateLog">
+<meta property="og:url" content="http://yoursite.com/2020/11/22/Raft_AppendEntries/index.html">
+<meta property="og:site_name" content="FILE">
+<meta property="og:description" content="ReplicateLog ReplicateLog是整个Raft中的关键地方.所有的信息都是通过AppendEntries的方式通知到所有节点. 123456789101112private void doReplicateLog() &amp;#123;    if (context.group().isStandalone()) &amp;#123;        context.log().advanceC">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2020/11/22/Raft_AppendEntries/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/22/Raft_AppendEntries/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/22/Raft_AppendEntries/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/22/Raft_AppendEntries/4.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/22/Raft_AppendEntries/5.png">
+<meta property="og:updated_time" content="2020-12-22T14:18:15.312Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java实现Raft算法_Raft算法之ReplicateLog">
+<meta name="twitter:description" content="ReplicateLog ReplicateLog是整个Raft中的关键地方.所有的信息都是通过AppendEntries的方式通知到所有节点. 123456789101112private void doReplicateLog() &amp;#123;    if (context.group().isStandalone()) &amp;#123;        context.log().advanceC">
+<meta name="twitter:image" content="http://yoursite.com/2020/11/22/Raft_AppendEntries/1.png">
+  <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/2020/11/22/Raft_AppendEntries/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Java实现Raft算法_Raft算法之ReplicateLog | FILE</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FILE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/22/Raft_AppendEntries/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Les">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/echarts.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FILE">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">Java实现Raft算法_Raft算法之ReplicateLog
+
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-11-22 13:40:15" itemprop="dateCreated datePublished" datetime="2020-11-22T13:40:15+08:00">2020-11-22</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-22 22:18:15" itemprop="dateModified" datetime="2020-12-22T22:18:15+08:00">2020-12-22</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="ReplicateLog"><a href="#ReplicateLog" class="headerlink" title="ReplicateLog"></a>ReplicateLog</h3><p><img src="1.png" alt="png"></p>
+<p><strong>ReplicateLog</strong>是整个Raft中的关键地方.所有的信息都是通过AppendEntries的方式通知到所有节点.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">doReplicateLog</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (context.group().isStandalone()) &#123;</span><br><span class="line">        context.log().advanceCommitIndex(context.log().getNextIndex() - <span class="number">1</span>, role.getTerm());</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//根据 GroupMembers 信息决定发送的数据</span></span><br><span class="line">    <span class="keyword">for</span> (GroupMember member : context.group().listReplicationTarget()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (member.shouldReplicate(context.config().getLogReplicationReadTimeout())) &#123;</span><br><span class="line">            doReplicateLog(member, context.config().getMaxReplicationEntries());</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Entry包括几种信息:</p>
+<ol>
+<li><p>no-op. 存粹的心跳.</p>
+</li>
+<li><p>普通信息. curd</p>
+</li>
+<li><p>配置信息. 整个集群的配置.</p>
+<p>​                                                                                                                                                                            </p>
+<p><img src="2.png" alt="png">                                        </p>
+</li>
+</ol>
+<h4 id="NoOpEntry"><a href="#NoOpEntry" class="headerlink" title="NoOpEntry"></a>NoOpEntry</h4><p>普通的心跳信息，当节点当选Leader之后。没有Client的数据请求， Leader需要和Follower保证相互之间是活着的。Leader将一直发送该消息。</p>
+<h4 id="GeneralEntry"><a href="#GeneralEntry" class="headerlink" title="GeneralEntry"></a>GeneralEntry</h4><h5 id="create-and-send"><a href="#create-and-send" class="headerlink" title="create and send"></a>create and send</h5><p>这个通过GenerEntry让节点之间保持最终一致性.</p>
+<ul>
+<li><p>每个节点都是有Log信息的，画了一个简图：</p>
+<p><img src="3.png" alt="png">    </p>
+</li>
+</ul>
+<p>我们可以看到一个Sequence，保存着所有的Entry。每个Entry中存有三大件 Kind ， Index ， Term. LogReplicate 就是根据 index 和 Term来进行判断的。Snapshot是在某个时候的数据快照。帮忙节点快速恢复数据。最后将数据提交到State machine。 下面哪个空白的是ConfigChangeLog.</p>
+<p>那么给Follower发送些什么数据呢-&gt;这就要根据Leader节点记录的每一个Follower信息了。</p>
+<ul>
+<li>Group</li>
+</ul>
+<p><img src="4.png" alt="png">    </p>
+<p>当前Leader中的Follower信息.Follower的地址,是否删除, 是否正在复制.还有比较关键的就是 NextIndex和 MatchIndex.</p>
+<p>Follower通过比较Log的nextLogIndex, 和 GroupMember的 NextIndex.来决定发送的数据.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> AppendEntriesRpc <span class="title">createAppendEntriesRpc</span><span class="params">(<span class="keyword">int</span> term, NodeId selfId, <span class="keyword">int</span> nextIndex)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> nextLogIndex = entrySequence.getNextLogIndex();</span><br><span class="line">    <span class="comment">//1.</span></span><br><span class="line">    <span class="keyword">if</span> (nextIndex &lt;= snapshot.getLastIncludedIndex()) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> EntryInSnapshotException(nextIndex);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//2.</span></span><br><span class="line">    AppendEntriesRpc rpc = <span class="keyword">new</span> AppendEntriesRpc();</span><br><span class="line">    rpc.setMessageId(UUID.randomUUID().toString());</span><br><span class="line">    rpc.setTerm(term);</span><br><span class="line">    rpc.setLeaderId(selfId);</span><br><span class="line">    rpc.setLeaderCommit(commitIndex);</span><br><span class="line">    <span class="keyword">if</span> (nextIndex == snapshot.getLastIncludedIndex() + <span class="number">1</span>) &#123;</span><br><span class="line">        rpc.setPrevLogIndex(snapshot.getLastIncludedIndex());</span><br><span class="line">        rpc.setPrevLogTerm(snapshot.getLastIncludedTerm());</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        Entry entry = entrySequence.getEntry(nextIndex - <span class="number">1</span>);</span><br><span class="line">        rpc.setPrevLogIndex(entry.getIndex());</span><br><span class="line">        rpc.setPrevLogTerm(entry.getTerm());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!entrySequence.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">int</span> maxIndex =  nextLogIndex;</span><br><span class="line">        <span class="comment">//2.1</span></span><br><span class="line">        rpc.setEntries(entrySequence.subList(nextIndex, maxIndex));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> rpc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>值得注意的是： Leader 根据每个member的信息不同是发送的不同的数据。</p>
+<ol>
+<li><p><strong>snapshot.LastIndex &gt; member.nextIndex</strong></p>
+<p>member的<strong>nextIndex</strong>比我快照的<strong>最后**</strong>Index**都小,那么肯定是首先发送一个快照信息给member</p>
+</li>
+<li><p><strong>leader.nextlogindex &gt; member.nextIndex</strong></p>
+<p><strong>leader</strong>的<strong>nextLogindex</strong> 大于<strong>member</strong>的<strong>index</strong> 这是最常规的.所以将Leader比member新的部分(subSequence)添加到AppendEntries里面。</p>
+</li>
+</ol>
+</li>
+<li><p>知道什么时候发送些什么之后我们再来看看AppendEntries本身应该发送些什么数据。在论文中我们可以看到</p>
+<p><img src="5.png" alt="png">    </p>
+<p>preLogIndex 和 prevLogTerm：他们用于和Follower进行日志的配置。</p>
+<p>leaderCommit 将 Follower的Commit更新，避免Leader还没有Commit，Follower就Commit了</p>
+<p>entries 自然就是Leader的角度看 Follower 所需要的信息。</p>
+</li>
+</ul>
+<h4 id="receive-and-reply"><a href="#receive-and-reply" class="headerlink" title="receive and reply"></a>receive and reply</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">AppendEntriesRpc rpc = rpcMessage.get();</span><br><span class="line"><span class="keyword">if</span> (rpc.getTerm() &lt; role.getTerm()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> AppendEntriesResult(rpc.getMessageId(), role.getTerm(), <span class="keyword">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (rpc.getTerm() &gt; role.getTerm()) &#123;</span><br><span class="line">    becomeFollower(rpc.getTerm(), <span class="keyword">null</span>, rpc.getLeaderId(), <span class="keyword">true</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> AppendEntriesResult(rpc.getMessageId(), rpc.getTerm(), appendEntries(rpc));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// rpc.term == my term</span></span><br><span class="line"><span class="keyword">switch</span> (role.getName()) &#123;</span><br><span class="line">    <span class="keyword">case</span> FOLLOWER:</span><br><span class="line">        <span class="comment">// reset election timeout and append entries</span></span><br><span class="line">        becomeFollower(rpc.getTerm(), ((FollowerNodeRole) role).getVotedFor(), rpc.getLeaderId(), <span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AppendEntriesResult(rpc.getMessageId(), rpc.getTerm(), appendEntries(rpc));</span><br><span class="line">    <span class="keyword">case</span> CANDIDATE:</span><br><span class="line">        <span class="comment">// more than one candidate but another node won the election</span></span><br><span class="line">        becomeFollower(rpc.getTerm(), <span class="keyword">null</span>, rpc.getLeaderId(), <span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AppendEntriesResult(rpc.getMessageId(), rpc.getTerm(), appendEntries(rpc));</span><br><span class="line">    <span class="keyword">case</span> LEADER:</span><br><span class="line">        <span class="comment">// todo the another leader how can deal with this condition</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AppendEntriesResult(rpc.getMessageId(), rpc.getTerm(), <span class="keyword">false</span>);</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"unexpected node role ["</span> + role.getName() + <span class="string">"]"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>rpc.Term &lt; role.Term 任期不同请求来的Term没有我本身的Term大呢. 将单前节点的Term发送回去。</li>
+<li>rpc.Term &gt; role.Term 任期不同比我的任期大,肯定是我的leader. 根据来的信息进行数据更新, 返回更新结果。</li>
+<li>rpc.Term = role.Term  根据当前节点的角色不同 （Follower 和 Candidate），根据来的信息进行数据更新返回更新结果。</li>
+</ul>
+<p>值得注意的， 节点在收到消息之后角色为（Follower 和 Candidate）都会重置 ElectionTimeout。</p>
+<p><strong>节点的数据同步</strong></p>
+<p>当然所有数据也是通过节点的Log首先commit， 然后根据Leader的(apply)commitIndex， 进行apply.</p>
+<ul>
+<li>首先判断rpc.prevLogIndex rpc，prevLogTrem与当前节点的Index是否能够匹配的上。及查询当前节点是否有prevLogIndex数据-&gt; 1.根据快照 2. 更具log序列获取。</li>
+<li>确保当前节点存在pervLog数据时， 删除Follower的未匹配（followerEntryMeta.Term() != leaderEntry.Term()）节点。</li>
+<li>为当前节点log 添加新的节点信息同样如果是ConfigChange信息将会特别的添加到ConfigList</li>
+</ul>
+<h4 id="appendEntriesResult"><a href="#appendEntriesResult" class="headerlink" title="appendEntriesResult"></a>appendEntriesResult</h4><ul>
+<li>在上述 rpc.Term &lt; role.Term的时候我们返回回来的Term，因为 Leader遇到了更大的Term，所以变为Follower</li>
+<li>检测当前节点角色.如果以及不是leader了那就没有必要处理result</li>
+<li>根据返回消息的节点获取Leader中保存的member信息， member被删除了或者不是major的一员就不用处理。</li>
+<li>返回消息是成功的话，将Leader的member信息更新， 并且根据Group中超过半数匹配的Index进行apply，到状态机。</li>
+<li>继续doReplicateLog</li>
+</ul>
+<h4 id="GroupConfigEntry"><a href="#GroupConfigEntry" class="headerlink" title="GroupConfigEntry"></a>GroupConfigEntry</h4><p>这一部分留到改变配置的时候再做详细的分析。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/11/15/Raft_VoteRequest/" rel="next" title="Java实现Raft算法_Raft算法之VoteRequest">
+                  <i class="fa fa-chevron-left"></i> Java实现Raft算法_Raft算法之VoteRequest
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/12/19/Google_EvenBus/" rel="prev" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/echarts.png"
+      alt="Les">
+  <p class="site-author-name" itemprop="name">Les</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ReplicateLog"><span class="nav-number">1.</span> <span class="nav-text">ReplicateLog</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NoOpEntry"><span class="nav-number">1.1.</span> <span class="nav-text">NoOpEntry</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GeneralEntry"><span class="nav-number">1.2.</span> <span class="nav-text">GeneralEntry</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#create-and-send"><span class="nav-number">1.2.1.</span> <span class="nav-text">create and send</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#receive-and-reply"><span class="nav-number">1.3.</span> <span class="nav-text">receive and reply</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#appendEntriesResult"><span class="nav-number">1.4.</span> <span class="nav-text">appendEntriesResult</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GroupConfigEntry"><span class="nav-number">1.5.</span> <span class="nav-text">GroupConfigEntry</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Les</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', function() {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>
