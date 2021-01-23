@@ -62,7 +62,7 @@
 <meta property="og:site_name" content="FILE">
 <meta property="og:description" content="在 Linux 中，增加用户或改变用户的组属性可以使用 useradd 或者 usermod 命令。useradd 增加一个新用户或者更新默认新用户信息。usermod 则是更改用户帐户属性，例如将其添加到一个已有的组中。 在 Linux 用户系统中存在两类组。第一类是主要用户组，第二类是附加用户组。所有的用户帐户及相关信息都存储在 /etc/passwd 文件中，/etc/shadow 和 /e">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-10-28T09:02:50.640Z">
+<meta property="og:updated_time" content="2020-12-30T06:09:01.817Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 权限.">
 <meta name="twitter:description" content="在 Linux 中，增加用户或改变用户的组属性可以使用 useradd 或者 usermod 命令。useradd 增加一个新用户或者更新默认新用户信息。usermod 则是更改用户帐户属性，例如将其添加到一个已有的组中。 在 Linux 用户系统中存在两类组。第一类是主要用户组，第二类是附加用户组。所有的用户帐户及相关信息都存储在 /etc/passwd 文件中，/etc/shadow 和 /e">
@@ -260,7 +260,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-10-28 17:02:50" itemprop="dateModified" datetime="2020-10-28T17:02:50+08:00">2020-10-28</time>
+                <time title="Modified: 2020-12-30 14:09:01" itemprop="dateModified" datetime="2020-12-30T14:09:01+08:00">2020-12-30</time>
               </span>
             
           
@@ -529,6 +529,13 @@ grpunconv   注：通过/etc/group 和/etc/gshadow 文件内容来同步或创�
 <p>  su 到root 用户.<br>  vim /etc/sudoers<br>  leleyi(用户名)     ALL=(ALL)       ALL.<br>  包保存即可.</p>
 </li>
 </ul>
+<p>Linux下创建用户时会用到useradd和adduser这两个命令，他们的区别如下：<br>　　1.使用useradd时，如果后面不添加任何参数选项，例如：#sudo useradd test创建出来的用户将是默认“三无”用户：一无Home Directory，二无密码，三无系统Shell。<br>　　2.使用adduser时，创建用户的过程更像是一种人机对话，系统会提示你输入各种信息，然后会根据这些信息帮你创建新用户。</p>
+<ul>
+<li>adduser会提示设置密码，而useradd不会。</li>
+<li>adduser会创建用户目录，比如/home/freebird freebird是用户，useradd不会</li>
+<li>dduser会创建用户目录，比如/home/freebird freebird是用户，useradd不会</li>
+<li>adduser会询问全名，房间号码，电话号码等用户信息，useradd不会</li>
+</ul>
 
     </div>
 
@@ -614,7 +621,7 @@ grpunconv   注：通过/etc/group 和/etc/gshadow 文件内容来同步或创�
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -645,7 +652,11 @@ grpunconv   注：通过/etc/group 和/etc/gshadow 文件内容来同步或创�
         
           
         
-        <span class="site-state-item-count">10</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">categories</span>
         
       </div>
@@ -689,7 +700,7 @@ grpunconv   注：通过/etc/group 和/etc/gshadow 文件内容来同步或创�
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-heart"></i>
   </span>
