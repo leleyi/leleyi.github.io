@@ -156,13 +156,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/08/11/pat1004/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2019/08/10/pat1003/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
@@ -177,21 +170,14 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/2019/08/11/pat1004/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/08/14/pat1005/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/08/15/pat1009/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/08/15/pat1007/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -205,7 +191,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/08/23/patb1022/</loc>
+    <loc>http://yoursite.com/2019/08/15/pat1007/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/08/15/pat1009/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -233,6 +226,13 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/2019/08/23/patb1022/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/08/23/patb1024/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
@@ -254,21 +254,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/09/06/patb1028/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/09/06/patb1030/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2019/09/06/patb1029/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/09/06/patb1028/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -282,7 +275,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/09/30/patb1035/</loc>
+    <loc>http://yoursite.com/2019/09/06/patb1030/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -290,13 +283,6 @@
   
   <url>
     <loc>http://yoursite.com/2019/09/20/patb1032/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/09/30/patb1036/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -317,6 +303,13 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/2019/09/30/patb1036/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/09/30/patb1037/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
@@ -324,14 +317,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/09/30/patb1038/</loc>
+    <loc>http://yoursite.com/2019/09/30/patb1035/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/10/01/patb1041/</loc>
+    <loc>http://yoursite.com/2019/09/30/patb1038/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -359,6 +352,27 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/2019/10/01/patb1041/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/10/01/patb1043/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/10/01/patb1046/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/10/01/patb1044/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
@@ -373,7 +387,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/10/01/patb1043/</loc>
+    <loc>http://yoursite.com/2019/10/01/patb1048/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -387,21 +401,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/10/01/patb1049/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/10/01/patb1048/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2019/10/01/patb1050/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/10/01/patb1049/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -415,7 +422,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/10/01/patb1046/</loc>
+    <loc>http://yoursite.com/2019/10/01/patb1053/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -436,35 +443,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/10/01/patb1053/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2019/10/01/patb1056/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/10/01/patb1055/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/10/01/patb1059/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/10/01/patb1057/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -485,7 +464,28 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/10/07/patb1061/</loc>
+    <loc>http://yoursite.com/2019/10/01/patb1059/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/10/01/patb1057/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/10/01/patb1055/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/10/07/patb1062/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -506,14 +506,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/10/07/patb1062/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/10/07/patb1065/</loc>
+    <loc>http://yoursite.com/2019/10/07/patb1061/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -527,7 +520,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/10/20/patb1067/</loc>
+    <loc>http://yoursite.com/2019/10/07/patb1065/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -535,6 +528,13 @@
   
   <url>
     <loc>http://yoursite.com/2019/10/20/patb1069/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/10/20/patb1067/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -555,7 +555,21 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/2019/11/30/patb1073/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/11/30/patb1071/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/12/29/patb1074/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -576,28 +590,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/12/29/patb1074/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2019/12/29/patb1077/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/12/29/patb1076/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/11/30/patb1073/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -611,14 +604,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/12/29/patb1079/</loc>
+    <loc>http://yoursite.com/2019/12/29/patb1076/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/12/30/patb1081/</loc>
+    <loc>http://yoursite.com/2019/12/29/patb1079/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -632,14 +625,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/12/30/patb1082/</loc>
+    <loc>http://yoursite.com/2019/12/30/patb1081/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/12/30/patb1084/</loc>
+    <loc>http://yoursite.com/2019/12/30/patb1082/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -653,7 +646,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/12/30/patb1085/</loc>
+    <loc>http://yoursite.com/2019/12/30/patb1084/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -667,7 +660,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/12/30/patb1089/</loc>
+    <loc>http://yoursite.com/2019/12/30/patb1088/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/12/30/patb1085/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -681,14 +681,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/12/30/patb1088/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2020/01/16/patb1091/</loc>
+    <loc>http://yoursite.com/2019/12/30/patb1089/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -702,13 +695,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2020/01/16/patb1094/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2020/01/16/patb1092/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
@@ -716,14 +702,28 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2020/01/16/patb1095/</loc>
+    <loc>http://yoursite.com/2020/01/16/patb1093/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2020/01/16/patb1093/</loc>
+    <loc>http://yoursite.com/2020/01/16/patb1091/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/01/16/patb1094/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/01/16/patb1095/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
