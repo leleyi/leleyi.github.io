@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/echarts.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/echarts.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"scrollpercent":true,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    save_scroll: false,
+    copycode: {"enable":true,"show_result":true,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="缓存预热在高请求之前，做好一系列措施，保证大量用户数量点击造成灾难。  请求数量较高 主从之间数据吞吐量较大，数据同步操作频度较高  缓存预热解决方案前置准备工作：  日常例行统计数据访问记录，统计访问频度较高的热点数据 利用 LRU 数据删除策略，构建数据留存队列例如：storm 与 kafka 配合  准备工作：  将统计结果中的数据分类，根据级别，redis 优先加载级别较高的热点数据 利用">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FILE">
+<meta property="og:url" content="http://yoursite.com/doing/Redis_问题以及解决方案.html">
+<meta property="og:site_name" content="FILE">
+<meta property="og:description" content="缓存预热在高请求之前，做好一系列措施，保证大量用户数量点击造成灾难。  请求数量较高 主从之间数据吞吐量较大，数据同步操作频度较高  缓存预热解决方案前置准备工作：  日常例行统计数据访问记录，统计访问频度较高的热点数据 利用 LRU 数据删除策略，构建数据留存队列例如：storm 与 kafka 配合  准备工作：  将统计结果中的数据分类，根据级别，redis 优先加载级别较高的热点数据 利用">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-04-06T07:47:21.939Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FILE">
+<meta name="twitter:description" content="缓存预热在高请求之前，做好一系列措施，保证大量用户数量点击造成灾难。  请求数量较高 主从之间数据吞吐量较大，数据同步操作频度较高  缓存预热解决方案前置准备工作：  日常例行统计数据访问记录，统计访问频度较高的热点数据 利用 LRU 数据删除策略，构建数据留存队列例如：storm 与 kafka 配合  准备工作：  将统计结果中的数据分类，根据级别，redis 优先加载级别较高的热点数据 利用">
+  <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/doing/Redis_问题以及解决方案">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title> | FILE</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FILE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+          <h3 id="缓存预热"><a href="#缓存预热" class="headerlink" title="缓存预热"></a>缓存预热</h3><p>在高请求之前，做好一系列措施，保证大量用户数量点击造成灾难。</p>
+<ol>
+<li>请求数量较高</li>
+<li>主从之间数据吞吐量较大，数据同步操作频度较高</li>
+</ol>
+<h5 id="缓存预热解决方案"><a href="#缓存预热解决方案" class="headerlink" title="缓存预热解决方案"></a>缓存预热解决方案</h5><p>前置准备工作：</p>
+<ol>
+<li>日常例行统计数据访问记录，统计访问频度较高的热点数据</li>
+<li>利用 LRU 数据删除策略，构建数据留存队列<br>例如：storm 与 kafka 配合</li>
+</ol>
+<p>准备工作：</p>
+<ol>
+<li>将统计结果中的数据分类，根据级别，redis 优先加载级别较高的热点数据</li>
+<li>利用分布式多服务器同时进行数据读取，提速数据加载过程</li>
+</ol>
+<p>实施：</p>
+<ol>
+<li>使用本程序固定出大数据预热过程</li>
+<li>如果条件允许，使用 CDN（内容分发网络），效果会更好</li>
+</ol>
+<p>缓存预热总结：<br>缓存预热就是系统启动前，提前将相关的缓存数据直接加载到缓存系统。避免在用户请求的时候，先查询数据库，然后再将数据缓存的问题！用户直接查询事先被预热的缓存数据!</p>
+<h3 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h3><h5 id="数据库服务器崩溃（1）"><a href="#数据库服务器崩溃（1）" class="headerlink" title="数据库服务器崩溃（1）"></a>数据库服务器崩溃（1）</h5><ol>
+<li>系统平稳运行过程中，忽然数据库连接量激增</li>
+<li>应用服务器无法及时请求</li>
+<li>大量 408，500 错误页面出现</li>
+<li>客户反复刷新页面获取数据</li>
+<li>数据库崩溃</li>
+<li>应用服务器崩溃</li>
+<li>重启应用服务器无效</li>
+<li>Redis 服务器崩溃</li>
+<li>Redis 集群崩溃</li>
+<li>重启数据之后再次被瞬间流量放倒</li>
+</ol>
+<h5 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h5><ol>
+<li>在一个较短的时间内，缓存中较多的 key 集中过期</li>
+<li>此周期内请求访问过期的数据，redis 未命中，redis 向数据库获取数据</li>
+<li>数据库同时接受到大量的请求无法即时处理</li>
+<li>Redis 大量请求被积压，开始出现超时现象</li>
+<li>数据库流量激增，数据库崩溃</li>
+<li>重启后任然面对缓存中无数据可用</li>
+<li>Redis 服务器资源被严重占用，Redis 服务器崩溃</li>
+<li>Redis 集群呈现崩塌，集群瓦解</li>
+<li>应用服务器无法即时得到数据响应请求，来自客户端的请求数量越来越多，应用服务器崩溃</li>
+<li>应用服务器，redis，数据库全部重启，效果不理想</li>
+</ol>
+<h5 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h5><ul>
+<li>短时间范围内</li>
+<li>大量 key 集中过期</li>
+</ul>
+<h5 id="解决方案（道）"><a href="#解决方案（道）" class="headerlink" title="解决方案（道）"></a>解决方案（道）</h5><ol>
+<li>更多的页面静态化处理</li>
+<li>构建多级缓存架构<br>Nginx 缓存 + redis 缓存 + ehcache 缓存</li>
+<li>检测 Mysql 严重耗时业务进行优化<br>对数据库的瓶颈排查：例如超时查询、耗时较高事务等</li>
+<li>灾难预警机制<br>监控 redis 服务器性能指标<br>1、CPU 占用、CPU 使用率<br>2、内存容量<br>3、查询平均响应时间<br>4、线程数</li>
+<li>限流、降级<br>短时间范围内习生一些客户体验，限制一部分请求访问，降低应用服务器压力，待业务低速运转后再逐渐放开访问</li>
+</ol>
+<h5 id="解决方案（术）"><a href="#解决方案（术）" class="headerlink" title="解决方案（术）"></a>解决方案（术）</h5><ol>
+<li>LRU 与 LFU 切换</li>
+<li>数据有效期策略调整<br>根据业务数据有效期进行分类错峰，A 类 90 分钟，B 类 80 分钟，C 类 70 分钟<br>过期时间使用固定形式 + 随机值的形式，稀释集中到期的 key 的数量</li>
+<li>超热数据使用永久 key</li>
+<li>定期维护（自动 + 人工）<br>对即将过期数据做访问量分析，确认是否演示，配合访问量统计，做热点数据的延时</li>
+<li>加锁 慎用！！！！！！！</li>
+</ol>
+<p>总结<br>缓存雪崩式瞬间过期数量太大，导致对数据库服务器造成压力。如果能有效避免过期时间集中，可以有效解决雪崩现象的出现（约 40%）。配合其他策略一起使用，并监控服务器的运行数据，根据运行结果做快速调整</p>
+<h3 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h3><h5 id="数据库服务器崩溃（2）"><a href="#数据库服务器崩溃（2）" class="headerlink" title="数据库服务器崩溃（2）"></a>数据库服务器崩溃（2）</h5><ol>
+<li>系统平稳运行过程中</li>
+<li>数据库连接量瞬间激增</li>
+<li>Redis 服务器无大量 key 过期</li>
+<li>Redis 内存平稳，无波动</li>
+<li>Redis 服务器 CPU 正常</li>
+<li>数据库崩溃</li>
+</ol>
+<h5 id="问题排查-1"><a href="#问题排查-1" class="headerlink" title="问题排查"></a>问题排查</h5><ol>
+<li>Redis 中某 key 过期，该 key 访问量巨大</li>
+<li>多个数据请求从服务器直接压到 Redis 后，均未命中</li>
+<li>Redis 在短时间内发起了大量对数据库中同一个数据的访问</li>
+</ol>
+<p><strong>问题分析</strong></p>
+<ul>
+<li>单个 key 高热数据</li>
+<li>key 过期</li>
+</ul>
+<h5 id="解决方案（术）-1"><a href="#解决方案（术）-1" class="headerlink" title="解决方案（术）"></a>解决方案（术）</h5><ol>
+<li>预先设定<br>以电商为例，每个商家根据店铺等级，指定若干款主打商品，在购物节期间，加大此类信息 key 的过期时常<br>注意：购物节不仅仅指当天，以及后续若干天，访问峰值呈现逐渐降低趋势</li>
+<li>现场调整<br>监控访问量，对自然流量激增的数据延长过期时间或设置为永久性 key</li>
+<li>后台刷新数据<br>启动定时任务，高峰期来临之前，刷新数据有效期，保存不丢失</li>
+<li>二级缓存<br>设置不同的失效时间，保障不会被同时淘汰就行</li>
+<li>加锁<br>分布式锁，防止被击穿，但是要注意也是性能瓶颈，慎重！！！！！！！！</li>
+</ol>
+<p>总结：<br>缓存击穿就是单个高热数据过期的瞬间，数据访问较大，未命中 redis 后，发起了大量对同一数据的数据库访问，导致对数据库服务器造成压力。应对策略应该在业务数据分析与预防方面进行，配合运行监控测试与即时调整策略，毕竟单个 key 的过期监控难度较高，配合雪崩处理策略即可</p>
+<h3 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h3><h5 id="数据库服务器崩溃（3）"><a href="#数据库服务器崩溃（3）" class="headerlink" title="数据库服务器崩溃（3）"></a>数据库服务器崩溃（3）</h5><ol>
+<li>系统平稳运行过程中</li>
+<li>应用服务器流量随时间增量较大</li>
+<li>Redis 服务器命中率随时间逐步降低</li>
+<li>Redis 内存平稳，内存无压力</li>
+<li>Redis 服务器 CPU 占用激增</li>
+<li>数据库服务器压力激增</li>
+<li>数据库崩溃</li>
+</ol>
+<h5 id="问题排查-2"><a href="#问题排查-2" class="headerlink" title="问题排查"></a>问题排查</h5><ol>
+<li>redis 中大面积出现未命中</li>
+<li>出现非正常 URL 访问</li>
+</ol>
+<p><strong>问题分析</strong></p>
+<ul>
+<li>获取的数据在数据库中也不存在，数据库查询未得到对应数据</li>
+<li>Redis 获取到 null 数据未进行持久化，直接返回</li>
+<li>下次此类数据到达重复上述过程</li>
+<li>出现黑客攻击服务器</li>
+</ul>
+<h5 id="解决方法（术）"><a href="#解决方法（术）" class="headerlink" title="解决方法（术）"></a>解决方法（术）</h5><ol>
+<li>缓存 null<br>对查询结果为 null 的数据进行缓存（长期使用，定期清理），设定短时限，例如 30-60 秒，最高五分钟</li>
+<li>白名单策略<br>提前预热各种分类数据 id 对应的 bitmaps,id 作为 bitmaps 的 offset, 相当于设置了数据白名单。当加载正常数据后放型，加载异常数据时直接拦截（效率偏低）<br>使用布隆过滤器（有关布隆过滤器的命中问题对当前状态可以忽略）</li>
+<li>实时监控<br>试试监控 redis 命中率（业务正常范围时，通常回有一个波动值）与 null 数据的占比<br>非活动时间波动：通常检测 3-5 倍，超过 5 倍纳入重点排查对象<br>活动时间波动：通常检测 10-50 倍，超过 50 倍纳入重点排查对象<br>根据背书不同，启动不同的排查流程。然后使用黑名单进行防控（运营）</li>
+<li>key 加密<br>问题出现后，临时启动防灾业务 key, 对 key 进行业务层传输加密服务，设定校验程序，过来的 key 校验<br>例如每天随机分配 60 个加密串，挑选 2-3 个，混淆到页面数据 id 中，发现访问 key 不满足规则，驳回数据访问</li>
+</ol>
+<p><strong>总结</strong><br>缓存穿透是访问了不存在的数据，跳过了合法数据的 redis 数据缓存阶段，每次访问数据库，导致对数据库服务器造成压力。通常此类数据的出现量是一个较低的值，当出现此类情况以毒攻毒，并即时报警。应对策略应该在临时预案防范方面多做文章<br>无论是黑名单还是白名单，都是对整体系统的压力，警报解除后尽快移除</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/echarts.png"
+      alt="Les">
+  <p class="site-author-name" itemprop="name">Les</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存预热"><span class="nav-number">1.</span> <span class="nav-text">缓存预热</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#缓存预热解决方案"><span class="nav-number">1.0.1.</span> <span class="nav-text">缓存预热解决方案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存雪崩"><span class="nav-number">2.</span> <span class="nav-text">缓存雪崩</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库服务器崩溃（1）"><span class="nav-number">2.0.1.</span> <span class="nav-text">数据库服务器崩溃（1）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题排查"><span class="nav-number">2.0.2.</span> <span class="nav-text">问题排查</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题分析"><span class="nav-number">2.0.3.</span> <span class="nav-text">问题分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方案（道）"><span class="nav-number">2.0.4.</span> <span class="nav-text">解决方案（道）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方案（术）"><span class="nav-number">2.0.5.</span> <span class="nav-text">解决方案（术）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存击穿"><span class="nav-number">3.</span> <span class="nav-text">缓存击穿</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库服务器崩溃（2）"><span class="nav-number">3.0.1.</span> <span class="nav-text">数据库服务器崩溃（2）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题排查-1"><span class="nav-number">3.0.2.</span> <span class="nav-text">问题排查</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方案（术）-1"><span class="nav-number">3.0.3.</span> <span class="nav-text">解决方案（术）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存穿透"><span class="nav-number">4.</span> <span class="nav-text">缓存穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库服务器崩溃（3）"><span class="nav-number">4.0.1.</span> <span class="nav-text">数据库服务器崩溃（3）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题排查-2"><span class="nav-number">4.0.2.</span> <span class="nav-text">问题排查</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方法（术）"><span class="nav-number">4.0.3.</span> <span class="nav-text">解决方法（术）</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Les</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+  
+
+</body>
+</html>

@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/echarts.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/echarts.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"scrollpercent":true,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    save_scroll: false,
+    copycode: {"enable":true,"show_result":true,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="IntroductionIn this lab you’ll build a MapReduce system. You’ll implement a worker process that calls application Map and Reduce functions and handles reading and writing files, and a coordinator proc">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FILE">
+<meta property="og:url" content="http://yoursite.com/doing/6.284_Lab1.html">
+<meta property="og:site_name" content="FILE">
+<meta property="og:description" content="IntroductionIn this lab you’ll build a MapReduce system. You’ll implement a worker process that calls application Map and Reduce functions and handles reading and writing files, and a coordinator proc">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-04-06T07:18:08.743Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FILE">
+<meta name="twitter:description" content="IntroductionIn this lab you’ll build a MapReduce system. You’ll implement a worker process that calls application Map and Reduce functions and handles reading and writing files, and a coordinator proc">
+  <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/doing/6.284_Lab1">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title> | FILE</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FILE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+          <h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>In this lab you’ll build a MapReduce system. You’ll implement a worker process that calls application Map and Reduce functions and handles reading and writing files, and a coordinator process that hands out tasks to workers and copes with failed workers. You’ll be building something similar to the <a href="http://research.google.com/archive/mapreduce-osdi04.pdf" target="_blank" rel="noopener">MapReduce paper</a>. (Note: the lab uses “coordinator” instead of the paper’s “master”.)</p>
+<h3 id="Getting-started"><a href="#Getting-started" class="headerlink" title="Getting started"></a>Getting started</h3><p>You need to <a href="https://pdos.csail.mit.edu/6.824/labs/go.html" target="_blank" rel="noopener">setup Go</a> to the labs.</p>
+<p>You’ll fetch the initial lab software with <a href="https://git-scm.com/" target="_blank" rel="noopener">git</a> (a version control system). To learn more about git, look at the <a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener">Pro Git book</a> or the <a href="http://www.kernel.org/pub/software/scm/git/docs/user-manual.html" target="_blank" rel="noopener">git user’s manual</a>. To fetch the 6.824 lab software:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git clone git://g.csail.mit.edu/6.824-golabs-2021 6.824</span><br><span class="line">$ cd 6.824</span><br><span class="line">$ ls</span><br><span class="line">Makefile src</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<p>We supply you with a simple sequential mapreduce implementation in <code>src/main/mrsequential.go</code>. It runs the maps and reduces one at a time, in a single process. We also provide you with a couple of MapReduce applications: word-count in <code>mrapps/wc.go</code>, and a text indexer in <code>mrapps/indexer.go</code>. You can run word count sequentially as follows:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/6.824</span><br><span class="line">$ cd src/main</span><br><span class="line">$ go build -race -buildmode=plugin ../mrapps/wc.go</span><br><span class="line">$ rm mr-out*</span><br><span class="line">$ go run -race mrsequential.go wc.so pg*.txt</span><br><span class="line">$ more mr-out-0</span><br><span class="line">A 509</span><br><span class="line">ABOUT 2</span><br><span class="line">ACT 8</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>(Note: If you don’t compile with <code>-race</code>, you won’t be able to run with <code>-race</code>)</p>
+<p><code>mrsequential.go</code> leaves its output in the file <code>mr-out-0</code>. The input is from the text files named <code>pg-xxx.txt</code>.</p>
+<p>Feel free to borrow code from <code>mrsequential.go</code>. You should also have a look at <code>mrapps/wc.go</code> to see what MapReduce application code looks like.</p>
+<h3 id="Your-Job-moderate-hard"><a href="#Your-Job-moderate-hard" class="headerlink" title="Your Job (moderate/hard)"></a>Your Job (<a href="https://pdos.csail.mit.edu/6.824/labs/guidance.html" target="_blank" rel="noopener">moderate/hard</a>)</h3><p>Your job is to implement a distributed MapReduce, consisting of two programs, the coordinator and the worker. There will be just one coordinator process, and one or more worker processes executing in parallel. In a real system the workers would run on a bunch of different machines, but for this lab you’ll run them all on a single machine. <strong>The workers will talk to the coordinator via RPC. Each worker process will ask the coordinator for a task, read the task’s input from one or more files, execute the task, and write the task’s output to one or more files.</strong> The coordinator should notice if a worker hasn’t completed its task in a reasonable amount of time (for this lab, use ten seconds), and <strong>give the same task to a different worker.</strong></p>
+<p>We have given you a little code to start you off. The “main” routines for the coordinator and worker are in <code>main/mrcoordinator.go</code> and <code>main/mrworker.go</code>; don’t change these files. You should put your implementation in <code>mr/coordinator.go</code>, <code>mr/worker.go</code>, and <code>mr/rpc.go</code>.</p>
+<p>Here’s how to run your code on the word-count MapReduce application. First, make sure the word-count plugin is freshly built:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go build -race -buildmode=plugin ../mrapps/wc.go</span><br></pre></td></tr></table></figure>
+<p>In the <code>main</code> directory, run the coordinator.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ rm mr-out*</span><br><span class="line">$ go run -race mrcoordinator.go pg-*.txt</span><br></pre></td></tr></table></figure>
+<p>The <code>pg-*.txt</code> arguments to <code>mrcoordinator.go</code> are the input files; each file corresponds to one “split”, and is the input to one Map task. The <code>-race</code> flags runs go with its race detector.</p>
+<p>In one or more other windows, run some workers:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go run -race mrworker.go wc.so</span><br></pre></td></tr></table></figure>
+<p>When the workers and coordinator have finished, look at the output in <code>mr-out-*</code>. When you’ve completed the lab, the sorted union of the output files should match the sequential output, like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cat mr-out-* | sort | more</span><br><span class="line">A 509</span><br><span class="line">ABOUT 2</span><br><span class="line">ACT 8</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>We supply you with a test script in <code>main/test-mr.sh</code>. The tests check that the <code>wc</code> and <code>indexer</code> MapReduce applications produce the correct output when given the <code>pg-xxx.txt</code> files as input. The tests also check that your implementation runs the Map and Reduce tasks <strong>in parallel</strong>, and that your implementation recovers from workers that crash while running tasks.</p>
+<p>If you run the test script now, it will hang because the coordinator never finishes:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/6.824/src/main</span><br><span class="line">$ bash test-mr.sh</span><br><span class="line">*** Starting wc test.</span><br></pre></td></tr></table></figure>
+<p>You can change <code>ret := false</code> to true in the Done function in <code>mr/coordinator.go</code> so that the coordinator exits immediately. Then:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ bash test-mr.sh</span><br><span class="line">*** Starting wc test.</span><br><span class="line">sort: No such file or directory</span><br><span class="line">cmp: EOF on mr-wc-all</span><br><span class="line">--- wc output is not the same as mr-correct-wc.txt</span><br><span class="line">--- wc test: FAIL</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<p>The test script expects to see output in files named <code>mr-out-X</code>, one for each reduce task. The empty implementations of <code>mr/coordinator.go</code> and <code>mr/worker.go</code> don’t produce those files (or do much of anything else), so the test fails.</p>
+<p>When you’ve finished, the test script output should look like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ bash test-mr.sh</span><br><span class="line">*** Starting wc test.</span><br><span class="line">--- wc test: PASS</span><br><span class="line">*** Starting indexer test.</span><br><span class="line">--- indexer test: PASS</span><br><span class="line">*** Starting map parallelism test.</span><br><span class="line">--- map parallelism test: PASS</span><br><span class="line">*** Starting reduce parallelism test.</span><br><span class="line">--- reduce parallelism test: PASS</span><br><span class="line">*** Starting crash test.</span><br><span class="line">--- crash test: PASS</span><br><span class="line">*** PASSED ALL TESTS</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<p>You’ll also see some errors from the Go RPC package that look like</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2019/12/16 13:27:09 rpc.Register: method &quot;Done&quot; has 1 input parameters; needs exactly three</span><br></pre></td></tr></table></figure>
+<p>Ignore these messages; <strong>registering the coordinator as an <a href="https://golang.org/src/net/rpc/server.go" target="_blank" rel="noopener">RPC server</a></strong> checks if all its methods are suitable for RPCs (have 3 inputs); we know that <code>Done</code> is not called via RPC.</p>
+<h3 id="A-few-rules"><a href="#A-few-rules" class="headerlink" title="A few rules:"></a>A few rules:</h3><ul>
+<li>The map phase should divide the intermediate keys into buckets for <code>nReduce</code> reduce tasks, where <code>nReduce</code> is the argument that <code>main/mrcoordinator.go</code> passes to <code>MakeCoordinator()</code>.</li>
+<li>The worker implementation should put the output of the <strong>X’th</strong> reduce task in the file <strong><code>mr-out-X</code>.</strong></li>
+<li>A <code>mr-out-X</code> file should contain one line per Reduce function output. The line should be generated with the Go <code>&quot;%v %v&quot;</code> format, called with the <strong>key and value</strong>. Have a look in <code>main/mrsequential.go</code> for the line commented “this is the correct format”. The test script will fail if your implementation deviates too much from this format.</li>
+<li>You can modify <code>mr/worker.go</code>, <code>mr/coordinator.go</code>, and <code>mr/rpc.go</code>. You can temporarily modify other files for testing, but make sure your code works with the original versions; we’ll test with the original versions.</li>
+<li>The worker should put <strong>intermediate Map output in files in the current directory</strong>, where your worker can later <strong>read them as input to Reduce tasks</strong>.</li>
+<li><code>main/mrcoordinator.go</code> expects <code>mr/coordinator.go</code> to <strong>implement</strong> a <code>Done()</code> method that returns true when the MapReduce job is completely finished; at that point, <code>mrcoordinator.go</code> will exit.</li>
+<li>When the job is completely finished, the worker processes should exit. A simple way to implement this is to use the return value from <code>call()</code>: if the worker fails to contact the coordinator, it can assume that the coordinator has exited because the job is done, and so the <strong>worker can terminate</strong> too. Depending on your design, you might also find it helpful to have a “please exit” pseudo-task that the coordinator can give to workers.</li>
+</ul>
+<h3 id="Hints"><a href="#Hints" class="headerlink" title="Hints"></a>Hints</h3><ul>
+<li><p>One way to get <strong>started is to modify</strong> <code>mr/worker.go</code>‘s <code>Worker()</code> to send an RPC to the coordinator asking for a task. Then modify the coordinator to respond with the file name of an as-yet-unstarted map task. Then modify the worker to read that file and call the application Map function, as in <code>mrsequential.go</code>.</p>
+</li>
+<li><p>The application Map and Reduce functions are loaded at run-time using the Go plugin package, from files whose names end in <code>.so</code>.</p>
+</li>
+<li><p>If you change anything in the <code>mr/</code> directory, you will probably have to re-build any MapReduce plugins you use, with something like <code>go build -race -buildmode=plugin ../mrapps/wc.go</code></p>
+</li>
+<li><p>This lab relies on the workers <strong>sharing a file</strong> system. That’s straightforward when all workers run on the same machine, but would require a global filesystem like GFS if the workers ran on different machines.</p>
+</li>
+<li><p>A reasonable naming convention for intermediate files is <code>mr-X-Y</code>, where <strong>X</strong> is the <strong>Map task number</strong>, and <strong>Y</strong> is the <strong>reduce task number.</strong></p>
+</li>
+<li><p>The worker’s map task code will need a way to store intermediate key/value pairs in files in a way that can be correctly read back during reduce tasks. One possibility is to use Go’s</p>
+</li>
+</ul>
+<p>  encoding/json</p>
+<p>  package. To write key/value pairs to a JSON file:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">enc := json.NewEncoder(file)</span><br><span class="line">for _, kv := ... &#123;</span><br><span class="line">  err := enc.Encode(&amp;kv)</span><br></pre></td></tr></table></figure>
+<p>  and to read such a file back:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dec := json.NewDecoder(file)</span><br><span class="line">for &#123;</span><br><span class="line">  var kv KeyValue</span><br><span class="line">  if err := dec.Decode(&amp;kv); err != nil &#123;</span><br><span class="line">    break</span><br><span class="line">  &#125;</span><br><span class="line">  kva = append(kva, kv)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>The map part of your worker can use the <code>ihash(key)</code> function (in <code>worker.go</code>) to pick the reduce task for a given key.</p>
+</li>
+<li><p>You can steal some code from <code>mrsequential.go</code> for reading Map input files, for sorting intermedate key/value pairs between the Map and Reduce, and for storing Reduce output in files.</p>
+</li>
+<li><p>The coordinator, as an RPC server, <strong>will be concurrent</strong>; don’t forget to <strong>lock shared data</strong>.</p>
+</li>
+<li><p>Use Go’s race detector, with <code>go build -race</code> and <code>go run -race</code>. <code>test-mr.sh</code> by default runs the tests with the race detector.</p>
+</li>
+<li><p>Workers will sometimes need to wait, e.g. <strong>reduces can’t start until the last map has finished.</strong> One possibility is for workers to <strong>periodically</strong> ask the coordinator for work, sleeping with <code>time.Sleep()</code> between each request. Another possibility is for the <strong>relevant RPC handler</strong> in the coordinator to have a loop that waits, either with <code>time.Sleep()</code> or <code>sync.Cond</code>. Go runs the handler for each RPC in its own thread, so the fact that one handler is waiting won’t prevent the coordinator from processing other RPCs.</p>
+</li>
+<li><p>The coordinator can’t reliably distinguish between crashed workers, workers that are alive but have stalled for some reason, and workers that are executing but too slowly to be useful. The best you can do is have the coordinator wait for some amount of time, and then give up and re-issue the task to a different worker. For this lab, have the coordinator <strong>wait for ten seconds</strong>; after that the coordinator should assume the worker has died (of course, it might not have).</p>
+</li>
+<li><p>If you choose to implement Backup Tasks (Section 3.6), note that we test that your code doesn’t schedule extraneous tasks when workers execute tasks without crashing. Backup tasks should only be scheduled after some relatively long period of time (e.g., 10s).</p>
+</li>
+<li><p>To test crash recovery, you can use the <code>mrapps/crash.go</code> application plugin. It randomly exits in the Map and Reduce functions.</p>
+</li>
+<li><p>To ensure that nobody observes partially written files in the presence of crashes, the MapReduce paper mentions the trick of using a temporary file and atomically renaming it once it is completely written. You can use <code>ioutil.TempFile</code> to create a temporary file and <code>os.Rename</code> to atomically rename it.</p>
+</li>
+<li><p><code>test-mr.sh</code> runs all the processes in the sub-directory <code>mr-tmp</code>, so if something goes wrong and you want to look at intermediate or output files, look there. You can modify <code>test-mr.sh</code> to <code>exit</code> after the failing test, so the script does not continue testing (and overwrite the output files).</p>
+</li>
+<li><p><code>test-mr-many.sh</code> provides a bare-bones script for running <code>test-mr.sh</code> with a timeout (which is how we’ll test your code). It takes as an argument the number of times to run the tests. You should not run several <code>test-mr.sh</code> instances in parallel because the coordinator will reuse the same socket, causing conflicts.</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>6.824 2021 Lecture 2: Infrastructure: RPC and threads</p>
+<p>Today:<br>  Threads and RPC in Go, with an eye towards the labs</p>
+<p>Why Go?<br>  good support for threads<br>  convenient RPC<br>  type safe<br>  garbage-collected (no use after freeing problems)<br>  threads + GC is particularly attractive!<br>  relatively simple<br>  After the tutorial, use <a href="https://golang.org/doc/effective_go.html" target="_blank" rel="noopener">https://golang.org/doc/effective_go.html</a></p>
+<p>Threads<br>  a useful structuring tool, but can be tricky<br>  Go calls them goroutines; everyone else calls them threads</p>
+<p>Thread = “thread of execution”<br>  threads allow one program to do many things at once<br>  each thread executes serially, just like an ordinary non-threaded program<br>  the threads share memory<br>  each thread includes some per-thread state:<br>    program counter, registers, stack</p>
+<p>Why threads?<br>  They express concurrency, which you need in distributed systems<br>  I/O concurrency<br>    Client sends requests to many servers in parallel and waits for replies.<br>    Server processes multiple client requests; each request may block.<br>    While waiting for the disk to read data for client X,<br>      process a request from client Y.<br>  Multicore performance<br>    Execute code in parallel on several cores.<br>  Convenience<br>    In background, once per second, check whether each worker is still alive.</p>
+<p>Is there an alternative to threads?<br>  Yes: write code that explicitly interleaves activities, in a single thread.<br>    Usually called “event-driven.”<br>  Keep a table of state about each activity, e.g. each client request.<br>  One “event” loop that:<br>    checks for new input for each activity (e.g. arrival of reply from server),<br>    does the next step for each activity,<br>    updates state.<br>  Event-driven gets you I/O concurrency,<br>    and eliminates thread costs (which can be substantial),<br>    but doesn’t get multi-core speedup,<br>    and is painful to program.</p>
+<p>Threading challenges:<br>  shared data<br>    e.g. what if two threads do n = n + 1 at the same time?<br>      or one thread reads while another increments?<br>    this is a “race” — and is usually a bug<br>    -&gt; use locks (Go’s sync.Mutex)<br>    -&gt; or avoid sharing mutable data<br>  coordination between threads<br>    e.g. one thread is producing data, another thread is consuming it<br>      how can the consumer wait (and release the CPU)?<br>      how can the producer wake up the consumer?<br>    -&gt; use Go channels or sync.Cond or WaitGroup<br>  deadlock<br>    cycles via locks and/or communication (e.g. RPC or Go channels)</p>
+<p>Let’s look at the tutorial’s web crawler as a threading example.</p>
+<p>What is a web crawler?<br>  goal is to fetch all web pages, e.g. to feed to an indexer<br>  web pages and links form a graph<br>  multiple links to some pages<br>  graph has cycles</p>
+<p>Crawler challenges<br>  Exploit I/O concurrency<br>    Network latency is more limiting than network capacity<br>    Fetch many URLs at the same time<br>      To increase URLs fetched per second<br>    =&gt; Need threads for concurrency<br>  Fetch each URL only <em>once</em><br>    avoid wasting network bandwidth<br>    be nice to remote servers<br>    =&gt; Need to remember which URLs visited<br>  Know when finished</p>
+<p>We’ll look at two styles of solution [crawler.go on schedule page]</p>
+<p>Serial crawler:<br>  performs depth-first exploration via recursive Serial calls<br>  the “fetched” map avoids repeats, breaks cycles<br>    a single map, passed by reference, caller sees callee’s updates<br>  but: fetches only one page at a time<br>    can we just put a “go” in front of the Serial() call?<br>    let’s try it… what happened?</p>
+<p>ConcurrentMutex crawler:<br>  Creates a thread for each page fetch<br>    Many concurrent fetches, higher fetch rate<br>  the “go func” creates a goroutine and starts it running<br>    func… is an “anonymous function”<br>  The threads share the “fetched” map<br>    So only one thread will fetch any given page<br>  Why the Mutex (Lock() and Unlock())?<br>    One reason:<br>      Two different web pages contain links to the same URL<br>      Two threads simultaneouly fetch those two pages<br>      T1 reads fetched[url], T2 reads fetched[url]<br>      Both see that url hasn’t been fetched (already == false)<br>      Both fetch, which is wrong<br>      The lock causes the check and update to be atomic<br>        So only one thread sees already==false<br>    Another reason:<br>      Internally, map is a complex data structure (tree? expandable hash?)<br>      Concurrent update/update may wreck internal invariants<br>      Concurrent update/read may crash the read<br>    What if I comment out Lock() / Unlock()?<br>      go run crawler.go<br>        Why does it work?<br>      go run -race crawler.go<br>        Detects races even when output is correct!<br>  How does the ConcurrentMutex crawler decide it is done?<br>    sync.WaitGroup<br>    Wait() waits for all Add()s to be balanced by Done()s<br>      i.e. waits for all child threads to finish<br>    [diagram: tree of goroutines, overlaid on cyclic URL graph]<br>    there’s a WaitGroup per node in the tree<br>  How many concurrent threads might this crawler create?</p>
+<p>ConcurrentChannel crawler<br>  a Go channel:<br>    a channel is an object<br>      ch := make(chan int)<br>    a channel lets one thread send an object to another thread<br>    ch &lt;- x<br>      the sender waits until some goroutine receives<br>    y := &lt;- ch<br>      for y := range ch<br>      a receiver waits until some goroutine sends<br>    channels both communicate and synchronize<br>    several threads can send and receive on a channel<br>    channels are cheap<br>    remember: sender blocks until the receiver receives!<br>      “synchronous”<br>      watch out for deadlock<br>  ConcurrentChannel master()<br>    master() creates a worker goroutine to fetch each page<br>    worker() sends slice of page’s URLs on a channel<br>      multiple workers send on the single channel<br>    master() reads URL slices from the channel<br>  At what line does the master wait?<br>    Does the master use CPU time while it waits?<br>  No need to lock the fetched map, because it isn’t shared!<br>  How does the master know it is done?<br>    Keeps count of workers in n.<br>    Each worker sends exactly one item on channel.</p>
+<p>Why is it not a race that multiple threads use the same channel?</p>
+<p>Is there a race when worker thread writes into a slice of URLs,<br>  and master thread reads that slice, without locking?</p>
+<ul>
+<li>worker only writes slice <em>before</em> sending</li>
+<li>master only reads slice <em>after</em> receiving<br>So they can’t use the slice at the same time.</li>
+</ul>
+<p>When to use sharing and locks, versus channels?<br>  Most problems can be solved in either style<br>  What makes the most sense depends on how the programmer thinks<br>    state — sharing and locks<br>    communication — channels<br>  For the 6.824 labs, I recommend sharing+locks for state,<br>    and sync.Cond or channels or time.Sleep() for waiting/notification.</p>
+<p>Remote Procedure Call (RPC)<br>  a key piece of distributed system machinery; all the labs use RPC<br>  goal: easy-to-program client/server communication<br>  hide details of network protocols<br>  convert data (strings, arrays, maps, &amp;c) to “wire format”</p>
+<p>RPC message diagram:<br>  Client             Server<br>    request—-&gt;<br>       &lt;—-response</p>
+<p>Software structure<br>  client app        handler fns<br>   stub fns         dispatcher<br>   RPC lib           RPC lib<br>     net  —————— net</p>
+<p><strong>Go example: kv.go on schedule page</strong><br>  A toy key/value storage server — Put(key,value), Get(key)-&gt;value<br>  Uses Go’s RPC library<br>  <strong>Common:</strong><br>    Declare Args and Reply struct for each server handler.<br>  <strong>Client:</strong><br>    connect()’s Dial() creates a TCP connection to the server<br>    get() and put() are client “stubs”<br>    Call() asks the RPC library to perform the call<br>      you specify server function name, arguments, place to put reply<br>      library marshalls args, sends request, waits, unmarshalls reply<br>      return value from Call() indicates whether it got a reply<br>      usually you’ll also have a reply.Err indicating service-level failure<br>  <strong>Server:</strong><br>    Go requires server to declare an object with methods as RPC handlers<br>    Server then registers that object with the RPC library<br>    Server accepts TCP connections, gives them to RPC library<br>    The RPC library<br>      reads each request<br>      creates a new goroutine for this request<br>      unmarshalls request<br>      looks up the named object (in table create by Register())<br>      calls the object’s named method (dispatch)<br>      marshalls reply<br>      writes reply on TCP connection<br>    The server’s Get() and Put() handlers<br>      Must lock, since RPC library creates a new goroutine for each request<br>      read args; modify reply</p>
+<p>A few details:<br>  Binding: how does client know what server computer to talk to?<br>    For Go’s RPC, server name/port is an argument to Dial<br>    Big systems have some kind of name or configuration server<br>  Marshalling: format data into packets<br>    Go’s RPC library can pass strings, arrays, objects, maps, &amp;c<br>    Go passes pointers by copying the pointed-to data<br>    Cannot pass channels or functions</p>
+<p>RPC problem: what to do about failures?<br>  e.g. lost packet, broken network, slow server, crashed server</p>
+<p>What does a failure look like to the client RPC library?<br>  Client never sees a response from the server<br>  Client does <em>not</em> know if the server saw the request!<br>    [diagram of losses at various points]<br>    Maybe server never saw the request<br>    Maybe server executed, crashed just before sending reply<br>    Maybe server executed, but network died just before delivering reply</p>
+<p>Simplest failure-handling scheme: “best effort”<br>  Call() waits for response for a while<br>  If none arrives, re-send the request<br>  Do this a few times<br>  Then give up and return an error</p>
+<p>Q: is “best effort” easy for applications to cope with?</p>
+<p>A particularly bad situation:<br>  client executes<br>    Put(“k”, 10);<br>    Put(“k”, 20);<br>  both succeed<br>  what will Get(“k”) yield?<br>  [diagram, timeout, re-send, original arrives late]</p>
+<p>Q: is best effort ever OK?<br>   read-only operations<br>   operations that do nothing if repeated<br>     e.g. DB checks if record has already been inserted</p>
+<p>Better RPC behavior: “at most once”<br>  idea: server RPC code detects duplicate requests<br>    returns previous reply instead of re-running handler<br>  Q: how to detect a duplicate request?<br>  client includes unique ID (XID) with each request<br>    uses same XID for re-send<br>  server:<br>    if seen[xid]:<br>      r = old[xid]<br>    else<br>      r = handler()<br>      old[xid] = r<br>      seen[xid] = true</p>
+<p>some at-most-once complexities<br>  this will come up in lab 3<br>  what if two clients use the same XID?<br>    big random number?<br>    combine unique client ID (ip address?) with sequence #?<br>  server must eventually discard info about old RPCs<br>    when is discard safe?<br>    idea:<br>      each client has a unique ID (perhaps a big random number)<br>      per-client RPC sequence numbers<br>      client includes “seen all replies &lt;= X” with every RPC<br>      much like TCP sequence #s and acks<br>    or only allow client one outstanding RPC at a time<br>      arrival of seq+1 allows server to discard all &lt;= seq<br>  how to handle dup req while original is still executing?<br>    server doesn’t know reply yet<br>    idea: “pending” flag per executing RPC; wait or ignore</p>
+<p>What if an at-most-once server crashes and re-starts?<br>  if at-most-once duplicate info in memory, server will forget<br>    and accept duplicate requests after re-start<br>  maybe it should write the duplicate info to disk<br>  maybe replica server should also replicate duplicate info</p>
+<p>Go RPC is a simple form of “at-most-once”<br>  open TCP connection<br>  write request to TCP connection<br>  Go RPC never re-sends a request<br>    So server won’t see duplicate requests<br>  Go RPC code returns an error if it doesn’t get a reply<br>    perhaps after a timeout (from TCP)<br>    perhaps server didn’t see request<br>    perhaps server processed request but server/net failed before reply came back</p>
+<p>What about “exactly once”?<br>  unbounded retries plus duplicate detection plus fault-tolerant service</p>
+<p><a href="https://github.com/JellyZhang/mit-6.824-2021/tree/324a95f0555587b36ef739675e64d9a76d2729d6" target="_blank" rel="noopener">ref</a></p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/echarts.png"
+      alt="Les">
+  <p class="site-author-name" itemprop="name">Les</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Getting-started"><span class="nav-number">2.</span> <span class="nav-text">Getting started</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Your-Job-moderate-hard"><span class="nav-number">3.</span> <span class="nav-text">Your Job (moderate/hard)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-few-rules"><span class="nav-number">4.</span> <span class="nav-text">A few rules:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hints"><span class="nav-number">5.</span> <span class="nav-text">Hints</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Les</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+  
+
+</body>
+</html>

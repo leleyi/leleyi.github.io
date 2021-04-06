@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/echarts.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/echarts.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"scrollpercent":true,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    save_scroll: false,
+    copycode: {"enable":true,"show_result":true,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="1：HashMap 的数据结构？A：哈希表结构（链表散列：数组 + 链表）实现，结合数组和链表的优点。当链表长度超过 8 时，链表转换为红黑树。 1transient Node&amp;lt;K,V&amp;gt;\[\] table; 2：HashMap 的工作原理？HashMap 底层是 hash 数组和单向链表实现，数组中的每个元素都是链表，由 Node 内部类（实现 Map.Entry 接口）实现，Has">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FILE">
+<meta property="og:url" content="http://yoursite.com/doing/流程_hashmap.html">
+<meta property="og:site_name" content="FILE">
+<meta property="og:description" content="1：HashMap 的数据结构？A：哈希表结构（链表散列：数组 + 链表）实现，结合数组和链表的优点。当链表长度超过 8 时，链表转换为红黑树。 1transient Node&amp;lt;K,V&amp;gt;\[\] table; 2：HashMap 的工作原理？HashMap 底层是 hash 数组和单向链表实现，数组中的每个元素都是链表，由 Node 内部类（实现 Map.Entry 接口）实现，Has">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://vlambda.com/img?url=https://mmbiz.qpic.cn/mmbiz_jpg/9mQQWOf4KRKkSgpKCd5PAf5rFicdeHYSv09hWxTuAAR0Q0picCAUyXxiatM1VG6JdmcibkjWUkwJmzuOAgheLnOHmQ/640?wx_fmt=jpeg">
+<meta property="og:image" content="https://vlambda.com/img?url=https://mmbiz.qpic.cn/mmbiz_jpg/9mQQWOf4KRKkSgpKCd5PAf5rFicdeHYSvbv2VRT6iaN9Xvk7s2j1IwDfqP9ianaPka23qXhiboaccZwtS6SfwGthDg/640?wx_fmt=jpeg">
+<meta property="og:updated_time" content="2021-04-06T03:00:44.294Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FILE">
+<meta name="twitter:description" content="1：HashMap 的数据结构？A：哈希表结构（链表散列：数组 + 链表）实现，结合数组和链表的优点。当链表长度超过 8 时，链表转换为红黑树。 1transient Node&amp;lt;K,V&amp;gt;\[\] table; 2：HashMap 的工作原理？HashMap 底层是 hash 数组和单向链表实现，数组中的每个元素都是链表，由 Node 内部类（实现 Map.Entry 接口）实现，Has">
+<meta name="twitter:image" content="https://vlambda.com/img?url=https://mmbiz.qpic.cn/mmbiz_jpg/9mQQWOf4KRKkSgpKCd5PAf5rFicdeHYSv09hWxTuAAR0Q0picCAUyXxiatM1VG6JdmcibkjWUkwJmzuOAgheLnOHmQ/640?wx_fmt=jpeg">
+  <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/doing/流程_hashmap">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title> | FILE</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FILE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+          <h4 id="1：HashMap-的数据结构？"><a href="#1：HashMap-的数据结构？" class="headerlink" title="1：HashMap 的数据结构？"></a>1：HashMap 的数据结构？</h4><p>A：哈希表结构（链表散列：数组 + 链表）实现，结合数组和链表的优点。当链表长度超过 8 时，链表转换为红黑树。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transient Node&lt;K,V&gt;\[\] table;</span><br></pre></td></tr></table></figure>
+<h4 id="2：HashMap-的工作原理？"><a href="#2：HashMap-的工作原理？" class="headerlink" title="2：HashMap 的工作原理？"></a>2：HashMap 的工作原理？</h4><p>HashMap 底层是 hash 数组和单向链表实现，数组中的每个元素都是链表，由 Node 内部类（实现 Map.Entry 接口）实现，HashMap 通过 put &amp; get 方法存储和获取。</p>
+<p>存储对象时，将 K/V 键值传给 put() 方法：</p>
+<p>①、调用 hash(K) 方法计算 K 的 hash 值，然后结合数组长度，计算得数组下标；</p>
+<p>②、调整数组大小（当容器中的元素个数大于 capacity * loadfactor 时，容器会进行扩容 resize 为 2n）；</p>
+<p>③、i. 如果 K 的 hash 值在 HashMap 中不存在，则执行插入，若存在，则发生碰撞；</p>
+<p>ii. 如果 K 的 hash 值在 HashMap 中存在，且它们两者 equals 返回 true，则更新键值对；</p>
+<p>iii. 如果 K 的 hash 值在 HashMap 中存在，且它们两者 equals 返回 false，则插入链表的尾部（尾插法）或者红黑树中（树的添加方式）。</p>
+<p>（JDK 1.7 之前使用头插法、JDK 1.8 使用尾插法）（注意：当碰撞导致链表大于 TREEIFY_THRESHOLD = 8 时，就把链表转换成红黑树）  </p>
+<p>获取对象时，将 K 传给 get() 方法： ①、调用 hash(K) 方法（计算 K 的 hash 值）从而获取该键值所在链表的数组下标； ②、顺序遍历链表，equals() 方法查找相同 Node 链表中 K 值对应的 V 值。  </p>
+<p>hashCode 是定位的，存储位置；equals 是定性的，比较两者是否相等。</p>
+<h4 id="3-当两个对象的-hashCode-相同会发生什么？"><a href="#3-当两个对象的-hashCode-相同会发生什么？" class="headerlink" title="3. 当两个对象的 hashCode 相同会发生什么？"></a>3. 当两个对象的 hashCode 相同会发生什么？</h4><h4 id="4-你知道-hash-的实现吗？为什么要这样实现？"><a href="#4-你知道-hash-的实现吗？为什么要这样实现？" class="headerlink" title="4. 你知道 hash 的实现吗？为什么要这样实现？"></a>4. 你知道 hash 的实现吗？为什么要这样实现？</h4><p>JDK 1.8 中，是通过 hashCode() 的高 16 位异或低 16 位实现的：(h = k.hashCode()) ^ (h &gt;&gt;&gt; 16)，主要是从速度，功效和质量来考虑的，减少系统的开销，也不会造成因为高位没有参与下标的计算，从而引起的碰撞。</p>
+<h4 id="5-为什么要用异或运算符？"><a href="#5-为什么要用异或运算符？" class="headerlink" title="5. 为什么要用异或运算符？"></a>5. 为什么要用异或运算符？</h4><p>保证了对象的 hashCode 的 32 位值只要有一位发生改变，整个 hash() 返回值就会改变。尽可能的减少碰撞。</p>
+<h4 id="6-HashMap-的-table-的容量如何确定？loadFactor-是什么？该容量如何变化？这种变化会带来什么问题？"><a href="#6-HashMap-的-table-的容量如何确定？loadFactor-是什么？该容量如何变化？这种变化会带来什么问题？" class="headerlink" title="6.HashMap 的 table 的容量如何确定？loadFactor 是什么？该容量如何变化？这种变化会带来什么问题？"></a>6.HashMap 的 table 的容量如何确定？loadFactor 是什么？该容量如何变化？这种变化会带来什么问题？</h4><p>④、如果数据很大的情况下，扩展时将会带来性能的损失，在性能要求很高的地方，这种损失很可能很致命。</p>
+<h4 id="7-HashMap-中-put-方法的过程？"><a href="#7-HashMap-中-put-方法的过程？" class="headerlink" title="7.HashMap 中 put 方法的过程？"></a>7.HashMap 中 put 方法的过程？</h4><p>答：“调用哈希函数获取 Key 对应的 hash 值，再计算其数组下标；</p>
+<p>如果没有出现哈希冲突，则直接放入数组；如果出现哈希冲突，则以链表的方式放在链表后面；</p>
+<p>如果链表长度超过阀值 (TREEIFY THRESHOLD==8)，就把链表转成红黑树，链表长度低于 6，就把红黑树转回链表;</p>
+<p>如果结点的 key 已经存在，则替换其 value 即可；</p>
+<p>如果集合中的键值对大于 12，调用 resize 方法进行数组扩容。”</p>
+<h4 id="8-数组扩容的过程？"><a href="#8-数组扩容的过程？" class="headerlink" title="8. 数组扩容的过程？"></a>8. 数组扩容的过程？</h4><p>创建一个新的数组，其容量为旧数组的两倍，并重新计算旧数组中结点的存储位置。结点在新数组中的位置只有两种，原下标位置或原下标 + 旧数组的大小。</p>
+<h4 id="9-拉链法导致的链表过深问题为什么不用二叉查找树代替，而选择红黑树？为什么不一直使用红黑树？"><a href="#9-拉链法导致的链表过深问题为什么不用二叉查找树代替，而选择红黑树？为什么不一直使用红黑树？" class="headerlink" title="9. 拉链法导致的链表过深问题为什么不用二叉查找树代替，而选择红黑树？为什么不一直使用红黑树？"></a>9. 拉链法导致的链表过深问题为什么不用二叉查找树代替，而选择红黑树？为什么不一直使用红黑树？</h4><h4 id="10-说说你对红黑树的见解？"><a href="#10-说说你对红黑树的见解？" class="headerlink" title="10. 说说你对红黑树的见解？"></a>10. 说说你对红黑树的见解？</h4><ul>
+<li><p>每个节点非红即黑</p>
+</li>
+<li><p>根节点总是黑色的</p>
+</li>
+<li><p>如果节点是红色的，则它的子节点必须是黑色的（反之不一定）</p>
+</li>
+<li><p>每个叶子节点都是黑色的空节点（NIL 节点）</p>
+</li>
+<li><p>从根节点到叶节点或空子节点的每条路径，必须包含相同数目的黑色节点（即相同的黑色高度）</p>
+</li>
+</ul>
+<h4 id="11-jdk8-中对-HashMap-做了哪些改变？"><a href="#11-jdk8-中对-HashMap-做了哪些改变？" class="headerlink" title="11.jdk8 中对 HashMap 做了哪些改变？"></a>11.jdk8 中对 HashMap 做了哪些改变？</h4><p>在 java 1.8 中，如果链表的长度超过了 8，那么链表将转换为红黑树。（桶的数量必须大于 64，小于 64 的时候只会扩容）</p>
+<p>发生 hash 碰撞时，java 1.7 会在链表的头部插入，而 java 1.8 会在链表的尾部插入</p>
+<p>在 java 1.8 中，Entry 被 Node 替代 (换了一个马甲。</p>
+<h4 id="12-HashMap，LinkedHashMap，TreeMap-有什么区别？"><a href="#12-HashMap，LinkedHashMap，TreeMap-有什么区别？" class="headerlink" title="12.HashMap，LinkedHashMap，TreeMap 有什么区别？"></a>12.HashMap，LinkedHashMap，TreeMap 有什么区别？</h4><p>HashMap 参考其他问题；</p>
+<p>LinkedHashMap 保存了记录的插入顺序，在用 Iterator 遍历时，先取到的记录肯定是先插入的；遍历比 HashMap 慢；</p>
+<p>TreeMap 实现 SortMap 接口，能够把它保存的记录根据键排序（默认按键值升序排序，也可以指定排序的比较器）</p>
+<h4 id="13-HashMap-amp-TreeMap-amp-LinkedHashMap-使用场景？"><a href="#13-HashMap-amp-TreeMap-amp-LinkedHashMap-使用场景？" class="headerlink" title="13.HashMap &amp; TreeMap &amp; LinkedHashMap 使用场景？"></a>13.HashMap &amp; TreeMap &amp; LinkedHashMap 使用场景？</h4><p>一般情况下，使用最多的是 HashMap。</p>
+<p>HashMap：在 Map 中插入、删除和定位元素时；</p>
+<p>TreeMap：在需要按自然顺序或自定义顺序遍历键的情况下；</p>
+<p>LinkedHashMap：在需要输出的顺序和输入的顺序相同的情况下。</p>
+<h4 id="14-HashMap-和-HashTable-有什么区别？"><a href="#14-HashMap-和-HashTable-有什么区别？" class="headerlink" title="14.HashMap 和 HashTable 有什么区别？"></a>14.HashMap 和 HashTable 有什么区别？</h4><p>①、HashMap 是线程不安全的，HashTable 是线程安全的；</p>
+<p>②、由于线程安全，所以 HashTable 的效率比不上 HashMap；</p>
+<p>③、HashMap 最多只允许一条记录的键为 null，允许多条记录的值为 null，而 HashTable 不允许；  </p>
+<p>④、HashMap 默认初始化数组的大小为 16，HashTable 为 11，前者扩容时，扩大两倍，后者扩大两倍 + 1；</p>
+<p>⑤、HashMap 需要重新计算 hash 值，而 HashTable 直接使用对象的 hashCode</p>
+<h4 id="15-Java-中的另一个线程安全的与-HashMap-极其类似的类是什么？同样是线程安全，它与-HashTable-在线程同步上有什么不同？"><a href="#15-Java-中的另一个线程安全的与-HashMap-极其类似的类是什么？同样是线程安全，它与-HashTable-在线程同步上有什么不同？" class="headerlink" title="15.Java 中的另一个线程安全的与 HashMap 极其类似的类是什么？同样是线程安全，它与 HashTable 在线程同步上有什么不同？"></a>15.Java 中的另一个线程安全的与 HashMap 极其类似的类是什么？同样是线程安全，它与 HashTable 在线程同步上有什么不同？</h4><p>ConcurrentHashMap 类（是 Java 并发包 java.util.concurrent 中提供的一个线程安全且高效的 HashMap 实现）。</p>
+<p>HashTable 是使用 synchronize 关键字加锁的原理（就是对对象加锁）；</p>
+<p>而针对 ConcurrentHashMap，在 JDK 1.7 中采用 分段锁的方式；JDK 1.8 中直接采用了 CAS（无锁算法）+ synchronized。</p>
+<h4 id="16-HashMap-amp-ConcurrentHashMap-的区别？"><a href="#16-HashMap-amp-ConcurrentHashMap-的区别？" class="headerlink" title="16.HashMap &amp; ConcurrentHashMap 的区别？"></a>16.HashMap &amp; ConcurrentHashMap 的区别？</h4><p>除了加锁，原理上无太大区别。另外，HashMap 的键值对允许有 null，但是 ConCurrentHashMap 都不允许。</p>
+<h4 id="17-为什么-ConcurrentHashMap-比-HashTable-效率要高？"><a href="#17-为什么-ConcurrentHashMap-比-HashTable-效率要高？" class="headerlink" title="17. 为什么 ConcurrentHashMap 比 HashTable 效率要高？"></a>17. 为什么 ConcurrentHashMap 比 HashTable 效率要高？</h4><p>HashTable 使用一把锁（锁住整个链表结构）处理并发问题，多个线程竞争一把锁，容易阻塞；</p>
+<p>ConcurrentHashMap</p>
+<ul>
+<li><p>JDK 1.7 中使用分段锁（ReentrantLock + Segment + HashEntry），相当于把一个 HashMap 分成多个段，每段分配一把锁，这样支持多线程访问。锁粒度：基于 Segment，包含多个 HashEntry。</p>
+</li>
+<li><p>JDK 1.8 中使用 CAS + synchronized + Node + 红黑树。锁粒度：Node（首结</p>
+<p>点）（实现 Map.Entry ）。锁粒度降低了。</p>
+</li>
+</ul>
+<h4 id="18-针对-ConcurrentHashMap-锁机制具体分析（JDK-1-7-VS-JDK-1-8）"><a href="#18-针对-ConcurrentHashMap-锁机制具体分析（JDK-1-7-VS-JDK-1-8）" class="headerlink" title="18. 针对 ConcurrentHashMap 锁机制具体分析（JDK 1.7 VS JDK 1.8）"></a>18. 针对 ConcurrentHashMap 锁机制具体分析（JDK 1.7 VS JDK 1.8）</h4><p>JDK 1.7 中，采用分段锁的机制，实现并发的更新操作，底层采用数组 + 链表的存储结构，包括两个核心静态内部类 Segment 和 HashEntry。</p>
+<p>①、Segment 继承 ReentrantLock（重入锁） 用来充当锁的角色，每个 Segment 对象守护每个散列映射表的若干个桶；</p>
+<p>②、HashEntry 用来封装映射表的键 - 值对；</p>
+<p>③、每个桶是由若干个 HashEntry 对象链接起来的链表</p>
+<p><img src="https://vlambda.com/img?url=https://mmbiz.qpic.cn/mmbiz_jpg/9mQQWOf4KRKkSgpKCd5PAf5rFicdeHYSv09hWxTuAAR0Q0picCAUyXxiatM1VG6JdmcibkjWUkwJmzuOAgheLnOHmQ/640?wx_fmt=jpeg" alt></p>
+<p>JDK 1.8 中，采用 Node + CAS + Synchronized 来保证并发安全。取消类 Segment，直接用 table 数组存储键值对；当 HashEntry 对象组成的链表长度超过 TREEIFY_THRESHOLD 时，链表转换为红黑树，提升性能。底层变更为数组 + 链表 + 红黑树。</p>
+<p><img src="https://vlambda.com/img?url=https://mmbiz.qpic.cn/mmbiz_jpg/9mQQWOf4KRKkSgpKCd5PAf5rFicdeHYSvbv2VRT6iaN9Xvk7s2j1IwDfqP9ianaPka23qXhiboaccZwtS6SfwGthDg/640?wx_fmt=jpeg" alt></p>
+<h4 id="19-ConcurrentHashMap-在-JDK-1-8-中，为什么要使用内置锁-synchronized-来代替重入锁-ReentrantLock？"><a href="#19-ConcurrentHashMap-在-JDK-1-8-中，为什么要使用内置锁-synchronized-来代替重入锁-ReentrantLock？" class="headerlink" title="19.ConcurrentHashMap 在 JDK 1.8 中，为什么要使用内置锁 synchronized 来代替重入锁 ReentrantLock？"></a>19.ConcurrentHashMap 在 JDK 1.8 中，为什么要使用内置锁 synchronized 来代替重入锁 ReentrantLock？</h4><p>①、粒度降低了；</p>
+<p>②、JVM 开发团队没有放弃 synchronized，而且基于 JVM 的 synchronized 优化空间更大，更加自然。</p>
+<p>③、在大量的数据操作下，对于 JVM 的内存压力，基于 API 的 ReentrantLock 会开销更多的内存。</p>
+<h4 id="20-ConcurrentHashMap-简单介绍？"><a href="#20-ConcurrentHashMap-简单介绍？" class="headerlink" title="20.ConcurrentHashMap 简单介绍？"></a>20.ConcurrentHashMap 简单介绍？</h4><p>①、重要的常量：</p>
+<p>private transient volatile int sizeCtl;</p>
+<p>当为负数时，-1 表示正在初始化，-N 表示 N - 1 个线程正在进行扩容；</p>
+<p>当为 0 时，表示 table 还没有初始化；</p>
+<p>当为其他正数时，表示初始化或者下一次进行扩容的大小。</p>
+<p>②、数据结构：</p>
+<p>Node 是存储结构的基本单元，继承 HashMap 中的 Entry，用于存储数据；  </p>
+<p>TreeNode 继承 Node，但是数据结构换成了二叉树结构，是红黑树的存储结构，用于红黑树中存储数据；</p>
+<p>TreeBin 是封装 TreeNode 的容器，提供转换红黑树的一些条件和锁的控制。</p>
+<p>③、存储对象时（put() 方法）：</p>
+<p>如果没有初始化，就调用 initTable() 方法来进行初始化；</p>
+<p>如果没有 hash 冲突就直接 CAS 无锁插入；</p>
+<p>如果需要扩容，就先进行扩容；</p>
+<p>如果存在 hash 冲突，就加锁来保证线程安全，两种情况：一种是链表形式就直接遍历</p>
+<p>到尾端插入，一种是红黑树就按照红黑树结构插入；</p>
+<p>如果该链表的数量大于阀值 8，就要先转换成红黑树的结构，break 再一次进入循环</p>
+<p>如果添加成功就调用 addCount() 方法统计 size，并且检查是否需要扩容。</p>
+<p>④、扩容方法 transfer()：默认容量为 16，扩容时，容量变为原来的两倍。</p>
+<p>helpTransfer()：调用多个工作线程一起帮助进行扩容，这样的效率就会更高。</p>
+<p>⑤、获取对象时（get() 方法）：</p>
+<p>计算 hash 值，定位到该 table 索引位置，如果是首结点符合就返回；</p>
+<p>如果遇到扩容时，会调用标记正在扩容结点 ForwardingNode.find() 方法，查找该结点，匹配就返回；</p>
+<p>以上都不符合的话，就往下遍历结点，匹配就返回，否则最后就返回 null。</p>
+<h4 id="21-ConcurrentHashMap-的并发度是什么？"><a href="#21-ConcurrentHashMap-的并发度是什么？" class="headerlink" title="21.ConcurrentHashMap 的并发度是什么？"></a>21.ConcurrentHashMap 的并发度是什么？</h4><p>程序运行时能够同时更新 ConccurentHashMap 且不产生锁竞争的最大线程数。默认为 16，且可以在构造函数中设置。</p>
+<p>当用户设置并发度时，ConcurrentHashMap 会使用大于等于该值的最小 2 幂指数作为实际并发度（假如用户设置并发度为 17，实际并发度则为 32）</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/echarts.png"
+      alt="Les">
+  <p class="site-author-name" itemprop="name">Les</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1：HashMap-的数据结构？"><span class="nav-number">1.</span> <span class="nav-text">1：HashMap 的数据结构？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2：HashMap-的工作原理？"><span class="nav-number">2.</span> <span class="nav-text">2：HashMap 的工作原理？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-当两个对象的-hashCode-相同会发生什么？"><span class="nav-number">3.</span> <span class="nav-text">3. 当两个对象的 hashCode 相同会发生什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-你知道-hash-的实现吗？为什么要这样实现？"><span class="nav-number">4.</span> <span class="nav-text">4. 你知道 hash 的实现吗？为什么要这样实现？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-为什么要用异或运算符？"><span class="nav-number">5.</span> <span class="nav-text">5. 为什么要用异或运算符？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-HashMap-的-table-的容量如何确定？loadFactor-是什么？该容量如何变化？这种变化会带来什么问题？"><span class="nav-number">6.</span> <span class="nav-text">6.HashMap 的 table 的容量如何确定？loadFactor 是什么？该容量如何变化？这种变化会带来什么问题？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-HashMap-中-put-方法的过程？"><span class="nav-number">7.</span> <span class="nav-text">7.HashMap 中 put 方法的过程？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-数组扩容的过程？"><span class="nav-number">8.</span> <span class="nav-text">8. 数组扩容的过程？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-拉链法导致的链表过深问题为什么不用二叉查找树代替，而选择红黑树？为什么不一直使用红黑树？"><span class="nav-number">9.</span> <span class="nav-text">9. 拉链法导致的链表过深问题为什么不用二叉查找树代替，而选择红黑树？为什么不一直使用红黑树？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-说说你对红黑树的见解？"><span class="nav-number">10.</span> <span class="nav-text">10. 说说你对红黑树的见解？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-jdk8-中对-HashMap-做了哪些改变？"><span class="nav-number">11.</span> <span class="nav-text">11.jdk8 中对 HashMap 做了哪些改变？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-HashMap，LinkedHashMap，TreeMap-有什么区别？"><span class="nav-number">12.</span> <span class="nav-text">12.HashMap，LinkedHashMap，TreeMap 有什么区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-HashMap-amp-TreeMap-amp-LinkedHashMap-使用场景？"><span class="nav-number">13.</span> <span class="nav-text">13.HashMap &amp; TreeMap &amp; LinkedHashMap 使用场景？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-HashMap-和-HashTable-有什么区别？"><span class="nav-number">14.</span> <span class="nav-text">14.HashMap 和 HashTable 有什么区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-Java-中的另一个线程安全的与-HashMap-极其类似的类是什么？同样是线程安全，它与-HashTable-在线程同步上有什么不同？"><span class="nav-number">15.</span> <span class="nav-text">15.Java 中的另一个线程安全的与 HashMap 极其类似的类是什么？同样是线程安全，它与 HashTable 在线程同步上有什么不同？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#16-HashMap-amp-ConcurrentHashMap-的区别？"><span class="nav-number">16.</span> <span class="nav-text">16.HashMap &amp; ConcurrentHashMap 的区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#17-为什么-ConcurrentHashMap-比-HashTable-效率要高？"><span class="nav-number">17.</span> <span class="nav-text">17. 为什么 ConcurrentHashMap 比 HashTable 效率要高？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#18-针对-ConcurrentHashMap-锁机制具体分析（JDK-1-7-VS-JDK-1-8）"><span class="nav-number">18.</span> <span class="nav-text">18. 针对 ConcurrentHashMap 锁机制具体分析（JDK 1.7 VS JDK 1.8）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#19-ConcurrentHashMap-在-JDK-1-8-中，为什么要使用内置锁-synchronized-来代替重入锁-ReentrantLock？"><span class="nav-number">19.</span> <span class="nav-text">19.ConcurrentHashMap 在 JDK 1.8 中，为什么要使用内置锁 synchronized 来代替重入锁 ReentrantLock？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#20-ConcurrentHashMap-简单介绍？"><span class="nav-number">20.</span> <span class="nav-text">20.ConcurrentHashMap 简单介绍？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#21-ConcurrentHashMap-的并发度是什么？"><span class="nav-number">21.</span> <span class="nav-text">21.ConcurrentHashMap 的并发度是什么？</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Les</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+  
+
+</body>
+</html>

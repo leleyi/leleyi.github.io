@@ -55,15 +55,19 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="FILE">
-<meta property="og:url" content="http://yoursite.com/archives/2019/03/index.html">
+  <meta name="description" content="首先树的几种遍历方式是最为基础的点。有三种算法1.递归 2.栈 3.莫里斯算法。 根据不同的遍历顺序有可以将树的遍历分为前中后三种顺序。 特别的是，后续的方法值得注意。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="面试手撕_树">
+<meta property="og:url" content="http://yoursite.com/doing/面试手撸代码_树.html">
 <meta property="og:site_name" content="FILE">
+<meta property="og:description" content="首先树的几种遍历方式是最为基础的点。有三种算法1.递归 2.栈 3.莫里斯算法。 根据不同的遍历顺序有可以将树的遍历分为前中后三种顺序。 特别的是，后续的方法值得注意。">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-04-06T08:58:53.147Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FILE">
+<meta name="twitter:title" content="面试手撕_树">
+<meta name="twitter:description" content="首先树的几种遍历方式是最为基础的点。有三种算法1.递归 2.栈 3.莫里斯算法。 根据不同的遍历顺序有可以将树的遍历分为前中后三种顺序。 特别的是，后续的方法值得注意。">
   <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
-  <link rel="canonical" href="http://yoursite.com/archives/2019/03/">
+  <link rel="canonical" href="http://yoursite.com/doing/面试手撸代码_树">
 
 
 <script id="page-configurations">
@@ -72,12 +76,12 @@
     sidebar: "",
     isHome: false,
     isPost: false,
-    isPage: false,
-    isArchive: true
+    isPage: true,
+    isArchive: false
   };
 </script>
 
-  <title>Archive | FILE</title>
+  <title>面试手撕_树 | FILE</title>
   
 
 
@@ -221,73 +225,50 @@
 
   
 
-          <div id="content" class="content page-archive">
+          <div id="content" class="content page-post-detail">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-      <span class="archive-page-counter">
-        
-        
-         
-          
-        Good! 89 posts in total. Keep on posting.
-      </span>
-      
-
-      
-
-  
-  
-  
-
-  
+  <div id="posts" class="posts-expand">
     
-    <div class="collection-title">
-      <h1 class="archive-year" id="archive-year-2019">2019</h1>
-    </div>
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">面试手撕_树
+
+</h1>
+
+<div class="post-meta">
   
-  
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+</div>
 
-      <h2 class="post-title">
+</header>
+
+      
+      
+      
+      <div class="post-body">
         
-          <a class="post-title-link" href="/2019/03/19/面试记录_/" itemprop="url">
-            
-              <span itemprop="name">2020实习_面试</span>
-            
-          </a>
-        
-      </h2>
+          <ul>
+<li>首先树的几种遍历方式是最为基础的点。有三种算法1.递归 2.栈 3.莫里斯算法。</li>
+<li>根据不同的遍历顺序有可以将树的遍历分为前中后三种顺序。</li>
+<li>特别的是，后续的方法值得注意。</li>
+</ul>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-19T21:51:30+08:00"
-              content="2019-03-19">
-          03-19
-        </time>
+        
       </div>
-
-    </header>
-  </article>
-
-
-
-
+      
+      
+      
     </div>
+    
+
+    
+    
+    
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -322,7 +303,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -494,12 +475,66 @@
   
 
   
+    
+      <script type="text/x-mathjax-config">
 
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', function() {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
   
 
   
 
+  
+
 
   
+    <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+  
+
 </body>
 </html>

@@ -56,9 +56,9 @@
 </script>
 
   <meta name="description" content="Java中又很多控制并发的方法, 如何选择采用哪种方案呢, 该问题困惑了我很久,因为感觉每个问题都可能有多种解决方案. -&amp;gt; 直到陈硕大牛的《多线程服务器的常用编程模型》一文中解决了我的困惑.即:  线程同步的四项原则，按重要性排列：  首要原则是尽量最低限度地共享对象，减少需要同步的场合。一个对象能不暴露给别的线程就不要暴露；如果要暴露，优先考虑 immutable 对象；实在不行才暴露">
-<meta property="og:type" content="article">
+<meta property="og:type" content="website">
 <meta property="og:title" content="面试手撕_多线程">
-<meta property="og:url" content="http://yoursite.com/2021/02/09/面试手撸代码_多线程/index.html">
+<meta property="og:url" content="http://yoursite.com/doing/面试手撸代码_多线程.html">
 <meta property="og:site_name" content="FILE">
 <meta property="og:description" content="Java中又很多控制并发的方法, 如何选择采用哪种方案呢, 该问题困惑了我很久,因为感觉每个问题都可能有多种解决方案. -&amp;gt; 直到陈硕大牛的《多线程服务器的常用编程模型》一文中解决了我的困惑.即:  线程同步的四项原则，按重要性排列：  首要原则是尽量最低限度地共享对象，减少需要同步的场合。一个对象能不暴露给别的线程就不要暴露；如果要暴露，优先考虑 immutable 对象；实在不行才暴露">
 <meta property="og:locale" content="en">
@@ -67,7 +67,7 @@
 <meta name="twitter:title" content="面试手撕_多线程">
 <meta name="twitter:description" content="Java中又很多控制并发的方法, 如何选择采用哪种方案呢, 该问题困惑了我很久,因为感觉每个问题都可能有多种解决方案. -&amp;gt; 直到陈硕大牛的《多线程服务器的常用编程模型》一文中解决了我的困惑.即:  线程同步的四项原则，按重要性排列：  首要原则是尽量最低限度地共享对象，减少需要同步的场合。一个对象能不暴露给别的线程就不要暴露；如果要暴露，优先考虑 immutable 对象；实在不行才暴露">
   <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
-  <link rel="canonical" href="http://yoursite.com/2021/02/09/面试手撸代码_多线程/">
+  <link rel="canonical" href="http://yoursite.com/doing/面试手撸代码_多线程">
 
 
 <script id="page-configurations">
@@ -75,8 +75,8 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: true,
-    isPage: false,
+    isPost: false,
+    isPage: true,
     isArchive: false
   };
 </script>
@@ -207,77 +207,51 @@
         <div class="content-wrap">
             
 
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
           <div id="content" class="content page-post-detail">
             
 
   <div id="posts" class="posts-expand">
     
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/09/面试手撸代码_多线程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Les">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/echarts.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="FILE">
-    </span>
+    
+    
+    <div class="post-block page">
       <header class="post-header">
 
-        
-          <h1 class="post-title" itemprop="name headline">面试手撕_多线程
+<h1 class="post-title" itemprop="name headline">面试手撕_多线程
 
-            
-          </h1>
-        
+</h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+<div class="post-meta">
+  
 
-              
-                
-              
+</div>
 
-              <time title="Created: 2021-02-09 21:51:30" itemprop="dateCreated datePublished" datetime="2021-02-09T21:51:30+08:00">2021-02-09</time>
-            </span>
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法题/" itemprop="url" rel="index"><span itemprop="name">算法题</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</header>
 
       
-        <ul>
+      
+      
+      <div class="post-body">
+        
+          <ul>
 <li>Java中又很多控制并发的方法, 如何选择采用哪种方案呢, 该问题困惑了我很久,因为感觉每个问题都可能有多种解决方案. -&gt; 直到陈硕大牛的《<a href="http://blog.csdn.net/solstice/article/details/5307710" target="_blank" rel="noopener">多线程服务器的常用编程模型</a>》一文中解决了我的困惑.即:</li>
 </ul>
 <p>线程同步的四项原则，按重要性排列：</p>
@@ -320,46 +294,17 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FooBar</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FooBar</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.n = n;</span><br><span class="line">    &#125;</span><br><span class="line">    Semaphore s1 = <span class="keyword">new</span> Semaphore(<span class="number">1</span>);</span><br><span class="line">    Semaphore s2 = <span class="keyword">new</span> Semaphore(<span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">(Runnable printFoo)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            s1.acquire();</span><br><span class="line">        	printFoo.run();</span><br><span class="line">            s2.release();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bar</span><span class="params">(Runnable printBar)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">            <span class="comment">// printBar.run() outputs "bar". Do not change or remove this line.</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            s2.acquire();</span><br><span class="line">            printBar.run();</span><br><span class="line">            s1.release();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="1116-打印零与奇偶数"><a href="#1116-打印零与奇偶数" class="headerlink" title="1116. 打印零与奇偶数"></a><a href="https://leetcode-cn.com/problems/print-zero-even-odd/" target="_blank" rel="noopener">1116. 打印零与奇偶数</a></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.Semaphore;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ZeroEvenOdd</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">private</span> Semaphore z = <span class="keyword">new</span> Semaphore(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">private</span> Semaphore e = <span class="keyword">new</span> Semaphore(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">private</span> Semaphore o = <span class="keyword">new</span> Semaphore(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ZeroEvenOdd</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.n = n;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">zero</span><span class="params">(IntConsumer printNumber)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            z.acquire();</span><br><span class="line">            printNumber.accept(<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">if</span>(i % <span class="number">2</span> == <span class="number">0</span>)&#123;</span><br><span class="line">                o.release();</span><br><span class="line">            &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">                e.release();</span><br><span class="line">            &#125;   </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">even</span><span class="params">(IntConsumer printNumber)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>;i &lt;= n;i += <span class="number">2</span>)&#123;</span><br><span class="line">            e.acquire();</span><br><span class="line">            printNumber.accept(i); </span><br><span class="line">            z.release();</span><br><span class="line">        &#125;   </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">odd</span><span class="params">(IntConsumer printNumber)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i += <span class="number">2</span>)&#123;</span><br><span class="line">            o.acquire();</span><br><span class="line">            printNumber.accept(i); </span><br><span class="line">            z.release();</span><br><span class="line">        &#125;   </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    </div>
-
-    
-    
-    
         
+      </div>
       
-
-      <footer class="post-footer">
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-              
-                <a href="/2020/12/09/源码_ReadWriteLock/" rel="next" title="AQS源码阅读记录">
-                  <i class="fa fa-chevron-left"></i> AQS源码阅读记录
-                </a>
-              
-            </div>
-
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2021/03/09/面试手撸代码_堆/" rel="prev" title="面试手撕系列_堆">
-                  面试手撕系列_堆 <i class="fa fa-chevron-right"></i>
-                </a>
-              
-            </div>
-          </div>
-        
-      </footer>
+      
+      
+    </div>
     
-  </div>
-  
-  
-  
-  </article>
 
+    
+    
+    
   </div>
 
 
@@ -404,7 +349,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -649,9 +594,10 @@
 
 
   
-  <script src="/js/scrollspy.js?v=7.3.0"></script>
+    <script src="/js/scrollspy.js?v=7.3.0"></script>
 <script src="/js/post-details.js?v=7.3.0"></script>
 
+  
 
 </body>
 </html>
