@@ -55,19 +55,21 @@
   };
 </script>
 
-  <meta name="description" content="1.介绍下你自己,爱好,项目 当然是唱跳 rua p 篮球!! 2.HashMap 和 ConcurrentHashMap的区别 3.JVM堆内存. 4.GC算法. G1 G1 算法的步骤. 5.反向代理 反向代理主要是隐藏了服务端,   即 我访问 A , 我只知道A, 但是返回结果的是其他服务器.我是不知道的. 正向代理就是, 我叫 A去帮我干什么事, A 就去调用服务了. 被调用的服务器只知">
+  <meta name="description" content="Map_Reduce 开局一张图， 我悟了。  1234567891011121314map(String key, String value):// key: document name// value: document contentsfor each word w in value:	EmitIntermediate(w, &quot;1&quot;);reduce(String key, Iterator">
 <meta property="og:type" content="website">
-<meta property="og:title" content="2020实习_面试">
-<meta property="og:url" content="http://yoursite.com/doing/面试记录_.html">
+<meta property="og:title" content="FILE">
+<meta property="og:url" content="http://yoursite.com/doing/jmeter.html">
 <meta property="og:site_name" content="FILE">
-<meta property="og:description" content="1.介绍下你自己,爱好,项目 当然是唱跳 rua p 篮球!! 2.HashMap 和 ConcurrentHashMap的区别 3.JVM堆内存. 4.GC算法. G1 G1 算法的步骤. 5.反向代理 反向代理主要是隐藏了服务端,   即 我访问 A , 我只知道A, 但是返回结果的是其他服务器.我是不知道的. 正向代理就是, 我叫 A去帮我干什么事, A 就去调用服务了. 被调用的服务器只知">
+<meta property="og:description" content="Map_Reduce 开局一张图， 我悟了。  1234567891011121314map(String key, String value):// key: document name// value: document contentsfor each word w in value:	EmitIntermediate(w, &quot;1&quot;);reduce(String key, Iterator">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-04-02T13:45:24.642Z">
+<meta property="og:image" content="d:/Les/blog/hexo/source/doing/6.284_LEC1.assets/image-20210409203735426.png">
+<meta property="og:updated_time" content="2021-04-09T12:42:15.899Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2020实习_面试">
-<meta name="twitter:description" content="1.介绍下你自己,爱好,项目 当然是唱跳 rua p 篮球!! 2.HashMap 和 ConcurrentHashMap的区别 3.JVM堆内存. 4.GC算法. G1 G1 算法的步骤. 5.反向代理 反向代理主要是隐藏了服务端,   即 我访问 A , 我只知道A, 但是返回结果的是其他服务器.我是不知道的. 正向代理就是, 我叫 A去帮我干什么事, A 就去调用服务了. 被调用的服务器只知">
+<meta name="twitter:title" content="FILE">
+<meta name="twitter:description" content="Map_Reduce 开局一张图， 我悟了。  1234567891011121314map(String key, String value):// key: document name// value: document contentsfor each word w in value:	EmitIntermediate(w, &quot;1&quot;);reduce(String key, Iterator">
+<meta name="twitter:image" content="d:/Les/blog/hexo/source/doing/6.284_LEC1.assets/image-20210409203735426.png">
   <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
-  <link rel="canonical" href="http://yoursite.com/doing/面试记录_">
+  <link rel="canonical" href="http://yoursite.com/doing/jmeter">
 
 
 <script id="page-configurations">
@@ -81,7 +83,7 @@
   };
 </script>
 
-  <title>2020实习_面试 | FILE</title>
+  <title> | FILE</title>
   
 
 
@@ -235,7 +237,7 @@
     <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">2020实习_面试
+<h1 class="post-title" itemprop="name headline">
 
 </h1>
 
@@ -251,41 +253,10 @@
       
       <div class="post-body">
         
-          <p>1.介绍下你自己,爱好,项目</p>
-<p>当然是唱跳 rua p 篮球!!</p>
-<p>2.HashMap 和 ConcurrentHashMap的区别</p>
-<p>3.JVM堆内存.</p>
-<p>4.GC算法. G1</p>
-<p>G1 算法的步骤.</p>
-<p>5.反向代理</p>
-<p>反向代理主要是隐藏了服务端,   即 我访问 A , 我只知道A, 但是返回结果的是其他服务器.我是不知道的.</p>
-<p>正向代理就是, 我叫 A去帮我干什么事, A 就去调用服务了. 被调用的服务器只知道A 需要调用,并不知道真实的我.</p>
-<p>6.spring事务传播</p>
-<p>7.如何求$\sqrt{3}$</p>
-<p>当时没想出来, 然后说了方法:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">double</span> ans = <span class="number">1.0</span>;</span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">1000000</span>; i *= <span class="number">10</span>) &#123;</span><br><span class="line">         <span class="keyword">while</span> (ans * ans &lt; <span class="number">3</span>) &#123;</span><br><span class="line">             ans += (<span class="number">1.0</span> / i);</span><br><span class="line">         &#125;</span><br><span class="line">         ans -= (<span class="number">1.0</span> / i);</span><br><span class="line">     &#125;</span><br><span class="line">     System.out.println(ans);</span><br><span class="line">     System.out.println(Math.sqrt(<span class="number">3</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 你有没有快一点的方法. -&gt; 我自己都觉得我的方法搞笑....</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>牛顿迭代法.</li>
-</ul>
-<p>8.10个一个G的文件, 文件中都是存的URL, 给你2G的内存, 10G的磁盘.问出现次数最多的前10条URL.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 先 hash(url)  / 10 个桶, 相同的只会出现再同一个桶中.</span><br><span class="line">2. 然后对每个桶的数据进行统计,hashmap(url, count), count指出现的次数.然后再存回磁盘中.</span><br><span class="line">3. 现在每个文件都是记录的 url : count . 只需要再遍历10遍 top10 就出来了.  归并排序 两个文件之间</span><br></pre></td></tr></table></figure>
-<p>9.乐观锁,和悲观锁.</p>
-<p>10.分布式锁. </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用Redis实现. k-v 快, 而且有过期等等, 防止死锁.</span><br></pre></td></tr></table></figure>
-<p>11.linux 如何查看隐藏文件. 我说的 </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ll  # 也可以啊??? 面试管觉得不对.</span><br><span class="line">ls -al # 这个可能是面试管想要听到的答案.</span><br></pre></td></tr></table></figure>
-<ol>
-<li>CRFS攻击</li>
-<li>Cookies 和 Session 的区别</li>
-</ol>
-<p><strong>一.CSRF是什么？</strong></p>
-<p>　　CSRF（Cross-site request forgery），中文名称：跨站请求伪造，也被称为：one click attack/session riding，缩写为：CSRF/XSRF。</p>
-<p><strong>二.CSRF可以做什么？</strong></p>
-<p>　　你这可以这么理解CSRF攻击：攻击者盗用了你的身份，以你的名义发送恶意请求。CSRF能够做的事情包括：以你名义发送邮件，发消息，盗取你的账号，甚至于购买商品，虚拟货币转账……造成的问题包括：个人隐私泄露以及财产安全。</p>
-<p><strong>三.CSRF漏洞现状</strong></p>
-<p>　　CSRF这种攻击方式在2000年已经被国外的安全人员提出，但在国内，直到06年才开始被关注，08年，国内外的多个大型社区和交互网站分别爆出CSRF漏洞，如：NYTimes.com（纽约时报）、Metafilter（一个大型的BLOG网站），YouTube和百度HI……而现在，互联网上的许多站点仍对此毫无防备，以至于安全业界称CSRF为“沉睡的巨人”。</p>
-<p>面试官非常好, 第一次面试有点紧张 , 语言组织不清…</p>
-<p>先说大纲 -&gt; 再说具体细节.</p>
+          <p>Map_Reduce</p>
+<p>开局一张图， 我悟了。</p>
+<p><img src="D:\Les\blog\hexo\source\doing\6.284_LEC1.assets\image-20210409203735426.png" alt="image-20210409203735426"></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">map</span>(String key, String value):</span><br><span class="line"><span class="comment">// key: document name</span></span><br><span class="line"><span class="comment">// value: document contents</span></span><br><span class="line"><span class="keyword">for</span> each word w in value:</span><br><span class="line">	EmitIntermediate(w, <span class="string">"1"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">reduce(String key, Iterator values):</span><br><span class="line"><span class="comment">// key: a word</span></span><br><span class="line"><span class="comment">// values: a list of counts</span></span><br><span class="line"><span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> each v in values:</span><br><span class="line">	result += ParseInt(v);</span><br><span class="line">	Emit(AsString(result));</span><br></pre></td></tr></table></figure>
 
         
       </div>
@@ -333,7 +304,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-count">84</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -504,55 +475,6 @@
 
   
 
-  
-    
-      <script type="text/x-mathjax-config">
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
-<script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', function() {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
-</script>
-
-    
   
 
   

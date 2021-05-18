@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/echarts.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/echarts.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"scrollpercent":true,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    save_scroll: false,
+    copycode: {"enable":true,"show_result":true,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="VM-FT 论文研读说明：本文为论文 《The Design of a Practical System for Fault-Tolerant Virtual Machines》 的个人理解，难免有理解不到位之处，欢迎交流与指正 。 论文地址：VM-FT 论文  本论文主要介绍了一个用于提供 容错虚拟机 (fault-tolerant virtual machine) 的企业级商业系统，该系统包含">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FILE">
+<meta property="og:url" content="http://yoursite.com/doing/The Design of a Practical System for Fault-Tolerant Virtual Machines.html">
+<meta property="og:site_name" content="FILE">
+<meta property="og:description" content="VM-FT 论文研读说明：本文为论文 《The Design of a Practical System for Fault-Tolerant Virtual Machines》 的个人理解，难免有理解不到位之处，欢迎交流与指正 。 论文地址：VM-FT 论文  本论文主要介绍了一个用于提供 容错虚拟机 (fault-tolerant virtual machine) 的企业级商业系统，该系统包含">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/2035097/202007/2035097-20200705125608572-72262889.png">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/2035097/202007/2035097-20200705125616934-1182521336.png">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/2035097/202007/2035097-20200705125629005-432201283.png">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/2035097/202007/2035097-20200705125642985-1713812573.png">
+<meta property="og:updated_time" content="2021-05-18T01:38:16.173Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FILE">
+<meta name="twitter:description" content="VM-FT 论文研读说明：本文为论文 《The Design of a Practical System for Fault-Tolerant Virtual Machines》 的个人理解，难免有理解不到位之处，欢迎交流与指正 。 论文地址：VM-FT 论文  本论文主要介绍了一个用于提供 容错虚拟机 (fault-tolerant virtual machine) 的企业级商业系统，该系统包含">
+<meta name="twitter:image" content="https://img2020.cnblogs.com/blog/2035097/202007/2035097-20200705125608572-72262889.png">
+  <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/doing/The Design of a Practical System for Fault-Tolerant Virtual Machines">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title> | FILE</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FILE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+          <h1 id="VM-FT-论文研读"><a href="#VM-FT-论文研读" class="headerlink" title="VM-FT 论文研读"></a>VM-FT 论文研读</h1><p><strong>说明</strong>：本文为论文 <strong>《The Design of a Practical System for Fault-Tolerant Virtual Machines》</strong> 的个人理解，难免有理解不到位之处，欢迎交流与指正 。</p>
+<p><strong>论文地址</strong>：<a href="https://github.com/XutongLi/Learning-Notes/blob/master/Distributed_System/Paper_Reading/VM-FT/vm-ft.pdf" target="_blank" rel="noopener">VM-FT 论文</a></p>
+<hr>
+<p>本论文主要介绍了一个用于提供 <code>容错虚拟机 (fault-tolerant virtual machine)</code> 的企业级商业系统，该系统包含了两台位于不同物理机的虚拟机，其中一台为 <strong>primary</strong> ，另一台为 <strong>backup</strong> ，<strong>backup</strong> 备份了 <strong>primary</strong> 的所有执行 。当 <strong>primary</strong> 出现故障时，<strong>backup</strong> 可以上线接管 <strong>primary</strong> 的工作，以此来提供容错 。</p>
+<h2 id="2-主-备份方法"><a href="#2-主-备份方法" class="headerlink" title="2. 主 / 备份方法"></a>2. 主 / 备份方法</h2><p>实现容错服务器的一种常见方法是 <code>主/备份方法</code> 。<strong>backup</strong> 状态与 <strong>primary</strong> 保持相同，<strong>primary</strong> 故障时，使用 <strong>backup</strong> 进行接管。并且以这种方式将故障对于 <strong>client</strong> 隐藏，不会丢失任何数据 。</p>
+<p>主 / 备份方法中保持状态同步的方法有以下两种：</p>
+<ul>
+<li><code>State transfer</code>：<strong>primary</strong> 持续地将所有状态（ 包括 <em>CPU</em>、内存和 <em>I/O</em> 设备 ）变化发送给 <strong>backup</strong> 。这种方法所需带宽非常大 。</li>
+<li><code>Replicated state machine</code>：将服务器抽象为确定性状态机 。让 <strong>primary</strong> 和 <strong>backup</strong> 按照相同的顺序执接收相同的输入请求，对于不确定的操作使用额外的协调来保证主备状态一致 。这种方法实现复杂，但是所需带宽较小 。本文便是采用这种方法 。</li>
+</ul>
+<blockquote>
+<p>确定性状态机：多台状态机从相同的初始状态开始、按照相同的顺序执行相同的操作，则它们的最终状态是一致的 。</p>
+<p>状态机方法允许 <strong>primary</strong> 和 <strong>backup</strong> 进行更大的物理分离 。</p>
+</blockquote>
+<h2 id="3-虚拟机的选择"><a href="#3-虚拟机的选择" class="headerlink" title="3. 虚拟机的选择"></a>3. 虚拟机的选择</h2><p><strong>虚拟机 (virtual machine)</strong> 不是通过硬件来启动操作系统，而是在硬件之上会调用一个 <strong>Hypervisor</strong> ，<strong>Hypervisor</strong> 的工作实际上就是在硬件上模拟多个虚拟计算机 。<strong>Hypervisor</strong> 上执行着 <strong>GuestOS</strong> ，再上面是应用程序 。</p>
+<p><img src="https://img2020.cnblogs.com/blog/2035097/202007/2035097-20200705125608572-72262889.png" alt></p>
+<blockquote>
+<p><strong>Hypervisor</strong> 即 <strong>virtual machine monitor</strong> ( <strong>VMM</strong> )</p>
+<p><strong>GuestOS</strong> 即运行在虚拟机中的操作系统，与之对应的是 <strong>HostOS</strong> ，指物理机里的操作系统 。</p>
+</blockquote>
+<p>在物理机上确保确定性执行是困难的，因为其会接收到很多不确定输入（ 如定时器中断 ），因此可以采用虚拟机，<strong>Hypervisor</strong> 对硬件进行模拟和控制，可以捕获到这些不确定输入的所有相关信息，使得 <strong>backup</strong> 可以重放这些不确定输入 。</p>
+<blockquote>
+<p>因为我们讨论的故障主要是指服务器故障，因此不同的虚拟机要位于不同的物理机上，否则便失去了容错的意义 。</p>
+</blockquote>
+<h2 id="4-基本设计"><a href="#4-基本设计" class="headerlink" title="4. 基本设计"></a>4. 基本设计</h2><h3 id="4-1-基本架构"><a href="#4-1-基本架构" class="headerlink" title="4.1 基本架构"></a>4.1 基本架构</h3><p><img src="https://img2020.cnblogs.com/blog/2035097/202007/2035097-20200705125616934-1182521336.png" alt></p>
+<p><strong>Primary VM</strong> 和 <strong>Backup VM</strong> 运行在同一网络环境中的不同物理机上，两者可以访问同一个 <strong>Disk Server</strong> ，即论文当中的 <strong>Shared Disk</strong> 。</p>
+<p>只有 <strong>Primary VM</strong> 向外界通知自己的存在，因此所有网络输入或其他输入（磁盘、鼠标、键盘）都进入 <strong>Primary VM</strong> 。</p>
+<p><strong>Primary VM</strong> 接收的所有输入都通一个称为 <strong>Logging Channel</strong> 的网络连接发送到 <strong>Backup VM</strong> ，以保证两者状态相同 。<strong>Backup VM</strong> 的指令执行结果与 <strong>Primary VM</strong> 的结果相同，但只有 <strong>Primary VM</strong> 返回给 <strong>client</strong> 结果，<strong>Backup VM</strong> 的结果会被 <strong>Hypervisor</strong> 丢弃 。</p>
+<p>系统使用 <strong>Primary VM</strong> 和 <strong>Backup VM</strong> 之间的心跳包和 <strong>Logging Channel</strong> 上的流量监控来检测 <strong>Primary VM</strong> 或 <strong>Backup VM</strong> 是否是失效 。此外，必须确保 <strong>Primary VM</strong> 和 <strong>Backup VM</strong> 中只有一个接管执行 。</p>
+<blockquote>
+<p>事实证明，这些主备虚拟机并不适用于本地磁盘，而是会和某些磁盘服务器进行通信。（ 论文中并未提到这点 ）</p>
+</blockquote>
+<h3 id="4-2-确定性重放"><a href="#4-2-确定性重放" class="headerlink" title="4.2 确定性重放"></a>4.2 确定性重放</h3><p>由上文可知，<strong>VM-FT</strong> 建模为确定性状态机的复制 。对于一系列输入，对 <strong>primary</strong> 的执行进行记录并确保 <strong>backup</strong> 以相同方式执行的基本技术称为 <strong>确定性重放</strong> 。</p>
+<p><strong>primary</strong> 的操作中包含了 <code>确定性操作</code> 和 <code>不确定性操作</code> 。确定性操作在 <strong>primary</strong> 和 <strong>backup</strong> 上的执行结果是相同的，不确定性操作包括：</p>
+<ul>
+<li>来自 <strong>client</strong> 的输入，这些输入可能在任何时候到达</li>
+<li>非确定性指令，如随机数生成指令、在不同时间获得时间的指令、生成设备唯一 <em>ID</em> 的指令等</li>
+<li>多核并发，服务中的指令会在不同的核上何以某种方式交错执行，执行顺序不可预测（ 本论文中的方法只针对单核处理器，不解决此问题 ）</li>
+</ul>
+<blockquote>
+<p>前两种不确定性操作会在 <strong>Logging Channel</strong> 中传送</p>
+</blockquote>
+<p>确定性重放记录 <strong>primary</strong> 的输入和 <strong>primary</strong> 执行相关的所有可能的不确定性，记录在 <strong>log entry</strong> 流中，发送给 <strong>backup</strong> 并使其重放 ：</p>
+<ul>
+<li>对于不确定的操作，将记录足够的信息，确保其在 <strong>backup</strong> 上重新执行能够得到相同的状态和输出</li>
+<li>对于不确定的事件，如定时器或 <em>IO</em> 完成中断，事件发生的确切指令会被记录下来，重放时，<strong>backup</strong> 会在指令流中相同的位置重放这些事件</li>
+</ul>
+<p><strong>log entry</strong> 中应该包含了：</p>
+<ul>
+<li>事件发生时的指令号</li>
+<li>类型，指明是网络输入还是其他指令</li>
+<li>数据：数据包里的数据，若是不确定指令，则此数据是该指令在 <strong>primary</strong> 的执行结果，所以 <strong>backup</strong> 就可以对该指令提供与 <strong>primary</strong> 相同的执行结果</li>
+</ul>
+<blockquote>
+<p>不确定性指令执行过程：</p>
+<p>（ 即使 <strong>primary</strong> 和 <strong>backup</strong> 在同一状态，执行不确定性指令后也会产生不同结果 ）</p>
+<p><strong>primary</strong>：</p>
+<ul>
+<li><strong>Hypervisor</strong> 在 <strong>primary</strong> 执行指令时设置中断</li>
+<li><strong>Hypervisor</strong> 执行指令并记录结果</li>
+<li>发送结果和指令序号到 <strong>backup</strong></li>
+</ul>
+<p><strong>backup</strong>：</p>
+<ul>
+<li><strong>Hypervisor</strong> 读 <strong>log entry</strong> ，在该指令序号处设置中断</li>
+<li><strong>Hypervisor</strong> 应用从 <strong>primary</strong> 执行得到的结果，自己产生的结果被丢弃，从而保证主备一致</li>
+</ul>
+</blockquote>
+<h3 id="4-3-输出要求和规则"><a href="#4-3-输出要求和规则" class="headerlink" title="4.3 输出要求和规则"></a>4.3 输出要求和规则</h3><p><code>输出要求</code>：若 <strong>primary</strong> 发生故障后且 <strong>backup</strong> 接管后，<strong>backup</strong> 必须以一种与原 <strong>primary</strong> 已发送到外部的输出完全一致的方式运行 。</p>
+<p>只要满足了输出要求，故障转移就不会丢失外部可见的状态或数据，<strong>client</strong> 也不会注意到 <strong>server</strong> 服务中断或有不一致 。</p>
+<p>可能有一种特殊情况会发生：如果 <strong>primary</strong> 在执行输出操作后立即故障，<strong>backup</strong> 在完成接管之前，可能还未执行到同样的输出操作，就被其他不确定事件所影响（ 如计时中断 ），这样 <strong>backup</strong> 就无法以与 <strong>primary</strong> 发生故障时的相同状态上线，为此提出了 <strong>输出规则</strong> 。</p>
+<p><code>输出规则</code>：<strong>primary</strong> 必须延后将输出发送到外部世界的动作，直到 <strong>backup</strong> 已经接收并确认 与产生该输出的操作相关 的 <strong>log entry</strong> 。</p>
+<p>基于输出规则，<strong>primary</strong> 和 <strong>backup</strong> 的交互如下图所示：</p>
+<p><img src="https://img2020.cnblogs.com/blog/2035097/202007/2035097-20200705125629005-432201283.png" alt></p>
+<p><strong>primary</strong> 等待来自 <strong>backup</strong> 的 <code>ACK</code> 时，不会停止执行，只需要延迟输出的发送 （ 异步执行 ）。</p>
+<p><strong>一些故障发生情况</strong>：</p>
+<ul>
+<li><p>如果 <strong>primary</strong> 在收到 <strong>ACK</strong> 之前故障，它不会返回结果给 <strong>client</strong> ，由于 <strong>backup</strong> 的输出会被丢弃，所以两者在 <strong>client</strong> 看来是一致的，即未收到 <strong>server</strong> 回复 。</p>
+</li>
+<li><p>如果 <strong>primary</strong> 在发送输出后故障，<strong>backup</strong> 在接管后也执行发送，<strong>client</strong> 会收到两次输出 。但是这种情况不会造成不良后果，因为对于 <em>TCP</em> 连接来说，它会处理重复的数据包；对于磁盘来说，会对同一块存储区覆盖写入 。</p>
+</li>
+</ul>
+<h3 id="4-4-检测和响应故障"><a href="#4-4-检测和响应故障" class="headerlink" title="4.4 检测和响应故障"></a>4.4 检测和响应故障</h3><p>两种 <strong>VM</strong> 都有可能发生故障：</p>
+<ul>
+<li>如果是 <strong>backup</strong> 故障，<strong>primary</strong> 将停止在 <strong>logging channel</strong> 上发送 <strong>log entry</strong> ，并继续执行</li>
+<li>如果是 <strong>primary</strong> 故障，<strong>backup</strong> 会继续重放 <strong>log entries</strong> ，重放结束后 <strong>上线</strong> 成为 <strong>primary</strong> ，此时，它可以向外界生成输出 。</li>
+</ul>
+<p><strong>VM-FT</strong> 检测故障的方式有 <em>UDP</em> 心跳检测和监控 <strong>logging channel</strong> 中的流量以及 <strong>backup</strong> 发送给 <strong>primary</strong> 的 <strong>ACK</strong> 。若心跳或日志流量停止的时间超过了特定超时时间（ 大约几秒 ），就会声明故障 。</p>
+<p>这样的故障检测方法，在有网络故障时，容易遇到 <strong>split-brain</strong> 问题：即 <strong>primary</strong> 和 <strong>backup</strong> 之间通信断开，但此时 <strong>primary</strong> 还在运行，若 <strong>backup</strong> 此时上线，会造成两者同时执行的问题，可能会导致数据损坏 。</p>
+<p>为解决 <strong>split-brain</strong> 问题，使 <strong>Disk Server</strong> 支持 <strong>atomic test-and-set</strong> 测试，即在 <strong>Disk Server</strong> 上维护一个 <strong>flag</strong> ，第一个访问此 <strong>flag</strong> 的 <strong>VM</strong> 会成为 <strong>primary</strong> ，第二个访问此 <strong>flag</strong> 的 <strong>VM</strong> 不会上线 。（ 类似于锁 ）</p>
+<h3 id="4-5-恢复冗余"><a href="#4-5-恢复冗余" class="headerlink" title="4.5 恢复冗余"></a>4.5 恢复冗余</h3><p><strong>primary</strong> 发生故障，<strong>backup</strong> 上线时，在新的物理机上建立 <strong>backup</strong> ，恢复冗余，继续进入到容错状态 。</p>
+<p><strong>VM vSephere</strong> 实现了一个集群服务，用于维护管理和资源信息。当发生故障时，集群服务根据资源使用情况和其他约束来确定新的 <strong>backup</strong> 的最佳服务器，并将其复制成为 <strong>backup</strong> 。其结果是，<strong>VM-FT</strong> 通常可以在服务器发生故障后几分钟内重新建立冗余，而在执行容错转移时不会产生任何明显的中断 。</p>
+<h3 id="4-6-管理日志通道"><a href="#4-6-管理日志通道" class="headerlink" title="4.6 管理日志通道"></a>4.6 管理日志通道</h3><p><strong>Hypervisor</strong> 为 <strong>primary</strong> 和 <strong>backup</strong> 分别维护了一个 <strong>log buffer</strong> ，如下图所示：</p>
+<p><img src="https://img2020.cnblogs.com/blog/2035097/202007/2035097-20200705125642985-1713812573.png" alt></p>
+<ul>
+<li><strong>primary</strong> 执行时，会将 <strong>log entry</strong> 生成到 <strong>log buffer</strong> 当中</li>
+<li><strong>primary</strong> 的 <strong>log buffer</strong> 会尽快将内容清除到 <strong>logging channel</strong></li>
+<li><strong>log entry</strong> 一到达 <strong>logging channel</strong> 就会被读到 <strong>backup</strong> 的 <strong>log buffer</strong></li>
+<li><strong>backup</strong> 发送 <strong>ACK</strong> 给 <strong>primary</strong></li>
+</ul>
+<p>若 <strong>primary</strong> 的 <strong>log buffer</strong> 已满，<strong>primary</strong> 会等待；若 <strong>backup</strong> 的 <strong>log buffer</strong> 已空，<strong>backup</strong> 会等待 。</p>
+<p>另外，为了防止 <strong>backup</strong> 的重放落后太多，在发送和确认 <strong>log entry</strong> 的协议中，会发送附加信息来确定 <strong>primary</strong> 和 <strong>backup</strong> 之间的 <code>实时执行延迟</code> ，通常小于 <em>100ms</em> 。若 <strong>backup</strong> 出现明显的延迟，<strong>VM-FT</strong> 会通知调度器给它分配更少的 <em>CPU</em> 资源，从而降低 <strong>primary</strong> 的速度；若 <strong>backup</strong> 追起来了，逐渐增加 <strong>primary</strong> 的速度 。</p>
+<h3 id="4-7-磁盘的内存访问竞争"><a href="#4-7-磁盘的内存访问竞争" class="headerlink" title="4.7 磁盘的内存访问竞争"></a>4.7 磁盘的内存访问竞争</h3><p>磁盘操作可能和 <strong>VM</strong> 中的应用程序或 <em>OS</em> 存在内存访问竞争 。</p>
+<p>这种竞争在网络数据包或磁盘块到达 <strong>primary</strong> 时产生 。在没有 <strong>VM-FT</strong> 的情况下，相关硬件会通过 <strong>DMA</strong> 将该数据复制到内存中 。若 <em>APP/OS</em> 也在同时读取这块内存。那么对于 <strong>primary</strong> 和 <strong>backup</strong> ，由于时间上的微小差异，可能一个在 <strong>DMA</strong> 之前读取，一个在 <strong>DMA</strong> 之后读取，就导致了不一致 。</p>
+<p>解决方法是使用 <code>bounce buffer</code> ，它的大小与磁盘操作访问的内存大小相同 。<strong>primary</strong> 的 <strong>Hypervisor</strong> 首先复制网络数据或磁盘块到 <strong>bounce buffer</strong> ，此时 <strong>primary</strong> 无法访问它 ，<strong>Hyperbisor</strong> 中断 <strong>primary</strong> 使其暂停执行，并记录中断的指令 。然后 <strong>Hypervisor</strong> 将 <strong>bounce buffer</strong> 中的内容复制到 <strong>primary</strong> 的内存 ，并让其继续执行 。通过 <strong>logging channel</strong> 将数据送到 <strong>backup</strong> 之后，<strong>backup</strong> 的 <strong>Hypervisor</strong> 在相同指令处中断 <strong>backup</strong> ，将数据复制到 <strong>backup</strong> 的内存后，最后恢复 <strong>backup</strong> 的执行 。</p>
+<h2 id="5-机器级复制和应用级复制"><a href="#5-机器级复制和应用级复制" class="headerlink" title="5. 机器级复制和应用级复制"></a>5. 机器级复制和应用级复制</h2><h3 id="5-1-机器级复制"><a href="#5-1-机器级复制" class="headerlink" title="5.1 机器级复制"></a>5.1 机器级复制</h3><p><code>机器级复制</code> 即复制了内存中和寄存器中的所有内容 。优点为可以在 <strong>VM-FT</strong> 上运行任何软件；缺点为不够高效</p>
+<h3 id="5-2-应用级复制"><a href="#5-2-应用级复制" class="headerlink" title="5.2 应用级复制"></a>5.2 应用级复制</h3><p><code>应用级复制</code> 即 <strong>primary</strong> 仅发送 <strong>high-level</strong> 操作给 <strong>backup</strong> 。如数据库，同步的状态仅为数据库内容，不是所有的内存内容，操作仅为数据库命令（ <strong>get</strong> 、<strong>put</strong> 之类 ），没有网络包或中断 。<strong>GFS</strong> 使用的也是应用级复制 。</p>
+<p>优点：更少的细粒度同步、更低的开销</p>
+<p>缺点：应用程序必须理解系统的容灾</p>
+<h2 id="6-VM-FT-和-GFS-容错的比较"><a href="#6-VM-FT-和-GFS-容错的比较" class="headerlink" title="6. VM-FT 和 GFS 容错的比较"></a>6. VM-FT 和 GFS 容错的比较</h2><p><strong>VM-FT</strong> 备份的是 <code>计算</code>，可以用它为任何已有的网络服务器提供容错性。<strong>VM-FT</strong> 提供了相当严谨的一致性而且对 <strong>client</strong> 和 <strong>server</strong> 都是透明的。例如，你可以利用 <strong>VM-FT</strong> 为已有的邮件服务器提供容错性。</p>
+<p>相比之下，<strong>GFS</strong> 只为 <code>存储</code> 提供容错性。因为 <strong>GFS</strong> 只针对一种简单的服务提供容错性，它的备份策略会比 <strong>VM-FT</strong> 更为高效：例如，<strong>GFS</strong> 不需要使中断发生在所有的副本的同一指令上。<strong>GFS</strong> 通常只会被用作一个对外提供完整容错服务的系统的一部分：例如，<strong>VM-FT</strong> 本身也依赖了一个在主备虚拟机间共享的有容错性的存储服务，而你则可以用类似于 GFS 的东西来实现这个模块（ 虽然从细节上来讲 <strong>GFS</strong> 不太适用于 <strong>FT</strong> ）。</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/echarts.png"
+      alt="Les">
+  <p class="site-author-name" itemprop="name">Les</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VM-FT-论文研读"><span class="nav-number">1.</span> <span class="nav-text">VM-FT 论文研读</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-主-备份方法"><span class="nav-number">1.1.</span> <span class="nav-text">2. 主 / 备份方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-虚拟机的选择"><span class="nav-number">1.2.</span> <span class="nav-text">3. 虚拟机的选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-基本设计"><span class="nav-number">1.3.</span> <span class="nav-text">4. 基本设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-基本架构"><span class="nav-number">1.3.1.</span> <span class="nav-text">4.1 基本架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-确定性重放"><span class="nav-number">1.3.2.</span> <span class="nav-text">4.2 确定性重放</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-输出要求和规则"><span class="nav-number">1.3.3.</span> <span class="nav-text">4.3 输出要求和规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-检测和响应故障"><span class="nav-number">1.3.4.</span> <span class="nav-text">4.4 检测和响应故障</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-恢复冗余"><span class="nav-number">1.3.5.</span> <span class="nav-text">4.5 恢复冗余</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-管理日志通道"><span class="nav-number">1.3.6.</span> <span class="nav-text">4.6 管理日志通道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-磁盘的内存访问竞争"><span class="nav-number">1.3.7.</span> <span class="nav-text">4.7 磁盘的内存访问竞争</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-机器级复制和应用级复制"><span class="nav-number">1.4.</span> <span class="nav-text">5. 机器级复制和应用级复制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-机器级复制"><span class="nav-number">1.4.1.</span> <span class="nav-text">5.1 机器级复制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-应用级复制"><span class="nav-number">1.4.2.</span> <span class="nav-text">5.2 应用级复制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-VM-FT-和-GFS-容错的比较"><span class="nav-number">1.5.</span> <span class="nav-text">6. VM-FT 和 GFS 容错的比较</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Les</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+  
+
+</body>
+</html>

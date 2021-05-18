@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/echarts.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/echarts.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"scrollpercent":true,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    save_scroll: false,
+    copycode: {"enable":true,"show_result":true,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="先看看大家熟知的大厂在成都都有哪些目前已经入驻： 腾讯成都大厦 位于天府三街的腾讯成都分部，相信玩王者荣耀的都知道，哈哈哈！（彩蛋：天美还在多个皮肤背景标识了天府三街）每晚在楼下等女朋友下班的时候，都会看到腾讯的楼层灯火通明，优秀的人都这么努力了，我个咸鱼可得加把劲了～  主要的项目有：手游、企业微信、腾讯云、腾讯视频、QQ浏览器等项目的研发。 岗位：前端、Java、安卓、ios、测试、数据分析、">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FILE">
+<meta property="og:url" content="http://yoursite.com/doing/成都offer.html">
+<meta property="og:site_name" content="FILE">
+<meta property="og:description" content="先看看大家熟知的大厂在成都都有哪些目前已经入驻： 腾讯成都大厦 位于天府三街的腾讯成都分部，相信玩王者荣耀的都知道，哈哈哈！（彩蛋：天美还在多个皮肤背景标识了天府三街）每晚在楼下等女朋友下班的时候，都会看到腾讯的楼层灯火通明，优秀的人都这么努力了，我个咸鱼可得加把劲了～  主要的项目有：手游、企业微信、腾讯云、腾讯视频、QQ浏览器等项目的研发。 岗位：前端、Java、安卓、ios、测试、数据分析、">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/Q5xqCucsiaSDI1Bapf46Bkca98pgSOALc50zYnLZibsWSslj611X8ib9hRQBuicF1OKdwgP4EbfwhxcL42OmgE2lxg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/Q5xqCucsiaSB26TtCmnhkNWGVovhsyuHvj0Ow1S7jJqE2WUdzQCYISwW0COOqkjUO04S6t7DIYusrFVcPYog0EQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJJXLuhusd2rgJmCo1CuShF1dSCwY8g0KEiaV1d28gauO51vDV6dFk6JQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJ751j1m2X1cI0fHKPLiaOWytKLnmNXOwFlgt5ynbTGTCZiavEJHVh0cbA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJqXYpS1r7z7gxyEfE3EFHEaCdsbibfHRgWuHltJeW0nQaFIjJpaRUZUQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJSOZjiafgyR3BkyG4dHDtrn8vl7r09OvYD5tSuMn5Nqm1UJ8DNU80lmw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJHKo5f1l9hc1vq1fNE8vaZXQQNic7lFJicUq8ibpUicaLf8AdZ8AUTC9XEw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJiceEcBr8ZbibfYhTLd5WxGRp15xcsNjwfr2FZK1INDWg2Ej4vC8cjBrw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJ4nueqZ5Q8nd0BhiaIZRLNpstJU2cd0ketqpwgE5xicR7o7QPm34Qeu3w/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJSSka47mykjDzkCd7bmzL9vhic9YNWGXDUiaFJWga0hFT4I8tfnj3dJXg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJ4k2EkNYaJFr2xnqTfONV27D48dVyMFMZeb0IXosl72zMD2WeIicjqqw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJYTSHjbzQgsibReLKbJcyhWDzY7n6VR4pxb8LOOVJ5cNk39xIqSsmAnA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJkZiaXlgnk4JibCOdjS7wxPG5SX7tvx582P8iaJBCs7b7IgMFneloCibEhw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/Q5xqCucsiaSB26TtCmnhkNWGVovhsyuHvhDDfBusl6pv2wGN1sTgsjOnGkVpjltblT7Hm6TQkEiaFdwRRplOIKBg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/Q5xqCucsiaSB26TtCmnhkNWGVovhsyuHvaUpSNqEUKgV7iaWcBh9iaW2DbxrL3rjzKkDDpQQbCeAHPrZSEt0zLYuw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/Q5xqCucsiaSB26TtCmnhkNWGVovhsyuHvY2icxY32TNGakUxKQhJI0UorYBGvKmCrppD3vFiacqXGTbwdvRrzJyUQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/Q5xqCucsiaSB26TtCmnhkNWGVovhsyuHvFiahrA9fdYzpQNRXvKR0c5psSxOicZjOTUhiaSDiaiaeoNsjaFaEiafUxqCA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJtEbWDicouB4Q8KYJOxIT5ibURhw0uexdPh3cBhCia90HA2GE0pQNnrBHQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJOkBLicLF04B0hYzFW1qHrDeLhzHrwqmS30icaSOJfFGbTpviaULjbjuvA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJWekpuyX49dZZSpKEDVOHdUOHTOppicjkd0EtdrONNQ1ibHPKyx8yuUpw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:updated_time" content="2021-04-19T10:29:36.398Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FILE">
+<meta name="twitter:description" content="先看看大家熟知的大厂在成都都有哪些目前已经入驻： 腾讯成都大厦 位于天府三街的腾讯成都分部，相信玩王者荣耀的都知道，哈哈哈！（彩蛋：天美还在多个皮肤背景标识了天府三街）每晚在楼下等女朋友下班的时候，都会看到腾讯的楼层灯火通明，优秀的人都这么努力了，我个咸鱼可得加把劲了～  主要的项目有：手游、企业微信、腾讯云、腾讯视频、QQ浏览器等项目的研发。 岗位：前端、Java、安卓、ios、测试、数据分析、">
+<meta name="twitter:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/Q5xqCucsiaSDI1Bapf46Bkca98pgSOALc50zYnLZibsWSslj611X8ib9hRQBuicF1OKdwgP4EbfwhxcL42OmgE2lxg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+  <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/doing/成都offer">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title> | FILE</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FILE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+          <p>先看看大家熟知的大厂在成都都有哪些目前已经入驻：</p>
+<h3 id="腾讯成都大厦"><a href="#腾讯成都大厦" class="headerlink" title="腾讯成都大厦"></a>腾讯成都大厦</h3><blockquote>
+<p>位于<strong>天府三街</strong>的腾讯成都分部，相信玩<strong>王者荣耀</strong>的都知道，哈哈哈！（彩蛋：天美还在多个皮肤背景标识了天府三街）每晚在楼下等女朋友下班的时候，都会看到腾讯的楼层灯火通明，优秀的人都这么努力了，我个咸鱼可得加把劲了～</p>
+</blockquote>
+<p>主要的项目有：<strong>手游、企业微信、腾讯云、腾讯视频、QQ浏览器</strong>等项目的研发。</p>
+<p><em>岗位：</em>前端、Java、安卓、ios、测试、数据分析、Windows、Mac、DBA、架构、项目管理、商品运营、PM、数据运营、游戏设计、审核、客服、销售等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/Q5xqCucsiaSDI1Bapf46Bkca98pgSOALc50zYnLZibsWSslj611X8ib9hRQBuicF1OKdwgP4EbfwhxcL42OmgE2lxg/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>腾讯成都大厦A座</p>
+<h3 id="阿里巴巴西部基地"><a href="#阿里巴巴西部基地" class="headerlink" title="阿里巴巴西部基地"></a>阿里巴巴西部基地</h3><blockquote>
+<p>位于<strong>天府四街</strong>的阿里巴巴成都分部，在成都的分公司一般都是P6级别的社招，校园招聘比较少。还有今年差点上市的支付宝（蚂蚁金服），当时可是羡煞我们软件园的程序猿了～</p>
+</blockquote>
+<p>主要的项目有：<strong>阿里云、阿里妈妈、国际事业部、蚂蚁金服</strong>等项目的研发。</p>
+<p><em>岗位：</em>前端 <code>Web</code> 服务端、Java、ios、移动服务端、大数据开发等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/Q5xqCucsiaSB26TtCmnhkNWGVovhsyuHvj0Ow1S7jJqE2WUdzQCYISwW0COOqkjUO04S6t7DIYusrFVcPYog0EQ/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>阿里巴巴西部基地</p>
+<h3 id="百度"><a href="#百度" class="headerlink" title="百度"></a>百度</h3><blockquote>
+<p>位于武侯区<strong>上善国际</strong>，在成都主要是销售公司，研发很少，也没有单独的研发中心，期待后续百度能有更好的发展，能入驻成都。</p>
+</blockquote>
+<p>主要的项目有：<strong>智慧城市</strong>等项目的研发。</p>
+<p><em>岗位：</em>智慧城市解决方案专家等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJJXLuhusd2rgJmCo1CuShF1dSCwY8g0KEiaV1d28gauO51vDV6dFk6JQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>百度</p>
+<h3 id="字节跳动"><a href="#字节跳动" class="headerlink" title="字节跳动"></a>字节跳动</h3><blockquote>
+<p>位于<strong>天府四街</strong>，目前还在不断发展中，主要负责的是抖音的核心业务，包括但不限于IM即时通讯、同城等等。成都现在整个团队还在成长中，坑位多，发展空间也比较大。（PS：紧挨着阿里，银泰城～）</p>
+</blockquote>
+<p>主要的项目有：<strong>抖音、基础架构、People 团队、教育、云平台</strong>等项目的研发。</p>
+<p><em>岗位：</em>前端、移动端、基础架构、Pass/IaaS 解决方案、数据分析、算法、测试、数据中台、DBA等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJ751j1m2X1cI0fHKPLiaOWytKLnmNXOwFlgt5ynbTGTCZiavEJHVh0cbA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>字节跳动</p>
+<h3 id="京东"><a href="#京东" class="headerlink" title="京东"></a>京东</h3><blockquote>
+<p>位于<strong>西部智谷D区</strong>，京东在成都的分公司技术团队不断的在扩编中，目前已经有 500+ 的团队；京东团队的技术氛围比较不错，对于程序猿来说是个不错的地方。</p>
+</blockquote>
+<p>主要的项目有：<strong>零售、物流、数科、京东云</strong>等项目的研发。</p>
+<p><em>岗位：</em>Java、测开、前端、移动端、NLP、数据分析、电商产品、智能客服产品、AI 产品等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJqXYpS1r7z7gxyEfE3EFHEaCdsbibfHRgWuHltJeW0nQaFIjJpaRUZUQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>西部智谷D区京东研发中心</p>
+<h3 id="美团"><a href="#美团" class="headerlink" title="美团"></a>美团</h3><blockquote>
+<p>位于<strong>天府一街</strong>，主要是闪购业务，前后台产品都招，1-3年经验，较少高级研发和管理岗位的坑。</p>
+</blockquote>
+<p>主要的项目有：<strong>美团到家、到店、酒旅、金融、基础研发平台</strong>等项目的研发。</p>
+<p><em>岗位：</em>Java、测开、架构师、前端、跑腿运营、社群运营、用户运营、商家运营等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJSOZjiafgyR3BkyG4dHDtrn8vl7r09OvYD5tSuMn5Nqm1UJ8DNU80lmw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>美团</p>
+<h3 id="滴滴"><a href="#滴滴" class="headerlink" title="滴滴"></a>滴滴</h3><blockquote>
+<p>位于锦江区<strong>天府国际大厦</strong>，成都分部很多，高级、资深岗位坑位很多，薪资都不错，可以考虑的选择。</p>
+</blockquote>
+<p>主要的项目有：<strong>内部协作、橙心优选</strong>等项目的研发。</p>
+<p><em>岗位：</em>移动端、Java、前端、技术顾问、在线协作、流程管理、数据分析等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJHKo5f1l9hc1vq1fNE8vaZXQQNic7lFJicUq8ibpUicaLf8AdZ8AUTC9XEw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>滴滴</p>
+<h3 id="网易"><a href="#网易" class="headerlink" title="网易"></a>网易</h3><blockquote>
+<p>位于武侯区<strong>石羊场</strong>，和百度类似，在成都分部研发岗位较少，主要业务集中在教育、销售、培训。</p>
+</blockquote>
+<p>主要的业务有：<strong>教育</strong>等项目。</p>
+<p><em>岗位：</em>在线辅导老师、业务培训师、辅导主管等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJiceEcBr8ZbibfYhTLd5WxGRp15xcsNjwfr2FZK1INDWg2Ej4vC8cjBrw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>网易</p>
+<h3 id="OPPO"><a href="#OPPO" class="headerlink" title="OPPO"></a>OPPO</h3><blockquote>
+<p>位于<strong>天府四街</strong>，成都主要的业务是音乐、os、政企等业务，有少量中级和资深岗位。</p>
+</blockquote>
+<p>主要的项目有：<strong>平台技术中心、浏览器、手机软件、影像、中间件、智能终端</strong>等项目的研发。</p>
+<p><em>岗位：</em>Java、算法、前端、移动端、编译器、架构、OS 内核及虚拟化、Web 引擎、多媒体驱动等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJ4nueqZ5Q8nd0BhiaIZRLNpstJU2cd0ketqpwgE5xicR7o7QPm34Qeu3w/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>OCG写字楼OPPO研发中心</p>
+<h3 id="爱奇艺"><a href="#爱奇艺" class="headerlink" title="爱奇艺"></a>爱奇艺</h3><blockquote>
+<p>位于<strong>天府软件园E区</strong>，业务广泛，成都主流业务手游视频、游戏数值、游戏服务器开发、游戏产品运营、3D 动作设计等等。</p>
+</blockquote>
+<p>主要的项目有：<strong>手游、AI 算法</strong>等项目的研发。</p>
+<p><em>岗位：</em>移动端、算法、数据开发、运维、H5、PHP、Java等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJSSka47mykjDzkCd7bmzL9vhic9YNWGXDUiaFJWga0hFT4I8tfnj3dJXg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>爱奇艺</p>
+<h3 id="华为"><a href="#华为" class="headerlink" title="华为"></a>华为</h3><blockquote>
+<p>位于郫都区<strong>高薪西</strong>，享受高新西区政策优惠，岗位丰厚，成都地区有大量云服务开发、通用软件、安全大数据、Ai 平台开发等技术岗位。</p>
+</blockquote>
+<p>主要的项目有：<strong>网路产品与解决方案、2012实验室、云、消费者、运营商</strong>等项目的研发。</p>
+<p><em>岗位：</em>C++、Java、前端、5G、分布式等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJ4k2EkNYaJFr2xnqTfONV27D48dVyMFMZeb0IXosl72zMD2WeIicjqqw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>华为研究所</p>
+<h3 id="快手"><a href="#快手" class="headerlink" title="快手"></a>快手</h3><blockquote>
+<p>位于<strong>新川创新科技园AI创新中心</strong>，岗位较少，只有高级 Java 研发岗位，其余都是审核、客服类型岗位。</p>
+</blockquote>
+<p>主要的业务有：<strong>Java 高级、内容审核、客服、电商</strong>等。</p>
+<p><em>岗位：</em>Java 高级开发、审核、编辑、客服等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJYTSHjbzQgsibReLKbJcyhWDzY7n6VR4pxb8LOOVJ5cNk39xIqSsmAnA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>AI创新中心快手部门</p>
+<h3 id="新浪"><a href="#新浪" class="headerlink" title="新浪"></a>新浪</h3><blockquote>
+<p>位于<strong>天府软件园C区</strong>，成都分部研发岗位较少，其余销售岗位、编辑岗位、策划岗位较多。</p>
+</blockquote>
+<p>主要业务有有：<strong>绿洲研发、销售、编辑、策划</strong>等业务。</p>
+<p><em>岗位：</em>绿洲研发、销售等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJkZiaXlgnk4JibCOdjS7wxPG5SX7tvx582P8iaJBCs7b7IgMFneloCibEhw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>新浪</p>
+<h3 id="携程"><a href="#携程" class="headerlink" title="携程"></a>携程</h3><blockquote>
+<p>位于<strong>天府四街</strong>，招聘岗位也比较少，只有 Java 岗位研发，其余岗位都是产品、旅游管理岗位。</p>
+</blockquote>
+<p>主要的业务有：<strong>携程、去哪儿、产品、旅游管理</strong>等。</p>
+<p><em>岗位：</em>Java 开发、搜索研发、监控平台研发、客户经理、线路管理等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/Q5xqCucsiaSB26TtCmnhkNWGVovhsyuHvhDDfBusl6pv2wGN1sTgsjOnGkVpjltblT7Hm6TQkEiaFdwRRplOIKBg/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>携程信息技术大楼</p>
+<h3 id="联想"><a href="#联想" class="headerlink" title="联想"></a>联想</h3><blockquote>
+<p>位于郫都区<strong>天高新西区</strong>，岗位比较丰富，Java、智慧校园、边缘计算、云管平台、物联网都有空缺。</p>
+</blockquote>
+<p>主要的项目有：<strong>智慧校园、运管平台</strong>等项目的研发。</p>
+<p><em>岗位：</em>Java、服务器技术、产品数据、监控等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/Q5xqCucsiaSB26TtCmnhkNWGVovhsyuHvaUpSNqEUKgV7iaWcBh9iaW2DbxrL3rjzKkDDpQQbCeAHPrZSEt0zLYuw/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>联想西部产业园区</p>
+<h3 id="陌陌"><a href="#陌陌" class="headerlink" title="陌陌"></a>陌陌</h3><blockquote>
+<p>位于<strong>天府软件园E区</strong>，想必男同胞们都用过这个软件。岗位比较完善，高级推荐、ERP、基础中间件等。</p>
+</blockquote>
+<p>主要的项目有：<strong>视频直播</strong>等项目的研发。</p>
+<p><em>岗位：</em>Java、CI 系统、高级产品等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/Q5xqCucsiaSB26TtCmnhkNWGVovhsyuHvY2icxY32TNGakUxKQhJI0UorYBGvKmCrppD3vFiacqXGTbwdvRrzJyUQ/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>陌陌科技</p>
+<h3 id="完美世界"><a href="#完美世界" class="headerlink" title="完美世界"></a>完美世界</h3><blockquote>
+<p>位于<strong>天府软件园C区</strong>，玩游戏的想必都认识，主要有游戏数据运营、游戏测试、角色原画、视觉设计、客户端开发。（PS：每天回家都可以看到～）</p>
+</blockquote>
+<p>主要的项目有：<strong>游戏、3D 动画</strong>等项目的研发。</p>
+<p><em>岗位：</em>Java、动画师、测试、UI等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/Q5xqCucsiaSB26TtCmnhkNWGVovhsyuHvFiahrA9fdYzpQNRXvKR0c5psSxOicZjOTUhiaSDiaiaeoNsjaFaEiafUxqCA/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>完美世界</p>
+<h3 id="锤子科技"><a href="#锤子科技" class="headerlink" title="锤子科技"></a>锤子科技</h3><blockquote>
+<p>位于成华区<strong>龙潭工业园</strong>，罗永浩重点发展成都片区。也同时吸引了成都广大高校如：川大、电子科技大学、成都信息工程大学的优秀毕业生前往。</p>
+</blockquote>
+<p>主要的项目有：<strong>手机、硬件</strong>等项目的研发。</p>
+<p><em>岗位：</em>安卓、Java等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJtEbWDicouB4Q8KYJOxIT5ibURhw0uexdPh3cBhCia90HA2GE0pQNnrBHQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>锤子科技</p>
+<h3 id="当乐网"><a href="#当乐网" class="headerlink" title="当乐网"></a>当乐网</h3><blockquote>
+<p>位于<strong>天府软件园E区</strong>，是中国手机游戏下载网站，2014年，研发中心已全部搬迁到成都，技术氛围不错，适合新人成长。</p>
+</blockquote>
+<p>主要的项目有：<strong>游戏服务器、游戏视频、客户端、动画、角色建模</strong>等项目的研发。</p>
+<p><em>岗位：</em>Java、客户端开发、特效师、服务端开发等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJOkBLicLF04B0hYzFW1qHrDeLhzHrwqmS30icaSOJfFGbTpviaULjbjuvA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>当乐网</p>
+<h3 id="科大讯飞"><a href="#科大讯飞" class="headerlink" title="科大讯飞"></a>科大讯飞</h3><blockquote>
+<p>位于<strong>天府软件园E区</strong>，是国内首屈一指的以语音技术为产业的软件企业，在国内智能语音领域已占据 70% 的市场。（PS：原来就在家门楼下～）</p>
+</blockquote>
+<p>主要的项目有：<strong>智慧医疗、智慧城市、智能汽车</strong>等项目的研发。</p>
+<p><em>岗位：</em>Web 前端开发、Java、智能服务开发、测试等…</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/Q5xqCucsiaSBcoFgg0GuicHf3rDppMHFeJWekpuyX49dZZSpKEDVOHdUOHTOppicjkd0EtdrONNQ1ibHPKyx8yuUpw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>天府菁蓉中心科大讯飞办公处</p>
+<h3 id="聚美优品"><a href="#聚美优品" class="headerlink" title="聚美优品"></a>聚美优品</h3><blockquote>
+<p>位于<strong>天府软件园G区</strong>，曾一度红遍网络的陈欧的一句“我是陈欧，我为自己代言”，当初可是火遍大江南北。</p>
+</blockquote>
+<p>主要的项目有：<strong>社群运营、广告、直播</strong>等项目的研发。</p>
+<p><em>岗位：</em>算法、系统工程师、产品视觉动效、UI 等…</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/echarts.png"
+      alt="Les">
+  <p class="site-author-name" itemprop="name">Les</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#腾讯成都大厦"><span class="nav-number">1.</span> <span class="nav-text">腾讯成都大厦</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阿里巴巴西部基地"><span class="nav-number">2.</span> <span class="nav-text">阿里巴巴西部基地</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#百度"><span class="nav-number">3.</span> <span class="nav-text">百度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字节跳动"><span class="nav-number">4.</span> <span class="nav-text">字节跳动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#京东"><span class="nav-number">5.</span> <span class="nav-text">京东</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#美团"><span class="nav-number">6.</span> <span class="nav-text">美团</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#滴滴"><span class="nav-number">7.</span> <span class="nav-text">滴滴</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网易"><span class="nav-number">8.</span> <span class="nav-text">网易</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OPPO"><span class="nav-number">9.</span> <span class="nav-text">OPPO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#爱奇艺"><span class="nav-number">10.</span> <span class="nav-text">爱奇艺</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#华为"><span class="nav-number">11.</span> <span class="nav-text">华为</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快手"><span class="nav-number">12.</span> <span class="nav-text">快手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新浪"><span class="nav-number">13.</span> <span class="nav-text">新浪</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#携程"><span class="nav-number">14.</span> <span class="nav-text">携程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联想"><span class="nav-number">15.</span> <span class="nav-text">联想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#陌陌"><span class="nav-number">16.</span> <span class="nav-text">陌陌</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完美世界"><span class="nav-number">17.</span> <span class="nav-text">完美世界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锤子科技"><span class="nav-number">18.</span> <span class="nav-text">锤子科技</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#当乐网"><span class="nav-number">19.</span> <span class="nav-text">当乐网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#科大讯飞"><span class="nav-number">20.</span> <span class="nav-text">科大讯飞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚美优品"><span class="nav-number">21.</span> <span class="nav-text">聚美优品</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Les</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+  
+
+</body>
+</html>

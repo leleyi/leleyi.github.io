@@ -55,17 +55,17 @@
   };
 </script>
 
-  <meta name="description" content="缓存预热在高请求之前，做好一系列措施，保证大量用户数量点击造成灾难。  请求数量较高 主从之间数据吞吐量较大，数据同步操作频度较高  缓存预热解决方案前置准备工作：  日常例行统计数据访问记录，统计访问频度较高的热点数据 利用 LRU 数据删除策略，构建数据留存队列例如：storm 与 kafka 配合  准备工作：  将统计结果中的数据分类，根据级别，redis 优先加载级别较高的热点数据 利用">
+  <meta name="description" content="Redis 我这腿老毛病了， 医不好。缓存预热 、缓存雪崩 、缓存击穿 、缓存穿透 缓存预热在高请求之前，做好一系列措施，保证大量用户数量点击造成灾难。  请求数量较高 主从之间数据吞吐量较大，数据同步操作频度较高  缓存预热解决方案前置准备工作：  日常例行统计数据访问记录，统计访问频度较高的热点数据 利用 LRU 数据删除策略，构建数据留存队列例如：storm 与 kafka 配合  准备工作">
 <meta property="og:type" content="website">
-<meta property="og:title" content="FILE">
+<meta property="og:title" content="Redis老寒腿">
 <meta property="og:url" content="http://yoursite.com/doing/Redis_问题以及解决方案.html">
 <meta property="og:site_name" content="FILE">
-<meta property="og:description" content="缓存预热在高请求之前，做好一系列措施，保证大量用户数量点击造成灾难。  请求数量较高 主从之间数据吞吐量较大，数据同步操作频度较高  缓存预热解决方案前置准备工作：  日常例行统计数据访问记录，统计访问频度较高的热点数据 利用 LRU 数据删除策略，构建数据留存队列例如：storm 与 kafka 配合  准备工作：  将统计结果中的数据分类，根据级别，redis 优先加载级别较高的热点数据 利用">
+<meta property="og:description" content="Redis 我这腿老毛病了， 医不好。缓存预热 、缓存雪崩 、缓存击穿 、缓存穿透 缓存预热在高请求之前，做好一系列措施，保证大量用户数量点击造成灾难。  请求数量较高 主从之间数据吞吐量较大，数据同步操作频度较高  缓存预热解决方案前置准备工作：  日常例行统计数据访问记录，统计访问频度较高的热点数据 利用 LRU 数据删除策略，构建数据留存队列例如：storm 与 kafka 配合  准备工作">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-04-06T07:47:21.939Z">
+<meta property="og:updated_time" content="2021-04-18T14:15:34.389Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FILE">
-<meta name="twitter:description" content="缓存预热在高请求之前，做好一系列措施，保证大量用户数量点击造成灾难。  请求数量较高 主从之间数据吞吐量较大，数据同步操作频度较高  缓存预热解决方案前置准备工作：  日常例行统计数据访问记录，统计访问频度较高的热点数据 利用 LRU 数据删除策略，构建数据留存队列例如：storm 与 kafka 配合  准备工作：  将统计结果中的数据分类，根据级别，redis 优先加载级别较高的热点数据 利用">
+<meta name="twitter:title" content="Redis老寒腿">
+<meta name="twitter:description" content="Redis 我这腿老毛病了， 医不好。缓存预热 、缓存雪崩 、缓存击穿 、缓存穿透 缓存预热在高请求之前，做好一系列措施，保证大量用户数量点击造成灾难。  请求数量较高 主从之间数据吞吐量较大，数据同步操作频度较高  缓存预热解决方案前置准备工作：  日常例行统计数据访问记录，统计访问频度较高的热点数据 利用 LRU 数据删除策略，构建数据留存队列例如：storm 与 kafka 配合  准备工作">
   <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
   <link rel="canonical" href="http://yoursite.com/doing/Redis_问题以及解决方案">
 
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title> | FILE</title>
+  <title>Redis老寒腿 | FILE</title>
   
 
 
@@ -235,7 +235,7 @@
     <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">
+<h1 class="post-title" itemprop="name headline">Redis老寒腿
 
 </h1>
 
@@ -251,7 +251,8 @@
       
       <div class="post-body">
         
-          <h3 id="缓存预热"><a href="#缓存预热" class="headerlink" title="缓存预热"></a>缓存预热</h3><p>在高请求之前，做好一系列措施，保证大量用户数量点击造成灾难。</p>
+          <p>Redis 我这腿老毛病了， 医不好。<strong>缓存预热 、缓存雪崩 、缓存击穿 、缓存穿透</strong></p>
+<h4 id="缓存预热"><a href="#缓存预热" class="headerlink" title="缓存预热"></a>缓存预热</h4><p>在高请求之前，做好一系列措施，保证大量用户数量点击造成灾难。</p>
 <ol>
 <li>请求数量较高</li>
 <li>主从之间数据吞吐量较大，数据同步操作频度较高</li>
@@ -272,7 +273,7 @@
 <li>如果条件允许，使用 CDN（内容分发网络），效果会更好</li>
 </ol>
 <p>缓存预热总结：<br>缓存预热就是系统启动前，提前将相关的缓存数据直接加载到缓存系统。避免在用户请求的时候，先查询数据库，然后再将数据缓存的问题！用户直接查询事先被预热的缓存数据!</p>
-<h3 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h3><h5 id="数据库服务器崩溃（1）"><a href="#数据库服务器崩溃（1）" class="headerlink" title="数据库服务器崩溃（1）"></a>数据库服务器崩溃（1）</h5><ol>
+<h4 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h4><h5 id="数据库服务器崩溃（1）"><a href="#数据库服务器崩溃（1）" class="headerlink" title="数据库服务器崩溃（1）"></a>数据库服务器崩溃（1）</h5><ol>
 <li>系统平稳运行过程中，忽然数据库连接量激增</li>
 <li>应用服务器无法及时请求</li>
 <li>大量 408，500 错误页面出现</li>
@@ -315,7 +316,7 @@
 <li>加锁 慎用！！！！！！！</li>
 </ol>
 <p>总结<br>缓存雪崩式瞬间过期数量太大，导致对数据库服务器造成压力。如果能有效避免过期时间集中，可以有效解决雪崩现象的出现（约 40%）。配合其他策略一起使用，并监控服务器的运行数据，根据运行结果做快速调整</p>
-<h3 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h3><h5 id="数据库服务器崩溃（2）"><a href="#数据库服务器崩溃（2）" class="headerlink" title="数据库服务器崩溃（2）"></a>数据库服务器崩溃（2）</h5><ol>
+<h4 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h4><h5 id="数据库服务器崩溃（2）"><a href="#数据库服务器崩溃（2）" class="headerlink" title="数据库服务器崩溃（2）"></a>数据库服务器崩溃（2）</h5><ol>
 <li>系统平稳运行过程中</li>
 <li>数据库连接量瞬间激增</li>
 <li>Redis 服务器无大量 key 过期</li>
@@ -341,7 +342,7 @@
 <li>加锁<br>分布式锁，防止被击穿，但是要注意也是性能瓶颈，慎重！！！！！！！！</li>
 </ol>
 <p>总结：<br>缓存击穿就是单个高热数据过期的瞬间，数据访问较大，未命中 redis 后，发起了大量对同一数据的数据库访问，导致对数据库服务器造成压力。应对策略应该在业务数据分析与预防方面进行，配合运行监控测试与即时调整策略，毕竟单个 key 的过期监控难度较高，配合雪崩处理策略即可</p>
-<h3 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h3><h5 id="数据库服务器崩溃（3）"><a href="#数据库服务器崩溃（3）" class="headerlink" title="数据库服务器崩溃（3）"></a>数据库服务器崩溃（3）</h5><ol>
+<h4 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h4><h5 id="数据库服务器崩溃（3）"><a href="#数据库服务器崩溃（3）" class="headerlink" title="数据库服务器崩溃（3）"></a>数据库服务器崩溃（3）</h5><ol>
 <li>系统平稳运行过程中</li>
 <li>应用服务器流量随时间增量较大</li>
 <li>Redis 服务器命中率随时间逐步降低</li>
@@ -424,7 +425,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-count">84</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -514,7 +515,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存预热"><span class="nav-number">1.</span> <span class="nav-text">缓存预热</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#缓存预热解决方案"><span class="nav-number">1.0.1.</span> <span class="nav-text">缓存预热解决方案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存雪崩"><span class="nav-number">2.</span> <span class="nav-text">缓存雪崩</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库服务器崩溃（1）"><span class="nav-number">2.0.1.</span> <span class="nav-text">数据库服务器崩溃（1）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题排查"><span class="nav-number">2.0.2.</span> <span class="nav-text">问题排查</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题分析"><span class="nav-number">2.0.3.</span> <span class="nav-text">问题分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方案（道）"><span class="nav-number">2.0.4.</span> <span class="nav-text">解决方案（道）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方案（术）"><span class="nav-number">2.0.5.</span> <span class="nav-text">解决方案（术）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存击穿"><span class="nav-number">3.</span> <span class="nav-text">缓存击穿</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库服务器崩溃（2）"><span class="nav-number">3.0.1.</span> <span class="nav-text">数据库服务器崩溃（2）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题排查-1"><span class="nav-number">3.0.2.</span> <span class="nav-text">问题排查</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方案（术）-1"><span class="nav-number">3.0.3.</span> <span class="nav-text">解决方案（术）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存穿透"><span class="nav-number">4.</span> <span class="nav-text">缓存穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库服务器崩溃（3）"><span class="nav-number">4.0.1.</span> <span class="nav-text">数据库服务器崩溃（3）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题排查-2"><span class="nav-number">4.0.2.</span> <span class="nav-text">问题排查</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方法（术）"><span class="nav-number">4.0.3.</span> <span class="nav-text">解决方法（术）</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存预热"><span class="nav-number">1.</span> <span class="nav-text">缓存预热</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#缓存预热解决方案"><span class="nav-number">1.1.</span> <span class="nav-text">缓存预热解决方案</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存雪崩"><span class="nav-number">2.</span> <span class="nav-text">缓存雪崩</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库服务器崩溃（1）"><span class="nav-number">2.1.</span> <span class="nav-text">数据库服务器崩溃（1）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题排查"><span class="nav-number">2.2.</span> <span class="nav-text">问题排查</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题分析"><span class="nav-number">2.3.</span> <span class="nav-text">问题分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方案（道）"><span class="nav-number">2.4.</span> <span class="nav-text">解决方案（道）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方案（术）"><span class="nav-number">2.5.</span> <span class="nav-text">解决方案（术）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存击穿"><span class="nav-number">3.</span> <span class="nav-text">缓存击穿</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库服务器崩溃（2）"><span class="nav-number">3.1.</span> <span class="nav-text">数据库服务器崩溃（2）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题排查-1"><span class="nav-number">3.2.</span> <span class="nav-text">问题排查</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方案（术）-1"><span class="nav-number">3.3.</span> <span class="nav-text">解决方案（术）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存穿透"><span class="nav-number">4.</span> <span class="nav-text">缓存穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库服务器崩溃（3）"><span class="nav-number">4.1.</span> <span class="nav-text">数据库服务器崩溃（3）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题排查-2"><span class="nav-number">4.2.</span> <span class="nav-text">问题排查</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方法（术）"><span class="nav-number">4.3.</span> <span class="nav-text">解决方法（术）</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -612,6 +613,55 @@
 
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', function() {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
   
 
   

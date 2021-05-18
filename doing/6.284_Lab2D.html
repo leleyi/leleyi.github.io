@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/echarts.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/echarts.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"scrollpercent":true,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    save_scroll: false,
+    copycode: {"enable":true,"show_result":true,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="6.824 Lab 2: RaftIntroductionThis is the first in a series of labs in which you’ll build a fault-tolerant key/value storage system. In this lab you’ll implement Raft, a replicated state machine protoc">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FILE">
+<meta property="og:url" content="http://yoursite.com/doing/6.284_Lab2D.html">
+<meta property="og:site_name" content="FILE">
+<meta property="og:description" content="6.824 Lab 2: RaftIntroductionThis is the first in a series of labs in which you’ll build a fault-tolerant key/value storage system. In this lab you’ll implement Raft, a replicated state machine protoc">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-04-21T14:00:06.638Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FILE">
+<meta name="twitter:description" content="6.824 Lab 2: RaftIntroductionThis is the first in a series of labs in which you’ll build a fault-tolerant key/value storage system. In this lab you’ll implement Raft, a replicated state machine protoc">
+  <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/doing/6.284_Lab2D">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false,
+    isPage: true,
+    isArchive: false
+  };
+</script>
+
+  <title> | FILE</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FILE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+          <h1 id="6-824-Lab-2-Raft"><a href="#6-824-Lab-2-Raft" class="headerlink" title="6.824 Lab 2: Raft"></a>6.824 Lab 2: Raft</h1><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>This is the first in a series of labs in which you’ll build a fault-tolerant key/value storage system. In this lab you’ll implement Raft, a replicated state machine protocol. In the next lab you’ll build a key/value service on top of Raft. Then you will “shard” your service over multiple replicated state machines for higher performance.</p>
+<p>A replicated service achieves fault tolerance by storing complete copies of its state (i.e., data) on multiple replica servers. Replication allows the service to continue operating even if some of its servers experience failures (crashes or a broken or flaky network). The challenge is that failures may cause the replicas to hold differing copies of the data.</p>
+<p>Raft organizes client requests into a sequence, called the log, and ensures that all the replica servers see the same log. Each replica executes client requests in log order, applying them to its local copy of the service’s state. Since all the live replicas see the same log contents, they all execute the same requests in the same order, and thus continue to have identical service state. If a server fails but later recovers, Raft takes care of bringing its log up to date. Raft will continue to operate as long as at least a majority of the servers are alive and can talk to each other. If there is no such majority, Raft will make no progress, but will pick up where it left off as soon as a majority can communicate again.</p>
+<p>In this lab you’ll implement Raft as a Go object type with associated methods, meant to be used as a module in a larger service. A set of Raft instances talk to each other with RPC to maintain replicated logs. Your Raft interface will support an indefinite sequence of numbered commands, also called log entries. The entries are numbered with <em>index numbers</em>. The log entry with a given index will eventually be committed. At that point, your Raft should send the log entry to the larger service for it to execute.</p>
+<p>You should follow the design in the <a href="https://pdos.csail.mit.edu/6.824/papers/raft-extended.pdf" target="_blank" rel="noopener">extended Raft paper</a>, with particular attention to Figure 2. You’ll implement most of what’s in the paper, including saving persistent state and reading it after a node fails and then restarts. You will not implement cluster membership changes (Section 6).</p>
+<p>You may find this <a href="https://thesquareplanet.com/blog/students-guide-to-raft/" target="_blank" rel="noopener">guide</a> useful, as well as this advice about <a href="https://pdos.csail.mit.edu/6.824/labs/raft-locking.txt" target="_blank" rel="noopener">locking</a> and <a href="https://pdos.csail.mit.edu/6.824/labs/raft-structure.txt" target="_blank" rel="noopener">structure</a> for concurrency. For a wider perspective, have a look at Paxos, Chubby, Paxos Made Live, Spanner, Zookeeper, Harp, Viewstamped Replication, and <a href="http://static.usenix.org/event/nsdi11/tech/full_papers/Bolosky.pdf" target="_blank" rel="noopener">Bolosky et al.</a> (Note: the student’s guide was written several years ago, and part 2D in particular has since changed. Make sure you understand why a particular implementation strategy makes sense before blindly following it!)</p>
+<p>We also provide a <a href="https://pdos.csail.mit.edu/6.824/notes/raft_diagram.pdf" target="_blank" rel="noopener">diagram of Raft interactions</a> that can help clarify how your Raft code interacts with the layers on top of it.</p>
+<p>This lab is due in four parts. You must submit each part on the corresponding due date.</p>
+<h3 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h3><p>If you have done Lab 1, you already have a copy of the lab source code. If not, you can find directions for obtaining the source via git in the <a href="https://pdos.csail.mit.edu/6.824/labs/lab-mr.html" target="_blank" rel="noopener">Lab 1 instructions</a>.</p>
+<p>We supply you with skeleton code <code>src/raft/raft.go</code>. We also supply a set of tests, which you should use to drive your implementation efforts, and which we’ll use to grade your submitted lab. The tests are in <code>src/raft/test_test.go</code>.</p>
+<p>To get up and running, execute the following commands. Don’t forget the <code>git pull</code> to get the latest software.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/6.824</span><br><span class="line">$ git pull</span><br><span class="line">...</span><br><span class="line">$ cd src/raft</span><br><span class="line">$ go test -race</span><br><span class="line">Test (2A): initial election ...</span><br><span class="line">--- FAIL: TestInitialElection2A (5.04s)</span><br><span class="line">        config.go:326: expected one leader, got none</span><br><span class="line">Test (2A): election after network failure ...</span><br><span class="line">--- FAIL: TestReElection2A (5.03s)</span><br><span class="line">        config.go:326: expected one leader, got none</span><br><span class="line">...</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<h3 id="The-code"><a href="#The-code" class="headerlink" title="The code"></a>The code</h3><p>Implement Raft by adding code to <code>raft/raft.go</code>. In that file you’ll find skeleton code, plus examples of how to send and receive RPCs.</p>
+<p>Your implementation must support the following interface, which the tester and (eventually) your key/value server will use. You’ll find more details in comments in <code>raft.go</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// create a new Raft server instance:</span><br><span class="line">rf := Make(peers, me, persister, applyCh)</span><br><span class="line"></span><br><span class="line">// start agreement on a new log entry:</span><br><span class="line">rf.Start(command interface&#123;&#125;) (index, term, isleader)</span><br><span class="line"></span><br><span class="line">// ask a Raft for its current term, and whether it thinks it is leader</span><br><span class="line">rf.GetState() (term, isLeader)</span><br><span class="line"></span><br><span class="line">// each time a new entry is committed to the log, each Raft peer</span><br><span class="line">// should send an ApplyMsg to the service (or tester).</span><br><span class="line">type ApplyMsg</span><br></pre></td></tr></table></figure>
+<p>A service calls <code>Make(peers,me,…)</code> to create a Raft peer. The peers argument is an array of network identifiers of the Raft peers (including this one), for use with RPC. The <code>me</code> argument is the index of this peer in the peers array. <code>Start(command)</code> asks Raft to start the processing to append the command to the replicated log. <code>Start()</code> should return immediately, without waiting for the log appends to complete. The service expects your implementation to send an <code>ApplyMsg</code> for each newly committed log entry to the <code>applyCh</code> channel argument to <code>Make()</code>.</p>
+<p><code>raft.go</code> contains example code that sends an RPC (<code>sendRequestVote()</code>) and that handles an incoming RPC (<code>RequestVote()</code>). Your Raft peers should exchange RPCs using the labrpc Go package (source in <code>src/labrpc</code>). The tester can tell <code>labrpc</code> to delay RPCs, re-order them, and discard them to simulate various network failures. While you can temporarily modify <code>labrpc</code>, make sure your Raft works with the original <code>labrpc</code>, since that’s what we’ll use to test and grade your lab. Your Raft instances must interact only with RPC; for example, they are not allowed to communicate using shared Go variables or files.</p>
+<p>Subsequent labs build on this lab, so it is important to give yourself enough time to write solid code.</p>
+<h3 id="Part-2D-log-compaction-hard"><a href="#Part-2D-log-compaction-hard" class="headerlink" title="Part 2D: log compaction (hard)"></a>Part 2D: log compaction (<a href="https://pdos.csail.mit.edu/6.824/labs/guidance.html" target="_blank" rel="noopener">hard</a>)</h3><p>As things stand now with your code, a rebooting service replays the complete Raft log in order to restore its state. However, it’s not practical for a long-running service to remember the complete Raft log forever. Instead, you’ll modify Raft to cooperate to save space: from time to time a service will persistently store a “snapshot” of its current state, and Raft will discard log entries that precede the snapshot. When a service falls far behind the leader and must catch up, the service first installs a snapshot and then replays log entries from after the point at which the snapshot was created. Section 7 of the <a href="https://pdos.csail.mit.edu/6.824/papers/raft-extended.pdf" target="_blank" rel="noopener">extended Raft paper</a> outlines the scheme; you will have to design the details.</p>
+<p>You may find it helpful to refer to the <a href="https://pdos.csail.mit.edu/6.824/notes/raft_diagram.pdf" target="_blank" rel="noopener">diagram of Raft interactions</a> to understand how the replicated service and Raft communicate.</p>
+<p>To support snapshots, we need an interface between the service and the Raft library. The Raft paper doesn’t specify this interface, and several designs are possible. To allow for a simple implementation, we decided on the following interface between service and Raft:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Snapshot(index int, snapshot []byte)</span><br><span class="line">CondInstallSnapshot(lastIncludedTerm int, lastIncludedIndex int, snapshot []byte) bool</span><br></pre></td></tr></table></figure>
+<p>A service calls <code>Snapshot()</code> to communicate the snapshot of its state to Raft. The snapshot includes all info up to and including index. This means the corresponding Raft peer no longer needs the log through (and including) index. Your Raft implementation should trim its log as much as possible. You must revise your Raft code to operate while storing only the tail of the log.</p>
+<p>As discussed in the extended Raft paper, Raft leaders must sometimes tell lagging Raft peers to update their state by installing a snapshot. You need to implement <code>InstallSnapshot</code> RPC senders and handlers for installing snapshots when this situation arises. This is in contrast to <code>AppendEntries</code>, which sends log entries that are then applied one by one by the service.</p>
+<p>Note that <code>InstallSnapshot</code> RPCs are sent <em>between</em> Raft peers, whereas the provided skeleton functions <code>Snapshot/CondInstallSnapshot</code> are used by the service to communicate to Raft.</p>
+<p>When a follower receives and handles an InstallSnapshot RPC, it must hand the included snapshot to the service using Raft. The InstallSnapshot handler can use the <code>applyCh</code> to send the snapshot to the service, by putting the snapshot in <code>ApplyMsg</code>. The service reads from <code>applyCh</code>, and invokes <code>CondInstallSnapshot</code> with the snapshot to tell Raft that the service is switching to the passed-in snapshot state, and that Raft should update its log at the same time. (See <code>applierSnap()</code> in <code>config.go</code> to see how the tester service does this)</p>
+<p><code>CondInstallSnapshot</code> should refuse to install a snapshot if it is an old snapshot (i.e., if Raft has processed entries after the snapshot’s <code>lastIncludedTerm/lastIncludedIndex</code>). This is because Raft may handle other RPCs and send messages on the <code>applyCh</code> after it handled the <code>InstallSnapshot</code> RPC, and before <code>CondInstallSnapshot</code> was invoked by the service. It is not OK for Raft to go back to an older snapshot, so older snapshots must be refused. When your implementation refuses the snapshot, <code>CondInstallSnapshot</code> should just return <code>false</code> so that the service knows it shouldn’t switch to the snapshot.</p>
+<p>If the snapshot is recent, then Raft should trim its log, persist the new state, return <code>true</code>, and the service should switch to the snapshot before processing the next message on the <code>applyCh</code>.</p>
+<p><code>CondInstallSnapshot</code> is one way of updating the Raft and service state; other interfaces between service and raft are possible too. This particular design allows your implementation to do the check whether an snapshot must be installed or not in one place and atomically switch both the service and Raft to the snapshot. You are free to implement Raft in a way that <code>CondInstallSnapShot</code> can always return <code>true</code>; if your implementation passes the tests, you receive full credit.</p>
+<p>Modify your Raft code to support snapshots: implement Snapshot, CondInstallSnapshot, and the InstallSnapshot RPC, as well as the changes to Raft to support these (e.g, continue to operate with a trimmed log). Your solution is complete when it passes the 2D tests and all the Lab 2 tests. (Note that lab 3 will test snapshots more thoroughly than lab 2 because lab 3 has a real service to stress Raft’s snapshots.)</p>
+<ul>
+<li>Send the entire snapshot in a single InstallSnapshot RPC. Don’t implement Figure 13’s <code>offset</code> mechanism for splitting up the snapshot.</li>
+<li>Raft must discard old log entries in a way that allows the Go garbage collector to free and re-use the memory; this requires that there be no reachable references (pointers) to the discarded log entries.</li>
+<li>Raft logs can no longer use the position of a log entry or the length of the log to determine log entry indices; you will need to use an indexing scheme independent of log position.</li>
+<li>Even when the log is trimmed, your implemention still needs to properly send the term and index of the entry prior to new entries in <code>AppendEntries</code> RPCs; this may require saving and referencing the latest snapshot’s <code>lastIncludedTerm/lastIncludedIndex</code> (consider whether this should be persisted).</li>
+<li>Raft must store each snapshot in the persister object using <code>SaveStateAndSnapshot()</code>.</li>
+<li>A reasonable amount of time to consume for the full set of Lab 2 tests (2A+2B+2C+2D) is 8 minutes of real time and one and a half minutes of CPU time.</li>
+</ul>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/echarts.png"
+      alt="Les">
+  <p class="site-author-name" itemprop="name">Les</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#6-824-Lab-2-Raft"><span class="nav-number">1.</span> <span class="nav-text">6.824 Lab 2: Raft</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">1.0.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Getting-Started"><span class="nav-number">1.0.2.</span> <span class="nav-text">Getting Started</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-code"><span class="nav-number">1.0.3.</span> <span class="nav-text">The code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part-2D-log-compaction-hard"><span class="nav-number">1.0.4.</span> <span class="nav-text">Part 2D: log compaction (hard)</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Les</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+  
+
+</body>
+</html>
