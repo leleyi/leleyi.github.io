@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/echarts.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/echarts.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"scrollpercent":true,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    save_scroll: false,
+    copycode: {"enable":true,"show_result":true,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="一、快速入门更改文件权限 （chmod 命令）一般使用格式 chmod [可选项]    123456789101112131415161718192021可选项：  -c, --changes          like verbose but report only when a change is made (若该档案权限确实已经更改，才显示其更改动作)  -f, --silent, --q">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FILE">
+<meta property="og:url" content="http://yoursite.com/2021/05/26/记事本_linux权限/index.html">
+<meta property="og:site_name" content="FILE">
+<meta property="og:description" content="一、快速入门更改文件权限 （chmod 命令）一般使用格式 chmod [可选项]    123456789101112131415161718192021可选项：  -c, --changes          like verbose but report only when a change is made (若该档案权限确实已经更改，才显示其更改动作)  -f, --silent, --q">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-05-26T15:01:38.040Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FILE">
+<meta name="twitter:description" content="一、快速入门更改文件权限 （chmod 命令）一般使用格式 chmod [可选项]    123456789101112131415161718192021可选项：  -c, --changes          like verbose but report only when a change is made (若该档案权限确实已经更改，才显示其更改动作)  -f, --silent, --q">
+  <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
+  <link rel="canonical" href="http://yoursite.com/2021/05/26/记事本_linux权限/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title> | FILE</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FILE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/05/26/记事本_linux权限/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Les">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/echarts.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FILE">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2021-05-26 23:01:57" itemprop="dateCreated datePublished" datetime="2021-05-26T23:01:57+08:00">2021-05-26</time>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="一、快速入门"><a href="#一、快速入门" class="headerlink" title="一、快速入门"></a>一、快速入门</h3><h4 id="更改文件权限-（chmod-命令）"><a href="#更改文件权限-（chmod-命令）" class="headerlink" title="更改文件权限 （chmod 命令）"></a>更改文件权限 （chmod 命令）</h4><h5 id="一般使用格式"><a href="#一般使用格式" class="headerlink" title="一般使用格式"></a>一般使用格式</h5><blockquote>
+<p>chmod [可选项] <mode> <file...></file...></mode></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">可选项：</span><br><span class="line">  -c, --changes          like verbose but report only when a change is made (若该档案权限确实已经更改，才显示其更改动作)</span><br><span class="line">  -f, --silent, --quiet  suppress most error messages  （若该档案权限无法被更改也不要显示错误讯息）</span><br><span class="line">  -v, --verbose          output a diagnostic <span class="keyword">for</span> every file processed（显示权限变更的详细资料）</span><br><span class="line">       --no-preserve-root  <span class="keyword">do</span> not treat <span class="string">'/'</span> specially (the default)</span><br><span class="line">       --preserve-root    fail to operate recursively on <span class="string">'/'</span></span><br><span class="line">       --reference=RFILE  use RFILE<span class="string">'s mode instead of MODE values</span></span><br><span class="line"><span class="string">  -R, --recursive        change files and directories recursively （以递归的方式对目前目录下的所有档案与子目录进行相同的权限变更)</span></span><br><span class="line"><span class="string">       --help		显示此帮助信息</span></span><br><span class="line"><span class="string">       --version		显示版本信息</span></span><br><span class="line"><span class="string">mode ：权限设定字串，详细格式如下：</span></span><br><span class="line"><span class="string">[ugoa...][[+-=][rwxX]...][,...]，其中</span></span><br><span class="line"><span class="string">[ugoa...]</span></span><br><span class="line"><span class="string">u 表示该档案的拥有者，g 表示与该档案的拥有者属于同一个群体(group)者，o 表示其他以外的人，a 表示所有（包含上面三者）。</span></span><br><span class="line"><span class="string">[+-=]</span></span><br><span class="line"><span class="string">+ 表示增加权限，- 表示取消权限，= 表示唯一设定权限。</span></span><br><span class="line"><span class="string">[rwxX]</span></span><br><span class="line"><span class="string">r 表示可读取，w 表示可写入，x 表示可执行，X 表示只有当该档案是个子目录或者该档案已经被设定过为可执行。</span></span><br><span class="line"><span class="string"> 	</span></span><br><span class="line"><span class="string">file...</span></span><br><span class="line"><span class="string">文件列表（单个或者多个文件、文件夹）</span></span><br></pre></td></tr></table></figure>
+<p>范例：</p>
+<ul>
+<li>设置所有用户可读取文件 a.conf</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chmod ugo+r a.sh </span><br><span class="line">或 </span><br><span class="line">chmod a+r  a.conf</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置 <a href="http://c.sh/" target="_blank" rel="noopener">c.sh</a> 只有 拥有者可以读写及执行</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod u+rwx c.sh</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置文件 a.conf 与 b.xml 权限为拥有者与其所属同一个群组 可读写，其它组可读不可写</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod a+r,ug+w,o-w a.conf b.xml</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置当前目录下的所有档案与子目录皆设为任何人可读写</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R a+rw *</span><br></pre></td></tr></table></figure>
+<h4 id="数字权限使用格式"><a href="#数字权限使用格式" class="headerlink" title="数字权限使用格式"></a>数字权限使用格式</h4><p>在这种使用方式中，首先我们需要了解数字如何表示权限。 首先，我们规定 数字 4 、2 和 1 表示读、写、执行权限（具体原因可见下节权限详解内容），即 r=4，w=2，x=1 。此时其他的权限组合也可以用其他的八进制数字表示出来，如： rwx = 4 + 2 + 1 = 7 rw = 4 + 2 = 6 rx = 4 +1 = 5 即</p>
+<p>若要同时设置 rwx (可读写运行） 权限则将该权限位 设置 为 4 + 2 + 1 = 7 若要同时设置 rw- （可读写不可运行）权限则将该权限位 设置 为 4 + 2 = 6 若要同时设置 r-x （可读可运行不可写）权限则将该权限位 设置 为 4 +1 = 5</p>
+<p>上面我们提到，每个文件都可以针对三个粒度，设置不同的 rwx(读写执行)权限。即我们可以用用三个 8 进制数字分别表示 拥有者 、群组 、其它组 ( u、 g 、o) 的权限详情，并用 chmod 直接加三个 8 进制数字的方式直接改变文件权限。语法格式为 ：</p>
+<blockquote>
+<p>chmod <abc> file…</abc></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">其中</span><br><span class="line">a,b,c各为一个数字，分别代表User、Group、及Other的权限。</span><br><span class="line">相当于简化版的</span><br><span class="line">chmod u=权限,g=权限,o=权限 file...</span><br><span class="line">而此处的权限将用8进制的数字来表示User、Group、及Other的读、写、执行权限</span><br></pre></td></tr></table></figure>
+<p>范例：</p>
+<ul>
+<li>设置所有人可以读写及执行</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 file  (等价于  chmod u=rwx,g=rwx,o=rwx file 或  chmod a=rwx file)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置拥有者可读写，其他人不可读写执行</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 600 file (等价于  chmod u=rw,g=---,o=--- file 或 chmod u=rw,go-rwx file )</span><br></pre></td></tr></table></figure>
+<h4 id="更改文件拥有者（chown-命令）"><a href="#更改文件拥有者（chown-命令）" class="headerlink" title="更改文件拥有者（chown 命令）"></a>更改文件拥有者（chown 命令）</h4><p>linux/Unix 是多人多工作业系统，每个的文件都有拥有者（所有者），如果我们想变更文件的拥有者（利用 chown 将文件拥有者加以改变），一般只有系统管理员 (root) 拥有此操作权限，而普通用户则没有权限将自己或者别人的文件的拥有者设置为别人。</p>
+<p>语法格式：</p>
+<blockquote>
+<p>chown [可选项] user[:group] file…</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">使用权限：root</span><br><span class="line"></span><br><span class="line">说明：</span><br><span class="line">[可选项] : 同上文chmod</span><br><span class="line">user : 新的文件拥有者的使用者 </span><br><span class="line">group : 新的文件拥有者的使用者群体(group)</span><br></pre></td></tr></table></figure>
+<p>范例：</p>
+<ul>
+<li>设置文件 d.key、e.scrt 的拥有者设为 users 群体的 tom</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown tom:users file d.key e.scrt</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置当前目录下与子目录下的所有文件的拥有者为 users 群体的 James</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R James:users  *</span><br></pre></td></tr></table></figure>
+<h3 id="二、Linux-权限详解"><a href="#二、Linux-权限详解" class="headerlink" title="二、Linux 权限详解"></a>二、Linux 权限详解</h3><p>Linux 系统上对文件的权限有着严格的控制，用于如果相对某个文件执行某种操作，必须具有对应的权限方可执行成功。这也是 Linux 有别于 Windows 的机制，也是基于这个权限机智，Linux 可以有效防止病毒自我运行，因为运行的条件是必须要有运行的权限，而这个权限在 Linux 是用户所赋予的。</p>
+<p>Linux 的文件权限有以下设定：</p>
+<ul>
+<li>Linux 下文件的权限类型一般包括读，写，执行。对应字母为 r、w、x。</li>
+<li>Linux 下权限的属组有 拥有者 、群组 、其它组 三种。每个文件都可以针对这三个属组（粒度），设置不同的 rwx(读写执行) 权限。</li>
+<li>通常情况下，一个文件只能归属于一个用户和组， 如果其它的用户想有这个文件的权限，则可以将该用户加入具备权限的群组，一个用户可以同时归属于多个组。</li>
+</ul>
+<p>如果我们要表示一个文件的所有权限详情，有两种方式：</p>
+<ul>
+<li>第一种是十位二进制表示法，(三个属组每个使用二进制位，再加一个最高位共十位)，可简化为三位八进制形式</li>
+<li>另外一种十二位二进制表示法 (十二个二进制位)，可简化为四位八进制形式</li>
+</ul>
+<h4 id="十位权限表示"><a href="#十位权限表示" class="headerlink" title="十位权限表示"></a>十位权限表示</h4><p>常见的权限表示形式有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-rw------- (600)      只有拥有者有读写权限。</span><br><span class="line">-rw-r--r-- (644)      只有 拥有者有读写权限；而 属组用户和 其他用户只有读权限。</span><br><span class="line">-rwx------ (700)     只有拥有者有读、写、执行权限。</span><br><span class="line">-rwxr-xr-x (755)    拥有者有读、写、执行权限；而属组用户和其他用户只有读、执行权限。</span><br><span class="line">-rwx--x--x (711)    拥有者有读、写、执行权限；而属组用户和其他用户只有执行权限。</span><br><span class="line">-rw-rw-rw- (666)   所有用户都有文件读、写权限。</span><br><span class="line">-rwxrwxrwx (777)  所有用户都有读、写、执行权限。</span><br></pre></td></tr></table></figure>
+<p>后九位解析： 我们知道 Linux 权限总共有三个属组，这里我们给每个属组使用三个位置来定义三种操作（读、写、执行）权限，合起来则是权限的后九位。 上面我们用字符表示权限，其中 - 代表无权限，r 代表读权限，w 代表写权限，x 代表执行权限。</p>
+<p>实际上，后九位每个位置的意义（代表某个属组的某个权限）都是固定的，如果我们将各个位置权限的有无用二进制数 1 和 0 来代替，则只读、只写、只执行权限，可以用三位二进制数表示为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">r-- = 100</span><br><span class="line">-w- = 010</span><br><span class="line">--x = 001</span><br><span class="line">--- = 000</span><br></pre></td></tr></table></figure>
+<p>转换成八进制数，则为 r=4, w=2, x=1, -=0（这也就是用数字设置权限时为何是 4 代表读，2 代表写，1 代表执行）</p>
+<p>实际上，我们可以将所有的权限用二进制形式表现出来，并进一步转变成八进制数字：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">rwx = 111 = 7</span><br><span class="line">rw- = 110 = 6</span><br><span class="line">r-x = 101 = 5</span><br><span class="line">r-- = 100 = 4</span><br><span class="line">-wx = 011 = 3</span><br><span class="line">-w- = 010 = 2</span><br><span class="line">--x = 001 = 1</span><br><span class="line">--- = 000 = 0</span><br></pre></td></tr></table></figure>
+<p>由上可以得出，每个属组的所有的权限都可以用一位八进制数表示，每个数字都代表了不同的权限（权值）。如 最高的权限为是 7，代表可读，可写，可执行。</p>
+<p>故 如果我们将每个属组的权限都用八进制数表示，则文件的权限可以表示为三位八进制数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-rw------- =  600</span><br><span class="line">-rw-rw-rw- =  666</span><br><span class="line">-rwxrwxrwx = 777</span><br></pre></td></tr></table></figure>
+<p>关于第一位最高位的解释： 上面我们说到了权限表示中后九位的含义，剩下的第一位代表的是文件的类型，类型可以是下面几个中的一个：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">d代表的是目录(directroy)</span><br><span class="line">-代表的是文件(regular file)</span><br><span class="line">s代表的是套字文件(socket)</span><br><span class="line">p代表的管道文件(pipe)或命名管道文件(named pipe)</span><br><span class="line">l代表的是符号链接文件(symbolic link)</span><br><span class="line">b代表的是该文件是面向块的设备文件(block-oriented device file)</span><br><span class="line">c代表的是该文件是面向字符的设备文件(charcter-oriented device file)</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2021/03/09/分布式_分布式锁的实现/" rel="next" title="分布式锁">
+                  <i class="fa fa-chevron-left"></i> 分布式锁
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/echarts.png"
+      alt="Les">
+  <p class="site-author-name" itemprop="name">Les</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">categories</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span>
+        
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、快速入门"><span class="nav-number">1.</span> <span class="nav-text">一、快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#更改文件权限-（chmod-命令）"><span class="nav-number">1.1.</span> <span class="nav-text">更改文件权限 （chmod 命令）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一般使用格式"><span class="nav-number">1.1.1.</span> <span class="nav-text">一般使用格式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数字权限使用格式"><span class="nav-number">1.2.</span> <span class="nav-text">数字权限使用格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更改文件拥有者（chown-命令）"><span class="nav-number">1.3.</span> <span class="nav-text">更改文件拥有者（chown 命令）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Linux-权限详解"><span class="nav-number">2.</span> <span class="nav-text">二、Linux 权限详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#十位权限表示"><span class="nav-number">2.1.</span> <span class="nav-text">十位权限表示</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Les</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+    
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>
