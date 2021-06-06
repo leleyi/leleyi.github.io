@@ -57,17 +57,17 @@
 
   <meta name="description" content="一、快速入门更改文件权限 （chmod 命令）一般使用格式 chmod [可选项]    123456789101112131415161718192021可选项：  -c, --changes          like verbose but report only when a change is made (若该档案权限确实已经更改，才显示其更改动作)  -f, --silent, --q">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FILE">
-<meta property="og:url" content="http://yoursite.com/2021/05/26/记事本_linux权限/index.html">
+<meta property="og:title" content="Linux权限">
+<meta property="og:url" content="http://yoursite.com/2020/05/09/记事本_linux权限/index.html">
 <meta property="og:site_name" content="FILE">
 <meta property="og:description" content="一、快速入门更改文件权限 （chmod 命令）一般使用格式 chmod [可选项]    123456789101112131415161718192021可选项：  -c, --changes          like verbose but report only when a change is made (若该档案权限确实已经更改，才显示其更改动作)  -f, --silent, --q">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-05-26T15:01:38.040Z">
+<meta property="og:updated_time" content="2021-06-06T12:41:29.158Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FILE">
+<meta name="twitter:title" content="Linux权限">
 <meta name="twitter:description" content="一、快速入门更改文件权限 （chmod 命令）一般使用格式 chmod [可选项]    123456789101112131415161718192021可选项：  -c, --changes          like verbose but report only when a change is made (若该档案权限确实已经更改，才显示其更改动作)  -f, --silent, --q">
   <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
-  <link rel="canonical" href="http://yoursite.com/2021/05/26/记事本_linux权限/">
+  <link rel="canonical" href="http://yoursite.com/2020/05/09/记事本_linux权限/">
 
 
 <script id="page-configurations">
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title> | FILE</title>
+  <title>Linux权限 | FILE</title>
   
 
 
@@ -218,7 +218,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/05/26/记事本_linux权限/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/09/记事本_linux权限/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Les">
@@ -232,7 +232,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">Linux权限
 
             
           </h1>
@@ -249,7 +249,20 @@
                 
               
 
-              <time title="Created: 2021-05-26 23:01:57" itemprop="dateCreated datePublished" datetime="2021-05-26T23:01:57+08:00">2021-05-26</time>
+              <time title="Created: 2020-05-09 14:57:15" itemprop="dateCreated datePublished" datetime="2020-05-09T14:57:15+08:00">2020-05-09</time>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/备忘/" itemprop="url" rel="index"><span itemprop="name">备忘</span></a></span>
+
+                
+                
+              
             </span>
           
 
@@ -357,8 +370,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2021/03/09/分布式_分布式锁的实现/" rel="next" title="分布式锁">
-                  <i class="fa fa-chevron-left"></i> 分布式锁
+                <a href="/2020/04/20/论文_VM-FT/" rel="next" title="Fault-Tolerant Virtual Machine">
+                  <i class="fa fa-chevron-left"></i> Fault-Tolerant Virtual Machine
                 </a>
               
             </div>
@@ -366,6 +379,10 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/05/17/近似最近邻_anns-dpg/" rel="prev" title="同时考虑距离因素和分布因素的多样化近邻图DPG——TKDE顶刊论文阅读笔记">
+                  同时考虑距离因素和分布因素的多样化近邻图DPG——TKDE顶刊论文阅读笔记 <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -463,7 +480,9 @@
         
           
         
-        <span class="site-state-item-count">15</span>
+          
+        
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">categories</span>
         
       </div>
@@ -610,6 +629,55 @@
 
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', function() {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
   
 
   
