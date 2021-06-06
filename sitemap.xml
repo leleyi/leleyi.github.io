@@ -2,9 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2020/04/14/%E8%AE%BA%E6%96%87_GFS/</loc>
+    
+    <lastmod>2021-06-06T12:35:55.901Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/doing/GFS.html</loc>
+    
+    <lastmod>2021-06-06T12:34:16.631Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/04/20/%E8%AE%BA%E6%96%87_VM-FT/</loc>
     
-    <lastmod>2021-05-29T12:24:59.908Z</lastmod>
+    <lastmod>2021-06-06T12:26:03.082Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/08/22/Raft/</loc>
+    
+    <lastmod>2021-06-06T12:11:17.927Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/doing/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E7%BC%93%E5%AD%98%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7.html</loc>
+    
+    <lastmod>2021-06-06T12:02:36.263Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/doing/Top_K%E7%AE%97%E6%B3%95.html</loc>
+    
+    <lastmod>2021-05-29T12:33:27.993Z</lastmod>
     
   </url>
   
@@ -19,13 +54,6 @@
     <loc>http://yoursite.com/doing/%E5%88%86%E5%B8%83%E5%BC%8F_%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%84%E5%AE%9E%E7%8E%B0.html</loc>
     
     <lastmod>2021-05-29T12:23:40.146Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/doing/%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7.html</loc>
-    
-    <lastmod>2021-05-28T15:00:54.136Z</lastmod>
     
   </url>
   
@@ -54,13 +82,6 @@
     <loc>http://yoursite.com/doing/Tool_jmeter.html</loc>
     
     <lastmod>2021-05-26T14:59:41.848Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/doing/Top_K%E7%AE%97%E6%B3%95.html</loc>
-    
-    <lastmod>2021-05-26T14:56:24.074Z</lastmod>
     
   </url>
   
@@ -100,13 +121,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/10/09/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F_%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</loc>
-    
-    <lastmod>2021-05-18T02:14:28.411Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2019/10/09/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F_%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</loc>
     
     <lastmod>2021-05-18T02:14:28.411Z</lastmod>
@@ -114,7 +128,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2020/08/07/document_embedding/</loc>
+    <loc>http://yoursite.com/2019/10/09/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F_%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/</loc>
+    
+    <lastmod>2021-05-18T02:14:28.411Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/08/07/ML_document_embedding/</loc>
     
     <lastmod>2021-05-18T02:14:25.225Z</lastmod>
     
@@ -128,7 +149,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2020/10/28/windows%20protobuf/</loc>
+    <loc>http://yoursite.com/2020/10/28/OP_windows%20protobuf/</loc>
     
     <lastmod>2021-05-18T02:14:07.525Z</lastmod>
     
@@ -142,28 +163,28 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/11/09/eth_mnist/</loc>
+    <loc>http://yoursite.com/2019/11/09/ML_eth_mnist/</loc>
     
     <lastmod>2021-05-18T02:13:37.933Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2020/07/12/Evaluation/</loc>
+    <loc>http://yoursite.com/2020/07/12/ML_Evaluation/</loc>
     
     <lastmod>2021-05-18T02:13:29.855Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2020/07/12/Learn2Rank/</loc>
+    <loc>http://yoursite.com/2020/07/12/ML_Learn2Rank/</loc>
     
     <lastmod>2021-05-18T02:13:23.348Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/08/28/Transformer/</loc>
+    <loc>http://yoursite.com/2019/08/28/ML_Transformer/</loc>
     
     <lastmod>2021-05-18T02:13:11.173Z</lastmod>
     
@@ -212,7 +233,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2021/02/20/6.284_Lab2A/</loc>
+    <loc>http://yoursite.com/2021/02/20/MIT_6.284_Lab2A/</loc>
     
     <lastmod>2021-05-18T01:43:17.483Z</lastmod>
     
@@ -229,13 +250,6 @@
     <loc>http://yoursite.com/doing/6.284_Lab2D.html</loc>
     
     <lastmod>2021-04-21T14:00:06.638Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/doing/GFS.html</loc>
-    
-    <lastmod>2021-04-20T13:47:28.687Z</lastmod>
     
   </url>
   
@@ -264,13 +278,6 @@
     <loc>http://yoursite.com/doing/Redis_%E9%97%AE%E9%A2%98%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.html</loc>
     
     <lastmod>2021-04-18T14:15:34.389Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/doing/Raft.html</loc>
-    
-    <lastmod>2021-04-18T14:14:00.352Z</lastmod>
     
   </url>
   
@@ -450,13 +457,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2020/09/12/linux%E6%9D%83%E9%99%90/</loc>
-    
-    <lastmod>2020-12-30T06:09:01.817Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2020/11/22/Raft_AppendEntries/</loc>
     
     <lastmod>2020-12-22T14:18:15.312Z</lastmod>
@@ -527,6 +527,13 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/2019/10/01/patb1053/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/10/01/patb1054/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
@@ -548,7 +555,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/10/01/patb1058/</loc>
+    <loc>http://yoursite.com/2019/10/01/patb1056/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -562,7 +569,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/10/01/patb1053/</loc>
+    <loc>http://yoursite.com/2019/10/01/patb1058/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -583,35 +590,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/10/01/patb1056/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/10/07/patb1062/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2019/10/07/patb1061/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/10/20/patb1067/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/10/07/patb1064/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -625,14 +604,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/10/20/patb1066/</loc>
+    <loc>http://yoursite.com/2019/10/07/patb1064/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/10/20/patb1069/</loc>
+    <loc>http://yoursite.com/2019/10/07/patb1062/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -646,7 +625,21 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/10/20/patb1068/</loc>
+    <loc>http://yoursite.com/2019/10/20/patb1066/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/10/20/patb1067/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/10/20/patb1069/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -660,21 +653,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/11/30/patb1071/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/12/29/patb1076/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/12/29/patb1074/</loc>
+    <loc>http://yoursite.com/2019/10/20/patb1068/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -688,21 +667,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/11/30/patb1073/</loc>
+    <loc>http://yoursite.com/2019/11/30/patb1071/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/12/29/patb1078/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/12/29/patb1079/</loc>
+    <loc>http://yoursite.com/2019/12/29/patb1074/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -723,7 +695,28 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/12/30/patb1083/</loc>
+    <loc>http://yoursite.com/2019/11/30/patb1073/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/12/29/patb1076/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/12/29/patb1078/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/12/29/patb1079/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -737,7 +730,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/12/30/patb1084/</loc>
+    <loc>http://yoursite.com/2019/12/30/patb1082/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -751,35 +744,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/12/30/patb1082/</loc>
+    <loc>http://yoursite.com/2019/12/30/patb1083/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/12/30/patb1085/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/12/30/patb1088/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/12/30/patb1087/</loc>
-    
-    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/12/30/patb1090/</loc>
+    <loc>http://yoursite.com/2019/12/30/patb1084/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -793,7 +765,28 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2020/01/16/patb1092/</loc>
+    <loc>http://yoursite.com/2019/12/30/patb1087/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/12/30/patb1085/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/12/30/patb1089/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/12/30/patb1090/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -807,7 +800,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/12/30/patb1089/</loc>
+    <loc>http://yoursite.com/2019/12/30/patb1088/</loc>
+    
+    <lastmod>2020-08-07T12:13:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/01/16/patb1092/</loc>
     
     <lastmod>2020-08-07T12:13:20.000Z</lastmod>
     
@@ -863,7 +863,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/08/09/MNIST/</loc>
+    <loc>http://yoursite.com/2019/08/09/ML_MNIST/</loc>
     
     <lastmod>2019-11-13T01:44:44.884Z</lastmod>
     
@@ -891,7 +891,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/10/09/%E5%9B%9E%E6%BA%AF/</loc>
+    <loc>http://yoursite.com/2019/10/09/AG_%E5%9B%9E%E6%BA%AF/</loc>
     
     <lastmod>2019-11-01T00:34:00.396Z</lastmod>
     

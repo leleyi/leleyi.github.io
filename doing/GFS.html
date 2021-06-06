@@ -62,15 +62,15 @@
 <meta property="og:site_name" content="FILE">
 <meta property="og:description" content="Google File System(GFS) 是一种适用于大型分布式数据密集型应用的可扩展分布式文件系统。它在大量普通机器上运行并提供容错能力，并为大量客户端提供高性能。 GFS 设计原则 节点失效是常态。系统由成百上千个普通机器组成，大量用户同时进行访问，这使得节点很容易因程序 bug、磁盘故障、内存故障等原因失效。因此，GFS 必须能够持续地监控自身状态，进行异常检测，同时具有很高的容错性，">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="c:/Users/leleyi/Desktop/simpread-[SOSP%2703]%20The%20Google%20File%20System.assets/image-20210409201717131.png">
-<meta property="og:image" content="c:/Users/leleyi/Desktop/GFS.assets/image-20210409201657476.png">
-<meta property="og:image" content="c:/Users/leleyi/Desktop/GFS.assets/image-20210409201717131.png">
-<meta property="og:image" content="c:/Users/leleyi/Desktop/GFS.assets/image-20210413200314884.png">
-<meta property="og:updated_time" content="2021-04-20T13:47:28.687Z">
+<meta property="og:image" content="http://yoursite.com/doing/image-20210409201717131.png">
+<meta property="og:image" content="http://yoursite.com/doing/image-20210409201657476.png">
+<meta property="og:image" content="http://yoursite.com/doing/image-20210409201717131.png">
+<meta property="og:image" content="http://yoursite.com/doing/image-20210413200314884.png">
+<meta property="og:updated_time" content="2021-06-06T12:34:16.631Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FILE">
 <meta name="twitter:description" content="Google File System(GFS) 是一种适用于大型分布式数据密集型应用的可扩展分布式文件系统。它在大量普通机器上运行并提供容错能力，并为大量客户端提供高性能。 GFS 设计原则 节点失效是常态。系统由成百上千个普通机器组成，大量用户同时进行访问，这使得节点很容易因程序 bug、磁盘故障、内存故障等原因失效。因此，GFS 必须能够持续地监控自身状态，进行异常检测，同时具有很高的容错性，">
-<meta name="twitter:image" content="c:/Users/leleyi/Desktop/simpread-[SOSP%2703]%20The%20Google%20File%20System.assets/image-20210409201717131.png">
+<meta name="twitter:image" content="http://yoursite.com/doing/image-20210409201717131.png">
   <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
   <link rel="canonical" href="http://yoursite.com/doing/GFS">
 
@@ -264,7 +264,7 @@
 <li>系统应该支持<strong>原子的文件追加</strong>操作，使得大量用户可以并行追加文件，而不需要额外的加锁机制。在 Goole 应用场景中，这些文件常用于生产者 - 消费者队列或者多路归并。</li>
 <li>系统的<strong>高吞吐量比低延时更重要</strong>。</li>
 </ul>
-<h2 id="GFS-集群架构"><a href="#GFS-集群架构" class="headerlink" title="GFS 集群架构"></a>GFS 集群架构</h2><p><img src="C:\Users\leleyi\Desktop\simpread-[SOSP&#39;03] The Google File System.assets\image-20210409201717131.png" alt="image-20210409201717131"></p>
+<h2 id="GFS-集群架构"><a href="#GFS-集群架构" class="headerlink" title="GFS 集群架构"></a>GFS 集群架构</h2><p><img src="image-20210409201717131.png" alt="png"></p>
 <p>一个 GFS 集群由一个 <strong>Master</strong> 节点和若干个 <strong>Chunk Server</strong> 节点组成，可以被若干个<strong>客户端</strong>访问。每个节点作为用户级进程运行在 Linux 机器上。</p>
 <p>在存储文件时，GFS 会把文件切分成 64MB 的 <strong>Chunk</strong> 进行存储。Chunk 由一个 Master 分配的不可改变且全局唯一的 64 位 Chunk 句柄进行标识。Chunk Server 在本地磁盘上存储 Chunk，通过指定 Chunk 句柄和字节范围读取或写入 Chunk。为了保证可靠性，每一个 Chunk 会被备份到多个 Chunk Server 上，通常情况下存储三份 Replica。</p>
 <p>Master 负责维护整个集群的元数据，包括文件和 Chunk 的命名空间、访问控制信息、文件与 Chunk 的映射和 Chunk Replica 的位置信息。此外，Master 还负责 Chunk 的租期管理、回收和迁移。Master 也会周期地通过心跳包和 Chunk Server 进行通信，以此收集 Chunk Server 的状态并向其发送指令。</p>
@@ -294,7 +294,7 @@
 <p>GFS 使用租约（lease）机制来保持多个副本间变更顺序的一致性。在客户端对某个 Chunk 做出变更时，会把该 Chunk 的 Lease 交给某个 Replica，使其成为 Primary：Primary 会负责为这些变更安排一个执行顺序，然后其他 Replica 便按照相同的顺序执行这些修改。</p>
 <p>设计租约机制的目的是为了最小化 Master 节点的管理负担。Chunk Lease 在初始时会有 60 秒的超时时间。在未超时前，Primary 可以向 Master 申请延长 Chunk Lease 的时间；必要时 Master 也可以直接撤回已分配的 Chunk Lease。</p>
 <h2 id="GFS-集群常见操作流程"><a href="#GFS-集群常见操作流程" class="headerlink" title="GFS 集群常见操作流程"></a>GFS 集群常见操作流程</h2><p><strong>文件写入</strong></p>
-<p><img src="C:\Users\leleyi\Desktop\GFS.assets\image-20210409201657476.png" alt="image-20210409201657476"></p>
+<p><img src="image-20210409201657476.png" alt="png"></p>
 <ol>
 <li>客户端向 Master 询问目前哪个 Chunk Server 持有该 Chunk 的 Lease。如果没有一个 Chunk 持有 Lease，Master 就选择其中一个 Replica 建立一个 Lease。</li>
 <li>Master 向客户端返回 Primary 和其他 Replica 的位置。客户端缓存这些数据以便后续的操作。只有在 Primary Chunk 不可用，或者 Primary Chunk 回复信息表明它已不再持有租约的时候，客户端才需要重新跟 Master 联系。</li>
@@ -326,7 +326,7 @@
 <li>当有客户端尝试对这些 Chunk 进行写入时，Master 会注意到这个 Chunk 的引用计数大于 1。此时，Master 不会马上响应客户端，而是生成一个 Handle，然后通知所有持有这些 Chunk 的 Chunk Server 在本地复制出一个新 Chunk，Master 给新 Chunk 的一个 Replica 分配租约，之后响应客户端，客户端得到响应后就可以正常的写这个 Chunk。</li>
 </ol>
 <p><strong>文件读取</strong></p>
-<p><img src="C:\Users\leleyi\Desktop\GFS.assets\image-20210409201717131.png" alt="image-20210409201717131"></p>
+<p><img src="image-20210409201717131.png" alt="png"></p>
 <ol>
 <li>对于指定的文件名和读取位置偏移量，客户端可以根据固定大小的 Chunk 计算出需要读取文件的 Chunk 索引。</li>
 <li>客户端将文件名和 Chunk 索引发送给 Master，Master 返回 Chunk 句柄以及其所有 Replica 的位置。客户端会以文件名和 Chunk 索引为 key 缓存该数据，当向同一个 Chunk 读取文件时，如果缓存信息没有过期，则直接与 Chunk Server 通信。</li>
@@ -389,7 +389,7 @@
 <li>所有客户端无论读取哪个 Replica 都会读取到相同的内容，那这部分文件就是<strong>一致</strong>的（Consistent）</li>
 <li>所有客户端都能看到上一次修改的完整内容，且这部分文件是一致的，那么我们说这部分文件是<strong>确定</strong>的（Defined）</li>
 </ul>
-<p><img src="C:\Users\leleyi\Desktop\GFS.assets\image-20210413200314884.png" alt="image-20210413200314884"></p>
+<p><img src="image-20210413200314884.png" alt="png"></p>
 <p>在修改后，一个文件的当前状态将取决于此次修改的类型以及修改是否成功。具体来说：</p>
 <ul>
 <li>如果一次写入操作成功且没有与其他并发的写入操作发生重叠，那这部分的文件是<strong>确定</strong>的（同时也是一致的）</li>
@@ -460,7 +460,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-count">90</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -499,7 +499,9 @@
         
           
         
-        <span class="site-state-item-count">14</span>
+          
+        
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">categories</span>
         
       </div>
