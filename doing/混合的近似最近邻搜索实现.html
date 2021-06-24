@@ -55,15 +55,19 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
+  <meta name="description" content="Top_K算法针对Topk査询类的问题，显然存在一种朴素算法NA（ Naive algorithm），这种算法无论在关系型数据库中还是分布式数据库环境下都能使用。其算法的思想 是：对m个有序数据列表L进行遍历依次查询并计算各个对象分布于不同数据列表中的属性的评分，利用聚合函数f计算每个对象的总分，再进行单调排序之后返 回Top-k结果。这种算法思路简单，但是该算法的开销会随着数据库中对象数目的线性">
+<meta property="og:type" content="website">
 <meta property="og:title" content="FILE">
-<meta property="og:url" content="http://yoursite.com/archives/2019/08/index.html">
+<meta property="og:url" content="http://yoursite.com/doing/混合的近似最近邻搜索实现.html">
 <meta property="og:site_name" content="FILE">
+<meta property="og:description" content="Top_K算法针对Topk査询类的问题，显然存在一种朴素算法NA（ Naive algorithm），这种算法无论在关系型数据库中还是分布式数据库环境下都能使用。其算法的思想 是：对m个有序数据列表L进行遍历依次查询并计算各个对象分布于不同数据列表中的属性的评分，利用聚合函数f计算每个对象的总分，再进行单调排序之后返 回Top-k结果。这种算法思路简单，但是该算法的开销会随着数据库中对象数目的线性">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-05-29T12:33:27.993Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FILE">
+<meta name="twitter:description" content="Top_K算法针对Topk査询类的问题，显然存在一种朴素算法NA（ Naive algorithm），这种算法无论在关系型数据库中还是分布式数据库环境下都能使用。其算法的思想 是：对m个有序数据列表L进行遍历依次查询并计算各个对象分布于不同数据列表中的属性的评分，利用聚合函数f计算每个对象的总分，再进行单调排序之后返 回Top-k结果。这种算法思路简单，但是该算法的开销会随着数据库中对象数目的线性">
   <link rel="alternate" href="/atom.xml" title="FILE" type="application/atom+xml">
-  <link rel="canonical" href="http://yoursite.com/archives/2019/08/">
+  <link rel="canonical" href="http://yoursite.com/doing/混合的近似最近邻搜索实现">
 
 
 <script id="page-configurations">
@@ -72,12 +76,12 @@
     sidebar: "",
     isHome: false,
     isPost: false,
-    isPage: false,
-    isArchive: true
+    isPage: true,
+    isArchive: false
   };
 </script>
 
-  <title>Archive | FILE</title>
+  <title> | FILE</title>
   
 
 
@@ -221,304 +225,46 @@
 
   
 
-          <div id="content" class="content page-archive">
+          <div id="content" class="content page-post-detail">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-      <span class="archive-page-counter">
-        
-        
-         
-          
-        Good! 90 posts in total. Keep on posting.
-      </span>
-      
-
-      
-
-  
-  
-  
-
-  
+  <div id="posts" class="posts-expand">
     
-    <div class="collection-title">
-      <h1 class="archive-year" id="archive-year-2019">2019</h1>
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+          <h3 id="Top-K算法"><a href="#Top-K算法" class="headerlink" title="Top_K算法"></a>Top_K算法</h3><p>针对Topk査询类的问题，显然存在一种朴素算法<code>NA（ Naive algorithm）</code>，这种算法无论在关系型数据库中还是分布式数据库环境下都能使用。其算法的思想 是：对m个有序数据列表L进行遍历依次查询并计算各个对象分布于不同数据列表中的属性的评分，利用聚合函数f计算每个对象的总分，再进行单调排序之后返 回Top-k结果。这种算法思路简单，但是该算法的开销会随着数据库中对象数目的线性增长,因此在大规模数据库种效率极低.</p>
+
+        
+      </div>
+      
+      
+      
     </div>
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/08/28/ML_Transformer/" itemprop="url">
-            
-              <span itemprop="name">Transformer</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-08-28T17:57:15+08:00"
-              content="2019-08-28">
-          08-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-  
-  
-  
-
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/08/25/Skip-Thought Vectors/" itemprop="url">
-            
-              <span itemprop="name">Skip-Thought Vectors</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-08-25T16:52:15+08:00"
-              content="2019-08-25">
-          08-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-  
-  
-  
-
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/08/13/SVM/" itemprop="url">
-            
-              <span itemprop="name">hands-on svm课后作业</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-08-13T09:57:15+08:00"
-              content="2019-08-13">
-          08-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-  
-  
-  
-
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/08/11/近似最近邻_Q-HNSW/" itemprop="url">
-            
-              <span itemprop="name">量化编码的分层可通航小世界图（HNSW）笔记</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-08-11T18:23:46+08:00"
-              content="2019-08-11">
-          08-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-  
-  
-  
-
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/08/09/ML_MNIST/" itemprop="url">
-            
-              <span itemprop="name">MNIST 手写识别任务</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-08-09T14:57:15+08:00"
-              content="2019-08-09">
-          08-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-  
-  
-  
-
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/08/09/树的相关 （难度easy）/" itemprop="url">
-            
-              <span itemprop="name">树的相关算法</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-08-09T14:57:15+08:00"
-              content="2019-08-09">
-          08-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-  
-  
-  
-
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/08/09/常见面试算法题/" itemprop="url">
-            
-              <span itemprop="name">面试手撕系列_题目</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-08-09T14:57:15+08:00"
-              content="2019-08-09">
-          08-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-  
-  
-  
-
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/08/09/动态规划（难度easey）/" itemprop="url">
-            
-              <span itemprop="name">DP相关算法题</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-08-09T14:57:15+08:00"
-              content="2019-08-09">
-          08-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-
-    </div>
+    
+
+    
+    
+    
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -537,8 +283,17 @@
 
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -631,6 +386,23 @@
 
         </div>
       </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Top-K算法"><span class="nav-number">1.</span> <span class="nav-text">Top_K算法</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
     </div>
   </aside>
@@ -730,5 +502,10 @@
 
 
   
+    <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+  
+
 </body>
 </html>
