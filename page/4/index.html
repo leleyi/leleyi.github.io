@@ -213,7 +213,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/16/patb1093/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/ML_Evaluation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Les">
@@ -229,7 +229,7 @@
         
           <h1 class="post-title" itemprop="name headline">
               
-              <a href="/2020/01/16/patb1093/" class="post-title-link" itemprop="url">PAT乙级1093 || 字符串A+B（详解，C/C++示例，测试点分析）</a>
+              <a href="/2020/07/12/ML_Evaluation/" class="post-title-link" itemprop="url">检索系统的评价</a>
             
           </h1>
         
@@ -245,7 +245,7 @@
                 
               
 
-              <time title="Created: 2020-01-16 19:36:56" itemprop="dateCreated datePublished" datetime="2020-01-16T19:36:56+08:00">2020-01-16</time>
+              <time title="Created: 2020-07-12 21:42:15" itemprop="dateCreated datePublished" datetime="2020-07-12T21:42:15+08:00">2020-07-12</time>
             </span>
           
             <span class="post-meta-item">
@@ -254,7 +254,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PAT/" itemprop="url" rel="index"><span itemprop="name">PAT</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a></span>
 
                 
                 
@@ -275,14 +275,17 @@
       
           
             <p>
-              字符串A+B题目描述给定两个字符串 A 和 B，本题要求你输出 A+B，即两个字符串的并集。要求先输出 A，再输出 B，但重复的字符必须被剔除。
-输入格式输入在两行中分别给出 A 和 B，均为长度不超过 $10^6$的、由可见 ASCII 字符 (即码值为32~126)和空格组成的、由回车标识结束的
+              检索系统的评价无序的检索结果评价.如果有测试集的话,那么系统效果常用的两个基本指标就是正确率和召回率.不考虑结果的顺序的话.那就和分类的评价差不多.
+
+正确率:返回与query相关文档所占比例;
+
+Precision = \frac{\text { 返同结果中相关文档的数目 }}{\text { 返
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2020/01/16/patb1093/#more" rel="contents">
+              <a class="btn" href="/2020/07/12/ML_Evaluation/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -313,7 +316,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/16/patb1092/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/ML_Learn2Rank/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Les">
@@ -329,7 +332,7 @@
         
           <h1 class="post-title" itemprop="name headline">
               
-              <a href="/2020/01/16/patb1092/" class="post-title-link" itemprop="url">PAT乙级1092 || 最好吃的月饼（详解，C/C++示例，测试点分析）</a>
+              <a href="/2020/07/12/ML_Learn2Rank/" class="post-title-link" itemprop="url">Learn to rank</a>
             
           </h1>
         
@@ -345,7 +348,7 @@
                 
               
 
-              <time title="Created: 2020-01-16 19:30:47" itemprop="dateCreated datePublished" datetime="2020-01-16T19:30:47+08:00">2020-01-16</time>
+              <time title="Created: 2020-07-12 14:56:15" itemprop="dateCreated datePublished" datetime="2020-07-12T14:56:15+08:00">2020-07-12</time>
             </span>
           
             <span class="post-meta-item">
@@ -354,7 +357,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PAT/" itemprop="url" rel="index"><span itemprop="name">PAT</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a></span>
 
                 
                 
@@ -375,16 +378,13 @@
       
           
             <p>
-              最好吃的月饼题目描述月饼是久负盛名的中国传统糕点之一，自唐朝以来，已经发展出几百品种。
-
-若想评比出一种“最好吃”的月饼，那势必在吃货界引发一场腥风血雨…… 在这里我们用数字说话，给出全国各地各种月饼的销量，要求你从中找出销量冠军，认定为最好吃的月饼。
-输入格式输入首先给出两个正整数 N（≤1000
+              Learn to rank在信息检索中, 检索rank可以由多种算法获得, 或者是检索的结果还可以受外部信息所影响.将这些信息融合起来排名可能会获得更好的排序结果.如:我们可以看到有不同的排序结果.将这多组数据进行在排序.在这 我们将得分 以$s_i(d)$表示, $i$ 为rank. d- doc
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2020/01/16/patb1092/#more" rel="contents">
+              <a class="btn" href="/2020/07/12/ML_Learn2Rank/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -415,7 +415,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/16/patb1091/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/28/ML_Transformer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Les">
@@ -431,7 +431,7 @@
         
           <h1 class="post-title" itemprop="name headline">
               
-              <a href="/2020/01/16/patb1091/" class="post-title-link" itemprop="url">PAT乙级1091 || N-自守数（详解，C/C++示例，测试点分析）</a>
+              <a href="/2019/08/28/ML_Transformer/" class="post-title-link" itemprop="url">Transformer</a>
             
           </h1>
         
@@ -447,7 +447,7 @@
                 
               
 
-              <time title="Created: 2020-01-16 19:23:56" itemprop="dateCreated datePublished" datetime="2020-01-16T19:23:56+08:00">2020-01-16</time>
+              <time title="Created: 2019-08-28 17:57:15" itemprop="dateCreated datePublished" datetime="2019-08-28T17:57:15+08:00">2019-08-28</time>
             </span>
           
             <span class="post-meta-item">
@@ -456,7 +456,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PAT/" itemprop="url" rel="index"><span itemprop="name">PAT</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a></span>
 
                 
                 
@@ -477,15 +477,17 @@
       
           
             <p>
-              N-自守数题目描述如果某个数 K 的平方乘以 N 以后，结果的末尾几位数等于 K，那么就称这个数为“N-自守数”。例如 3×922=25392，而 25392 的末尾两位正好是 92，所以 92 是一个 3-自守数。
-本题就请你编写程序判断一个给定的数字是否关于某个 N 是 N-自守数。
-输入格式输
+              TransformerModel Architecture
+Encoder先定义符号：emb_dim：embedding的维度
+input_length: 输入序列的长度（不同长度的序列通过填充来使得其长度都相同）
+hidden_dim:forward_feedback中隐藏层的长度
+vocab_s
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2020/01/16/patb1091/#more" rel="contents">
+              <a class="btn" href="/2019/08/28/ML_Transformer/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -516,7 +518,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/30/patb1090/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/01/TextRNN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Les">
@@ -532,7 +534,7 @@
         
           <h1 class="post-title" itemprop="name headline">
               
-              <a href="/2019/12/30/patb1090/" class="post-title-link" itemprop="url">PAT乙级1090 || 危险品装箱（详解，C/C++示例，测试点分析）</a>
+              <a href="/2019/10/01/TextRNN/" class="post-title-link" itemprop="url">TextRNN</a>
             
           </h1>
         
@@ -548,7 +550,7 @@
                 
               
 
-              <time title="Created: 2019-12-30 19:49:26" itemprop="dateCreated datePublished" datetime="2019-12-30T19:49:26+08:00">2019-12-30</time>
+              <time title="Created: 2019-10-01 20:52:15" itemprop="dateCreated datePublished" datetime="2019-10-01T20:52:15+08:00">2019-10-01</time>
             </span>
           
             <span class="post-meta-item">
@@ -557,7 +559,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PAT/" itemprop="url" rel="index"><span itemprop="name">PAT</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a></span>
 
                 
                 
@@ -578,15 +580,14 @@
       
           
             <p>
-              危险品装箱题目描述集装箱运输货物时，我们必须特别小心，不能把不相容的货物装在一只箱子里。比如氧化剂绝对不能跟易燃液体同箱，否则很容易造成爆炸。
-本题给定一张不相容物品的清单，需要你检查每一张集装箱货品清单，判断它们是否能装在同一只箱子里。
-输入格式输入第一行给出两个正整数：N (≤$10^4$) 是
+              TextRNN使用双向LSTM。使用最后的hidden layer全连接进行分类。
+import numpy as npimport torchimport torch.nn as nnimport torch.nn.functional as Ffrom sklearn import metric
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/12/30/patb1090/#more" rel="contents">
+              <a class="btn" href="/2019/10/01/TextRNN/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -617,7 +618,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/30/patb1089/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/25/TextCNN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Les">
@@ -633,7 +634,7 @@
         
           <h1 class="post-title" itemprop="name headline">
               
-              <a href="/2019/12/30/patb1089/" class="post-title-link" itemprop="url">PAT乙级1089 || 狼人杀-简单版（详解，C/C++示例，测试点分析）</a>
+              <a href="/2019/09/25/TextCNN/" class="post-title-link" itemprop="url">TextCNN</a>
             
           </h1>
         
@@ -649,7 +650,7 @@
                 
               
 
-              <time title="Created: 2019-12-30 19:49:20" itemprop="dateCreated datePublished" datetime="2019-12-30T19:49:20+08:00">2019-12-30</time>
+              <time title="Created: 2019-09-25 16:52:15" itemprop="dateCreated datePublished" datetime="2019-09-25T16:52:15+08:00">2019-09-25</time>
             </span>
           
             <span class="post-meta-item">
@@ -658,7 +659,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PAT/" itemprop="url" rel="index"><span itemprop="name">PAT</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a></span>
 
                 
                 
@@ -679,13 +680,13 @@
       
           
             <p>
-              狼人杀-简单版题目描述以下文字摘自《灵机一动·好玩的数学》：“狼人杀”游戏分为狼人、好人两大阵营。在一局“狼人杀”游戏中，1 号玩家说：“2 号是狼人”，2 号玩家说：“3 号是好人”，3 号玩家说：“4 号是狼人”，4 号玩家说：“5 号是好人”，5 号玩家说：“4 号是好人”。已知这 5 名玩家
+              TextCnnimport numpy as npimport torchimport torch.nn as nnimport torch.nn.functional as Ffrom sklearn import metricsimport timeimport pickle as pklimp
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/12/30/patb1089/#more" rel="contents">
+              <a class="btn" href="/2019/09/25/TextCNN/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -716,7 +717,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/30/patb1088/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/25/Skip-Thought Vectors/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Les">
@@ -732,7 +733,7 @@
         
           <h1 class="post-title" itemprop="name headline">
               
-              <a href="/2019/12/30/patb1088/" class="post-title-link" itemprop="url">PAT乙级1088 || 三人行（详解，C/C++示例，测试点分析）</a>
+              <a href="/2019/08/25/Skip-Thought Vectors/" class="post-title-link" itemprop="url">Skip-Thought Vectors</a>
             
           </h1>
         
@@ -748,7 +749,7 @@
                 
               
 
-              <time title="Created: 2019-12-30 19:49:15" itemprop="dateCreated datePublished" datetime="2019-12-30T19:49:15+08:00">2019-12-30</time>
+              <time title="Created: 2019-08-25 16:52:15" itemprop="dateCreated datePublished" datetime="2019-08-25T16:52:15+08:00">2019-08-25</time>
             </span>
           
             <span class="post-meta-item">
@@ -757,7 +758,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PAT/" itemprop="url" rel="index"><span itemprop="name">PAT</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a></span>
 
                 
                 
@@ -778,14 +779,18 @@
       
           
             <p>
-              三人行题目描述子曰：“三人行，必有我师焉。择其善者而从之，其不善者而改之。”
-本题给定甲、乙、丙三个人的能力值关系为：甲的能力值确定是 2 位正整数；把甲的能力值的 2 个数字调换位置就是乙的能力值；甲乙两人能力差是丙的能力值的 X 倍；乙的能力值是丙的 Y 倍。请你指出谁比你强应“从之”，谁比你弱
+              Skip-Thought Vectors
+目的：句子级别的无监督模型的表示 
+
+为什么需要句子级别的表示：
+两个句子的相似度，句子的所带有的情感。如果直接使用word2vec的单词进行组合，那么不同顺序的句子表示就会出现问题。比如 我爱你 和 你爱我。
+需要一个更好的方法来表示句子中有单词的顺序的问
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/12/30/patb1088/#more" rel="contents">
+              <a class="btn" href="/2019/08/25/Skip-Thought Vectors/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -816,7 +821,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/30/patb1087/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/09/常见面试算法题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Les">
@@ -832,7 +837,7 @@
         
           <h1 class="post-title" itemprop="name headline">
               
-              <a href="/2019/12/30/patb1087/" class="post-title-link" itemprop="url">PAT乙级1087 || 有多少不同的值（详解，C/C++示例，测试点分析）</a>
+              <a href="/2019/08/09/常见面试算法题/" class="post-title-link" itemprop="url">面试手撕系列_题目</a>
             
           </h1>
         
@@ -848,7 +853,7 @@
                 
               
 
-              <time title="Created: 2019-12-30 19:49:10" itemprop="dateCreated datePublished" datetime="2019-12-30T19:49:10+08:00">2019-12-30</time>
+              <time title="Created: 2019-08-09 14:57:15" itemprop="dateCreated datePublished" datetime="2019-08-09T14:57:15+08:00">2019-08-09</time>
             </span>
           
             <span class="post-meta-item">
@@ -857,7 +862,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PAT/" itemprop="url" rel="index"><span itemprop="name">PAT</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法题/" itemprop="url" rel="index"><span itemprop="name">算法题</span></a></span>
 
                 
                 
@@ -878,15 +883,29 @@
       
           
             <p>
-              有多少不同的值题目描述当自然数 n 依次取 1、2、3、……、N 时，算式 ⌊n/2⌋+⌊n/3⌋+⌊n/5⌋ 有多少个不同的值？（注：⌊x⌋ 为取整函数，表示不超过 x 的最大自然数，即 x 的整数部分。）
-输入格式输入给出一个正整数 N（2≤N≤$10^4$）。
-输出格式在一行中输出题面中算式取
+              常见面试算法题
+
+快排
+编程题，找第k大的数
+数组中第k大的数
+
+两个栈实现队列
+
+实现跳表
+
+手撕两个栈实现一个队列；
+手撕数据流的中位数；(两个堆)
+手撕二叉树的直径；(递归)
+双向链表的插入；
+手撕快速排序；
+手撕字符串中回文子串的数目；(dp)
+手撕给你一个字符串，返回所有它能表示的IP地址
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/12/30/patb1087/#more" rel="contents">
+              <a class="btn" href="/2019/08/09/常见面试算法题/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -917,7 +936,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/30/patb1086/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/09/Raft_Base/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Les">
@@ -933,7 +952,7 @@
         
           <h1 class="post-title" itemprop="name headline">
               
-              <a href="/2019/12/30/patb1086/" class="post-title-link" itemprop="url">PAT乙级1086 || 就不告诉你（详解，C/C++示例，测试点分析）</a>
+              <a href="/2020/11/09/Raft_Base/" class="post-title-link" itemprop="url">Java实现Raft算法_理论知识</a>
             
           </h1>
         
@@ -949,7 +968,7 @@
                 
               
 
-              <time title="Created: 2019-12-30 19:48:53" itemprop="dateCreated datePublished" datetime="2019-12-30T19:48:53+08:00">2019-12-30</time>
+              <time title="Created: 2020-11-09 16:40:15" itemprop="dateCreated datePublished" datetime="2020-11-09T16:40:15+08:00">2020-11-09</time>
             </span>
           
             <span class="post-meta-item">
@@ -958,7 +977,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PAT/" itemprop="url" rel="index"><span itemprop="name">PAT</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a></span>
 
                 
                 
@@ -979,16 +998,13 @@
       
           
             <p>
-              就不告诉你题目描述做作业的时候，邻座的小盆友问你：“五乘以七等于多少？”你应该不失礼貌地围笑着告诉他：“五十三。”本题就要求你，对任何一对给定的正整数，倒着输出它们的乘积。
-
-输入格式输入在第一行给出两个不超过 1000 的正整数 A 和 B，其间以空格分隔。
-输出格式在一行中倒着输出 A 和 B 
+              CAP原则又称CAP定理[2000]，指的是在一个分布式系统中，一致性（Consistency）、可用性（Availability）、分区容错性（Partition tolerance）。CAP 原则指的是，这三个要素最多只能同时实现两点，不可能三者兼顾。一致性：多个数据副本之间数据能否保持一致。可
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/12/30/patb1086/#more" rel="contents">
+              <a class="btn" href="/2020/11/09/Raft_Base/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1019,7 +1035,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/30/patb1085/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/01/docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Les">
@@ -1035,7 +1051,7 @@
         
           <h1 class="post-title" itemprop="name headline">
               
-              <a href="/2019/12/30/patb1085/" class="post-title-link" itemprop="url">PAT乙级1085 || PAT单位排行（详解，C/C++示例，测试点分析）</a>
+              <a href="/2020/08/01/docker/" class="post-title-link" itemprop="url">Docker</a>
             
           </h1>
         
@@ -1051,20 +1067,7 @@
                 
               
 
-              <time title="Created: 2019-12-30 19:48:38" itemprop="dateCreated datePublished" datetime="2019-12-30T19:48:38+08:00">2019-12-30</time>
-            </span>
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PAT/" itemprop="url" rel="index"><span itemprop="name">PAT</span></a></span>
-
-                
-                
-              
+              <time title="Created: 2020-08-01 09:57:15" itemprop="dateCreated datePublished" datetime="2020-08-01T09:57:15+08:00">2020-08-01</time>
             </span>
           
 
@@ -1081,15 +1084,15 @@
       
           
             <p>
-              PAT单位排行题目描述每次 PAT 考试结束后，考试中心都会发布一个考生单位排行榜。本题就请你实现这个功能。
-输入格式输入第一行给出一个正整数 N（≤$10^5$），即考生人数。随后 N 行，每行按下列格式给出一个考生的信息：准考证号 得分 学校
-其中准考证号是由6个字符组成的字符串，其首字母表示考
+              参考b站教程
+一、Docker 介绍1. 安装需要的包#想安装Docker，需要先将依赖的环境全部下载下来sudo apt install apt-transport-https ca-certificates software-properties-common curl
+2. 指定 Docker
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/12/30/patb1085/#more" rel="contents">
+              <a class="btn" href="/2020/08/01/docker/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1120,7 +1123,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/30/patb1084/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/09/Tool_v2ray/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Les">
@@ -1136,7 +1139,7 @@
         
           <h1 class="post-title" itemprop="name headline">
               
-              <a href="/2019/12/30/patb1084/" class="post-title-link" itemprop="url">PAT乙级1084 || 外观数列（详解，C/C++示例，测试点分析）</a>
+              <a href="/2020/11/09/Tool_v2ray/" class="post-title-link" itemprop="url">linux中v2ray以及proxychains</a>
             
           </h1>
         
@@ -1152,7 +1155,7 @@
                 
               
 
-              <time title="Created: 2019-12-30 19:48:32" itemprop="dateCreated datePublished" datetime="2019-12-30T19:48:32+08:00">2019-12-30</time>
+              <time title="Created: 2020-11-09 12:40:15" itemprop="dateCreated datePublished" datetime="2020-11-09T12:40:15+08:00">2020-11-09</time>
             </span>
           
             <span class="post-meta-item">
@@ -1161,7 +1164,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PAT/" itemprop="url" rel="index"><span itemprop="name">PAT</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
 
                 
                 
@@ -1182,14 +1185,28 @@
       
           
             <p>
-              外观数列题目描述外观数列是指具有以下特点的整数序列：d, d1, d111, d113, d11231, d112213111, ...
-它从不等于 1 的数字 d 开始，序列的第 n+1 项是对第 n 项的描述。比如第 2 项表示第 1 项有 1 个 d，所以就是 d1；第 2 项是 1 个 d（
+              V2Ray 搭建
+安装 wget
+
+下载脚本
+安装完 wget 之后就可以进行下载操作了，如下：
+wget https://install.direct/go.sh
+
+
+
+执行安装
+sudo bash go.sh
+
+
+显示一下信息代表安装成功:
+
+[ts@ubuntu v2ray]$ sudo ba
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/12/30/patb1084/#more" rel="contents">
+              <a class="btn" href="/2020/11/09/Tool_v2ray/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
