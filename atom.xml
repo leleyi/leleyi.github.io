@@ -339,30 +339,6 @@
   </entry>
   
   <entry>
-    <title>Googel EvenBus</title>
-    <link href="http://yoursite.com/2020/08/20/%E6%BA%90%E7%A0%81_EvenBus/"/>
-    <id>http://yoursite.com/2020/08/20/源码_EvenBus/</id>
-    <published>2020-08-20T13:44:15.000Z</published>
-    <updated>2021-06-24T12:34:58.436Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Google-EvenBus-源码"><a href="#Google-EvenBus-源码" class="headerlink" title="Google EvenBus 源码"></a>Google EvenBus 源码</h3><p><strong>EventBus</strong> 发布/订阅者者模式</p><p><img src="1.png" alt="png"></p><p>简单的使用放</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">TestEventBus</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    EventBus bus = <span class="keyword">new</span> EventBus();</span><br><span class="line">    bus.register(<span class="keyword">this</span>);</span><br><span class="line">    bus.post(<span class="number">1024</span>);</span><br><span class="line">    bus.post(<span class="string">"hello world"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Subscribe</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceiveInteger</span><span class="params">(Integer value)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"Integer : "</span> + value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Subscribe</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceiveString</span><span class="params">(String value)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"String : "</span> + value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="2.png" alt="png"></p><h3 id="Subscriber"><a href="#Subscriber" class="headerlink" title="Subscriber"></a>Subscriber</h3><p>我们在上面可以看到 <strong> @Subscribe</strong>  注解表示向EventBus总线订阅了该方法. </p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="meta">@Beta</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Subscribe &#123;&#125;</span><br></pre></td></tr></table></figure><p>我们可以看到该注解是基于方法上的. 通过对方法添加注解,当有时间来临的时候.便会执行该方法.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bus.register(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure><p>将当前对象注册到EventBus中. </p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Multimap&lt;Class&lt;?&gt;, Subscriber&gt; findAllSubscribers(Object listener) &#123;</span><br><span class="line">  Multimap&lt;Class&lt;?&gt;, Subscriber&gt; methodsInListener = HashMultimap.create();</span><br><span class="line">  Class&lt;?&gt; clazz = listener.getClass();</span><br><span class="line">  <span class="keyword">for</span> (Method method : getAnnotatedMethods(clazz)) &#123;</span><br><span class="line">    Class&lt;?&gt;[] parameterTypes = method.getParameterTypes();</span><br><span class="line">    Class&lt;?&gt; eventType = parameterTypes[<span class="number">0</span>];</span><br><span class="line">    methodsInListener.put(eventType, Subscriber.create(bus, listener, method));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> methodsInListener;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>所以通过遍历当前对象 (listener中) 的所有包含Subscribe的方法</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;Google-EvenBus-源码&quot;&gt;&lt;a href=&quot;#Google-EvenBus-源码&quot; class=&quot;headerlink&quot; title=&quot;Google EvenBus 源码&quot;&gt;&lt;/a&gt;Google EvenBus 源码&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Ev
-      
-    
-    </summary>
-    
-    
-      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>Authorisation not recognised</title>
     <link href="http://yoursite.com/2020/08/20/Authorisation/"/>
     <id>http://yoursite.com/2020/08/20/Authorisation/</id>
@@ -382,6 +358,30 @@
     
     
       <category term="BUG" scheme="http://yoursite.com/categories/BUG/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Googel EvenBus</title>
+    <link href="http://yoursite.com/2020/08/20/%E6%BA%90%E7%A0%81_EvenBus/"/>
+    <id>http://yoursite.com/2020/08/20/源码_EvenBus/</id>
+    <published>2020-08-20T13:44:15.000Z</published>
+    <updated>2021-06-24T12:34:58.436Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Google-EvenBus-源码"><a href="#Google-EvenBus-源码" class="headerlink" title="Google EvenBus 源码"></a>Google EvenBus 源码</h3><p><strong>EventBus</strong> 发布/订阅者者模式</p><p><img src="1.png" alt="png"></p><p>简单的使用放</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">TestEventBus</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    EventBus bus = <span class="keyword">new</span> EventBus();</span><br><span class="line">    bus.register(<span class="keyword">this</span>);</span><br><span class="line">    bus.post(<span class="number">1024</span>);</span><br><span class="line">    bus.post(<span class="string">"hello world"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Subscribe</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceiveInteger</span><span class="params">(Integer value)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"Integer : "</span> + value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Subscribe</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceiveString</span><span class="params">(String value)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"String : "</span> + value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="2.png" alt="png"></p><h3 id="Subscriber"><a href="#Subscriber" class="headerlink" title="Subscriber"></a>Subscriber</h3><p>我们在上面可以看到 <strong> @Subscribe</strong>  注解表示向EventBus总线订阅了该方法. </p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="meta">@Beta</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Subscribe &#123;&#125;</span><br></pre></td></tr></table></figure><p>我们可以看到该注解是基于方法上的. 通过对方法添加注解,当有时间来临的时候.便会执行该方法.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bus.register(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure><p>将当前对象注册到EventBus中. </p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Multimap&lt;Class&lt;?&gt;, Subscriber&gt; findAllSubscribers(Object listener) &#123;</span><br><span class="line">  Multimap&lt;Class&lt;?&gt;, Subscriber&gt; methodsInListener = HashMultimap.create();</span><br><span class="line">  Class&lt;?&gt; clazz = listener.getClass();</span><br><span class="line">  <span class="keyword">for</span> (Method method : getAnnotatedMethods(clazz)) &#123;</span><br><span class="line">    Class&lt;?&gt;[] parameterTypes = method.getParameterTypes();</span><br><span class="line">    Class&lt;?&gt; eventType = parameterTypes[<span class="number">0</span>];</span><br><span class="line">    methodsInListener.put(eventType, Subscriber.create(bus, listener, method));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> methodsInListener;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>所以通过遍历当前对象 (listener中) 的所有包含Subscribe的方法</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Google-EvenBus-源码&quot;&gt;&lt;a href=&quot;#Google-EvenBus-源码&quot; class=&quot;headerlink&quot; title=&quot;Google EvenBus 源码&quot;&gt;&lt;/a&gt;Google EvenBus 源码&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Ev
+      
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
     
     
   </entry>
