@@ -411,6 +411,30 @@
   </entry>
   
   <entry>
+    <title>量化编码的分层可通航小世界图（HNSW）笔记</title>
+    <link href="http://yoursite.com/2020/08/11/%E8%BF%91%E4%BC%BC%E6%9C%80%E8%BF%91%E9%82%BB_Q-HNSW/"/>
+    <id>http://yoursite.com/2020/08/11/近似最近邻_Q-HNSW/</id>
+    <published>2020-08-11T10:23:46.000Z</published>
+    <updated>2021-07-28T01:34:12.771Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><h3 id="两种改进方法"><a href="#两种改进方法" class="headerlink" title="两种改进方法"></a>两种改进方法</h3><p>HNSW内存开销大，基于量化编码的检索算法能够压缩数据集向量，大幅度降低内存占用。将量化编码与HNSW结合，有两种改进方法：</p><ol><li>使用标量量化编码向量的HNSWSQ算法</li><li>使用乘积量化编码向量的HNSWPQ算法</li></ol><h3 id="HNSW内存开销大的原因"><a href="#HNSW内存开销大的原因" class="headerlink" title="HNSW内存开销大的原因"></a>HNSW内存开销大的原因</h3><ol><li>需要存储全部的数据集元素</li><li>需要存储每一层中节点之间的连接关系</li></ol><h2 id="乘积量化"><a href="#乘积量化" class="headerlink" title="乘积量化"></a>乘积量化</h2><h3 id="PQ乘积量化"><a href="#PQ乘积量化" class="headerlink" title="PQ乘积量化"></a>PQ乘积量化</h3><h4 id="建立码本和量化编码"><a href="#建立码本和量化编码" class="headerlink" title="建立码本和量化编码"></a>建立码本和量化编码</h4><p><img src="pq.png"></p><p>将<code>N * 128</code>的数据集进行切分，划分为4个子空间，每个子空间中向量的维数为32，得到<code>N * 4 * 32</code>。每个字段（子空间）同样有<code>N</code>个向量，对这<code>N</code>个向量进行聚类得到256个类中心，这样4个字段一共有<code>4 * 256</code>个类中心。每个子空间的所有<code>N</code>个向量都可以用该子空间的256个类中心的某一向量表示，对256个类中心进行编码只需8位即可，从而任一向量在该子空间的子向量的编码就可以用该子向量所属的类中心的编码来表示。</p><p>待编码样本如何编码？</p><p>对于待编码的样本，将它进行相同的切分，然后在各个子空间里逐一找到距离它们最近的类中心，然后用类中心的id来表示它们，即完成了待编码样本的编码。</p><h4 id="码字的搜索算法"><a href="#码字的搜索算法" class="headerlink" title="码字的搜索算法"></a>码字的搜索算法</h4><p><img src="pq2.png"></p><p>对于某个查询向量，要查询离其最近的k个向量，关键就是计算查询向量与dataset中的样本距离了。暴力方法就是计算数据集中所有的样本与查询向量的距离，然后进行排序，选出top@k个最近的样本返回。对数据集进行PQ乘积量化编码后，这个过程就变成下面的方式：</p><p>将查询向量进行切分，切分方式与对数据集切分的相同，计算查询向量的每个子向量在相应的子空间中到256个类中心的距离，从而得到<code>4 * 256</code>的距离矩阵。某个样本到查询向量的距离就可以通过以下方式得到（不需单独计算了）：</p><p>比如该样本的编码是(124, 56, 132, 222)，在<code>4 * 256</code>的距离矩阵中依次找出（查表）查询向量的相应子向量到编码为124（第一个子空间），编码为56（第二个子空间），编码为132（第三个子空间），编码为222（第四个子空间）的类中心的距离，将这4个距离相加的和作为该样本（编码是(124, 56, 132, 222)）到查询向量的距离。</p><h4 id="PQ乘积量化能够加速索引的原理"><a href="#PQ乘积量化能够加速索引的原理" class="headerlink" title="PQ乘积量化能够加速索引的原理"></a>PQ乘积量化能够加速索引的原理</h4><ul><li>将全样本的距离计算，转化为到子空间类中心的距离计算（加快查询）</li><li>对特征进行编码后，可以用一个相对比较短的编码来表示样本（降低内存消耗）</li><li>存储时只需存储类中心的向量值（计算距离时只需要它们 ）</li></ul><p>注：暴力搜索的距离计算的次数随样本数目<code>N</code>成线性增长，对于上面的例子，PQ乘积量化只需<code>4 * 256</code>次距离计算。</p><h2 id="HNSWPQ算法"><a href="#HNSWPQ算法" class="headerlink" title="HNSWPQ算法"></a>HNSWPQ算法</h2><p>与原始的HNSW算法相比，不再需要在内存中保持原始向量。将HNSW算法作为索引算法，采用PQ算法进行向量编码，由于使用PQ算法对原始向量编码，需要将HNSW算法插入过程中与近邻点距离的计算相应地修改为PQ的距离计算。</p><h3 id="HNSWPQ的构建过程"><a href="#HNSWPQ的构建过程" class="headerlink" title="HNSWPQ的构建过程"></a>HNSWPQ的构建过程</h3><ol><li>对<strong>原始向量</strong>量化编码建立码本存储在内存中</li><li>新插入的结点作为查询结点，得到其能达到的最大层（指数衰减概率分布）</li><li>选邻居时，计算某结点与查询向量的距离应为PQ的距离计算</li></ol><p>与原HNSW算法相比，主要有两方面的不同：</p><ul><li>原HNSW算法直接在原始向量上构建，而HNSWPQ算法需要先对原始向量进行量化编码建立码本在此基础上再逐个插入结点构建（增加了一步）</li><li>原HNSW算法计算距离时是直接计算，而HNSWPQ算法采用PQ距离计算方法（计算速度快）</li></ul><h2 id="HNSWSQ算法"><a href="#HNSWSQ算法" class="headerlink" title="HNSWSQ算法"></a>HNSWSQ算法</h2><p>标量量化（SQ）对向量的每一维都进行量化，HNSWSQ算法采用最大最小量化方法。对于向量的第 $ i $ 维，通过样本集训练获取该维出现的最大值 $ vmax[i] $ 和最小值 $ vmin[i] $ ，然后将向量 $ \vec{a} $ 第 $ i $ 维的值量化为:</p><script type="math/tex; mode=display">\frac{x_i - vmin[i]} {vmax[i]}</script><p>其中，$ i = 1, …, n $ ，量化后的值编码存储，假设每一维编码为１个字节，则进一步处理为：</p><script type="math/tex; mode=display">f(x_i) = \lfloor \varphi( \frac{x_i - vmin[i]} {vmax[i]} ) \times 255\rfloor</script><p>其中：</p><script type="math/tex; mode=display"> \varphi(x) = \begin{cases}1 & x \geq 1\\x & 0 < x < 1\\0 & x \leq 0\end{cases}</script><p>HNSWSQ算法在插入结点计算距离时，首先将编码后的向量解码还原，然后计算查询向量与解码向量的距离。</p><p><img src="SQ量化计算示例.png"></p><h2 id="量化后性能分析"><a href="#量化后性能分析" class="headerlink" title="量化后性能分析"></a>量化后性能分析</h2><h3 id="HNSWPQ算法性能分析"><a href="#HNSWPQ算法性能分析" class="headerlink" title="HNSWPQ算法性能分析"></a>HNSWPQ算法性能分析</h3><p>与原始的HNSW算法相比，HNSWPQ算法在同样查询时间下Recall@1准确率要低很多，内存占用几乎只有 HNSW算法的一半（主要是结点连接关系），构建索引耗时是HNSW的几倍，主要是编码引起。</p><p>随着PQ子量化器（子空间）的增多，由于量化误差的降低，各算法的Recall@1准确率逐步提高。</p><h3 id="HNSWSQ算法性能分析"><a href="#HNSWSQ算法性能分析" class="headerlink" title="HNSWSQ算法性能分析"></a>HNSWSQ算法性能分析</h3><p>在GIST-1M数据集上HNSWSQ8的内存开销只有HNSW算法的29.5%，两者性能相当；在SIFT-1M数据集上，两者性能相当，构建索引耗时相当，HNSWSQ8的内存占用比HNSW低45%。</p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><blockquote><p>[1]李秋珍,白兴强,李立夏,王赢.量化编码的分层可通航小世界图算法[J].计算机工程与科学,2019,41(04):618-625.<br>[2]Yong Yuan, 图像检索：再叙ANN Search, <a href="http://yongyuan.name/blog/ann-search.html" target="_blank" rel="noopener">http://yongyuan.name/blog/ann-search.html</a>, 2019.7.30.</p></blockquote><p>在推荐功能模块利用 SBERT 模型 生成 词向量 词向量 ，根据 文档 不同 位置 的权重 进一步 进一步 得到 文档向量 文档向量 文</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h2&gt;&lt;h3 id=&quot;两种改进方法&quot;&gt;&lt;a href=&quot;#两种改进方法&quot; class=&quot;headerlink&quot; title=&quot;两种改进方法&quot;&gt;&lt;/a&gt;两
+      
+    
+    </summary>
+    
+    
+      <category term="近似最近邻搜索" scheme="http://yoursite.com/categories/%E8%BF%91%E4%BC%BC%E6%9C%80%E8%BF%91%E9%82%BB%E6%90%9C%E7%B4%A2/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Document_Embedding</title>
     <link href="http://yoursite.com/2020/08/07/ML_document_embedding/"/>
     <id>http://yoursite.com/2020/08/07/ML_document_embedding/</id>
@@ -478,30 +502,6 @@
     
     
       <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>检索系统的评价</title>
-    <link href="http://yoursite.com/2020/07/12/ML_Evaluation/"/>
-    <id>http://yoursite.com/2020/07/12/ML_Evaluation/</id>
-    <published>2020-07-12T13:42:15.000Z</published>
-    <updated>2021-05-18T02:13:29.855Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="检索系统的评价"><a href="#检索系统的评价" class="headerlink" title="检索系统的评价"></a>检索系统的评价</h1><h3 id="无序的检索结果评价"><a href="#无序的检索结果评价" class="headerlink" title="无序的检索结果评价."></a>无序的检索结果评价.</h3><p>如果有测试集的话,那么系统效果常用的两个基本指标就是正确率和召回率.不考虑结果的顺序的话.那就和分类的评价差不多.</p><ul><li>正确率:返回与query相关文档所占比例;</li></ul><script type="math/tex; mode=display">Precision = \frac{\text { 返同结果中相关文档的数目 }}{\text { 返同结果的数目 }}=P(\text { relevant } \mid \text { retrieved })</script><ul><li>召回率:返回相关文档所占所有相关文档的比例;</li></ul><script type="math/tex; mode=display">Recall =\frac{\text { 返同结果中相关文档的数目 }}{\text { 所有相关文档的数目 }}=P(\text { retrieved } \mid \text { relevant })</script><div class="table-container"><table><thead><tr><th></th><th>相关(relevant)</th><th>不相关(nonrelevant)</th></tr></thead><tbody><tr><td>retrieved</td><td>true positives(tp)</td><td>false positives(fp)</td></tr><tr><td>not retrieved</td><td>false negatives(fn)</td><td>true negatives(tn)</td></tr></tbody></table></div><p>则有:</p><script type="math/tex; mode=display">\begin{array}{l}P=t p /(t p+f p) \\R=t p /(t p+f n)\end{array}</script><p>在这有个问题就是精确度(accuracy)对于信息检索不是一个很好的指标, 因为信息检索中数据极度不平衡.通常99.99%以上都是不相关文档. 全判定为不相关精确度都很高.<br>采用正确率() 和 召回率() 两个指标的有个有点,他能根据场景不同来确定指标的重要性.<br>如果两种都需要,直觉来看就是平均值, 这就出现了一个新的指标 F</p><script type="math/tex; mode=display">F=\frac{1}{\alpha \frac{1}{P}+(1-\alpha) \frac{1}{R}}=\frac{\left(\beta^{2}+1\right) P R}{\beta^{2} P+R}</script><p>其中, $\beta^{2} = \frac{1 - \alpha}{\alpha} , \alpha \in [0, 1]$,</p><h3 id="有序检索结果的评价方法"><a href="#有序检索结果的评价方法" class="headerlink" title="有序检索结果的评价方法"></a>有序检索结果的评价方法</h3><p>正确率、召回率和F值都是基于集合的评价方法,它们都利用无序的文档集合进行计算.所以需要其他的评价方式.<br>在结果有序的情况下，通常很自然地会将前面k个（k=1,2,…）检索结果组成合适的返回文档子集。对每个这样的集合，都可以得到正确率和召回率，分别以它们作为纵坐标和横<br>坐标在平面上描点并连接便可以得到所示的正确率—召回率曲线<br><img src="20200711110949009_8654.png" alt="png"><br>在某个召回率水平r上的插值正确率（interpolated precision，记为pinterp）定义为对于任意不小于r的召回率水平r′ 所对应的最大正确率，即</p><script type="math/tex; mode=display">p_{\text {interp }}(r)=\max _{r^{\prime} \mathrm{H} r} p\left(r^{\prime}\right)</script><p>根据插值正确率.画出插值正确率—召回率平均曲线<br><img src="20200711111350026_26373.png" alt="png"></p><ul><li>MAP(mean average precision)平均正确率值列表.<br>形式化地，假定信息需求qj∈Q对应的所有相关文档集合<br>为${d<em>1, . . . d</em>{mj}}，R_{jk}$是返回结果中直到遇见$d_k$后其所在位置前（含$d_k$）的所有文档集合，则有</li></ul><script type="math/tex; mode=display">\operatorname{MAP}(Q)=\frac{1}{|Q|} \sum_{j=1}^{|Q|} \frac{1}{m_{j}} \sum_{k=1}^{m_{j}} \operatorname{Prcision}\left(R_{j k}\right)</script><p>如果某篇相关文档未返回，那么上式中其对应的正确率值为0。对于单个信息需求来说，平均正确率是未插值的正确率—召回率曲线下面的面积的近似值，因此，MAP可以粗略地认为是某个查询集合对应的多条正确率—召回率曲线下面积的平均值<br><img src="20200711141728462_15451.png" alt="png"><br><a href="https://blog.csdn.net/leviopku/article/details/80835929" target="_blank" rel="noopener">MAP参考</a></p><ul><li><p>P@k, 在上述基础上,只计算前K个结果的正确率, 该指标的优点九十一不需要计算相关文档的集合数目, 缺点是不稳定, 因为相关文档的总数会对P@k有非常强的影响.</p></li><li><p>R-precision</p></li><li>ROC</li><li>NDCG</li></ul><p>CG表示将每个结果相关性的分值累加后作为整个列表的得分</p><script type="math/tex; mode=display">C G_{k}=\sum_{i=1}^{k} r e l_{i}$$此时没有考虑顺序.$$DCG_k = \sum_{i = 1}^{k} \frac{2^{rel_i} - 1}{log_2(i + 1)}</script><p>同指标P@k一样，它基于前k个检索结果进行计算。设$R(j,d)$是评价人员给出的文档d对查询 j 的相关性得分，那么有</p><script type="math/tex; mode=display">\operatorname{NDCG}(Q, k)=\frac{1}{|Q|} \sum_{j=1}^{|Q|} Z_{j, k} \sum_{m=1}^{k} \frac{2^{R(j, m)}-1}{\log (1+m)}</script>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;检索系统的评价&quot;&gt;&lt;a href=&quot;#检索系统的评价&quot; class=&quot;headerlink&quot; title=&quot;检索系统的评价&quot;&gt;&lt;/a&gt;检索系统的评价&lt;/h1&gt;&lt;h3 id=&quot;无序的检索结果评价&quot;&gt;&lt;a href=&quot;#无序的检索结果评价&quot; class=&quot;header
-      
-    
-    </summary>
-    
-    
-      <category term="NLP" scheme="http://yoursite.com/categories/NLP/"/>
     
     
   </entry>
